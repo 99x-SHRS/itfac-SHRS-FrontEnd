@@ -2,12 +2,10 @@ import '../../Assets/styles/css/searchbar.css'
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
-import Drop from './dropDownList.js'
 import DatePicker from '../DatePicker/datepicker.js'
-import { render } from 'react-dom'
 import { Component } from 'react'
-import $ from 'jquery'
 import jQuery from 'jquery'
+
 class Searchbox extends Component {
   componentDidMount() {
     ;(function ($) {
