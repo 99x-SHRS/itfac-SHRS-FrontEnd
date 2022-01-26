@@ -1,0 +1,23 @@
+.signupbtn,
+.loginbtn {
+  width: 8rem;
+}
+
+.wrapper {
+  padding-left: 20px;
+}
+
+.image--cover {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+
+  object-fit: cover;
+  object-position: center right;
+}
+
+@media only screen and (max-width: 767px) {
+  .image--cover {
+    display: none;
+  }
+}
