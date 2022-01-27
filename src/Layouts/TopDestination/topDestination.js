@@ -5,7 +5,7 @@ import AnuradapraLogo from '../../Assets/images/anuradapra.jpg'
 
 const TopDestination = () => {
   return (
-    <div className='container topDestination-container mt-5 bg-light rounded'>
+    <div className='container topDestination-container mt-5 bg-light rounded p-3'>
       <div className='row'>
         <div className='col-md-4 test mb-5 '>
           <div className='title-logo text-center'>
