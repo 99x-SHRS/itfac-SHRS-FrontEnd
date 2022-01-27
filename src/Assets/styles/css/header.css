@@ -13,7 +13,7 @@
   background-position: center;
 }
 .description {
-  position: relative;
+  position: absolute;
   top: 50vh;
 }
 .description h1 {

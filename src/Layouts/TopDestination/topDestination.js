@@ -8,10 +8,6 @@ const TopDestination = () => {
     <div className='container topDestination-container mt-5 bg-light rounded p-3'>
       <div className='row'>
         <div className='col-md-4 test mb-5 '>
-          <div className='title-logo text-center'>
-            <h2>Anuradhapura</h2>
-            <h3>Get some fresh air</h3>
-          </div>
           <div className='circle'>
             <div className='circle_inner'>
               <div className='circle_inner__layer'>
@@ -19,12 +15,12 @@ const TopDestination = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className='col-md-4 test mb-5'>
           <div className='title-logo text-center'>
-            <h2>Galle</h2>
+            <h2>Anuradhapura</h2>
             <h3>Get some fresh air</h3>
           </div>
+        </div>
+        <div className='col-md-4 test mb-5'>
           <div className='circle'>
             <div className='circle_inner'>
               <div className='circle_inner__layer'>
@@ -32,18 +28,22 @@ const TopDestination = () => {
               </div>
             </div>
           </div>
-        </div>
-        <div className='col-md-4 test mb-5'>
           <div className='title-logo text-center'>
-            <h2>Ella</h2>
+            <h2>Galle</h2>
             <h3>Get some fresh air</h3>
           </div>
-          <div className='circle'>
+        </div>
+        <div className='col-md-4 test mb-5'>
+          <div className='circle '>
             <div className='circle_inner'>
               <div className='circle_inner__layer'>
                 <img src={EllaLogo} />
               </div>
             </div>
+          </div>
+          <div className='title-logo text-center '>
+            <h2>Ella</h2>
+            <h3>Get some fresh air</h3>
           </div>
         </div>
       </div>
