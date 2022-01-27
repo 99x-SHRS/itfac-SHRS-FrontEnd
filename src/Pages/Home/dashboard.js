@@ -6,7 +6,7 @@ const Dashboard = () => {
     <div>
       <Header />
       <div className='container mt-5'>
-        <h1>Top Destinations is Sri Lanka</h1>
+        <h1>Top Destinations in Sri Lanka</h1>
         <TopDestination />
       </div>
     </div>
