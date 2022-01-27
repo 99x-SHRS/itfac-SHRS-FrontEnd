@@ -2,9 +2,19 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import '../../Assets/styles/css/navbar.css'
 
 const Navbars = () => {
+  var prevScrollpos = window.pageYOffset
+  window.onscroll = function () {
+    var currentScrollPos = window.pageYOffset
+    if (prevScrollpos > currentScrollPos) {
+      document.getElementById('navbar').style.top = '0'
+    } else {
+      document.getElementById('navbar').style.top = '-100px'
+    }
+    prevScrollpos = currentScrollPos
+  }
   return (
     <>
-      <Navbar bg='light' expand='md'>
+      <Navbar bg='light' expand='md' id='navbar'>
         <Container fluid>
           <Navbar.Brand href='#'>BOOKNOW.COM</Navbar.Brand>
           <Navbar.Toggle aria-controls='navbarScroll' />

@@ -265,7 +265,7 @@ class Searchbox extends Component {
                   </ul>
                 </div>
               </div>
-              <div className='col-md-2 '>
+              <div className='col-md-2 search-button'>
                 <button class='btn-submit submit-Btn' type='submit'>
                   search
                 </button>
