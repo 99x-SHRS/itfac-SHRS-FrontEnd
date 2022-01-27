@@ -5,7 +5,10 @@ const Dashboard = () => {
   return (
     <div>
       <Header />
-      <TopDestination />
+      <div className='container mt-5'>
+        <h1>Top Destinations is Sri Lanka</h1>
+        <TopDestination />
+      </div>
     </div>
   )
 }
