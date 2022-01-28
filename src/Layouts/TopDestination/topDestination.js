@@ -6,6 +6,9 @@ import AnuradapraLogo from '../../Assets/images/anuradapra.jpg'
 const TopDestination = () => {
   return (
     <div className='container topDestination-container mt-5 bg-light rounded p-3'>
+      <div>
+        <h2>Top Destinations</h2>
+      </div>
       <div className='row'>
         <div className='col-md-4 test mb-5 '>
           <div className='circle'>
