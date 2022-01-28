@@ -1,0 +1,10 @@
+.recommonded-hotels img {
+  height: 208px;
+}
+
+@media only screen and (max-width: 767px) {
+  .recommonded-hotels img {
+    min-height: 10rem !important;
+    max-height: 10rem;
+  }
+}

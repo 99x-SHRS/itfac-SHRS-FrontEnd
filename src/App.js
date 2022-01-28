@@ -11,11 +11,12 @@ function App() {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-    }, 8000)
+    }, 4000)
   }, [])
   return (
     <div className='App'>
-      {loading ? (
+      <Dashboard />
+      {/* {loading ? (
         <div className='Loader'>
           <PropagateLoader
             loading={loading}
@@ -26,7 +27,7 @@ function App() {
         </div>
       ) : (
         <Dashboard />
-      )}
+      )} */}
     </div>
   )
 }
