@@ -4,22 +4,11 @@
 .gallery-mobile {
   display: none;
 }
-.gallery-cell {
-  width: 40%;
+.gallery-cells {
+  width: 90% !important;
   height: 250px;
-  margin-right: 10px;
-  background: #8c8;
-  counter-increment: gallery-cell;
 }
 
-/* cell number */
-.gallery-cell:before {
-  display: block;
-  text-align: center;
-  line-height: 200px;
-  font-size: 80px;
-  color: white;
-}
 .gallery-full div {
   background-size: cover;
   background-repeat: no-repeat;
@@ -44,7 +33,7 @@
 .guest-houses {
   background-image: url('../../../images/property-types/guest-houses.jpg');
 }
-.gallery-cell:hover {
+.gallery-cells:hover {
   opacity: 0.8;
 }
 @media only screen and (max-width: 767px) {
@@ -65,4 +54,9 @@
     rgba(23, 21, 69, 0.5) 100%
   );
   color: aliceblue;
+}
+.slick-prev:before,
+.slick-next:before {
+  color: rgb(19, 113, 221) !important;
+  scale: 150% !important;
 }

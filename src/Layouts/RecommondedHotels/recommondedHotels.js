@@ -1,10 +1,10 @@
 import React from 'react'
-import { Card, Button } from 'react-bootstrap'
+import HotelCard from '../../Components/HotelCard/HotelCard'
+
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
 import Hotel_2 from '../../Assets/images/hotels/hotel2.jpg'
 import Hotel_3 from '../../Assets/images/hotels/hotel3.jpg'
 import Hotel_4 from '../../Assets/images/hotels/hotel4.jpg'
-import HotelCard from '../../Components/HotelCard/HotelCard'
 
 const Recommendeds = () => {
   const hotelData = [

@@ -1,36 +1,48 @@
 import '../../Assets/styles/css/components/browsetype.css'
 import React, { Component } from 'react'
+import Slider from 'react-slick'
+import { Carousel } from 'react-bootstrap'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 import $ from 'jquery'
 import image_1 from '../../Assets/images/property-types/luxary.jpg'
 import image_2 from '../../Assets/images/property-types/kabana.jpg'
 import image_3 from '../../Assets/images/property-types/villa.jpg'
 import image_4 from '../../Assets/images/property-types/bangalow.jpg'
 import image_5 from '../../Assets/images/property-types/guest-houses.jpg'
-import { Carousel } from 'react-bootstrap'
+
 class Browsetype extends Component {
   render() {
+    const settings = {
+      className: 'center',
+      centerMode: true,
+      infinite: true,
+      centerPadding: '60px',
+      slidesToShow: 3,
+      speed: 500,
+    }
     return (
       <div className='container mt-5 mb-5'>
-        <div
-          class='gallery-full js-flickity card '
-          data-flickity-options='{ "wrapAround": true }'
-        >
-          <div className='gallery-cell luxary text-center rounded'>
-            <h3 class='card-header'>Luxury</h3>
-          </div>
-          <div className='gallery-cell kabana text-center rounded '>
-            <h3 class='card-header'>Kabana Hotels</h3>
-          </div>
-          <div className='gallery-cell villa text-center rounded'>
-            <h3 class='card-header'>Villa</h3>
-          </div>
-          <div className='gallery-cell bangalow text-center rounded'>
-            <h3 class='card-header'>Bangalows</h3>
-          </div>
-          <div className='gallery-cell guest-houses text-center rounded'>
-            <h3 class='card-header'>Guest Houses</h3>
-          </div>
+        <div className='gallery-full'>
+          <Slider {...settings}>
+            <div className='gallery-cells luxary text-center rounded'>
+              <h3 class='card-header'>Luxury</h3>
+            </div>
+            <div className='gallery-cells kabana text-center rounded '>
+              <h3 class='card-header'>Kabana Hotels</h3>
+            </div>
+            <div className='gallery-cells villa text-center rounded'>
+              <h3 class='card-header'>Villa</h3>
+            </div>
+            <div className='gallery-cells bangalow text-center rounded'>
+              <h3 class='card-header'>Bangalows</h3>
+            </div>
+            <div className='gallery-cells guest-houses text-center rounded'>
+              <h3 class='card-header'>Guest Houses</h3>
+            </div>
+          </Slider>
         </div>
+
         <div className='gallery-mobile'>
           <Carousel fade>
             <Carousel.Item>

@@ -14,7 +14,7 @@ const TopDestination = () => {
           <div className='circle'>
             <div className='circle_inner'>
               <div className='circle_inner__layer'>
-                <img src={AnuradapraLogo} />
+                <img src={AnuradapraLogo} alt='image' />
               </div>
             </div>
           </div>
@@ -27,7 +27,7 @@ const TopDestination = () => {
           <div className='circle'>
             <div className='circle_inner'>
               <div className='circle_inner__layer'>
-                <img src={GalleLogo} />
+                <img src={GalleLogo} alt='image' />
               </div>
             </div>
           </div>
@@ -40,7 +40,7 @@ const TopDestination = () => {
           <div className='circle '>
             <div className='circle_inner'>
               <div className='circle_inner__layer'>
-                <img src={EllaLogo} />
+                <img src={EllaLogo} alt='image' />
               </div>
             </div>
           </div>
