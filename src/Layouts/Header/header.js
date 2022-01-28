@@ -8,9 +8,9 @@ const Header = () => {
       <Navbar />
       <Searchbox />
       <div className='container description '>
-        <div className='header-title text-left'>
+        {/* <div className='header-title text-left'>
           <h1>Hello Sri Lanka</h1>
-        </div>
+        </div> */}
         {/* <div className='header-description text-center'>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi quae
           at quod eos error vel necessitatibus porro officiis molestiae dolores

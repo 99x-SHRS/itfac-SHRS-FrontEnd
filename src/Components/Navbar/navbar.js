@@ -16,7 +16,11 @@ const Navbars = () => {
     <>
       <Navbar bg='light' expand='md' id='navbar'>
         <Container fluid>
-          <Navbar.Brand href='#'>BOOKNOW.COM</Navbar.Brand>
+          <Navbar.Brand href='#'>
+            <h2>
+              <b>BOOKNOW.COM</b>
+            </h2>
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='navbarScroll' />
           <Navbar.Collapse id='navbarScroll'>
             <Nav

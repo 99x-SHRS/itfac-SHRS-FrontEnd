@@ -181,7 +181,7 @@ class Searchbox extends Component {
     return (
       <div>
         <form action='' method='post'>
-          <div className='container searchcontainer'>
+          <div className='flex searchcontainer'>
             <div className='row'>
               <div className='col-md-3'>
                 <div class='input-group '>
