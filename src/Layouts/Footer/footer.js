@@ -36,10 +36,10 @@ const Footer = () => {
             <div class='col-md-6 item text'>
               <h3>BOOKING.COM</h3>
               <p>
-                Praesent sed lobortis mi. Suspendisse vel placerat ligula.
-                Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis
-                tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel
-                in justo.
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
+                odit iure distinctio rem alias aliquam voluptas quaerat velit
+                reiciendis repellat perferendis soluta itaque, illo quibusdam
+                eius voluptatem quo ullam officiis.
               </p>
             </div>
             <div class='col item social'>

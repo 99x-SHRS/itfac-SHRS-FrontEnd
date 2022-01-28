@@ -8,3 +8,7 @@
     max-height: 10rem;
   }
 }
+.recommonded-hotels :hover {
+  opacity: 0.8;
+  cursor: pointer;
+}

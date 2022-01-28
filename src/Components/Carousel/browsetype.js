@@ -16,7 +16,7 @@ class Browsetype extends Component {
           data-flickity-options='{ "wrapAround": true }'
         >
           <div className='gallery-cell luxary text-center rounded'>
-            <h3 class='card-header'>Featured</h3>
+            <h3 class='card-header'>Luxury</h3>
           </div>
           <div className='gallery-cell kabana text-center rounded '>
             <h3 class='card-header'>Kabana Hotels</h3>
