@@ -15,8 +15,7 @@ function App() {
   }, [])
   return (
     <div className='App'>
-      <Dashboard />
-      {/* {loading ? (
+      {loading ? (
         <div className='Loader'>
           <PropagateLoader
             loading={loading}
@@ -27,7 +26,7 @@ function App() {
         </div>
       ) : (
         <Dashboard />
-      )} */}
+      )}
     </div>
   )
 }
