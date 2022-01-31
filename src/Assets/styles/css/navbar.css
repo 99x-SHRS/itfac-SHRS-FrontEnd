@@ -6,10 +6,16 @@
 #navbar h2 {
   font-family: 'Lora', serif;
 }
+#navbar h4:hover {
+  cursor: pointer;
+}
 .wrapper {
   padding-left: 20px;
+  cursor: pointer;
 }
-
+#navbar button {
+  height: 90%;
+}
 .image--cover {
   width: 45px;
   height: 45px;

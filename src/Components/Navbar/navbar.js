@@ -1,6 +1,7 @@
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import '../../Assets/styles/css/navbar.css'
-
+import Profile from '../../Assets/images/profile/loggedIn-user.jpg'
+import { useState } from 'react'
 const Navbars = () => {
   var prevScrollpos = window.pageYOffset
   window.onscroll = function () {
@@ -12,11 +13,15 @@ const Navbars = () => {
     }
     prevScrollpos = currentScrollPos
   }
+
+  const [LoggedIn, setLoggedIn] = useState(true)
+  const toggleChecked = () => setLoggedIn((LoggedIn) => !LoggedIn)
+
   return (
     <>
       <Navbar bg='light' expand='md' id='navbar'>
         <Container fluid>
-          <Navbar.Brand href='#'>
+          <Navbar.Brand>
             <h2>
               <b>BOOKNOW.COM</b>
             </h2>
@@ -28,26 +33,63 @@ const Navbars = () => {
               style={{ maxHeight: '3000px' }}
               navbarScroll
             >
-              <Nav.Link href='#action1'>
-                <Button variant='outline-success ' className='signupbtn'>
-                  Sign Up
-                </Button>
-              </Nav.Link>
+              {LoggedIn ? null : (
+                <Nav.Item className='m-2'>
+                  <Button variant='outline-success ' className='signupbtn'>
+                    Sign Up
+                  </Button>
+                </Nav.Item>
+              )}
 
-              <Nav.Link href='#action1'>
-                <Button variant='outline-success' className='loginbtn'>
-                  Login
-                </Button>
-              </Nav.Link>
-              <Nav.Link href='#action1'>
+              {LoggedIn ? null : (
+                <Nav.Item className='m-2'>
+                  <Button
+                    variant='outline-success'
+                    className='loginbtn'
+                    onClick={toggleChecked}
+                  >
+                    Login
+                  </Button>
+                </Nav.Item>
+              )}
+              {LoggedIn ? (
+                <Nav.Item className='m-2'>
+                  <h4>Bookings</h4>
+                </Nav.Item>
+              ) : null}
+              {LoggedIn ? (
+                <Nav.Item className='m-2'>
+                  <h4>Bookings</h4>
+                </Nav.Item>
+              ) : null}
+              {LoggedIn ? (
+                <Nav.Item className='m-2'>
+                  <h4>Bookings</h4>
+                </Nav.Item>
+              ) : null}
+              {LoggedIn ? (
+                <Nav.Item className='m-2' onClick={toggleChecked}>
+                  <h4>Log out</h4>
+                </Nav.Item>
+              ) : null}
+              {LoggedIn ? (
                 <div class='wrapper'>
                   <img
-                    src='https://i2.cdn.turner.com/cnnnext/dam/assets/140926165711-john-sutter-profile-image-large-169.jpg'
-                    alt=''
+                    src={Profile}
+                    alt='profile picture'
                     class='image--cover'
                   />
                 </div>
-              </Nav.Link>
+              ) : (
+                <div class='wrapper'>
+                  <img
+                    src={'/images/defaults/default-profile.png'}
+                    alt='profile picture'
+                    class='image--cover'
+                  />
+                </div>
+              )}
+              <Nav.Item></Nav.Item>
             </Nav>
           </Navbar.Collapse>
         </Container>

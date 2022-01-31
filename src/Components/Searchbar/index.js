@@ -5,7 +5,7 @@ import '../../Assets/vendor/select2/select2.min.css'
 import DatePicker from '../DatePicker/datepicker.js'
 import { Component } from 'react'
 import jQuery from 'jquery'
-
+import { Link } from 'react-router-dom'
 class Searchbox extends Component {
   componentDidMount() {
     ;(function ($) {
@@ -267,7 +267,7 @@ class Searchbox extends Component {
               </div>
               <div className='col-md-2 search-button'>
                 <button class='btn-submit submit-Btn' type='submit'>
-                  search
+                  <Link to='/hotels'>search</Link>
                 </button>
               </div>
             </div>
