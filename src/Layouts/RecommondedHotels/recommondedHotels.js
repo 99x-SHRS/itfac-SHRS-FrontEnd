@@ -30,7 +30,7 @@ const Recommendeds = () => {
       name: 'SunQueen',
       description:
         '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum voluptates officiis suscipit sed a distinctio facilis similique ratione animi voluptas?',
-      image: Hotel_4,
+      image: Hotel_1,
     },
   ]
 

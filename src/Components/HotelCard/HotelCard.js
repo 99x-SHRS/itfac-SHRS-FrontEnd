@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 import '../../Assets/styles/css/components/hotelCard.css'
 class HotelCard extends Component {
-  componentDidMount() {
-    console.log(this.props)
-  }
   render() {
     return (
       <div class='card recommonded-hotels'>

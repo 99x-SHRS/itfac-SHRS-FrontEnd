@@ -1,4 +1,3 @@
-import '../../Assets/styles/css/searchbar.css'
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
@@ -6,7 +5,7 @@ import DatePicker from '../DatePicker/datepicker.js'
 import { Component } from 'react'
 import jQuery from 'jquery'
 import { Link } from 'react-router-dom'
-class Searchbox extends Component {
+class SideSearchbar extends Component {
   componentDidMount() {
     ;(function ($) {
       try {
@@ -179,11 +178,11 @@ class Searchbox extends Component {
   }
   render() {
     return (
-      <div c>
+      <div>
         <form action='' method='post'>
-          <div className='flex searchcontainer '>
+          <div className='flex searchcontainer'>
             <div className='row'>
-              <div className='col-md-3'>
+              <div>
                 <div class='input-group '>
                   <label class='label'>Going to</label>
                   <input
@@ -196,14 +195,14 @@ class Searchbox extends Component {
                   <i class='zmdi zmdi-pin input-group-symbol'></i>
                 </div>
               </div>
-              <div className='col-md-4'>
+              <div>
                 <div class='input-group'>
                   <DatePicker />
                   <i class='zmdi zmdi-calendar-alt input-group-symbol'></i>
                 </div>
               </div>
 
-              <div className='col-md-3 travellers ' id='show'>
+              <div className=' travellers ' id='show'>
                 <div class='input-group' id='js-select-special'>
                   <label class='label'>Travellers</label>
                   <i class='zmdi zmdi-pin input-group-symbol'></i>
@@ -265,7 +264,7 @@ class Searchbox extends Component {
                   </ul>
                 </div>
               </div>
-              <div className='col-md-2 search-button'>
+              <div className='search-button'>
                 <button class='btn-submit submit-Btn' type='submit'>
                   <Link to='/hotels'>search</Link>
                 </button>
@@ -278,4 +277,4 @@ class Searchbox extends Component {
   }
 }
 
-export default Searchbox
+export default SideSearchbar
