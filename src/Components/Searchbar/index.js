@@ -179,9 +179,9 @@ class Searchbox extends Component {
   }
   render() {
     return (
-      <div c>
+      <div>
         <form action='' method='post'>
-          <div className='flex searchcontainer '>
+          <div className=' searchcontainer '>
             <div className='row'>
               <div className='col-md-3'>
                 <div class='input-group '>

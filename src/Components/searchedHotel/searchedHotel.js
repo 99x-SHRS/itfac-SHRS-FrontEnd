@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../../Assets/styles/css/Layouts/searchedHotel.css'
-
+import PriceTag from '../PriceTag/priceTag'
+import HotelCard from '../searchedHotelCard/hotelCard'
 class SearchedHotel extends Component {
   constructor(props) {
     super(props)
@@ -26,6 +27,14 @@ class SearchedHotel extends Component {
       console.log(this.state.isSaved)
       this.notify('You Saved a hotel successfully !')
     }
+  }
+
+  getStars(params) {
+    let content = []
+    for (let i = 0; i < params; i++) {
+      content.push(<i class='fa fa-star' aria-hidden='true'></i>)
+    }
+    return content
   }
   render() {
     return (
@@ -63,12 +72,10 @@ class SearchedHotel extends Component {
                     ></i>
                   )}
                 </div>
-
                 <h5 class='card-title'>{this.props.hotel.province}</h5>
+                <div>{this.getStars(this.props.hotel.stars)}</div>
                 <p class='card-text'>{this.props.hotel.description}</p>
-                <p class='card-text'>
-                  <small class='text-muted'>Last updated 3 mins ago</small>
-                </p>
+                <PriceTag price={this.props.hotel.price} />
               </div>
             </div>
           </div>

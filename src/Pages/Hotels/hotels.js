@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import HotelHeader from '../../Layouts/Header/hotelHeader.js'
 import '../../Assets/styles/css/pages/hotels.css'
-import SearchedHotel from '../../Components/searchedHotel/searchedHotel.js'
+import SearchedHotel from '../../Components/SearchedHotel/searchedHotel.js'
 import SearchedHotels from '../../Layouts/SearchedHotels/SearchedHotels.js'
 import Searchbox from '../../Components/Searchbar/index.js'
 import Footer from '../../Layouts/Footer/footer.js'

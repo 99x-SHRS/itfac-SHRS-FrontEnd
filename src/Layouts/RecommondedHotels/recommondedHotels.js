@@ -7,6 +7,8 @@ import Hotel_3 from '../../Assets/images/hotels/hotel3.jpg'
 import Hotel_4 from '../../Assets/images/hotels/hotel4.jpg'
 
 const Recommendeds = () => {
+  ///call the api ->return JSON
+
   const hotelData = [
     {
       name: 'Avenra',
