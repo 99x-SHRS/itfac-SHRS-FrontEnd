@@ -67,8 +67,8 @@ class HotelCard extends Component {
                   ></i>
                 )}
               </div>
-              <div class='w-full absolute bottom-0 flex justify-center bg-gradient-black-transparent'>
-                <ul class='text-xs sm:font-semibold my-2 flex sm:block justify-around w-full sm:w-auto text-white'>
+              <div class='w-full  bottom-0 flex justify-center service-icon'>
+                <ul class='text-xs sm:font-semibold my-2 flex sm:block justify-around w-full sm:w-auto text-white '>
                   <li class='my-1 flex items-center'>
                     <svg
                       aria-hidden='true'
@@ -163,7 +163,10 @@ class HotelCard extends Component {
                 </div>
                 <div>
                   <div class='text-right text-xl leading-tight text-gray-600 font-semibold'>
-                    $ 869 <br /> 2 nights
+                    $ 869 <br />{' '}
+                    <div className='nights'>
+                      <p>2 nights</p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -224,7 +227,7 @@ class HotelCard extends Component {
                     431 reviews
                   </p>
                 </div>
-                <div class='mt-3 sm:mt-3'>
+                <div class='mt-3 sm:mt-3 book-now'>
                   <a
                     href='#'
                     class='bg-blue-500 shadow text-blue-100 py-3 px-6 font-bold inline-block rounded-md'

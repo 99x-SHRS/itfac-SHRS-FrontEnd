@@ -1,16 +1,18 @@
-/* .hotel-cover {
-  background-image: url(https://www.citystyleandliving.com/wordpress/wp-content/uploads/2019/01/outside.jpg);
-} */
-
+.hotel-cover {
+  min-height: 20rem;
+}
 .bg-gradient-black-transparent {
   background: black;
   background: linear-gradient(0deg, black 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-@media screen and (min-width: 640px) {
-  .bg-gradient-black-transparent {
-    background: black;
-    background: linear-gradient(0deg, black 0%, rgba(0, 0, 0, 0.1) 100%);
+@media screen and (max-width: 640px) {
+  .hotel-cover {
+    min-height: 15rem;
+  }
+  .book-now a {
+    width: 100%;
+    text-align: center;
   }
 }
 
@@ -24,6 +26,14 @@
 .notSaved-heart {
   color: rgb(182, 204, 207);
 }
-/* #hotel-card {
-  height: 20rem;
-} */
+.service-icon {
+  position: absolute;
+  bottom: 1px !important;
+}
+.nights {
+  display: inline-block;
+  white-space: nowrap;
+}
+.nights p {
+  white-space: nowrap;
+}
