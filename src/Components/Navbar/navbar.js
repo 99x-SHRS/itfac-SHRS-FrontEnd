@@ -1,6 +1,8 @@
+import React, { Component } from 'react'
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import '../../Assets/styles/css/navbar.css'
 import Profile from '../../Assets/images/profile/loggedIn-user.jpg'
+import { Link } from 'react-router-dom'
 import { useState } from 'react'
 const Navbars = () => {
   var prevScrollpos = window.pageYOffset
@@ -34,60 +36,76 @@ const Navbars = () => {
               navbarScroll
             >
               {LoggedIn ? null : (
-                <Nav.Item className='m-2'>
-                  <Button variant='outline-success ' className='signupbtn'>
-                    Sign Up
-                  </Button>
-                </Nav.Item>
+                <Link to='/' className='nav-link'>
+                  <Nav.Item>
+                    <Button variant='outline-success ' className='signupbtn'>
+                      Sign Up
+                    </Button>
+                  </Nav.Item>
+                </Link>
               )}
 
               {LoggedIn ? null : (
-                <Nav.Item className='m-2'>
-                  <Button
-                    variant='outline-success'
-                    className='loginbtn'
-                    onClick={toggleChecked}
-                  >
-                    Login
-                  </Button>
-                </Nav.Item>
+                <Link to='/' className='nav-link'>
+                  <Nav.Item>
+                    <Button
+                      variant='outline-success'
+                      className='loginbtn'
+                      onClick={toggleChecked}
+                    >
+                      Login
+                    </Button>
+                  </Nav.Item>
+                </Link>
               )}
               {LoggedIn ? (
-                <Nav.Item className='m-2'>
-                  <h4>Bookings</h4>
-                </Nav.Item>
+                <Link to='/' className='nav-link'>
+                  <Nav.Item className='m-2'>
+                    <h4>Home</h4>
+                  </Nav.Item>
+                </Link>
               ) : null}
               {LoggedIn ? (
-                <Nav.Item className='m-2'>
-                  <h4>Bookings</h4>
-                </Nav.Item>
+                <Link to='/' className='nav-link'>
+                  <Nav.Item className='m-2'>
+                    <h4>Bookings</h4>
+                  </Nav.Item>
+                </Link>
               ) : null}
               {LoggedIn ? (
-                <Nav.Item className='m-2'>
-                  <h4>Bookings</h4>
-                </Nav.Item>
+                <Link to='/' className='nav-link'>
+                  <Nav.Item className='m-2'>
+                    <h4>Saved</h4>
+                  </Nav.Item>
+                </Link>
               ) : null}
               {LoggedIn ? (
-                <Nav.Item className='m-2' onClick={toggleChecked}>
-                  <h4>Log out</h4>
-                </Nav.Item>
+                <Link to='/' className='nav-link'>
+                  <Nav.Item className='m-2' onClick={toggleChecked}>
+                    <h4>Log out</h4>
+                  </Nav.Item>
+                </Link>
               ) : null}
               {LoggedIn ? (
-                <div class='wrapper'>
-                  <img
-                    src={Profile}
-                    alt='profile picture'
-                    class='image--cover'
-                  />
-                </div>
+                <Link to='/' className='nav-link'>
+                  <div class='wrapper'>
+                    <img
+                      src={Profile}
+                      alt='profile picture'
+                      class='image--cover1'
+                    />
+                  </div>
+                </Link>
               ) : (
-                <div class='wrapper'>
-                  <img
-                    src={'/images/defaults/default-profile.png'}
-                    alt='profile picture'
-                    class='image--cover'
-                  />
-                </div>
+                <Link to='/' className='nav-link'>
+                  <div class='wrapper'>
+                    <img
+                      src={'/images/defaults/default-profile.png'}
+                      alt='profile picture'
+                      class='image--cover2'
+                    />
+                  </div>
+                </Link>
               )}
               <Nav.Item></Nav.Item>
             </Nav>

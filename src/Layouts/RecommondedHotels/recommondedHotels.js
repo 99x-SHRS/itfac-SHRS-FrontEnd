@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import HotelCard from '../../Components/HotelCard/HotelCard'
 
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
@@ -7,6 +7,8 @@ import Hotel_3 from '../../Assets/images/hotels/hotel3.jpg'
 import Hotel_4 from '../../Assets/images/hotels/hotel4.jpg'
 
 const Recommendeds = () => {
+  ///call the api ->return JSON
+
   const hotelData = [
     {
       name: 'Avenra',
@@ -30,7 +32,7 @@ const Recommendeds = () => {
       name: 'SunQueen',
       description:
         '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum voluptates officiis suscipit sed a distinctio facilis similique ratione animi voluptas?',
-      image: Hotel_4,
+      image: Hotel_1,
     },
   ]
 
