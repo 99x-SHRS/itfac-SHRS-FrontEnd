@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import HotelCard from '../../Components/HotelCard/HotelCard'
 
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'

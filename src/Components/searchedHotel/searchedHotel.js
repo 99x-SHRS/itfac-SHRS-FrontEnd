@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import '../../Assets/styles/css/Layouts/searchedHotel.css'
 import PriceTag from '../PriceTag/priceTag'
-import HotelCard from '../searchedHotelCard/hotelCard'
+
 class SearchedHotel extends Component {
   constructor(props) {
     super(props)

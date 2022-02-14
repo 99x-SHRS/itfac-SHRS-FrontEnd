@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
 import '../../Assets/styles/css/navbar.css'
 import Profile from '../../Assets/images/profile/loggedIn-user.jpg'
@@ -96,13 +97,15 @@ const Navbars = () => {
                   </div>
                 </Link>
               ) : (
-                <div class='wrapper'>
-                  <img
-                    src={'/images/defaults/default-profile.png'}
-                    alt='profile picture'
-                    class='image--cover2 '
-                  />
-                </div>
+                <Link to='/' className='nav-link'>
+                  <div class='wrapper'>
+                    <img
+                      src={'/images/defaults/default-profile.png'}
+                      alt='profile picture'
+                      class='image--cover2'
+                    />
+                  </div>
+                </Link>
               )}
               <Nav.Item></Nav.Item>
             </Nav>

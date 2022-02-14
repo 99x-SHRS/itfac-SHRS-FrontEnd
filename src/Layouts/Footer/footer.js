@@ -1,4 +1,6 @@
+import React, { Component } from 'react'
 import '../../Assets/styles/css/Layouts/footer.css'
+
 const Footer = () => {
   return (
     <div class='footer-dark mt-5'>

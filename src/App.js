@@ -1,12 +1,14 @@
-import 'slick-carousel/slick/slick.css'
-import 'slick-carousel/slick/slick-theme.css'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PropagateLoader from 'react-spinners/PropagateLoader'
 import React, { useState, useEffect } from 'react'
-import './App.css'
 
 import Dashboard from './Pages/Home/dashboard'
 import Hotels from './Pages/Hotels/hotels'
+import HotelPage from './Pages/Booking/hotelPage'
+
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import './App.css'
 
 function App() {
   const [loading, setLoading] = useState(false)
@@ -23,6 +25,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Dashboard />}></Route>
           <Route exact path='/hotels' element={<Hotels />}></Route>
+          <Route exact path='/booking/:id' element={<HotelPage />}></Route>
         </Routes>
         {/* {loading ? (
           <div className='Loader'>

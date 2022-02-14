@@ -1,3 +1,4 @@
+import React from 'react'
 import Header from '../../Layouts/Header/header.js'
 import TopDestination from '../../Layouts/TopDestination/topDestination.js'
 import Browsetype from '../../Components/Carousel/browsetype.js'

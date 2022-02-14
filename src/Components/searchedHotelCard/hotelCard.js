@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import '../../Assets/styles/css/components/searchedHotelCard.css'
 import { toast } from 'react-toastify'
+import { Link } from 'react-router-dom'
 
 class HotelCard extends Component {
   constructor(props) {
@@ -232,7 +233,7 @@ class HotelCard extends Component {
                     href='#'
                     class='bg-blue-500 shadow text-blue-100 py-3 px-6 font-bold inline-block rounded-md'
                   >
-                    Book Now
+                    <Link to='/booking/1'> Book Now</Link>
                   </a>
                 </div>
               </div>

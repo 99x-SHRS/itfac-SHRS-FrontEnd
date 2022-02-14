@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import SearchedHotel from '../../Components/SearchedHotel/searchedHotel'
-import SideSearchbar from '../../Components/SideSearchbar/SideSearchbar'
+
 import '../../Assets/styles/css/Layouts/searchedHotels.css'
-import InputSlider from '../../Components/InputSlider/inputSlider'
+
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
 import Hotel_2 from '../../Assets/images/hotels/hotel2.jpg'
 import Hotel_3 from '../../Assets/images/hotels/hotel3.jpg'

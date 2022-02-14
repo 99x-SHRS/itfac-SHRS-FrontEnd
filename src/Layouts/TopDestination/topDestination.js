@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 import '../../Assets/styles/css/Layouts/topdestination.css'
 import GalleLogo from '../../Assets/images/galle.jpg'
 import EllaLogo from '../../Assets/images/ella.jpg'

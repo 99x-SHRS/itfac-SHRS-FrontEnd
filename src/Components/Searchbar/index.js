@@ -1,9 +1,10 @@
+import React, { Component } from 'react'
 import '../../Assets/styles/css/searchbar.css'
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
 import DatePicker from '../DatePicker/datepicker.js'
-import { Component } from 'react'
+
 import jQuery from 'jquery'
 import { Link } from 'react-router-dom'
 class Searchbox extends Component {

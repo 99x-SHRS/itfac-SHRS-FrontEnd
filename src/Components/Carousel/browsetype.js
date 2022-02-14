@@ -4,7 +4,7 @@ import Slider from 'react-slick'
 import { Carousel } from 'react-bootstrap'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
-import $ from 'jquery'
+
 import image_1 from '../../Assets/images/property-types/luxary.jpg'
 import image_2 from '../../Assets/images/property-types/kabana.jpg'
 import image_3 from '../../Assets/images/property-types/villa.jpg'
