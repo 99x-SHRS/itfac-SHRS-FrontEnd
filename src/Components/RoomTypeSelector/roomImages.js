@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import '../../Assets/styles/css/Layouts/roomImages.css'
 // import HotelImageScript from '../../Assets/js/roomImage.js'
 
-var ReactDOM = require('react-dom')
 var Carousel = require('react-responsive-carousel').Carousel
-var ReactDOM = require('react-dom')
 
 class RoomImages extends Component {
   constructor(props) {
