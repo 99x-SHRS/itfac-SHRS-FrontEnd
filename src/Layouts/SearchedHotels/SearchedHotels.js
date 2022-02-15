@@ -8,7 +8,7 @@ import Hotel_3 from '../../Assets/images/hotels/hotel3.jpg'
 import Hotel_4 from '../../Assets/images/hotels/hotel4.jpg'
 import PriceRange from '../leftSideBar/priceRange'
 import StartFilter from '../leftSideBar/startFilter'
-import HotelCard from '../../Components/searchedHotelCard/hotelCard'
+import HotelCard from '../../Components/SearchedHotelCard/hotelCard'
 const hotelData = [
   {
     name: 'Avenra Beach Hotel',
