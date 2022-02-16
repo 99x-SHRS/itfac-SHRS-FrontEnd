@@ -4,8 +4,8 @@ import '../../Assets/styles/css/Layouts/hotelLeftSide.css'
 class PriceRange extends Component {
   render() {
     return (
-      <div>
-        <div class='card-header'>Budget</div>
+      <div className='bg-light price-container'>
+        <div class='card-header bg-primary text-white '>Budget</div>
         <div class='card-body'>
           <Form>
             <div class='form-check'>

@@ -7,48 +7,16 @@ class DropDownList extends Component {
   render() {
     return (
       <div>
-        <div class='select-box'>
-          <div class='select-box__current' tabindex='1'>
-            {this.props.roomTypes.map((type, index) => {
-              return (
-                <div class='select-box__value'>
-                  <input
-                    class='select-box__input'
-                    type='radio'
-                    id={index}
-                    value={type.name}
-                    name={type.name}
-                    checked={index == 0 ? 'checked' : ''}
-                  />
-                  <p class='select-box__input-text' id='room-type'>
-                    {type.name}
-                  </p>
-                </div>
-              )
-            })}
-            <img
-              class='select-box__icon'
-              src='http://cdn.onlinewebfonts.com/svg/img_295694.svg'
-              alt='Arrow Icon'
-              aria-hidden='true'
-            />
-          </div>
-          <ul class='select-box__list'>
-            {this.props.roomTypes.map((type, index) => {
-              return (
-                <li>
-                  <label
-                    class='select-box__option'
-                    for={index}
-                    aria-hidden='aria-hidden'
-                  >
-                    {type.name}
-                  </label>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+        <select class='form-select' aria-label='Default select example'>
+          <option selected>Select your preference </option>
+          {this.props.roomTypes.map((roomType, index) => {
+            return (
+              <option key={index} value={roomType.name}>
+                {roomType.name}
+              </option>
+            )
+          })}
+        </select>
       </div>
     )
   }

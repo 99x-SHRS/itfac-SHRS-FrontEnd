@@ -130,25 +130,27 @@ function calculatePrice(e, price) {
 const RoomSelection = () => {
   const [room, setRoom] = useState(-1)
   const [roomQty, setRoomQty] = useState(0)
+
   return (
     <div className='room-selection'>
       <div class='room-selection-container'>
         <ul class='responsive-table'>
-          <li class='table-header '>
-            <div class=' col-4'>Room</div>
-            <div class=' col-1'>Sleeps</div>
-            <div class=' col-2'>Price per night</div>
-            <div class=' col-1'>Rooms</div>
-            <div class=' col-4'>Benefits</div>
+          <li class='table-header bg-primary text-white'>
+            <div class='col-sm-12 col-md-4'>Room</div>
+            <div class='col-sm-12 col-md-1'>Sleeps</div>
+            <div class='col-sm-12 col-md-2'>Price per night</div>
+            <div class='col-sm-12 col-md-1'>Rooms</div>
+            <div class='col-sm-12 col-md-4'>Benefits</div>
           </li>
 
           {hotelData.map((hotel, hotelId) => {
             return (
               <li class='table-row border border-dark'>
-                <div class=' col-4 '>
+                <div class='col-sm-12 col-md-4  mb-3 '>
+                  <img src={souvenirs1[0].path} alt='' />
                   <RoomImages souvenirs={souvenirs1} />
                 </div>
-                <div class=' col-1 '>
+                <div class='col-sm-12 col-1  mb-3'>
                   <div className='verticle-center'>
                     {[...Array(hotel.sleeps)].map((elementInArray, index) => (
                       <i key={index} class='fas fa-bed m-1'></i>
@@ -156,7 +158,7 @@ const RoomSelection = () => {
                   </div>
                 </div>
 
-                <div class=' col-2 '>
+                <div class='col-sm-12 col-md-2 mb-3'>
                   <div className='prices-container'>
                     {hotel.disount != 0 ? (
                       <div className='save-today'>
@@ -165,15 +167,23 @@ const RoomSelection = () => {
                     ) : (
                       ''
                     )}
-                    <del>
-                      <div class='or-amount'>Rs.{hotel.price}</div>
-                    </del>
+                    {hotel.disount != 0 ? (
+                      <del>
+                        <div class='or-amount'>Rs.{hotel.price}</div>
+                      </del>
+                    ) : (
+                      ''
+                    )}
+
                     <div className='room-price'>
                       Rs.{hotel.price * (1 - hotel.disount)}
                     </div>
                   </div>
                 </div>
-                <div class=' col-1' data-label='Payment Status'>
+                <div
+                  class='col-sm-12 col-md-1  mb-3'
+                  data-label='Payment Status'
+                >
                   <div className='verticle-center no-rooms'>
                     <select
                       class='mdb-select '
@@ -198,12 +208,15 @@ const RoomSelection = () => {
                     </select>
                   </div>
                 </div>
-                <div class=' col-4' data-label='Payment Status'>
+                <div
+                  class='col-sm-12 col-md-4  mb-3'
+                  data-label='Payment Status'
+                >
                   Your price includes:
                   <div className='services'>
                     {hotel.attributes.map((service, index) => {
                       return (
-                        <div>
+                        <div className='sleep-container'>
                           <i class='fa-solid fa-check mr-3'>
                             <div className='service-name'>{service}</div>
                           </i>
