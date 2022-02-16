@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../../Assets/styles/css/Layouts/roomTypeSelector.css'
 import DropDownList from '../../Components/DropDownList/dropDownList'
 import RoomSelection from '../../Layouts/RoomSelection/roomSelection'
+import HorizontalLine from '../HorizontalLine/horizontalLine'
 const roomTypes = [
   {
     name: 'Single Room',
@@ -26,16 +27,20 @@ class RoomTypeSelector extends Component {
     return (
       <div>
         <div className='mt-4 pt-4' id='room-Type-Selector'>
+          <HorizontalLine />
           <h3> Select Room Type</h3>
         </div>
-        <div className='p-2'>
+        <div className='p-2 mb-5'>
           <form onChange={selectRoomType}>
             <div className='room-type-selector row '>
               <DropDownList roomTypes={roomTypes} />
             </div>
           </form>
-          <RoomSelection />
+          <div className='mt-4'>
+            <HorizontalLine />
+          </div>
         </div>
+        <RoomSelection />
       </div>
     )
   }
