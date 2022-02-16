@@ -268,7 +268,10 @@ class Searchbox extends Component {
               </div>
               <div className='col-md-2 search-button'>
                 <button class='btn-submit submit-Btn' type='submit'>
-                  <Link to='/hotels'>search</Link>
+                  <Link to='/hotels'>
+                    {' '}
+                    <p>search</p>
+                  </Link>
                 </button>
               </div>
             </div>
