@@ -4,13 +4,17 @@ import Personalsettingsmodel from "../../Layouts/PersonalSettingsmodel/personalS
 import Navbar from "../../Components/Navbar/navbar";
 import Footer from "../../Layouts/Footer/footer";
 
+import "../../Assets/styles/css/pages/personalSettings.css";
+
 function Personalsettings() {
-    return(
-        <div>
-            <Navbar/>
-            <Personalsettingsmodel/>
-            <Footer/>
-        </div>
-    );
+  return (
+    <div>
+      <Navbar />
+      <div className="per-container">
+        <Personalsettingsmodel />
+      </div>
+      <Footer />
+    </div>
+  );
 }
 export default Personalsettings;

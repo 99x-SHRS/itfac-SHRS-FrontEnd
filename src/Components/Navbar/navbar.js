@@ -76,6 +76,13 @@ const Navbars = () => {
                 </Link>
               ) : null}
               {LoggedIn ? (
+                <Link to='/request-manage' className='nav-link'>
+                  <Nav.Item className='m-2'>
+                    <h4>Request</h4>
+                  </Nav.Item>
+                </Link>
+              ) : null}
+              {LoggedIn ? (
                 <Link to='/' className='nav-link'>
                   <Nav.Item className='m-2'>
                     <h4>Saved</h4>

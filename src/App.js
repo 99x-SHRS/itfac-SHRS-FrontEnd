@@ -7,7 +7,8 @@ import Hotels from "./Pages/Hotels/hotels";
 import HotelPage from "./Pages/Booking/hotelPage";
 import AccountSettings from "./Pages/AccountSettings/accountSettings";
 import Personalsettings from "./Pages/PersonalSettings/personalSettings";
-import Securitysettings from './Pages/SecuritySettings/securitySettings';
+import Securitysettings from "./Pages/SecuritySettings/securitySettings";
+import Requestmanage from "./Pages/RequestManage/requestManage";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -43,6 +44,11 @@ function App() {
             exact
             path="/account/settings/security-settings"
             element={<Securitysettings />}
+          ></Route>
+           <Route
+            exact
+            path="/request-manage"
+            element={<Requestmanage/>}
           ></Route>
         </Routes>
         {/* {loading ? (

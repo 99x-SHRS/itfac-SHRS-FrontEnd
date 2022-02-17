@@ -1,4 +1,5 @@
-import Requestmanagemodel from "../../Layouts/Requestmanagemodel/requestmanagemodel.js";
+import React from "react";
+import Requestmanagemodel from "../../Layouts/Requestmanagemodel/requestmanagemodel";
 function Requestmanage() {
   return (
     <Requestmanagemodel/>

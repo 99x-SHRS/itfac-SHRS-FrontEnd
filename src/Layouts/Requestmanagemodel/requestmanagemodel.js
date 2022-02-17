@@ -1,6 +1,7 @@
 import Pendingrequest from "../../Components/Pendingrequest/pendingrequest";
 import Rejectedrequest from "../../Components/Rejectedrequest/rejectedrequest";
 import Acceptedrequest from "../../Components/Acceptedrequest/acceptedrequest";
+import React from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import { Collapse } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
@@ -51,7 +52,7 @@ function Requestmanagemodel() {
         id="noanim-tab-example"
         className="mb-3 mt-4 row-g-2 d-flex justify-content-center"
       >
-        {/* <Tab eventKey="all" title="All Request">
+        <Tab eventKey="all" title="All Request">
           <div className="container">
             <div className="row g-3 rounded-3 shadow p-2 border border-light mt-4">
               <div className="col-4 d-flex justify-content-center">
@@ -102,9 +103,9 @@ function Requestmanagemodel() {
               </div>
             </div>
           </div>
-        </Tab> */}
+        </Tab>
 
-        {/* <Tab eventKey="pending" title="Pending Request">
+        <Tab eventKey="pending" title="Pending Request">
           <div className="container">
             <div className="row g-3 rounded-3 shadow p-2 border border-light mt-4">
               <div className="col-4 d-flex justify-content-center">
@@ -167,9 +168,9 @@ function Requestmanagemodel() {
               </div>
             </div>
           </div>
-        </Tab> */}
+        </Tab>
 
-        {/* <Tab eventKey="accepted" title="Accepted Request">
+        <Tab eventKey="accepted" title="Accepted Request">
           <div className="container">
             <div className="row g-3 rounded-3 shadow p-2 border border-light mt-4">
               <div className="col-4 d-flex justify-content-center">
@@ -232,7 +233,7 @@ function Requestmanagemodel() {
               </div>
             </div>
           </div>
-        </Tab> */}
+        </Tab>
 
         <Tab eventKey="rejected" title="Rejected Request">
           <div className="container">
