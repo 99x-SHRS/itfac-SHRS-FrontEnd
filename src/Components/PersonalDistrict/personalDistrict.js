@@ -1,3 +1,5 @@
+import React from "react";
+
 function Personaldistrict() {
     return (
       <div className="col-md-3">

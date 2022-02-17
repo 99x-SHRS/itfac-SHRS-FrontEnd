@@ -1,3 +1,4 @@
+import React from "react";
 function Personalprovince() {
   return (
     <div className="col-md-6">

@@ -87,7 +87,7 @@ const Navbars = () => {
                 </Link>
               ) : null}
               {LoggedIn ? (
-                <Link to='/' className='nav-link'>
+                <Link to='/account/settings' className='nav-link'>
                   <div class='wrapper'>
                     <img
                       src={Profile}
