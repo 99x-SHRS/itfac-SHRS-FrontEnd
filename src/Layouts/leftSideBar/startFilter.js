@@ -4,7 +4,7 @@ class StartFilter extends Component {
   render() {
     return (
       <div className='bg-light'>
-        <div class='card-header'>Stars</div>
+        <div class='card-header card-header'>Stars</div>
         <div class='card-body'>
           <Form>
             <div class='form-check'>

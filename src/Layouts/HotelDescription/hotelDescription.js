@@ -5,7 +5,7 @@ class HotelDescription extends Component {
   render() {
     return (
       <div className='hotelDescription-container' id='hotel-description'>
-        <div className='mt-4 p-2 bg-light'>
+        <div className='mt-4 p-2 '>
           <h2>Hotel Name</h2>
           <div>
             <p>

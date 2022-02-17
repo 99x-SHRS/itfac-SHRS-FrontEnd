@@ -1,6 +1,12 @@
 .hotel-cover {
   min-height: 20rem;
 }
+.book-now p {
+  color: white;
+}
+.book-now p:hover {
+  color: rgb(197, 167, 167);
+}
 .bg-gradient-black-transparent {
   background: black;
   background: linear-gradient(0deg, black 0%, rgba(0, 0, 0, 0) 100%);

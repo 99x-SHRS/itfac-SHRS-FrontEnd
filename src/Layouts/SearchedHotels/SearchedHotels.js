@@ -64,11 +64,15 @@ class SearchedHotels extends Component {
           <div className='row'>
             <div className='col-lg-3 left-side-bar'>
               <div class='card p-3 left-container'>
-                <div>
+                <div className='mb-3'>
                   <b>Filter By</b>
                 </div>
-                <PriceRange />
-                <StartFilter />
+                <div className='mb-3'>
+                  <PriceRange />
+                </div>
+                <div>
+                  <StartFilter />
+                </div>
               </div>
             </div>
             <div className=' col-md-9 searched-hotel'>

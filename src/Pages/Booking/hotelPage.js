@@ -23,12 +23,6 @@ class hotelPage extends Component {
           <Facilities />
           <Review />
           <HotelLocation />
-
-          {/*
-          //table //facilities 
-          //reveiws
-          //Location
-           //footer */}
         </div>
         <Footer />
       </div>

@@ -1,7 +1,8 @@
 import React from 'react'
-import '../../Assets/styles/css/header.css'
 import Searchbox from '../../Components/Searchbar'
 import Navbar from '../../Components/Navbar/navbar'
+
+import '../../Assets/styles/css/header.css'
 
 const Header = () => {
   return (

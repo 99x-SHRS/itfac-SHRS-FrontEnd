@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import { Navbar, Nav, Container, Button } from 'react-bootstrap'
-import '../../Assets/styles/css/navbar.css'
 import Profile from '../../Assets/images/profile/loggedIn-user.jpg'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+
+import '../../Assets/styles/css/navbar.css'
+
 const Navbars = () => {
+  const [LoggedIn, setLoggedIn] = useState(true)
+  const toggleChecked = () => setLoggedIn((LoggedIn) => !LoggedIn)
+
   var prevScrollpos = window.pageYOffset
   window.onscroll = function () {
     var currentScrollPos = window.pageYOffset
@@ -13,11 +18,9 @@ const Navbars = () => {
     } else {
       document.getElementById('navbar').style.top = '-100px'
     }
+    console.log(prevScrollpos)
     prevScrollpos = currentScrollPos
   }
-
-  const [LoggedIn, setLoggedIn] = useState(true)
-  const toggleChecked = () => setLoggedIn((LoggedIn) => !LoggedIn)
 
   return (
     <>
