@@ -22,12 +22,12 @@ function App() {
   return (
     <Router>
       <div className='App'>
-        {/* <Routes>
+        <Routes>
           <Route exact path='/' element={<Dashboard />}></Route>
           <Route exact path='/hotels' element={<Hotels />}></Route>
           <Route exact path='/booking/:id' element={<HotelPage />}></Route>
-        </Routes> */}
-        {loading ? (
+        </Routes>
+        {/* {loading ? (
           <div className='Loader'>
             <PropagateLoader
               loading={loading}
@@ -39,10 +39,8 @@ function App() {
         ) : (
           <Routes>
             <Route exact path='/' element={<Dashboard />}></Route>
-            <Route exact path='/hotels' element={<Hotels />}></Route>
-            <Route exact path='/booking/:id' element={<HotelPage />}></Route>
           </Routes>
-        )}
+        )} */}
       </div>
     </Router>
   )

@@ -11,7 +11,7 @@ export default function HotelPageTabs() {
   }
 
   return (
-    <div className='hotel-tabs mt-4'>
+    <div className='hotel-tabs mt-4 '>
       <Box sx={{ flexGrow: 1, bgcolor: 'background.paper' }}>
         <Tabs
           value={value}
@@ -27,11 +27,34 @@ export default function HotelPageTabs() {
             },
           }}
         >
-          <Tab value='Overview' label='Overview' href='#hotel-description' />
-          <Tab value='Room-Type' label='Room Type' href='#room-Type-Selector' />
-          <Tab value='Facilities' label='Facilities' href='#hotel-facilities' />
-          <Tab value='Reviews' label='Reviews' href='#hotel-review' />
-          <Tab value='Location' label='Location' href='#hotel-location' />
+          <div className='container-tags'>
+            <i class='fa-solid fa-book-open'></i>
+            <Tab value='Overview' label='Overview' href='#hotel-description' />
+          </div>
+          <div className='container-tags'>
+            <i class='fa-solid fa-magnifying-glass'></i>
+            <Tab
+              value='Room-Type'
+              label='RoomType'
+              href='#room-Type-Selector'
+            />
+          </div>
+          <div className='container-tags'>
+            <i class='fa-solid fa-bell-concierge'></i>
+            <Tab
+              value='Facilities'
+              label='Facilities'
+              href='#hotel-facilities'
+            />
+          </div>
+          <div className='container-tags'>
+            <i class='fa-solid fa-pen-to-square'></i>
+            <Tab value='Reviews' label='Reviews' href='#hotel-review' />
+          </div>
+          <div className='container-tags'>
+            <i class='fa-solid fa-location-crosshairs'></i>
+            <Tab value='Location' label='Location' href='#hotel-location' />
+          </div>
         </Tabs>
       </Box>
     </div>
