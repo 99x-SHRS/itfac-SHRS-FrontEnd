@@ -17,8 +17,6 @@ class Searchbox extends Component {
         var info = selectSpecial.find('#info')
         var dropdownSelect = selectSpecial.parent().find('.dropdown-select')
         var listRoom = dropdownSelect.find('.list-room')
-        // var btnAddRoom = $('#btn-add-room')
-        // var totalRoom = 1
 
         selectSpecial.on('click', function (e) {
           e.stopPropagation()

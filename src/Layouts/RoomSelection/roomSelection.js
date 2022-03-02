@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import RoomImages from '../../Components/RoomTypeSelector/roomImages'
 import HorizontalLine from '../../Components/HorizontalLine/horizontalLine'
 
@@ -239,7 +240,9 @@ const RoomSelection = () => {
                   )}
                   <div>
                     {hotelId == room && roomQty != 0 ? (
-                      <button className='reserve-button'>Reserve</button>
+                      <button className='reserve-button'>
+                        <Link to='/booking/5789/details'>Reserve</Link>
+                      </button>
                     ) : (
                       <button className='reserve-button' disabled>
                         Reserve

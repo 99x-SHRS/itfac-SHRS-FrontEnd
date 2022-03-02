@@ -106,7 +106,7 @@
   display: block;
 }
 .fa-solid {
-  color: red;
+  color: rgb(43, 22, 22);
 }
 .fa-solid,
 .fas {
@@ -123,4 +123,7 @@
 .or-amount {
   color: gray;
   font-size: 85%;
+}
+.reserve-button a {
+  color: #dbc8c8 !important;
 }
