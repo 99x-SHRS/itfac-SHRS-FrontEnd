@@ -24,6 +24,7 @@ class hotelPage extends Component {
           <Review />
           <HotelLocation />
         </div>
+
         <Footer />
       </div>
     )

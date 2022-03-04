@@ -77,7 +77,7 @@ class Review extends Component {
               <h3>What people say about us</h3>
 
               <div class='cards row '>
-                <div class='card col-md-3 '>
+                <div class='card col-lg-3 '>
                   <div class='card__shap'>
                     <img
                       src={'/images/defaults/default-profile.png'}
@@ -96,7 +96,7 @@ class Review extends Component {
                     </p>
                   </div>
                 </div>
-                <div class='card col-md-3'>
+                <div class='card col-lg-3 mt-2'>
                   <div class='card__shap'>
                     <img
                       src={'/images/defaults/default-profile.png'}
@@ -115,7 +115,7 @@ class Review extends Component {
                     </p>
                   </div>
                 </div>
-                <div class='card col-md-3'>
+                <div class='card col-lg-3 mt-2'>
                   <div class='card__shap'>
                     <img
                       src={'/images/defaults/default-profile.png'}
