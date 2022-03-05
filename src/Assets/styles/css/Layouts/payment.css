@@ -8,3 +8,11 @@
 .payment-gateway-interface div {
   padding: 0px !important;
 }
+.gpay-interface button {
+  width: 100% !important;
+}
+.google-pay-button-container {
+  width: 100% !important;
+  margin: auto !important;
+  display: block !important;
+}

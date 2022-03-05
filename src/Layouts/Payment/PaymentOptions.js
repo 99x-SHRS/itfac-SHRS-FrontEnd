@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { toast } from 'react-toastify'
 
 import Paypal from '../../Services/PaymentGateways/PayPal'
+import Gpay from '../../Services/PaymentGateways/Gpay'
+
 const PaymentOptions = (paymentMethod) => {
   // useEffect(() => {}, [paymentMethod])
 
@@ -32,6 +34,13 @@ const PaymentOptions = (paymentMethod) => {
         {paymentMethod.method === 'paypal' ? (
           <div className='paypal-btn'>
             <Paypal />
+          </div>
+        ) : (
+          <></>
+        )}
+        {paymentMethod.method === 'g pay' ? (
+          <div className='gpay-btn'>
+            <Gpay />
           </div>
         ) : (
           <></>
