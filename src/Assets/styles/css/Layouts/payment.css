@@ -16,3 +16,11 @@
   margin: auto !important;
   display: block !important;
 }
+
+.payhere-interface {
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+.payhere-btn {
+  width: 60%;
+}

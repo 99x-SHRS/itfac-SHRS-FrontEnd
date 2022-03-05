@@ -139,9 +139,9 @@ const Payament = () => {
                 </table>
               </div>
             </div>
-            <div className='col-md-4 col-lg-3 '>
-              <div className='border mt-3'>
-                <h4>How do you wish to payment ?</h4>
+            <div className='col-md-4 col-lg-4 '>
+              <div className='border mt-1'>
+                <h4>How do you wish to pay ?</h4>
                 <SelectPayment />
               </div>
             </div>

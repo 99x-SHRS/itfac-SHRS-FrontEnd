@@ -65,7 +65,7 @@ const SelectPayment = () => {
               name='flexRadioDefault'
               id='flexRadioDefault2'
               onClick={() => {
-                setPaymentMethod('g pay')
+                setPaymentMethod('gpay')
               }}
             />
             <img src={'/images/PaymentGateway/gPay.png'} alt='payHere' />
