@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import RoomImages from '../../Components/RoomTypeSelector/roomImages'
 import HorizontalLine from '../../Components/HorizontalLine/horizontalLine'
 
@@ -131,6 +132,10 @@ const RoomSelection = () => {
   const [room, setRoom] = useState(-1)
   const [roomQty, setRoomQty] = useState(0)
 
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   return (
     <div className='room-selection'>
       <div class='room-selection-container'>
@@ -239,7 +244,11 @@ const RoomSelection = () => {
                   )}
                   <div>
                     {hotelId == room && roomQty != 0 ? (
-                      <button className='reserve-button'>Reserve</button>
+                      <button className='reserve-button'>
+                        <Link to='/booking/5789/details'>
+                          <a href='#second-page'>Reserve</a>
+                        </Link>
+                      </button>
                     ) : (
                       <button className='reserve-button' disabled>
                         Reserve

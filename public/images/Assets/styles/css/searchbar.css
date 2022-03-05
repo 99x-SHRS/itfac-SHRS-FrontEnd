@@ -875,9 +875,9 @@ input[type='number']::-webkit-outer-spin-button {
   position: absolute;
   left: 0;
   right: 0;
-  /* top: -webkit-calc(100% + 2px); */
-  /* top: -moz-calc(100% + 2px); */
-  /* top: calc(100% + 2px); */
+  top: -webkit-calc(100% + 2px);
+  top: -moz-calc(100% + 2px);
+  top: calc(100% + 2px);
   background: #fff;
   z-index: 99;
   -webkit-border-radius: 10px;
@@ -890,8 +890,9 @@ input[type='number']::-webkit-outer-spin-button {
   padding-right: 25px;
 }
 
-.dropdown-select.show {
+.dropdown-select .show {
   display: block;
+  align-content: space-between !important;
 }
 
 .open .input-icon::before {

@@ -5,6 +5,8 @@ import React, { useState, useEffect } from 'react'
 import Dashboard from './Pages/Home/dashboard'
 import Hotels from './Pages/Hotels/hotels'
 import HotelPage from './Pages/Booking/hotelPage'
+import CustomerDetails from './Pages/Booking/CustomerDetails'
+import Payment from './Pages/Booking/Payment.js'
 
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
@@ -26,6 +28,16 @@ function App() {
           <Route exact path='/' element={<Dashboard />}></Route>
           <Route exact path='/hotels' element={<Hotels />}></Route>
           <Route exact path='/booking/:id' element={<HotelPage />}></Route>
+          <Route
+            exact
+            path='/booking/:id/details'
+            element={<CustomerDetails />}
+          ></Route>
+          <Route
+            exact
+            path='/booking/:id/details/payment'
+            element={<Payment />}
+          ></Route>
         </Routes>
         {/* {loading ? (
           <div className='Loader'>

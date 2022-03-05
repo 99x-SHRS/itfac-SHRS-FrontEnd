@@ -1,3 +1,4 @@
-/* .hotel-room-seletor-container div {
-  margin-top: 5px;
-} */
+.hotel-room-seletor-container {
+  position: relative;
+  top: 5rem;
+}

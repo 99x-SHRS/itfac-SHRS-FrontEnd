@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import HotelHeader from '../../Layouts/HotelHeader/hotelHeader.js'
 import HotelDescription from '../../Layouts/HotelDescription/hotelDescription.js'
-import '../../Assets/styles/css/pages/hotelPage.css'
 import Souvenir from '../../Components/Carousel/souvenir'
 import HotelPageTabs from '../../Components/HotelPageTabs/hotelPageTabs.js'
 import RoomTypeSelector from '../../Components/RoomTypeSelector/roomTypeSelector.js'
@@ -10,6 +9,7 @@ import Review from '../../Layouts/Reviews/review.js'
 import HotelLocation from '../../Layouts/Location/hotelLocation.js'
 import Footer from '../../Layouts/Footer/footer.js'
 
+import '../../Assets/styles/css/pages/hotelPage.css'
 class hotelPage extends Component {
   render() {
     return (
@@ -24,6 +24,7 @@ class hotelPage extends Component {
           <Review />
           <HotelLocation />
         </div>
+
         <Footer />
       </div>
     )

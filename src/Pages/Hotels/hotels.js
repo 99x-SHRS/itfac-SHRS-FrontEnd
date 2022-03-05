@@ -7,6 +7,9 @@ import Footer from '../../Layouts/Footer/footer.js'
 import '../../Assets/styles/css/pages/hotels.css'
 
 class Hotels extends Component {
+  componentDidMount() {
+    window.scrollTo(0, 0)
+  }
   render() {
     return (
       <div>

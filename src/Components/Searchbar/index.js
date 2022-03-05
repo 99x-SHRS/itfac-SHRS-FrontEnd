@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import '../../Assets/styles/css/searchbar.css'
+import { Link } from 'react-router-dom'
+import DatePicker from '../DatePicker/datepicker.js'
+import jQuery from 'jquery'
+
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
-import DatePicker from '../DatePicker/datepicker.js'
 
-import jQuery from 'jquery'
-import { Link } from 'react-router-dom'
+import '../../Assets/styles/css/searchbar.css'
+
 class Searchbox extends Component {
   componentDidMount() {
     ;(function ($) {
@@ -17,8 +19,6 @@ class Searchbox extends Component {
         var info = selectSpecial.find('#info')
         var dropdownSelect = selectSpecial.parent().find('.dropdown-select')
         var listRoom = dropdownSelect.find('.list-room')
-        // var btnAddRoom = $('#btn-add-room')
-        // var totalRoom = 1
 
         selectSpecial.on('click', function (e) {
           e.stopPropagation()
