@@ -114,6 +114,10 @@
     right: 0%;
     margin-top: 15px;
   }
+  .country-selector {
+    width: 100%;
+    background-color: #fff;
+  }
 }
 .PhoneInputCountryIconImg {
   min-width: 2rem;
@@ -128,7 +132,8 @@
 .PhoneInputCountryIcon--border {
   border: red;
 }
-.PhoneInputInput {
+.PhoneInputInput,
+.country-selector {
   font-family: 'Poppins', 'Arial', 'Helvetica Neue', sans-serif !important;
   font-size: 0.975em;
 }
@@ -136,4 +141,15 @@
   /* display: none !important; */
   width: 3rem;
   height: 2rem;
+}
+.country-selector {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+.country-selector select option[value=''] value {
+  color: #999999;
+}
+.payment-container {
+  position: relative;
+  top: 10%;
 }

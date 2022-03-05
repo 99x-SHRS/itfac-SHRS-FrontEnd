@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import HotelHeader from '../../Layouts/HotelHeader/hotelHeader.js'
 import BookingCusDetails from '../../Layouts/PersonalDetails/BookingCusDetails.js'
 import Footer from '../../Layouts/Footer/footer.js'
+
 import '../../Assets/styles/css/Layouts/CustomerDetails.css'
 
 class CustomerDetails extends Component {
@@ -18,7 +19,7 @@ class CustomerDetails extends Component {
           <ul class='list-unstyled multi-steps'>
             <li>Select your room</li>
             <li class='is-active'>Enter your details</li>
-            <li>Payament</li>
+            <li>Finalize your payament</li>
           </ul>
         </div>
         <div className='person-details-container'>

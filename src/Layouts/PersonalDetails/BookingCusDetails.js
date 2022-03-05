@@ -1,74 +1,27 @@
-import React, { Component, useState } from 'react'
-
-import 'react-phone-number-input/style.css'
+import React, { Component, useState, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import PhoneInput, {
   formatPhoneNumber,
   formatPhoneNumberIntl,
   isValidPhoneNumber,
 } from 'react-phone-number-input'
-import HorizontalLine from '../../Components/HorizontalLine/horizontalLine.js'
+import {
+  CountryDropdown,
+  RegionDropdown,
+  CountryRegionData,
+} from 'react-country-region-selector'
+import SideSummary from '../../Pages/Booking/SideSummary'
+import 'react-phone-number-input/style.css'
 
 const BookingCusDetails = () => {
-  const [value, setValue] = useState()
+  const [country, setCountry] = useState()
+  const [number, setNumber] = useState()
+
   return (
     <div className='container'>
-      <div className='row user-details  pt-5'>
+      <div className='row user-details '>
         <div className='col-md-4 col-lg-3 '>
-          <div className='border'>
-            <h4 className='mb-3'>Booking Details</h4>
-            <div className='time-container'>
-              <div className='border-end '>
-                <h5>
-                  <i class='fa fa-sign-in mr-1' aria-hidden='true'></i>
-                  Check-in date
-                </h5>
-                <p>Sun, Mar 20, 2022</p>
-              </div>
-              <div>
-                <h5>
-                  <i class='fa fa-sign-out  mr-1' aria-hidden='true'></i>
-                  Check-out date
-                </h5>
-                <p>Tue, Mar 22, 2022</p>
-              </div>
-            </div>
-            <div>
-              <p>Total length of stay: 3 nights</p>
-            </div>
-            <div>
-              <a href=''>Do you want to change the dates?</a>
-            </div>
-            <hr />
-            <div>
-              <p>You selected Deluxe room</p>
-            </div>
-            <div>
-              <a href=''>Do you want to change the room type?</a>
-            </div>
-          </div>
-          <div className='border mt-3'>
-            <h4>Payment summary</h4>
-            <div className='payment-summary'>
-              <div>Deluxe Double Room</div>
-              <div>LKR 20,098.38</div>
-            </div>
-          </div>
-          <div className='border mt-3'>
-            <div>
-              <h4>How much will it cost to cancel?</h4>
-              <p>
-                Free cancellation until 11:59 PM on Mar 12 From 12:00 AM on Mar
-                13 LKR 10,934
-              </p>
-            </div>
-          </div>
-          <div className='border mt-3'>
-            <div>
-              <h4>Your loyalty benefits included in the price:</h4>
-              <p>14% discount</p>
-              <p>Applied to the price before taxes and fees</p>
-            </div>
-          </div>
+          <SideSummary />
         </div>
 
         <div className='col-md-7 col-lg-8  '>
@@ -154,16 +107,27 @@ const BookingCusDetails = () => {
                 </div>
               </div>
               <div className='row'>
-                <div class='form-group '>
+                <div>
+                  <label for='exampleInputEmail1'>Country/Region * </label>
+                  <br />
+                  <CountryDropdown
+                    className='border country-selector'
+                    value={country}
+                    onChange={setCountry}
+                  />
+                </div>
+              </div>
+              <div className='row'>
+                <div>
                   <label for='exampleInputEmail1'>Telephone *</label>
                   <PhoneInput
                     placeholder='Enter phone number'
-                    class='form-control'
-                    value={value}
-                    onChange={setValue}
+                    class='form-control border'
+                    value={number}
+                    onChange={setNumber}
                     error={
-                      value
-                        ? isValidPhoneNumber(value)
+                      number
+                        ? isValidPhoneNumber(number)
                           ? undefined
                           : 'Invalid phone number'
                         : 'Phone number required'
@@ -252,7 +216,10 @@ const BookingCusDetails = () => {
                 By continuing to the next step, you agree to these house rules
               </p>
               <button className='reserve-button '>
-                Next : Almost done! <span>{'>'}</span>
+                <Link to='/booking/:id/details/payment'>
+                  {' '}
+                  Next : Almost done! <span>{'>'}</span>
+                </Link>
               </button>
             </div>
           </div>
