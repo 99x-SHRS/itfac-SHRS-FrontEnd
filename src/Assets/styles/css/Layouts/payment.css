@@ -1,0 +1,10 @@
+.final-payment-btn {
+  width: 100% !important;
+  left: 0px;
+}
+.payment-methods {
+  margin: 0.8rem;
+}
+.payment-gateway-interface div {
+  padding: 0px !important;
+}

@@ -10,7 +10,7 @@ import {
   RegionDropdown,
   CountryRegionData,
 } from 'react-country-region-selector'
-import SideSummary from '../../Pages/Booking/SideSummary'
+import SideSummary from '../../Layouts/Payment/SideSummary.js'
 import 'react-phone-number-input/style.css'
 
 const BookingCusDetails = () => {
