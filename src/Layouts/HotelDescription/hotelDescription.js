@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../Assets/styles/css/components/hotelPageTabs.css'
+import '../../Assets/styles/css/Components/hotelPageTabs.css'
 
 class HotelDescription extends Component {
   render() {

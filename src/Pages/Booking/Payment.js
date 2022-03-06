@@ -6,7 +6,7 @@ import SideSummary from '../../Layouts/Payment/SideSummary.js'
 import InfoToolTip from '../../Components/ToolTip/InfoToolTip.js'
 import Footer from '../../Layouts/Footer/footer.js'
 
-import '../../Assets/styles/css/pages/payment.css'
+import '../../Assets/styles/css/Pages/payment.css'
 import { red } from '@material-ui/core/colors'
 const Payament = () => {
   useEffect(() => {

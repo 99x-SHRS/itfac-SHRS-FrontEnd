@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Souvenir from '../../Carousel/souvenir'
 import SplideSlider from '../../Carousel/splide'
-import '../../../Assets/styles/css/components/roomImageModal.css'
+import '../../../Assets/styles/css/Components/roomImageModal.css'
 import Browsetype from '../../Carousel/browsetype'
 
 class RoomImageModal extends Component {

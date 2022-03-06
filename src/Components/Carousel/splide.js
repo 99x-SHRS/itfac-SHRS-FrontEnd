@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/themes/splide-default.min.css'
-import '../../Assets/styles/css/components/souvenir.css'
+
+import '../../Assets/styles/css/Components/souvenir.css'
 
 const initialItems = Array.apply(null, Array(6)).map(
   (value, index) => index + 1

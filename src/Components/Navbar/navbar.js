@@ -4,7 +4,7 @@ import Profile from '../../Assets/images/profile/loggedIn-user.jpg'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
 
-import '../../Assets/styles/css/navbar.css'
+import '../../Assets/styles/css/Components/navbar.css'
 
 const Navbars = () => {
   const [LoggedIn, setLoggedIn] = useState(true)

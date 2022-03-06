@@ -9,7 +9,7 @@ import Review from '../../Layouts/Reviews/review.js'
 import HotelLocation from '../../Layouts/Location/hotelLocation.js'
 import Footer from '../../Layouts/Footer/footer.js'
 
-import '../../Assets/styles/css/pages/hotelPage.css'
+import '../../Assets/styles/css/Pages/hotelPage.css'
 class hotelPage extends Component {
   render() {
     return (

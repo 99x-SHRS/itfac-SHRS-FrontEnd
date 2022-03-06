@@ -2,7 +2,7 @@ import React from 'react'
 import Searchbox from '../../Components/Searchbar'
 import Navbar from '../../Components/Navbar/navbar'
 
-import '../../Assets/styles/css/header.css'
+import '../../Assets/styles/css/Layouts/header.css'
 
 const Header = () => {
   return (
