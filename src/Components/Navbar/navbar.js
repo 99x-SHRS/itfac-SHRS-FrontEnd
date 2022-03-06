@@ -7,10 +7,11 @@ import { useState } from 'react'
 import '../../Assets/styles/css/Components/navbar.css'
 
 const Navbars = () => {
-  const [LoggedIn, setLoggedIn] = useState(true)
-  const toggleChecked = () => setLoggedIn((LoggedIn) => !LoggedIn)
+  // const [LoggedIn, setLoggedIn] = useState(true)
+  // const toggleChecked = () => setLoggedIn((LoggedIn) => !LoggedIn)
 
   var prevScrollpos = window.pageYOffset
+
   window.onscroll = function () {
     var currentScrollPos = window.pageYOffset
     if (prevScrollpos > currentScrollPos) {
@@ -24,97 +25,66 @@ const Navbars = () => {
 
   return (
     <>
-      <Navbar bg='light' expand='md' id='navbar'>
-        <Container fluid>
-          <Navbar.Brand>
-            <h2>
-              <b>BOOKNOW.COM</b>
-            </h2>
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls='navbarScroll' />
-          <Navbar.Collapse id='navbarScroll'>
-            <Nav
-              className='ms-auto my-2 my-lg-0'
-              style={{ maxHeight: '3000px' }}
-              navbarScroll
-            >
-              {LoggedIn ? null : (
-                <Link to='/' className='nav-link'>
-                  <Nav.Item>
-                    <Button variant='outline-success ' className='signupbtn'>
-                      Sign Up
-                    </Button>
-                  </Nav.Item>
-                </Link>
-              )}
+      <div className='nav-bar-container' id='navbar'>
+        <img
+          src={'/images/LOGO/short-logo.png'}
+          className='short-logo'
+          alt=''
+        />
+        <div className='notification-container'>
+          <div class='icons'>
+            <div class='notification'>
+              <a href='#'>
+                <div class='notBtn' href='#'>
+                  <div class='number'>2</div>
+                  <i class='fas fa-bell'></i>
 
-              {LoggedIn ? null : (
-                <Link to='/' className='nav-link'>
-                  <Nav.Item>
-                    <Button
-                      variant='outline-success'
-                      className='loginbtn'
-                      onClick={toggleChecked}
-                    >
-                      Login
-                    </Button>
-                  </Nav.Item>
-                </Link>
-              )}
-              {LoggedIn ? (
-                <Link to='/' className='nav-link'>
-                  <Nav.Item className='m-2'>
-                    <h4>Home</h4>
-                  </Nav.Item>
-                </Link>
-              ) : null}
-              {LoggedIn ? (
-                <Link to='/' className='nav-link'>
-                  <Nav.Item className='m-2'>
-                    <h4>Bookings</h4>
-                  </Nav.Item>
-                </Link>
-              ) : null}
-              {LoggedIn ? (
-                <Link to='/' className='nav-link'>
-                  <Nav.Item className='m-2'>
-                    <h4>Saved</h4>
-                  </Nav.Item>
-                </Link>
-              ) : null}
-              {LoggedIn ? (
-                <Link to='/' className='nav-link'>
-                  <Nav.Item className='m-2' onClick={toggleChecked}>
-                    <h4>Log out</h4>
-                  </Nav.Item>
-                </Link>
-              ) : null}
-              {LoggedIn ? (
-                <Link to='/' className='nav-link'>
-                  <div class='wrapper'>
-                    <img
-                      src={Profile}
-                      alt='profile picture'
-                      class='image--cover1'
-                    />
+                  <div class='box '>
+                    <div class='display'>
+                      <div class='nothing'>
+                        <i class='fas fa-child stick'></i>
+                        <div class='cent'>Looks Like your all caught up!</div>
+                      </div>
+                      <div class='cont'>
+                        <div class='view-all-container'>
+                          <div class=';'>
+                            <button className='view-all'>View All</button>
+                          </div>
+                        </div>
+                        <div class='sec'>
+                          <div class='profCont'></div>
+                          <div class=';'>
+                            James liked your post: "Pure css notification box"
+                          </div>
+                          <div class='txt sub'> 2:30 pm</div>
+                        </div>
+
+                        <div class='sec'>
+                          <div class='profCont'></div>
+                          <div class=';'>
+                            James liked your post: "Pure css notification box"
+                          </div>
+                          <div class='txt sub'> 2:30 pm</div>
+                        </div>
+                        <div class='sec'>
+                          <div class='profCont'></div>
+                          <div class=';'>
+                            James liked your post: "Pure css notification box"
+                          </div>
+                          <div class='txt sub'> 2:30 pm</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </Link>
-              ) : (
-                <Link to='/' className='nav-link'>
-                  <div class='wrapper'>
-                    <img
-                      src={'/images/defaults/default-profile.png'}
-                      alt='profile picture'
-                      class='image--cover2'
-                    />
-                  </div>
-                </Link>
-              )}
-              <Nav.Item></Nav.Item>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div className='wrapper'></div>
+        </div>
+      </div>
     </>
   )
 }
