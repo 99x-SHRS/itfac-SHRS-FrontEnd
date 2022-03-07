@@ -1,4 +1,3 @@
-import '../../Assets/styles/css/components/browsetype.css'
 import React, { Component } from 'react'
 import Slider from 'react-slick'
 import { Carousel } from 'react-bootstrap'
@@ -10,6 +9,8 @@ import image_2 from '../../Assets/images/property-types/kabana.jpg'
 import image_3 from '../../Assets/images/property-types/villa.jpg'
 import image_4 from '../../Assets/images/property-types/bangalow.jpg'
 import image_5 from '../../Assets/images/property-types/guest-houses.jpg'
+
+import '../../Assets/styles/css/Components/browsetype.css'
 
 class Browsetype extends Component {
   render() {

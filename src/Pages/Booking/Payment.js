@@ -2,11 +2,11 @@ import React, { Component, useEffect } from 'react'
 
 import HotelHeader from '../../Layouts/HotelHeader/hotelHeader.js'
 import SelectPayment from '../../Layouts/Payment/SelectPayment.js'
-import SideSummary from '../../Pages/Booking/SideSummary'
+import SideSummary from '../../Layouts/Payment/SideSummary.js'
 import InfoToolTip from '../../Components/ToolTip/InfoToolTip.js'
 import Footer from '../../Layouts/Footer/footer.js'
 
-import '../../Assets/styles/css/pages/payment.css'
+import '../../Assets/styles/css/Pages/payment.css'
 import { red } from '@material-ui/core/colors'
 const Payament = () => {
   useEffect(() => {
@@ -27,9 +27,6 @@ const Payament = () => {
       <div className='user-details'>
         <div className='container'>
           <div className='row user-details '>
-            <div className='col-md-4 col-lg-3 '>
-              <SideSummary />
-            </div>
             <div className='col-md-7 col-lg-8 mt-1 '>
               <div className='container payment-summary border'>
                 <table class='table table-borderless'>
@@ -141,8 +138,10 @@ const Payament = () => {
                   </tbody>
                 </table>
               </div>
-              <div className='border mt-3'>
-                <h4>How do you wish to payment ?</h4>
+            </div>
+            <div className='col-md-4 col-lg-4 '>
+              <div className='border mt-1'>
+                <h4>How do you wish to pay ?</h4>
                 <SelectPayment />
               </div>
             </div>

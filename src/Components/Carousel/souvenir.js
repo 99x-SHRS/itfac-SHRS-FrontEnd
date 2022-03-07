@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { Carousel } from 'react-bootstrap'
+
 import image_1 from '../../Assets/images/property-types/luxary.jpg'
 import image_2 from '../../Assets/images/property-types/kabana.jpg'
 import image_3 from '../../Assets/images/property-types/villa.jpg'
 import image_4 from '../../Assets/images/property-types/bangalow.jpg'
 import image_5 from '../../Assets/images/property-types/guest-houses.jpg'
-import '../../Assets/styles/css/components/souvenir.css'
+
+import '../../Assets/styles/css/Components/souvenir.css'
 
 class Souvenir extends Component {
   render() {

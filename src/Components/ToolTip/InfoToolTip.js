@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../Assets/styles/css/components/toolTip.css'
+import '../../Assets/styles/css/Components/toolTip.css'
 class InfoToolTip extends Component {
   render() {
     return (

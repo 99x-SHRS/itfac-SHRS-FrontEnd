@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Header from '../../Layouts/Header/header.js'
 import TopDestination from '../../Layouts/TopDestination/topDestination.js'
 import Browsetype from '../../Components/Carousel/browsetype.js'
@@ -6,9 +6,13 @@ import RecommondedHotels from '../../Layouts/RecommondedHotels/recommondedHotels
 import Footer from '../../Layouts/Footer/footer.js'
 
 const Dashboard = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   return (
     <div>
       <Header />
+      <RecommondedHotels />
       <TopDestination />
       <RecommondedHotels />
       <Browsetype />

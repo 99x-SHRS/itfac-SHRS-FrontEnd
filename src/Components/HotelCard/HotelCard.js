@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../Assets/styles/css/components/hotelCard.css'
+import '../../Assets/styles/css/Components/hotelCard.css'
 class HotelCard extends Component {
   render() {
     return (
