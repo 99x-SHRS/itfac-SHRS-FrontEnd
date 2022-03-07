@@ -1,5 +1,5 @@
 import React, { Component, useEffect } from 'react'
-import { Navbar, Nav, Container, Button } from 'react-bootstrap'
+import { Dropdown, Nav, Container, Button } from 'react-bootstrap'
 import Profile from '../../Assets/images/profile/loggedIn-user.jpg'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
@@ -20,7 +20,7 @@ const Navbars = () => {
   }, [])
 
   // useEffect(() => {
-  //   var x = document.getElementById('myDIV')
+  //   var x = document.getElementById('sideDropMenu')
   //   if (sideBox) {
   //     x.style.display = 'block'
   //   } else {
@@ -140,8 +140,26 @@ const Navbars = () => {
             </div>
           </div>
           <div className='nav-items'>
-            <div className='wrapper'></div>
-            {/* <div id='myDIV'>This is my DIV element.</div> */}
+            {/* <div id='sideDropMenu'>
+              <div>Bookings</div>
+              <div>Saved Hotels</div>
+              <div>Loyalty</div>
+            </div> */}
+            <Dropdown>
+              <Dropdown.Toggle
+                className='wrapper'
+                id='dropdown-basic'
+              ></Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item href='#/action-1'>Bookings</Dropdown.Item>
+                <Dropdown.Item href='#/action-2'>Saved</Dropdown.Item>
+                <Dropdown.Item href='#/action-3'>Loyalty</Dropdown.Item>
+                <Dropdown.Item href='#/action-3'>Messeges</Dropdown.Item>
+                <Dropdown.Item href='#/action-3'>My Account</Dropdown.Item>
+                <Dropdown.Item href='#/action-3'>Sign Out</Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
           </div>
         </div>
       </div>
