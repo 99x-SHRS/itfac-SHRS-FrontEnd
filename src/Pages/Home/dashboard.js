@@ -12,6 +12,7 @@ const Dashboard = () => {
   return (
     <div>
       <Header />
+      <RecommondedHotels />
       <TopDestination />
       <RecommondedHotels />
       <Browsetype />

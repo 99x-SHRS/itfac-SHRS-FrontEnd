@@ -28,6 +28,11 @@
   height: 5rem;
   display: flex;
 }
+.right-align {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
 .short-logo {
   height: 110%;
   width: 9rem;
@@ -35,7 +40,9 @@
   background-size: cover;
   background-position: center;
   transform: scale(1.6);
+  cursor: pointer;
 }
+
 @media only screen and (max-width: 767px) {
   .short-logo {
     width: 8rem;
@@ -256,9 +263,10 @@
     margin-top: 2rem;
     left: -140%;
   }
-  /* .notification-container .display {
-    width: 20rem;
-  } */
+  .nav-items {
+    margin: auto 0px auto 0px;
+    cursor: pointer !important;
+  }
 }
 .wrapper {
   width: 2.8rem;
@@ -272,9 +280,27 @@
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 50%;
+  border: rgb(255, 255, 255) solid 3px;
 }
 /* .wrapper img {
   border-radius: 50%;
   width: 3.5rem;
   height: 3.5rem;
 } */
+.currency-container {
+  width: 11%;
+  margin: auto 0 auto auto;
+  border-radius: 5px;
+}
+
+.currency-selector {
+  color: black;
+  cursor: pointer;
+  background-color: #00ad5f;
+  border: rgb(255, 255, 255) solid 3px;
+  border-radius: 5px;
+}
+.nav-items {
+  margin: auto 5px auto 0;
+  cursor: pointer !important;
+}
