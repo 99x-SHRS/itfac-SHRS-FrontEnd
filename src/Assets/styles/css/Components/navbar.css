@@ -257,8 +257,8 @@
   color: white;
 }
 @media only screen and (max-width: 767px) {
-  .notification-container .box {
-    width: 20rem;
+  .box {
+    width: 20rem !important;
     position: absolute;
     margin-top: 2rem;
     left: -140%;
@@ -303,4 +303,21 @@
 .nav-items {
   margin: auto 5px auto 0;
   cursor: pointer !important;
+}
+#myDIV {
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+  background-color: lightblue;
+  margin-top: 20px;
+  width: 10rem;
+  right: 1rem;
+  position: absolute;
+}
+.currency-selector {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  padding: 0px 5px 0px 5px;
 }

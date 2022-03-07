@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import '../../Assets/styles/css/Components/searchedHotelCard.css'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
 
+import '../../Assets/styles/css/Components/searchedHotelCard.css'
 class HotelCard extends Component {
   constructor(props) {
     super(props)

@@ -11,11 +11,34 @@ import '../../Assets/styles/css/Components/navbar.css'
 const Navbars = () => {
   // const [LoggedIn, setLoggedIn] = useState(true)
   // const toggleChecked = () => setLoggedIn((LoggedIn) => !LoggedIn)
+  const [sideBox, setSideBox] = useState(false)
+  const [currency, setCurrency] = useState('USD')
+
   useEffect(() => {
     window.scrollTo(0, 0)
     toast.configure()
   }, [])
-  const [currency, setCurrency] = useState('USD')
+
+  // useEffect(() => {
+  //   var x = document.getElementById('myDIV')
+  //   if (sideBox) {
+  //     x.style.display = 'block'
+  //   } else {
+  //     x.style.display = 'none'
+  //   }
+  // }, [sideBox])
+
+  // const concernedElement = document.querySelector('.wrapper')
+
+  // document.addEventListener('click', (event) => {
+  //   if (concernedElement.contains(event.target)) {
+  //     setSideBox(!sideBox)
+  //     console.log('Clicked Inside')
+  //   } else {
+  //     setSideBox(false)
+  //     console.log('Clicked out')
+  //   }
+  // })
 
   function notify(message) {
     toast.success(message)
@@ -55,9 +78,10 @@ const Navbars = () => {
                 notify('You changed currency to ' + e.target.value)
               }}
             >
-              <option selected value={'USD'}>
-                USD
+              <option selected value={'LKR'}>
+                LKR
               </option>
+              <option value={'EUR'}>EUR</option>
               <option value={'EUR'}>EUR</option>
               <option value={'GBP'}>GBP</option>
               <option value={'JPY'}>JPY</option>
@@ -73,7 +97,7 @@ const Navbars = () => {
                     <div class='number'>2</div>
                     <i class='fas fa-bell'></i>
 
-                    <div class='box '>
+                    <div class='box'>
                       <div class='display'>
                         <div class='nothing'>
                           <i class='fas fa-child stick'></i>
@@ -117,6 +141,7 @@ const Navbars = () => {
           </div>
           <div className='nav-items'>
             <div className='wrapper'></div>
+            {/* <div id='myDIV'>This is my DIV element.</div> */}
           </div>
         </div>
       </div>
