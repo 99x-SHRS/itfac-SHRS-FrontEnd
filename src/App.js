@@ -7,7 +7,8 @@ import Hotels from './Pages/Hotels/hotels'
 import HotelPage from './Pages/Booking/hotelPage'
 import CustomerDetails from './Pages/Booking/CustomerDetails'
 import Payment from './Pages/Booking/Payment.js'
-
+import SavedHotel from './Pages/Saved/savedHotel'
+import BookingHistory from './Pages/BookingHistory/bookingHistory.js'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './App.css'
@@ -37,6 +38,12 @@ function App() {
             exact
             path='/booking/:id/details/payment'
             element={<Payment />}
+          ></Route>
+          <Route exact path='/saved-hotel' element={<SavedHotel />}></Route>
+          <Route
+            exact
+            path='/booking-history'
+            element={<BookingHistory />}
           ></Route>
         </Routes>
         {/* {loading ? (

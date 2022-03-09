@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 
+import PriceRange from '../leftSideBar/priceRange'
+import StartFilter from '../leftSideBar/startFilter'
+import HotelCard from '../../Components/SearchedHotelCard/hotelCard'
+
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
 import Hotel_2 from '../../Assets/images/hotels/hotel2.jpg'
 import Hotel_3 from '../../Assets/images/hotels/hotel3.jpg'
 import Hotel_4 from '../../Assets/images/hotels/hotel4.jpg'
-import PriceRange from '../leftSideBar/priceRange'
-import StartFilter from '../leftSideBar/startFilter'
-import HotelCard from '../../Components/SearchedHotelCard/hotelCard'
 
 import '../../Assets/styles/css/Layouts/searchedHotels.css'
 

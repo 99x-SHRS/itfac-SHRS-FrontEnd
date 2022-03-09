@@ -152,8 +152,8 @@ const Navbars = () => {
               ></Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href='#/action-1'>Bookings</Dropdown.Item>
-                <Dropdown.Item href='#/action-2'>Saved</Dropdown.Item>
+                <Dropdown.Item href='/booking-history'>Bookings</Dropdown.Item>
+                <Dropdown.Item href='/saved-hotel'>Saved</Dropdown.Item>
                 <Dropdown.Item href='#/action-3'>Loyalty</Dropdown.Item>
                 <Dropdown.Item href='#/action-3'>Messeges</Dropdown.Item>
                 <Dropdown.Item href='#/action-3'>My Account</Dropdown.Item>
