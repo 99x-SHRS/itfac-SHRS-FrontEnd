@@ -21,9 +21,9 @@ function App() {
   return (
     <Router>
       <div className='App'>
-        <ChatBot />
-        <Routes>{UserRoutes}</Routes>
-        {/* {loading ? (
+        {/* <ChatBot />
+        <Routes>{UserRoutes}</Routes> */}
+        {loading ? (
           <div className='Loader'>
             <PropagateLoader
               loading={loading}
@@ -33,10 +33,11 @@ function App() {
             />
           </div>
         ) : (
-          <Routes>
-            <Route exact path='/' element={<Dashboard />}></Route>
-          </Routes>
-        )} */}
+          <>
+            <ChatBot />
+            <Routes>{UserRoutes}</Routes>
+          </>
+        )}
       </div>
     </Router>
   )
