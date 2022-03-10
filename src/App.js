@@ -2,13 +2,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PropagateLoader from 'react-spinners/PropagateLoader'
 import React, { useState, useEffect } from 'react'
 
-import Dashboard from './Pages/Home/dashboard'
-import Hotels from './Pages/Hotels/hotels'
-import HotelPage from './Pages/Booking/hotelPage'
-import CustomerDetails from './Pages/Booking/CustomerDetails'
-import Payment from './Pages/Booking/Payment.js'
-import SavedHotel from './Pages/Saved/savedHotel'
-import BookingHistory from './Pages/BookingHistory/bookingHistory.js'
+import UserRoutes from './Routes/userRouter'
+import ChatBot from './Services/ChatBot/chatBot.js'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './App.css'
@@ -22,30 +17,12 @@ function App() {
       setLoading(false)
     }, 3000)
   }, [])
+
   return (
     <Router>
       <div className='App'>
-        <Routes>
-          <Route exact path='/' element={<Dashboard />}></Route>
-          <Route exact path='/hotels' element={<Hotels />}></Route>
-          <Route exact path='/booking/:id' element={<HotelPage />}></Route>
-          <Route
-            exact
-            path='/booking/:id/details'
-            element={<CustomerDetails />}
-          ></Route>
-          <Route
-            exact
-            path='/booking/:id/details/payment'
-            element={<Payment />}
-          ></Route>
-          <Route exact path='/saved-hotel' element={<SavedHotel />}></Route>
-          <Route
-            exact
-            path='/booking-history'
-            element={<BookingHistory />}
-          ></Route>
-        </Routes>
+        <ChatBot />
+        <Routes>{UserRoutes}</Routes>
         {/* {loading ? (
           <div className='Loader'>
             <PropagateLoader

@@ -1,6 +1,7 @@
 @import 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Raleway:300,400';
 .booking-history-container {
   margin-top: 7rem !important;
+  min-height: 40rem !important;
 }
 .booking-history-container .tabs {
   left: 50%;
@@ -340,5 +341,36 @@
   }
   .booking-history-container .tabs .content section h2 {
     display: block;
+  }
+}
+.table-mob {
+  display: none;
+}
+.pagination .page-item {
+  width: 80%;
+}
+.pagination {
+  width: 50%;
+  margin: auto;
+}
+.fa-info-circle {
+  color: #428bff !important;
+}
+@media only screen and (max-width: 767px) {
+  .table-web {
+    display: none;
+  }
+  .table-mob {
+    display: block;
+  }
+
+  .booking-history-container .tabs {
+    padding: 5px !important;
+    width: 100%;
+    padding: 0px !important;
+  }
+  .pagination {
+    width: 100%;
+    padding: -50px !important;
   }
 }

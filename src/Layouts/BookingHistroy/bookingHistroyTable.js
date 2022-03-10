@@ -1,7 +1,6 @@
 import React, { Component, useEffect } from 'react'
-import CurrentBooking from '../../Components/BookingHistoryTabs/currentBooking'
-import PastBookings from '../../Components/BookingHistoryTabs/pastBookings'
-import AllBookings from '../../Components/BookingHistoryTabs/allBookings'
+import BookingHistory from '../../Components/BookingHistoryTabs/bookingHistory.js'
+
 import '../../Assets/styles/css/Layouts/bookingHistoryTable.css'
 const BookingHistroyTable = () => {
   useEffect(() => {
@@ -62,15 +61,15 @@ const BookingHistroyTable = () => {
         <div class='content'>
           <section>
             <h2>Current Bookings</h2>
-            <CurrentBooking />
+            <BookingHistory />
           </section>
           <section>
             <h2>Past Bookings</h2>
-            <PastBookings />
+            <BookingHistory />
           </section>
           <section>
             <h2>All Bookings</h2>
-            <AllBookings />
+            <BookingHistory />
           </section>
           <section>
             <h2>Reviews</h2>
