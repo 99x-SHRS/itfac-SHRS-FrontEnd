@@ -89,6 +89,9 @@ const Navbars = () => {
               <option value={'AUD'}>AUD</option>
             </select>
           </div>
+          {/* <div className='nav-items'>
+            <i class='fa-solid fa-comment'></i>
+          </div> */}
           <div className='nav-items'>
             <div class='icons'>
               <div class='notification'>
