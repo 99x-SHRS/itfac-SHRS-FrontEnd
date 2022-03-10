@@ -44,7 +44,7 @@ const Recommendeds = () => {
       <div className='row '>
         {hotelData.map((hotel, index) => {
           return (
-            <div class='col-6 col-md-3 '>
+            <div class='col-6 col-lg-3 '>
               <HotelCard hotel={hotel} />
             </div>
           )
