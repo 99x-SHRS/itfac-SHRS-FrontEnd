@@ -89,9 +89,9 @@ const Navbars = () => {
               <option value={'AUD'}>AUD</option>
             </select>
           </div>
-          {/* <div className='nav-items'>
+          <div className='nav-items'>
             <i class='fa-solid fa-comment'></i>
-          </div> */}
+          </div>
           <div className='nav-items'>
             <div class='icons'>
               <div class='notification'>
@@ -155,9 +155,15 @@ const Navbars = () => {
               ></Dropdown.Toggle>
 
               <Dropdown.Menu>
-                <Dropdown.Item href='/booking-history'>Bookings</Dropdown.Item>
-                <Dropdown.Item href='/saved-hotel'>Saved</Dropdown.Item>
-                <Dropdown.Item href='#/action-3'>Loyalty</Dropdown.Item>
+                <Dropdown.Item as={Link} to={'/booking-history'}>
+                  Bookings
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to={'/saved-hotel'}>
+                  Saved
+                </Dropdown.Item>
+                <Dropdown.Item as={Link} to={'/loyalty-program'}>
+                  Loyalty
+                </Dropdown.Item>
                 <Dropdown.Item href='#/action-3'>Messeges</Dropdown.Item>
                 <Dropdown.Item href='#/action-3'>My Account</Dropdown.Item>
                 <Dropdown.Item href='#/action-3'>Sign Out</Dropdown.Item>

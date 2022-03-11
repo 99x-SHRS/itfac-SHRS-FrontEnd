@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Sedgwick+Ave&display=swap');
 .header {
-  background-image: url('../../../images//bg-img-01.jpg');
+  background-image: url('/public/images/Backgrounds/bg-img-01.jpg');
   position: relative;
   top: 0;
   left: 0;

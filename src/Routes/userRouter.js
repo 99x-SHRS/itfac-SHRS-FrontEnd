@@ -8,7 +8,7 @@ import Payment from '../Pages/Booking/Payment.js'
 import SavedHotel from '../Pages/Saved/savedHotel'
 import BookingHistory from '../Pages/BookingHistory/bookingHistory.js'
 import BookingDetails from '../Layouts/BookingHistroy/bookingDetails'
-
+import LoyaltyDescription from '../Pages/Loyalty/loyaltyDescription'
 const UserRoutes = (
   <>
     <Route exact path='/' element={<Dashboard />}></Route>
@@ -30,6 +30,12 @@ const UserRoutes = (
       exact
       path='/booking-history/details'
       element={<BookingDetails />}
+    ></Route>
+
+    <Route
+      exact
+      path='/loyalty-program'
+      element={<LoyaltyDescription />}
     ></Route>
   </>
 )
