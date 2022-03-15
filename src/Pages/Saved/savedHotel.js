@@ -44,7 +44,7 @@ class SavedHotel extends Component {
       <div>
         <Navbar />
         <div className='container ' style={{ marginTop: '8rem' }}>
-          <h2 className='mb-3'>Saved Bookings</h2>
+          <h2 className='mb-3'>Saved Hotels</h2>
           <div className='row '>
             {hotelData.map((hotel, index) => {
               return (

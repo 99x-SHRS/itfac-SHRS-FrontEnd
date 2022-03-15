@@ -119,24 +119,20 @@ const Navbars = () => {
                           </div>
                           <div class='sec'>
                             <div class='profCont'></div>
-                            <div class=';'>
-                              James liked your post: "Pure css notification box"
-                            </div>
+                            <div class=';'>Welcome to the booknow.lk.</div>
                             <div class='txt sub'> 2:30 pm</div>
                           </div>
 
                           <div class='sec'>
                             <div class='profCont'></div>
                             <div class=';'>
-                              James liked your post: "Pure css notification box"
+                              You can create account through cliking signup .
                             </div>
                             <div class='txt sub'> 2:30 pm</div>
                           </div>
                           <div class='sec'>
                             <div class='profCont'></div>
-                            <div class=';'>
-                              James liked your post: "Pure css notification box"
-                            </div>
+                            <div class=';'>Yah...Succesfully login!</div>
                             <div class='txt sub'> 2:30 pm</div>
                           </div>
                         </div>
@@ -154,7 +150,7 @@ const Navbars = () => {
               <div>Loyalty</div>
             </div> */}
           {loggedin ? (
-            <div className='nav-items '>
+            <div className='nav-items menu-dropdown'>
               <Dropdown>
                 <Dropdown.Toggle
                   className='wrapper right-dropdown'

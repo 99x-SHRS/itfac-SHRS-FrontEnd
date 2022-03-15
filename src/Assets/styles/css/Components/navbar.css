@@ -294,7 +294,7 @@
     width: 20rem !important;
     position: absolute;
     margin-top: 2rem;
-    left: -140%;
+    left: -360%;
   }
   .nav-items {
     margin: auto 0px auto 0px;
@@ -379,3 +379,7 @@
 .right-dropdown::after {
   content: none;
 }
+/* .btn-primary.dropdown-toggle {
+  opacity: 1;
+  background-color: unset !important;
+} */
