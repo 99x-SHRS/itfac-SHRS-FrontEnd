@@ -155,7 +155,7 @@ const RoomSelection = () => {
                   <img src={souvenirs1[0].path} alt='' />
                   <RoomImages souvenirs={souvenirs1} />
                 </div>
-                <div class='col-sm-12 col-1  mb-3'>
+                <div class='col-sm-12 col-1  mb-3 bed-icon'>
                   <div className='verticle-center'>
                     {[...Array(hotel.sleeps)].map((elementInArray, index) => (
                       <i key={index} class='fas fa-bed m-1'></i>

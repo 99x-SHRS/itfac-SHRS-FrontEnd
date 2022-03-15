@@ -62,7 +62,7 @@ class SearchedHotels extends Component {
   render() {
     return (
       <div>
-        <div className='searched-hotel-container hotels bg-light  pt-2 rounded b-1'>
+        <div className='searched-hotel-container hotels   pt-2 rounded b-1'>
           <div className='row'>
             <div className='col-lg-3 left-side-bar'>
               <div class='card p-3 left-container'>

@@ -127,3 +127,7 @@
 .reserve-button a {
   color: #dbc8c8 !important;
 }
+.bed-icon i {
+  color: black;
+  font-size: larger;
+}
