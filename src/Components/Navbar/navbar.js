@@ -1,51 +1,59 @@
-import React, { Component, useEffect } from 'react'
-import { Dropdown, Nav, Container, Button } from 'react-bootstrap'
-import Profile from '../../Assets/images/profile/loggedIn-user.jpg'
+import React, { Component, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { useState } from 'react'
-import Dashboard from '../../Pages/Home/dashboard'
-
+import { Dropdown, Nav, Container, Button } from 'react-bootstrap'
+import Modal from 'react-responsive-modal'
 import { toast } from 'react-toastify'
+import Login from '../Login/login'
+import Signup from '../Signup/signup'
+import Dashboard from '../../Pages/Home/dashboard'
+import SignupAndLogin from '../SignupAndLogin/signupAndLogin'
+import LoginSignup from '../../Layouts/LoginSignup/loginSignup'
+import Profile from '../../Assets/images/profile/loggedIn-user.jpg'
 import '../../Assets/styles/css/Components/navbar.css'
+import 'react-responsive-modal/styles.css'
 
 const Navbars = () => {
-  // const [LoggedIn, setLoggedIn] = useState(true)
-  // const toggleChecked = () => setLoggedIn((LoggedIn) => !LoggedIn)
   const [sideBox, setSideBox] = useState(false)
   const [currency, setCurrency] = useState('USD')
+  const [login, setLogin] = useState(false)
+  const [sign, setSign] = useState(false)
+  const [loggedin, setLoggedin] = useState(true)
 
   useEffect(() => {
     window.scrollTo(0, 0)
     toast.configure()
   }, [])
 
-  // useEffect(() => {
-  //   var x = document.getElementById('sideDropMenu')
-  //   if (sideBox) {
-  //     x.style.display = 'block'
-  //   } else {
-  //     x.style.display = 'none'
-  //   }
-  // }, [sideBox])
+  const loginMount = () => {
+    return LoginSignup
+  }
+  const onOpenModal = () => {
+    console.log()
+    setSign(true)
+  }
+  const onOpenModalLogin = () => {
+    setLogin(true)
+  }
+  const onCloseModal = () => {
+    setSign(false)
+  }
+  const onCloseModalclose = () => {
+    setLogin(false)
+  }
 
-  // const concernedElement = document.querySelector('.wrapper')
-
-  // document.addEventListener('click', (event) => {
-  //   if (concernedElement.contains(event.target)) {
-  //     setSideBox(!sideBox)
-  //     console.log('Clicked Inside')
-  //   } else {
-  //     setSideBox(false)
-  //     console.log('Clicked out')
-  //   }
-  // })
-
-  function notify(message) {
+  const notify = (message) => {
     toast.success(message)
+  }
+
+  const homepage = () => {
+    window.location.href = '/'
+  }
+  const loginForm = () => {
+    console.log('asd')
   }
   var prevScrollpos = window.pageYOffset
 
-  window.onscroll = function () {
+  window.onscroll = () => {
     var currentScrollPos = window.pageYOffset
     if (prevScrollpos > currentScrollPos) {
       document.getElementById('navbar').style.top = '0'
@@ -54,9 +62,6 @@ const Navbars = () => {
     }
     console.log(prevScrollpos)
     prevScrollpos = currentScrollPos
-  }
-  const homepage = () => {
-    window.location.href = '/'
   }
 
   return (
@@ -89,9 +94,9 @@ const Navbars = () => {
               <option value={'AUD'}>AUD</option>
             </select>
           </div>
-          <div className='nav-items'>
+          {/* <div className='nav-items'>
             <i class='fa-solid fa-comment'></i>
-          </div>
+          </div> */}
           <div className='nav-items'>
             <div class='icons'>
               <div class='notification'>
@@ -142,35 +147,70 @@ const Navbars = () => {
               </div>
             </div>
           </div>
-          <div className='nav-items'>
-            {/* <div id='sideDropMenu'>
+
+          {/* <div id='sideDropMenu'>
               <div>Bookings</div>
               <div>Saved Hotels</div>
               <div>Loyalty</div>
             </div> */}
-            <Dropdown>
-              <Dropdown.Toggle
-                className='wrapper'
-                id='dropdown-basic'
-              ></Dropdown.Toggle>
+          {loggedin ? (
+            <div className='nav-items '>
+              <Dropdown>
+                <Dropdown.Toggle
+                  className='wrapper right-dropdown'
+                  id='dropdown-basic'
+                ></Dropdown.Toggle>
 
-              <Dropdown.Menu>
-                <Dropdown.Item as={Link} to={'/booking-history'}>
-                  Bookings
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to={'/saved-hotel'}>
-                  Saved
-                </Dropdown.Item>
-                <Dropdown.Item as={Link} to={'/loyalty-program'}>
-                  Loyalty
-                </Dropdown.Item>
-                <Dropdown.Item href='#/action-3'>Messeges</Dropdown.Item>
-                <Dropdown.Item href='#/action-3'>My Account</Dropdown.Item>
-                <Dropdown.Item href='#/action-3'>Sign Out</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown>
-          </div>
+                <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to={'/booking-history'}>
+                    Bookings
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to={'/saved-hotel'}>
+                    Saved
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to={'/loyalty-program'}>
+                    Loyalty
+                  </Dropdown.Item>
+                  <Dropdown.Item>Messeges</Dropdown.Item>
+                  <Dropdown.Item>My Account</Dropdown.Item>
+                  <Dropdown.Item
+                    href='#/action-3'
+                    onClick={() => {
+                      setLoggedin(false)
+                    }}
+                  >
+                    Sign Out
+                  </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          ) : (
+            <>
+              {' '}
+              <div className='nav-items'>
+                <span className='login-btn ' onClick={onOpenModal}>
+                  Signup{' '}
+                </span>
+              </div>
+              <div className='nav-items'>
+                <span className='login-btn' onClick={onOpenModalLogin}>
+                  login{' '}
+                </span>
+              </div>
+            </>
+          )}
         </div>
+      </div>
+
+      <div>
+        <Modal open={sign} onClose={onCloseModal}>
+          <SignupAndLogin />
+          <Signup />
+        </Modal>
+        <Modal open={login} onClose={onCloseModalclose}>
+          <SignupAndLogin />
+          <Login />
+        </Modal>
       </div>
     </>
   )
