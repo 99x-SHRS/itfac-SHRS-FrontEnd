@@ -12,7 +12,7 @@ const PaymentOptions = (paymentMethod) => {
   }, [])
   function notify(message) {
     toast.success(message)
-    window.location.href = '/'
+    window.location.href = '/booking-history'
   }
   return (
     <div className='payment-gateway-interface'>

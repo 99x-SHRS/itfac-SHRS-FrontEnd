@@ -125,10 +125,15 @@
   font-size: 25px;
   padding-bottom: 10px;
   color: rgb(255, 255, 255);
-  margin-right: 40px;
+  margin-right: 50px;
   margin-left: 40px;
 }
-
+.fa-comment {
+  font-size: 25px;
+  color: rgb(255, 255, 255) !important;
+  margin-right: 30px;
+  margin-left: 40px;
+}
 .box {
   width: 400px;
   height: 0px;
@@ -256,7 +261,35 @@
   padding: 5px;
   color: white;
 }
+.currency-selector {
+  color: white;
+  cursor: pointer;
+  background-color: #333333;
+  /* border: rgb(255, 255, 255) solid 3px; */
+  border-radius: 5px;
+  margin-right: 20px;
+}
+.login-btn {
+  background-color: #00ad5f;
+  border: rgb(255, 255, 255) solid 3px;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: black;
+  margin-right: 20px;
+}
+
 @media only screen and (max-width: 767px) {
+  .login-btn {
+    background-color: #00ad5f;
+    border: rgb(255, 255, 255) solid 3px;
+
+    padding-left: 5px;
+    padding-right: 5px;
+    color: black;
+    margin-right: 10px;
+  }
+
   .box {
     width: 20rem !important;
     position: absolute;
@@ -266,6 +299,22 @@
   .nav-items {
     margin: auto 0px auto 0px;
     cursor: pointer !important;
+  }
+  .fas {
+    font-size: 25px;
+    padding-bottom: 10px;
+    color: rgb(255, 255, 255);
+    margin-right: 20px;
+    margin-left: 10px;
+  }
+  .fa-comment {
+    font-size: 25px;
+    color: rgb(255, 255, 255) !important;
+    margin-right: 10px;
+    margin-left: 20px;
+  }
+  .currency-selector {
+    margin-right: 5px;
   }
 }
 .wrapper {
@@ -304,13 +353,6 @@
   border-radius: 5px;
 }
 
-.currency-selector {
-  color: black;
-  cursor: pointer;
-  background-color: #00ad5f;
-  border: rgb(255, 255, 255) solid 3px;
-  border-radius: 5px;
-}
 .nav-items {
   margin: auto 5px auto 0;
   cursor: pointer !important;
@@ -332,4 +374,8 @@
   text-indent: 1px;
   text-overflow: '';
   padding: 0px 5px 0px 5px;
+}
+
+.right-dropdown::after {
+  content: none;
 }

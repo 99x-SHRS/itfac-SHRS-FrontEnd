@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
 import '../../Assets/styles/css/Layouts/topdestination.css'
-import GalleLogo from '../../Assets/images/galle.jpg'
-import EllaLogo from '../../Assets/images/ella.jpg'
-import AnuradapraLogo from '../../Assets/images/anuradapra.jpg'
 
 const TopDestination = () => {
   return (
@@ -15,7 +12,7 @@ const TopDestination = () => {
           <div className='circle'>
             <div className='circle_inner'>
               <div className='circle_inner__layer'>
-                <img src={AnuradapraLogo} alt='image' />
+                <img src='/images/shortcutPlaces/anuradapra.jpg' alt='image' />
               </div>
             </div>
           </div>
@@ -28,7 +25,7 @@ const TopDestination = () => {
           <div className='circle'>
             <div className='circle_inner'>
               <div className='circle_inner__layer'>
-                <img src={GalleLogo} alt='image' />
+                <img src='/images/shortcutPlaces/galle.jpg' alt='image' />
               </div>
             </div>
           </div>
@@ -41,7 +38,7 @@ const TopDestination = () => {
           <div className='circle '>
             <div className='circle_inner'>
               <div className='circle_inner__layer'>
-                <img src={EllaLogo} alt='image' />
+                <img src='/images/shortcutPlaces/ella.jpg' alt='image' />
               </div>
             </div>
           </div>
