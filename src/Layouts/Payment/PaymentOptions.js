@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import Paypal from '../../Services/PaymentGateways/PayPal'
@@ -6,13 +7,14 @@ import Gpay from '../../Services/PaymentGateways/Gpay'
 import PayHere from '../../Services/PaymentGateways/PayHere'
 const PaymentOptions = (paymentMethod) => {
   // useEffect(() => {}, [paymentMethod])
-
+  let navigate = useNavigate()
   useEffect(() => {
     toast.configure()
   }, [])
   function notify(message) {
     toast.success(message)
-    window.location.href = '/booking-history'
+    // history.push('/booking-history')
+    navigate('../booking-history', { replace: true })
   }
   return (
     <div className='payment-gateway-interface'>
