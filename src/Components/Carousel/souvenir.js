@@ -16,7 +16,7 @@ class Souvenir extends Component {
         <div className='souvenir-container mt-5 '>
           <Carousel fade>
             <Carousel.Item>
-              <img className='d-block w-100' src={image_5} alt='First slide' />
+              <img className='d-block w-100' src={image_1} alt='First slide' />
               <Carousel.Caption>
                 <h3>First slide label</h3>
                 <p>
@@ -25,7 +25,7 @@ class Souvenir extends Component {
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item>
-              <img className='d-block w-100' src={image_5} alt='Second slide' />
+              <img className='d-block w-100' src={image_2} alt='Second slide' />
 
               <Carousel.Caption>
                 <h3>Second slide label</h3>
