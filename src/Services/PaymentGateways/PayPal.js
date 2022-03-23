@@ -1,12 +1,15 @@
 import React, { useRef, useEffect } from 'react'
 import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 export default function Paypal() {
   const paypal = useRef()
+  let navigate = useNavigate()
   useEffect(() => {
     toast.configure()
   }, [])
   function notify(message) {
     toast.success(message)
+    navigate('../booking-history', { replace: true })
   }
   useEffect(() => {
     window.paypal
@@ -30,8 +33,6 @@ export default function Paypal() {
           if ((order.status = 'COMPLETED')) {
             console.log('COMPLETED')
             notify('Payment was successfully finished!')
-            notify('Your booking is placed !')
-            window.location.href = '/'
           }
         },
         onError: (err) => {
