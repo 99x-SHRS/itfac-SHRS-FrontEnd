@@ -15,18 +15,15 @@ function App() {
     setLoading(true)
     setTimeout(() => {
       setLoading(false)
-
     }, 5000)
-
-
   }, [])
 
   return (
     <Router>
       <div className='App'>
-        <Routes>{UserRoutes}</Routes>
+        {/* <Routes>{UserRoutes}</Routes> */}
         {/* <ChatBot /> */}
-        {/* {loading ? (
+        {loading ? (
           <div className='Loader'>
             <PropagateLoader
               loading={loading}
@@ -40,7 +37,7 @@ function App() {
             <Routes>{UserRoutes}</Routes>
             <ChatBot />
           </>
-        )} */}
+        )}
       </div>
     </Router>
   )
