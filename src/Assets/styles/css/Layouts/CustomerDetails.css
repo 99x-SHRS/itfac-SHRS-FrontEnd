@@ -118,6 +118,10 @@
     width: 100%;
     background-color: #fff;
   }
+  .step-indicator {
+    position: relative;
+    margin-top: 12% !important;
+  }
 }
 .PhoneInputCountryIconImg {
   min-width: 2rem;
