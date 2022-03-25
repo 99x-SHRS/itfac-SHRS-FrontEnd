@@ -1,17 +1,10 @@
-const url = 'tasks'
-const plural = 'tasks'
-const single = 'task'
+import provider from './provider'
+const BASE_URL = process.env.REACT_APP_BASE_URL
 
-const apiHotels = new ApiCore({
-  getAll: true,
-  getSingle: true,
-  post: true,
-  put: false,
-  patch: false,
-  delete: true,
-  url: url,
-  plural: plural,
-  single: single,
-})
+//user
 
-export default apiHotels
+const getAllHotels = async () => {
+  return await provider.getAll(BASE_URL, 'hotel', 'getAllHotels')
+}
+
+export default getAllHotels
