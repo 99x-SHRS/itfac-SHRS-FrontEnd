@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import '../../Assets/styles/css/Components/login.css'
 
 const Signup = (props) => {
-  console.log(props)
   return (
     <div className='modal-body signup-container'>
       <form className='contact-form form-validate4' novalidate='novalidate'>

@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { handleResponse, handleError } from './response'
 
+//get methods
 const getAll = async (url, type, task) => {
   console.log(`${url}/${type}/${task}`)
   return axios
@@ -15,4 +16,11 @@ const getOneById = (url, type, task) => {
     .catch(handleError)
 }
 
-export default { getAll, getOneById }
+//post methods
+const getAllPOST = async (url, type, task, data) => {
+  return axios
+    .post(`${url}/${type}/${task}`, data)
+    .then(handleResponse)
+    .catch(handleError)
+}
+export default { getAll, getOneById, getAllPOST }

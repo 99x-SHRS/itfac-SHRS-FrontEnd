@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../../Assets/styles/css/Components/hotelCard.css'
+import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
 class HotelCard extends Component {
   getStars(params) {
     let content = []
@@ -11,7 +12,7 @@ class HotelCard extends Component {
   render() {
     return (
       <div class='card recommonded-hotels'>
-        <img src={this.props.hotel.image} class='card-img-top' alt='...' />
+        <img src={Hotel_1} class='card-img-top' alt='...' />
         <div class='card-body'>
           <h4 class='card-title'>
             {this.props.hotel.name} {this.getStars(1)}

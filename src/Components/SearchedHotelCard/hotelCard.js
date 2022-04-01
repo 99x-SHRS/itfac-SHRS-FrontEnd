@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css'
-
+import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
 import '../../Assets/styles/css/Components/searchedHotelCard.css'
 class HotelCard extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class HotelCard extends Component {
             <div
               class='w-full sm:w-2/4 hotel-cover bg-center bg-cover border relative h-g sm:h-auto shadow-inner'
               style={{
-                backgroundImage: `url(${this.props.hotel.image})`,
+                backgroundImage: `url(${Hotel_1})`,
               }}
             >
               <div className='save-hotel m-2'>
@@ -133,10 +133,10 @@ class HotelCard extends Component {
                 <div>
                   <div class='sm:flex items-center mb-1'>
                     <h2 class='text-lg font-semibold text-gray-600'>
-                      {this.props.hotel.name}
+                      {this.props.hotelData.hotel.name}
                     </h2>
                     <div class='flex sm:ml-3'>
-                      {this.getStars(this.props.hotel.stars)}
+                      {/* {this.getStars(this.props.hotel.stars)} */}
                     </div>
                   </div>
                   <div class='flex items-center'>
@@ -156,7 +156,7 @@ class HotelCard extends Component {
                       ></path>
                     </svg>
                     <p class='text-xs text-gray-600'>
-                      {this.props.hotel.province}
+                      {this.props.hotelData.hotel.province}
                       <a class='font-semibold text-gray-700 ml-2' href=''>
                         Show on Map
                       </a>
@@ -165,10 +165,8 @@ class HotelCard extends Component {
                 </div>
                 <div>
                   <div class='text-right text-xl leading-tight text-gray-600 font-semibold'>
-                    $ 869 <br />{' '}
-                    <div className='nights'>
-                      <p>2 nights</p>
-                    </div>
+                    Rs {this.props.hotelData.rate}
+                    <br /> <div className='nights'>{/* <p>2 nights</p> */}</div>
                   </div>
                 </div>
               </div>
@@ -192,10 +190,7 @@ class HotelCard extends Component {
                   </svg>
                 </div>
                 <p class='text-xs ml-1 text-gray-600'>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Tempora modi natus enim ipsa incidunt eum optio perspiciatis
-                  laboriosam reiciendis voluptatem totam, dolorem aliquid
-                  provident amet odio adipisci ullam praesentium quos.
+                  {this.props.hotelData.hotel.description}
                 </p>
               </div>
 
@@ -225,7 +220,7 @@ class HotelCard extends Component {
               <div class='sm:flex mt-3 items-center justify-between'>
                 <div>
                   <p class='text-xs text-green-700'>
-                    <strong>{this.props.hotel.stars}/5 Avgerage.</strong> See
+                    {/* <strong>{this.props.hotel.stars}/5 Avgerage.</strong> See */}
                     431 reviews
                   </p>
                 </div>

@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, createRef } from 'react'
 import { Link } from 'react-router-dom'
 import DatePicker from '../DatePicker/datepicker.js'
 import jQuery from 'jquery'
+import History from '../History/history.js'
 
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
@@ -10,6 +11,10 @@ import '../../Assets/vendor/select2/select2.min.css'
 import '../../Assets/styles/css/Components/searchbar.css'
 
 class Searchbox extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { dateRange: [] }
+  }
   componentDidMount() {
     ;(function ($) {
       try {
@@ -178,10 +183,36 @@ class Searchbox extends Component {
       }
     })(jQuery)
   }
+
+  handleSubmit = (event) => {
+    event.preventDefault()
+    console.log('called')
+    let data = {
+      location: event.target.address.value,
+      checkInDate: this.state.dateRange[0],
+      checkOutDate: this.state.dateRange[1],
+      adult: event.target.Adults.value,
+      children: event.target.Children.value,
+      rooms: event.target.Rooms.value,
+    }
+    const URL = `location=${data.location}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
+    window.location.href = `/hotels?${URL}`
+  }
+  getDateRange = (date) => {
+    let dates = [
+      new Date(date[0]).toISOString().slice(0, 10),
+      new Date(date[1]).toISOString().slice(0, 10),
+    ]
+
+    this.setState({
+      dateRange: dates,
+    })
+  }
+  eventhandler = (data) => console.log(data)
   render() {
     return (
       <div>
-        <form action='' method='post'>
+        <form onSubmit={this.handleSubmit}>
           <div className=' searchcontainer '>
             <div className='row'>
               <div className='col-md-3'>
@@ -199,7 +230,7 @@ class Searchbox extends Component {
               </div>
               <div className='col-md-4'>
                 <div class='input-group'>
-                  <DatePicker />
+                  <DatePicker getDateRange={this.getDateRange} />
                   <i class='zmdi zmdi-calendar-alt input-group-symbol'></i>
                 </div>
               </div>
@@ -229,9 +260,11 @@ class Searchbox extends Component {
                             <input
                               class='inputQty'
                               type='number'
+                              name='Adults'
                               min='0'
                               value='1'
                             />
+
                             <span class='plus'>+</span>
                           </div>
                         </li>
@@ -242,6 +275,7 @@ class Searchbox extends Component {
                             <input
                               class='inputQty'
                               type='number'
+                              name='Children'
                               min='0'
                               value='0'
                             />
@@ -255,6 +289,7 @@ class Searchbox extends Component {
                             <input
                               class='inputQty'
                               type='number'
+                              name='Rooms'
                               min='1'
                               value='1'
                             />
@@ -268,10 +303,7 @@ class Searchbox extends Component {
               </div>
               <div className='col-md-2 search-button'>
                 <button class='btn-submit submit-Btn' type='submit'>
-                  <Link to='/hotels'>
-                    {' '}
-                    <p>search</p>
-                  </Link>
+                  <p>search</p>
                 </button>
               </div>
             </div>

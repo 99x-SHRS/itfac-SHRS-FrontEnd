@@ -9,10 +9,11 @@ import SavedHotel from '../Pages/Saved/savedHotel'
 import BookingHistory from '../Pages/BookingHistory/bookingHistory.js'
 import BookingDetails from '../Layouts/BookingHistroy/bookingDetails'
 import LoyaltyDescription from '../Pages/Loyalty/loyaltyDescription'
+// /hotels/:location/:checkin/:checkout/:adults/:children/:rooms
 const UserRoutes = (
   <>
     <Route exact path='/' element={<Dashboard />}></Route>
-    <Route exact path='/hotels' element={<Hotels />}></Route>
+    <Route path='/hotels' element={<Hotels />}></Route>
     <Route exact path='/booking/:id' element={<HotelPage />}></Route>
     <Route
       exact

@@ -7,4 +7,7 @@ const getAllHotels = async () => {
   return await provider.getAll(BASE_URL, 'hotel', 'getAllHotels')
 }
 
-export default getAllHotels
+const searchHotels = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'hotel', 'search', bodyData)
+}
+export { getAllHotels, searchHotels }
