@@ -14,9 +14,9 @@ const Hotels = (props) => {
     <div>
       <HotelHeader />
       <div className='hotel-container hotels '>
-        <div className='hotel-searchbox secondary-searchbox'>
+        {/* <div className='hotel-searchbox secondary-searchbox'>
           <Searchbox />
-        </div>
+        </div> */}
         <div className='p-1'>
           <SearchedHotels />
         </div>

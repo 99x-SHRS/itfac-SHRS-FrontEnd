@@ -1,4 +1,6 @@
 import React, { Component, useEffect, useState } from 'react'
+import ReactPaginate from 'react-paginate'
+import HashLoader from 'react-spinners/HashLoader'
 import { searchHotels } from '../../Services/Api/Utilities/index.js'
 import PriceRange from '../leftSideBar/priceRange'
 import StartFilter from '../leftSideBar/startFilter'
@@ -13,28 +15,56 @@ import '../../Assets/styles/css/Layouts/searchedHotels.css'
 import { useSearchParams } from 'react-router-dom'
 
 const SearchedHotels = (props) => {
+  const [loading, setLoading] = useState(false)
+  let [color, setColor] = useState('#ffffff')
   const [searchedParams, setSearchedparams] = useSearchParams()
   let [hotels, setHotels] = useState([])
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+  const [items, setItems] = useState([])
+  const [pageCount, setpageCount] = useState(0)
+  let limit = 10
 
   useEffect(() => {
-    const fetchData = async () => {
-      const dataModel = {
-        location: searchedParams.get('location') || '',
-        checkInDate: searchedParams.get('checkin-date') || '',
-        checkOutDate: searchedParams.get('checkout-date') || '',
-        adult: searchedParams.get('adults') || '',
-        children: searchedParams.get('children') || '',
-        rooms: searchedParams.get('rooms') || '',
-      }
-      await searchHotels(dataModel).then((data) => {
-        setHotels(data.data)
-      })
+    window.scrollTo(0, 0)
+    setLoading(true)
+  }, [])
+  useEffect(() => {
+    fetchData(0)
+  }, [limit])
+  useEffect(() => {
+    if (hotels.length != 0) {
+      setLoading(false)
     }
-    fetchData()
   }, [hotels.length])
+
+  useEffect(() => {
+    if (loading) {
+      document.getElementById('pagination-div').style.display = 'none'
+    } else {
+      document.getElementById('pagination-div').style.display = 'block'
+    }
+  }, [loading])
+
+  const fetchData = async (page) => {
+    const dataModel = {
+      location: searchedParams.get('location') || '',
+      checkInDate: searchedParams.get('checkin-date') || '',
+      checkOutDate: searchedParams.get('checkout-date') || '',
+      adult: searchedParams.get('adults') || '',
+      children: searchedParams.get('children') || '',
+      rooms: searchedParams.get('rooms') || '',
+      page: page,
+    }
+    await searchHotels(dataModel).then((data) => {
+      setHotels(data.data.rows)
+      let totalRows = data.data.count
+      setpageCount(Math.ceil(totalRows / limit))
+    })
+  }
+  const handlePageClick = async (data) => {
+    let currentPage = data.selected
+    fetchData(currentPage)
+    window.scrollTo(0, 0)
+  }
 
   return (
     <div>
@@ -53,10 +83,42 @@ const SearchedHotels = (props) => {
               </div>
             </div>
           </div>
-          <div className=' col-md-9 searched-hotel'>
-            {hotels.map((hotel, index) => {
-              return <HotelCard hotelData={hotel} />
-            })}
+          <div className=' col-md-9 searched-hotel '>
+            {loading ? (
+              <div className='hotel-loader'>
+                <HashLoader
+                  loading={loading}
+                  size={25}
+                  margin={2}
+                  color='#00AD5F'
+                />
+              </div>
+            ) : (
+              hotels.map((hotel, index) => {
+                return <HotelCard hotelData={hotel} />
+              })
+            )}
+            <div className='mt-3 pagination-container' id='pagination-div'>
+              <ReactPaginate
+                previousLabel={'previous'}
+                nextLabel={'next'}
+                breakLabel={'...'}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination justify-content-center'}
+                pageClassName={'page-item'}
+                pageLinkClassName={'page-link'}
+                previousClassName={'page-item'}
+                previousLinkClassName={'page-link'}
+                nextClassName={'page-item'}
+                nextLinkClassName={'page-link'}
+                breakClassName={'page-item'}
+                breakLinkClassName={'page-link'}
+                activeClassName={'active'}
+              />
+            </div>
           </div>
         </div>
       </div>

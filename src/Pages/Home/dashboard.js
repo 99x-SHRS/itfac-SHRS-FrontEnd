@@ -9,11 +9,11 @@ const Dashboard = () => {
   return (
     <div>
       <Header />
-      {/* <RecommondedHotels /> */}
+      <RecommondedHotels />
       <TopDestination />
-      {/* <RecommondedHotels /> */}
+      <RecommondedHotels />
       <Browsetype />
-      {/* <RecommondedHotels /> */}
+      <RecommondedHotels />
       <Footer />
     </div>
   )

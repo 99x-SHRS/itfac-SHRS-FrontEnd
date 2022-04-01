@@ -224,17 +224,13 @@ class HotelCard extends Component {
                     431 reviews
                   </p>
                 </div>
-                <div class='mt-3 sm:mt-3 book-now'>
-                  <a
-                    href='#'
-                    class='bg-blue-500 shadow text-blue-100 py-3 px-6 font-bold inline-block rounded-md'
-                  >
-                    <Link to='/booking/1'>
-                      {' '}
+                <Link to={`/booking/${this.props.hotelData.roomId}`}>
+                  <div class='mt-3 sm:mt-3 book-now'>
+                    <a class='bg-blue-500 shadow text-blue-100 py-3 px-6 font-bold inline-block rounded-md'>
                       <p>Book Now</p>
-                    </Link>
-                  </a>
-                </div>
+                    </a>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
