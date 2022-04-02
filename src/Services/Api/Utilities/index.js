@@ -10,4 +10,12 @@ const getAllHotels = async () => {
 const searchHotels = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'search', bodyData)
 }
-export { getAllHotels, searchHotels }
+const getRoomTypesByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'roomtype',
+    'getRoomTypesByHotelId',
+    bodyData
+  )
+}
+export { getAllHotels, searchHotels, getRoomTypesByHotelId }

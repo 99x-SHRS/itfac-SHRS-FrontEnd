@@ -11,8 +11,8 @@ class DropDownList extends Component {
           <option selected>Select your preference </option>
           {this.props.roomTypes.map((roomType, index) => {
             return (
-              <option key={index} value={roomType.name}>
-                {roomType.name}
+              <option key={roomType.roomTypeId} value={roomType.type}>
+                {roomType.type}
               </option>
             )
           })}

@@ -18,9 +18,7 @@ const Recommendeds = () => {
 
   const pageOnLoad = async () => {
     const recommondedData = await getAllHotels()
-
     setRecommondedHotel(recommondedData.data.slice(0, 4))
-    console.log(recommondedHotel)
   }
 
   return (

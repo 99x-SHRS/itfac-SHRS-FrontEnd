@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
+import { useSearchParams } from 'react-router-dom'
 import HashLoader from 'react-spinners/HashLoader'
 import { searchHotels } from '../../Services/Api/Utilities/index.js'
 import PriceRange from '../leftSideBar/priceRange'
@@ -12,7 +13,6 @@ import Hotel_3 from '../../Assets/images/hotels/hotel3.jpg'
 import Hotel_4 from '../../Assets/images/hotels/hotel4.jpg'
 
 import '../../Assets/styles/css/Layouts/searchedHotels.css'
-import { useSearchParams } from 'react-router-dom'
 
 const SearchedHotels = (props) => {
   const [loading, setLoading] = useState(false)
@@ -57,6 +57,9 @@ const SearchedHotels = (props) => {
     await searchHotels(dataModel).then((data) => {
       setHotels(data.data.rows)
       let totalRows = data.data.count
+      if (data.status == 200) {
+        setLoading(false)
+      }
       setpageCount(Math.ceil(totalRows / limit))
     })
   }
@@ -68,7 +71,7 @@ const SearchedHotels = (props) => {
 
   return (
     <div>
-      <div className='searched-hotel-container hotels   pt-2 rounded b-1'>
+      <div className='searched-hotel-container hotels pt-2 rounded b-1'>
         <div className='row'>
           <div className='col-lg-3 left-side-bar'>
             <div class='card p-3 left-container'>
