@@ -134,6 +134,7 @@ const RoomSelection = () => {
 
   useEffect(() => {
     window.scrollTo(0, 0)
+    console.log('re rendered')
   }, [])
 
   return (

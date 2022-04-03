@@ -14,7 +14,7 @@ const UserRoutes = (
   <>
     <Route exact path='/' element={<Dashboard />}></Route>
     <Route path='/hotels' element={<Hotels />}></Route>
-    <Route exact path='/room/:id' element={<HotelPage />}></Route>
+    <Route exact path='/hotel/:id' element={<HotelPage />}></Route>
     <Route
       exact
       path='/booking/:id/details'

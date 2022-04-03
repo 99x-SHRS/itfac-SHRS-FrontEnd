@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
+
 import 'react-toastify/dist/ReactToastify.css'
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
 import '../../Assets/styles/css/Components/searchedHotelCard.css'
 class HotelCard extends Component {
   constructor(props) {
     super(props)
+
     toast.configure()
     this.state = {
       isSaved: false,
     }
   }
+  // componentDidMount() {
+  //   const params = this.props.match.params
+  //   console.log(params)
+  // }
   notify(message) {
     toast.success(message)
   }
@@ -224,7 +230,7 @@ class HotelCard extends Component {
                     431 reviews
                   </p>
                 </div>
-                <Link to={`/room/${this.props.hotelData.roomId}`}>
+                <Link to={`/hotel/${this.props.hotelData.roomId}`}>
                   <div class='mt-3 sm:mt-3 book-now'>
                     <a class='bg-blue-500 shadow text-blue-100 py-3 px-6 font-bold inline-block rounded-md'>
                       <p>Book Now</p>
