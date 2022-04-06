@@ -21,6 +21,7 @@ const SearchedHotels = (props) => {
   let [hotels, setHotels] = useState([])
   const [items, setItems] = useState([])
   const [pageCount, setpageCount] = useState(0)
+  const [URLparams, setURLparams] = useState({})
   let limit = 10
 
   useEffect(() => {
@@ -33,6 +34,7 @@ const SearchedHotels = (props) => {
   useEffect(() => {
     if (hotels.length != 0) {
       setLoading(false)
+      console.log(hotels)
     }
   }, [hotels.length])
 
@@ -54,8 +56,10 @@ const SearchedHotels = (props) => {
       rooms: searchedParams.get('rooms') || '',
       page: page,
     }
+    setURLparams(dataModel)
     await searchHotels(dataModel).then((data) => {
       setHotels(data.data.rows)
+      console.log(data)
       let totalRows = data.data.count
       if (data.status == 200) {
         setLoading(false)
@@ -98,7 +102,7 @@ const SearchedHotels = (props) => {
               </div>
             ) : (
               hotels.map((hotel, index) => {
-                return <HotelCard hotelData={hotel} />
+                return <HotelCard hotelData={hotel} URLparams={URLparams} />
               })
             )}
             <div className='mt-3 pagination-container' id='pagination-div'>

@@ -18,11 +18,11 @@ const getRoomTypesByHotelId = async (bodyData) => {
     bodyData
   )
 }
-const getRoomsByHotelIdAndRoomType = async (bodyData) => {
+const getAvailbleRooms = async (bodyData) => {
   return await provider.getAllPOST(
     BASE_URL,
     'room',
-    'getRoomsByHotelIdAndRoomType',
+    'getAvailbleRooms',
     bodyData
   )
 }
@@ -34,10 +34,29 @@ const getRoomByHotelId = async (bodyData) => {
     bodyData
   )
 }
+const getRoomsByHotelIdAndRoomType = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'room',
+    'getRoomsByHotelIdAndRoomType',
+    bodyData
+  )
+}
+const getAllImagesByRoomId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'uploads/room',
+    'getAllImagesByRoomId',
+    bodyData
+  )
+}
+
 export {
   getAllHotels,
   searchHotels,
   getRoomTypesByHotelId,
-  getRoomsByHotelIdAndRoomType,
+  getAvailbleRooms,
   getRoomByHotelId,
+  getRoomsByHotelIdAndRoomType,
+  getAllImagesByRoomId,
 }

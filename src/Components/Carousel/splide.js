@@ -1,7 +1,7 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/themes/splide-default.min.css'
-
+import { getAllImagesByRoomId } from '../../Services/Api/Utilities/index.js'
 import '../../Assets/styles/css/Components/souvenir.css'
 
 const initialItems = Array.apply(null, Array(6)).map(
@@ -32,9 +32,14 @@ const souvenirs1 = [
   },
 ]
 
-const SplideSlider = () => {
+const SplideSlider = ({ roomId }) => {
   const [items, setItems] = useState(initialItems)
-
+  useEffect(() => {
+    console.log(roomId)
+  }, [roomId])
+  // const getImages=()=>{]
+  // getAllImagesByRoomId
+  // }
   return (
     <>
       <Splide

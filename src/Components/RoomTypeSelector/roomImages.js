@@ -5,18 +5,11 @@ import '../../Assets/styles/css/Layouts/roomImages.css'
 
 var Carousel = require('react-responsive-carousel').Carousel
 
-class RoomImages extends Component {
-  constructor(props) {
-    super(props)
-  }
-
-  render() {
-    return (
-      <div>
-        <RoomImageModal />
-      </div>
-    )
-  }
+const RoomImages = ({ roomId }) => {
+  return (
+    <div>
+      <RoomImageModal roomId={roomId} />
+    </div>
+  )
 }
-
 export default RoomImages

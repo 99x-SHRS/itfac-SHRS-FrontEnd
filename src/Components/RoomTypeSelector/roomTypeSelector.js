@@ -1,64 +1,44 @@
 import React, { Component, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
+
 import DropDownList from '../../Components/DropDownList/dropDownList'
 import RoomSelection from '../../Layouts/RoomSelection/roomSelection'
 import HorizontalLine from '../HorizontalLine/horizontalLine'
+
 import {
   getRoomTypesByHotelId,
   getRoomsByHotelIdAndRoomType,
-  getRoomByHotelId,
 } from '../../Services/Api/Utilities/index.js'
 
 import '../../Assets/styles/css/Layouts/roomTypeSelector.css'
 
 const RoomTypeSelector = () => {
-  const params = useParams()
+  const [searchedParams, setSearchedparams] = useSearchParams()
   const [roomTypes, setRoomTypes] = useState([])
-  const [roomType, setRoomType] = useState()
-  const [rooms, setRooms] = useState([])
-
+  const [roomType, setRoomType] = useState(1)
+  let hotelId = searchedParams.get('hotel') || ''
   useEffect(() => {
-    fetchData()
-  }, [])
-
-  useEffect(() => {
-    const fetchRoomData = async () => {
-      console.log('changed')
-
-      const dataModel = {
-        hotelId: params.id,
-        roomTypeId: roomType,
-      }
-
-      await getRoomsByHotelIdAndRoomType(dataModel)
-        .then((res) => {
-          setRooms(res.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+    if (roomType.length != 0) {
+      fetchData()
     }
-    fetchRoomData()
+  }, [roomTypes.length])
+  useEffect(() => {
+    console.log('changed')
   }, [roomType])
 
-  const fetchData = async (data) => {
+  const fetchData = async () => {
     const dataModel = {
-      id: params.id,
+      id: hotelId,
     }
     await getRoomTypesByHotelId(dataModel)
       .then((res) => {
         setRoomTypes(res.data)
+        // setRoomType(roomTypes)
+        console.log(roomTypes)
       })
       .catch((err) => {
         console.log(err)
       })
-    // await getRoomByHotelId(dataModel)
-    //   .then((res) => {
-    //     setRoomTypes(res.data)
-    //   })
-    //   .catch((err) => {
-    //     console.log(err)
-    //   })
   }
 
   return (
@@ -77,7 +57,7 @@ const RoomTypeSelector = () => {
           <HorizontalLine />
         </div>
       </div>
-      <RoomSelection roomData={rooms} />
+      <RoomSelection roomTypeId={roomType} />
     </div>
   )
 }

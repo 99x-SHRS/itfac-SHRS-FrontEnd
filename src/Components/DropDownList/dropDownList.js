@@ -16,9 +16,9 @@ class DropDownList extends Component {
             this.props.setRoomType(x)
           }}
         >
-          <option selected disabled>
+          {/* <option selected disabled>
             Select your preference{' '}
-          </option>
+          </option> */}
           {this.props.roomTypes.map((roomType, index) => {
             return (
               <option key={roomType.roomTypeId} value={roomType.roomTypeId}>
