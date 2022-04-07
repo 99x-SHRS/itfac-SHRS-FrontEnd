@@ -6,40 +6,140 @@ import { Tabs, Tab } from "react-bootstrap";
 import { Collapse } from "react-bootstrap";
 import ReactPaginate from "react-paginate";
 import { useEffect, useState } from "react";
+import axios from "axios";
+import HttpHelper from "../../Utill/HttpHelper.js";
 
 function Requestmanagemodel() {
-  const [items, setItems] = useState([]);
-
-  const [pageCount, setpageCount] = useState(0);
+  const [items0, setItems0] = useState([]);
+  const [items1, setItems1] = useState([]);
+  const [items2, setItems2] = useState([]);
+  const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
-    const getComments = async () => {
-      const res = await fetch(
-        `http://localhost:3004/comments?_page=1&_limit=10`
-      );
-      const data = await res.json();
-      const total = res.headers.get("x-total-count");
-      setpageCount(Math.ceil(total / 10));
-      //console.log(total);
-      setItems(data);
-    };
-    getComments();
+    getrejectedDetails(itemOffset);
+    getacceptedDetails(itemOffset);
+    getpendingDetails(itemOffset);
   }, []);
 
-  const fetchComments = async (currentPage) => {
-    const res = await fetch(
-      `http://localhost:3004/comments?_page=${currentPage}&_limit=10`
-    );
-    const data = await res.json();
-    return data;
+  async function getrejectedDetails(page) {
+    var pages;
+    if (page == null) {
+      pages = itemOffset;
+    } else {
+      pages = page;
+    }
+    const data = {
+      status: "rejected",
+      page: pages,
+    };
+    HttpHelper.post(`/api/hotel/getHotelsByStatus`, data)
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        setItems0(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
-  const handlePageClick = async (data) => {
-    //console.log(data.selected);
+  async function getacceptedDetails(page) {
+    var pages;
+    if (page == null) {
+      pages = itemOffset;
+    } else {
+      pages = page;
+    }
+    const data = {
+      status: "accepted",
+      page: pages,
+    };
+    await axios
+      .post(`http://localhost:8000/api/hotel/getHotelsByStatus`, data)
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        setItems1(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    let currentPage = data.selected + 1;
-    const commentsFromServer = await fetchComments(currentPage);
-    setItems(commentsFromServer);
+  async function getpendingDetails(page) {
+    var pages;
+    if (page == null) {
+      pages = itemOffset;
+    } else {
+      pages = page;
+    }
+    const data = {
+      status: "pending",
+      page: pages,
+    };
+    await axios
+      .post(`http://localhost:8000/api/hotel/getHotelsByStatus`, data)
+      .then((res) => {
+        const data = res.data;
+        console.log(data);
+        setItems2(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+
+  const handlependingNextPageClick = async (event) => {
+    const newOffset = itemOffset + 1;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+    getpendingDetails(newOffset);
+  };
+  const handleacceptedNextPageClick = async (event) => {
+    const newOffset = itemOffset + 1;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+    getacceptedDetails(newOffset);
+  };
+  const handlerejectedNextPageClick = async (event) => {
+    const newOffset = itemOffset + 1;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+    getrejectedDetails(newOffset);
+  };
+
+
+
+  const handlependingBackPageClick = async (event) => {
+    const newOffset = itemOffset - 1;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+    getpendingDetails(newOffset);
+  };
+  const handleacceptedBackPageClick = async (event) => {
+    const newOffset = itemOffset - 1;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+    getacceptedDetails(newOffset);
+  };
+  const handlerejectedBackPageClick = async (event) => {
+    const newOffset = itemOffset - 1;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
+    setItemOffset(newOffset);
+    getrejectedDetails(newOffset);
   };
   return (
     <div class="container">
@@ -47,64 +147,11 @@ function Requestmanagemodel() {
         <h1>Request Manage</h1>
       </div>
       <Tabs
-        defaultActiveKey="all"
+        defaultActiveKey="pending"
         transition={Collapse}
         id="noanim-tab-example"
         className="mb-3 mt-4 row-g-2 d-flex justify-content-center"
       >
-        <Tab eventKey="all" title="All Request">
-          <div className="container">
-            <div className="row g-3 rounded-3 shadow p-2 border border-light mt-4">
-              <div className="col-4 d-flex justify-content-center">
-                <h2>All Request</h2>
-              </div>
-              <div className="col-8">
-                <div className="row g-1 rounded-3 bg-secondary text-white align-middle mb-2">
-                  <div className="col-sm-3 d-flex justify-content-center">
-                    <p>Hotel Name</p>
-                  </div>
-                  <div className="col-sm-3 d-flex justify-content-center">
-                    <p>Owner Name</p>
-                  </div>
-                  <div className="col-sm-2 d-flex justify-content-center">
-                    <p>Location</p>
-                  </div>
-                  <div className="col-sm-2 d-flex justify-content-center">
-                    <p>Status</p>
-                  </div>
-                  <div className="col-sm-2 d-flex justify-content-center">
-                    <p>Actions</p>
-                  </div>
-                </div>
-                <Pendingrequest
-                  hname="Beach Hotel"
-                  oname="O.W.Kodithuwakku"
-                  location="Mount Lavinia"
-                  status="pending"
-                />
-                <Pendingrequest
-                  hname="Hilltop Hotel"
-                  oname="Sumudu"
-                  location="Yatiyanthota"
-                  status="pending"
-                />
-                <Acceptedrequest
-                  hname="Samudura Hotel"
-                  oname="K.Perera"
-                  location="Matara"
-                  status="accepted"
-                />
-                <Rejectedrequest
-                  hname="Sewana Hotel"
-                  oname="S.Gunasena"
-                  location="Polonnaruwa"
-                  status="Rejected"
-                />
-              </div>
-            </div>
-          </div>
-        </Tab>
-
         <Tab eventKey="pending" title="Pending Request">
           <div className="container">
             <div className="row g-3 rounded-3 shadow p-2 border border-light mt-4">
@@ -129,42 +176,33 @@ function Requestmanagemodel() {
                     <p>Actions</p>
                   </div>
                 </div>
-                <Pendingrequest
-                  hname="Beach Hotel"
-                  oname="O.W.Kodithuwakku"
-                  location="Mount Lavinia"
-                  status="pending"
-                />
-                <Pendingrequest
-                  hname="Taj Hotel"
-                  oname="K.C.Perera"
-                  location="Dehiwala"
-                  status="pending"
-                />
-                <Pendingrequest
-                  hname="Hilltop Hotel"
-                  oname="Sumudu"
-                  location="Yatiyanthota"
-                  status="pending"
-                />
-                <Pendingrequest
-                  hname="Samudura Hotel"
-                  oname="K.Perera"
-                  location="Matara"
-                  status="pending"
-                />
-                <Pendingrequest
-                  hname="Gem Hotel"
-                  oname="K.Fernando"
-                  location="Negambo"
-                  status="pending"
-                />
-                <Pendingrequest
-                  hname="Sewana Hotel"
-                  oname="S.Gunasena"
-                  location="Polonnaruwa"
-                  status="pending"
-                />
+
+                {items2.map((item) => {
+                  return (
+                    <Pendingrequest
+                      id={item.hotelId}
+                      hname={item.name}
+                      oname={item.description}
+                      location={item.town}
+                      status={item.status}
+                      onfresh={getpendingDetails}
+                    />
+                  );
+                })}
+                <div className="d-flex justify-content-center">
+                  <button
+                    className="pending-req-button mx-2"
+                    onClick={handlependingBackPageClick}
+                  >
+                    Back
+                  </button>
+                  <button
+                    className="pending-req-button mx-2"
+                    onClick={handlependingNextPageClick}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -194,42 +232,30 @@ function Requestmanagemodel() {
                     <p>Actions</p>
                   </div>
                 </div>
-                <Acceptedrequest
-                  hname="Beach Hotel"
-                  oname="O.W.Kodithuwakku"
-                  location="Mount Lavinia"
-                  status="accepted"
-                />
-                <Acceptedrequest
-                  hname="Taj Hotel"
-                  oname="K.C.Perera"
-                  location="Dehiwala"
-                  status="accepted"
-                />
-                <Acceptedrequest
-                  hname="Hilltop Hotel"
-                  oname="Sumudu"
-                  location="Yatiyanthota"
-                  status="accepted"
-                />
-                <Acceptedrequest
-                  hname="Samudura Hotel"
-                  oname="K.Perera"
-                  location="Matara"
-                  status="accepted"
-                />
-                <Acceptedrequest
-                  hname="Gem Hotel"
-                  oname="K.Fernando"
-                  location="Negambo"
-                  status="accepted"
-                />
-                <Acceptedrequest
-                  hname="Sewana Hotel"
-                  oname="S.Gunasena"
-                  location="Polonnaruwa"
-                  status="accepted"
-                />
+                {items1.map((item, index) => {
+                  return (
+                    <Acceptedrequest
+                      hname={item.name}
+                      oname={item.description}
+                      location={item.town}
+                      status={item.status}
+                    />
+                  );
+                })}
+                <div className="d-flex justify-content-center">
+                  <button
+                    className="pending-req-button mx-2"
+                    onClick={handleacceptedBackPageClick}
+                  >
+                    Back
+                  </button>
+                  <button
+                    className="pending-req-button mx-2"
+                    onClick={handleacceptedNextPageClick}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -259,62 +285,30 @@ function Requestmanagemodel() {
                     <p>Actions</p>
                   </div>
                 </div>
-                <Rejectedrequest
-                  hname="Beach Hotel"
-                  oname="O.W.Kodithuwakku"
-                  location="Mount Lavinia"
-                  status="Rejected"
-                />
-                <Rejectedrequest
-                  hname="Taj Hotel"
-                  oname="K.C.Perera"
-                  location="Dehiwala"
-                  status="Rejected"
-                />
-                <Rejectedrequest
-                  hname="Hilltop Hotel"
-                  oname="Sumudu"
-                  location="Yatiyanthota"
-                  status="Rejected"
-                />
-                <Rejectedrequest
-                  hname="Samudura Hotel"
-                  oname="K.Perera"
-                  location="Matara"
-                  status="Rejected"
-                />
-                <Rejectedrequest
-                  hname="Gem Hotel"
-                  oname="K.Fernando"
-                  location="Negambo"
-                  status="Rejected"
-                />
-                <Rejectedrequest
-                  hname="Sewana Hotel"
-                  oname="S.Gunasena"
-                  location="Polonnaruwa"
-                  status="Rejected"
-                />
-
-                <ReactPaginate
-                  previousLabel={"<<"}
-                  nextLabel={">>"}
-                  breakLabel={". . ."}
-                  pageCount={pageCount}
-                  marginPagesDisplayed={2}
-                  pageRangeDisplayed={4}
-                  onPageChange={handlePageClick}
-                  containerClassName={"pagination justify-content-center"}
-                  pageClassName={"page-item"}
-                  pageLinkClassName={"page-link"}
-                  previousClassName={"page-item"}
-                  previousLinkClassName={"page-link"}
-                  nextClassName={"page-item"}
-                  nextLinkClassName={"page-link"}
-                  breakClassName={"page-item"}
-                  breakLinkClassName={"page-link"}
-                  activeClassName={"active"}
-                />
+                {items0.map((item, index) => {
+                  return (
+                    <Rejectedrequest
+                      hname={item.name}
+                      oname={item.description}
+                      location={item.town}
+                      status={item.status}
+                    />
+                  );
+                })}
+                <div className="d-flex justify-content-center">
+                  <button
+                    className="pending-req-button mx-2"
+                    onClick={handlerejectedBackPageClick}
+                  >
+                    Back
+                  </button>
+                  <button
+                    className="pending-req-button mx-2"
+                    onClick={handlerejectedNextPageClick}
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             </div>
           </div>

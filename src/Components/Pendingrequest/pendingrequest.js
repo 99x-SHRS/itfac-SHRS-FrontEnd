@@ -1,40 +1,80 @@
 import React from "react";
+import axios from "axios";
+import "../../Assets/styles/css/components/pendingRequest.css";
 
-function Pendingrequest(props) {
+
+
+function Pendingrequest({id, hname, oname,location,status,onfresh}) {
+  const updaterejectedDetails = () => {
+    const data = {
+      status: "rejected",
+    };
+    axios
+      .put(`http://localhost:8000/api/hotel/updateHotelById/${id}`, data)
+      .then((res) => {
+        console.log("updated");
+        onfresh();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  //getrejectedDetails();
+  const updateacceptedDetails = () => {
+    const data = {
+      status: "accepted",
+    };
+    axios
+      .put(`http://localhost:8000/api/hotel/updateHotelById/${id}`, data)
+      .then((res) => {
+        console.log("updated");
+        onfresh();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  //getrejectedDetails();
   return (
     <div className="rounded-3 shadow border border-info row g-1 align-middle mb-2">
       <div className="col-sm-3 d-flex justify-content-center my-auto">
-        <p>{props.hname}</p>
+        <p>{hname}</p>
       </div>
       <div className="col-sm-3 d-flex justify-content-center my-auto">
-        <p>{props.oname}</p>
+        <p>{oname}</p>
       </div>
       <div className="col-sm-2 d-flex justify-content-center my-auto">
-        <p>{props.location}</p>
+        <p>{location}</p>
       </div>
       <div className="col-sm-2 d-flex justify-content-center my-auto">
-        <p>{props.status}</p>
-      </div> 
-      <div className="col-sm-2 pb-2 d-flex justify-content-center">
-        <button type="button" class="btn btn-outline-success btn-sm mx-2">
+        <p>{status}</p>
+      </div>
+      <div className="col-sm-2 d-flex justify-content-center">
+        <button
+          className="pending-req-button mx-1"
+          onClick={updateacceptedDetails}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-check2"
+            width="25"
+            height="25"
+            fill="green"
+            className="bi bi-check2 mx-2"
             viewBox="0 0 16 16"
           >
             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
           </svg>
         </button>
-        <button type="button" class="btn btn-outline-danger btn-sm mx-2">
+        <button
+          className="pending-req-button mx-1"
+          onClick={updaterejectedDetails}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="16"
-            height="16"
-            fill="currentColor"
-            class="bi bi-trash3-fill"
+            width="20"
+            height="20"
+            fill="red"
+            className="bi bi-trash3-fill mx-2"
             viewBox="0 0 16 16"
           >
             <path

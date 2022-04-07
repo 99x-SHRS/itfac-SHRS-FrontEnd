@@ -4,8 +4,11 @@ import TopDestination from '../../Layouts/TopDestination/topDestination.js'
 import Browsetype from '../../Components/Carousel/browsetype.js'
 import RecommondedHotels from '../../Layouts/RecommondedHotels/recommondedHotels.js'
 import Footer from '../../Layouts/Footer/footer.js'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 const Dashboard = () => {
+ 
   return (
     <div>
       <Header />
