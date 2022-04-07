@@ -4,42 +4,54 @@ import '@splidejs/splide/dist/css/themes/splide-default.min.css'
 import { getAllImagesByRoomId } from '../../Services/Api/Utilities/index.js'
 import '../../Assets/styles/css/Components/souvenir.css'
 
-const initialItems = Array.apply(null, Array(6)).map(
-  (value, index) => index + 1
-)
-
 const souvenirs1 = [
   {
-    path: '/images/property-types/kabana.jpg',
+    image: '/images/property-types/kabana.jpg',
   },
   {
-    path: '/images/property-types/villa.jpg',
+    image: '/images/property-types/villa.jpg',
   },
   {
-    path: '/images/property-types/villa.jpg',
+    image: '/images/property-types/villa.jpg',
   },
   {
-    path: '/images/property-types/bangalow.jpg',
+    image: '/images/property-types/bangalow.jpg',
   },
   {
-    path: '/images/property-types/guest-houses.jpg',
+    image: '/images/property-types/guest-houses.jpg',
   },
   {
-    path: '/images/property-types/guest-houses.jpg',
+    image: '/images/property-types/guest-houses.jpg',
   },
   {
-    path: '/images/property-types/guest-houses.jpg',
+    image: '/images/property-types/guest-houses.jpg',
   },
 ]
 
 const SplideSlider = ({ roomId }) => {
-  const [items, setItems] = useState(initialItems)
+  const [images, setRoomImages] = useState([])
   useEffect(() => {
-    console.log(roomId)
+    getImages()
+    console.log('asd' + roomId)
   }, [roomId])
-  // const getImages=()=>{]
-  // getAllImagesByRoomId
-  // }
+
+  useEffect(() => {
+    getImages()
+    console.log('asd' + roomId)
+  }, [images.length])
+
+  const getImages = async () => {
+    const dataModel = {
+      id: roomId,
+    }
+    await getAllImagesByRoomId(dataModel)
+      .then((res) => {
+        setRoomImages(res.data)
+      })
+      .catch((err) => {
+        setRoomImages(souvenirs1)
+      })
+  }
   return (
     <>
       <Splide
@@ -66,13 +78,10 @@ const SplideSlider = ({ roomId }) => {
           },
         }}
       >
-        {items.map((item) => {
+        {images.map((item) => {
           return (
-            <SplideSlide key={item} className='slide'>
-              <img
-                src={`https://source.unsplash.com/random/400x500?sig=${item}`}
-                alt={`${item}`}
-              />
+            <SplideSlide className='slide'>
+              <img src={item.image} />
             </SplideSlide>
           )
         })}
