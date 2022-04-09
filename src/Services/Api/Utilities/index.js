@@ -66,6 +66,14 @@ const getDiscountByHotelId = async (bodyData) => {
     bodyData
   )
 }
+
+// *****************************************************************************
+//                          booking  end points
+// *****************************************************************************
+
+const placeBooking = async (bodyData) => {
+  return await provider.insertData(BASE_URL, 'booking', '', bodyData)
+}
 export {
   getAllHotels,
   searchHotels,
@@ -75,4 +83,5 @@ export {
   getRoomsByHotelIdAndRoomType,
   getAllImagesByRoomId,
   getDiscountByHotelId,
+  placeBooking,
 }

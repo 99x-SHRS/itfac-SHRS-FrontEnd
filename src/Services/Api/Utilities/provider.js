@@ -36,5 +36,18 @@ const getOneByIdPost = async (url, type, task, data) => {
     .then(handleResponse)
     .catch(handleError)
 }
+const insertData = async (url, type, task, data) => {
+  return axios
+    .post(`${url}/${type}/${task}`, data)
+    .then(handleResponse)
+    .catch(handleError)
+}
 
-export default { getAll, getOneById, getAllPOST, getAllById, getOneByIdPost }
+export default {
+  getAll,
+  getOneById,
+  getAllPOST,
+  getAllById,
+  getOneByIdPost,
+  insertData,
+}

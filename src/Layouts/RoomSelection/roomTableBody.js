@@ -138,7 +138,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                 {roomQty != 0 && setedRoom == room.roomId ? (
                   <button className='reserve-button'>
                     <Link
-                      to={`/booking/details?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&room=${setedRoom}`}
+                      to={`/booking/details?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}`}
                     >
                       Reserve
                     </Link>

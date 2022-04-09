@@ -1,5 +1,6 @@
 import React, { Component, useState, useMemo, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
+import { placeBooking } from '../../Services/Api/Utilities/index.js'
 import PhoneInput, {
   formatPhoneNumber,
   formatPhoneNumberIntl,
@@ -16,19 +17,54 @@ import 'react-phone-number-input/style.css'
 const BookingCusDetails = () => {
   const [country, setCountry] = useState('LK')
   const [number, setNumber] = useState(0)
+  const [searchedParams, setSearchedparams] = useSearchParams()
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const details = {
-      firstName: event.target.first_name.value,
-      lastName: event.target.last_name.value,
-      email: event.target.email.value,
-      settedContry: country,
-      telephone_number: number,
-      arrival_time: event.target.arrival_time.value,
-      rent_car: event.target.rent_car.checked,
-      special_request: event.target.special_request.value,
+    // const details = {
+    //   firstName: event.target.first_name.value,
+    //   lastName: event.target.last_name.value,
+    //   email: event.target.email.value,
+    //   settedContry: country,
+    //   telephone_number: number,
+    //   arrival_time: event.target.arrival_time.value,
+    //   rent_car: event.target.rent_car.checked,
+    //   special_request: event.target.special_request.value,
+    // }
+    // window.location.href = `/hotels?${URL}`
+
+    const dataModel = {
+      checkInDate: searchedParams.get('checkin-date') || '',
+      checkOutDate: searchedParams.get('checkout-date') || '',
+      specialRequest: event.target.special_request.value,
+      arrivalTime: event.target.arrival_time.value,
+      guestName: 'guest',
+      rentCar: event.target.rent_car.checked,
+      location: searchedParams.get('location') || '',
+      customerId: 1,
+      roomId: searchedParams.get('roomno') || '',
+      vasId: null,
+      noRooms: searchedParams.get('rooms') || '',
+      // adult: searchedParams.get('rooms') || '',
+      // children: searchedParams.get('children') || '',
+      // rooms: searchedParams.get('rooms') || '',
+      // hotelId: searchedParams.get('hotel') || '',
     }
+    console.log(dataModel)
+    bookRoom(dataModel)
+  }
+
+  const bookRoom = async (dataModel) => {
+    await placeBooking(dataModel)
+      .then((res) => {
+        console.log(res)
+        const bookingId = res.data.bookingId
+
+        window.location.href = `/booking/${bookingId}/details/payment`
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
   return (
     <div className='container'>
