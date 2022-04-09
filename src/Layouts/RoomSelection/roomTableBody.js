@@ -8,6 +8,7 @@ import NumericInput from 'react-numeric-input'
 const TableBody = ({ rooms, souvenirs1 }) => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [roomsData, setRoomsData] = useState([])
+  const [params, setParams] = useState({})
   const [roomQty, setRoomQty] = useState(0)
   const [setedRoom, setRoom] = useState(0)
   const [discount, setDiscount] = useState(0)
@@ -17,7 +18,18 @@ const TableBody = ({ rooms, souvenirs1 }) => {
     setRoomQty(0)
     console.log(rooms)
   }, [rooms])
-
+  useEffect(() => {
+    const dataModel = {
+      location: searchedParams.get('location') || '',
+      checkInDate: searchedParams.get('checkin-date') || '',
+      checkOutDate: searchedParams.get('checkout-date') || '',
+      adult: searchedParams.get('adults') || '',
+      children: searchedParams.get('children') || '',
+      rooms: searchedParams.get('rooms') || '',
+      hotelId: searchedParams.get('hotel') || '',
+    }
+    setParams(dataModel)
+  }, [])
   const getRoomDiscount = async (id) => {
     const dataModel = {
       id: 1,
@@ -125,8 +137,10 @@ const TableBody = ({ rooms, souvenirs1 }) => {
               <div>
                 {roomQty != 0 && setedRoom == room.roomId ? (
                   <button className='reserve-button'>
-                    <Link to='/booking/5789/details'>
-                      <a href='#second-page'>Reserve</a>
+                    <Link
+                      to={`/booking/details?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&room=${setedRoom}`}
+                    >
+                      Reserve
                     </Link>
                   </button>
                 ) : (

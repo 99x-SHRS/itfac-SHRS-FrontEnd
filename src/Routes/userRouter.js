@@ -15,11 +15,13 @@ const UserRoutes = (
     <Route exact path='/' element={<Dashboard />}></Route>
     <Route path='/hotels' element={<Hotels />}></Route>
     <Route path='/hotel/page' element={<HotelPage />}></Route>
-    <Route
+
+    {/* <Route
       exact
       path='/booking/:id/details'
       element={<CustomerDetails />}
-    ></Route>
+    ></Route> */}
+    <Route path='/booking/details' element={<CustomerDetails />}></Route>
     <Route
       exact
       path='/booking/:id/details/payment'
