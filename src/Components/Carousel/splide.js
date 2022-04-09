@@ -32,12 +32,10 @@ const SplideSlider = ({ roomId }) => {
   const [images, setRoomImages] = useState([])
   useEffect(() => {
     getImages()
-    console.log('asd' + roomId)
   }, [roomId])
 
   useEffect(() => {
     getImages()
-    console.log('asd' + roomId)
   }, [images.length])
 
   const getImages = async () => {

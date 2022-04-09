@@ -1,8 +1,9 @@
 import provider from './provider'
 const BASE_URL = process.env.REACT_APP_BASE_URL
 
-//hotels end points
-
+// *****************************************************************************
+//                          hotels end points
+// *****************************************************************************
 const getAllHotels = async () => {
   return await provider.getAll(BASE_URL, 'hotel', 'getAllHotels')
 }
@@ -26,6 +27,10 @@ const getAvailbleRooms = async (bodyData) => {
     bodyData
   )
 }
+
+// *****************************************************************************
+//                          rooms  end points
+// *****************************************************************************
 const getRoomByHotelId = async (bodyData) => {
   return await provider.getAllPOST(
     BASE_URL,
@@ -50,7 +55,17 @@ const getAllImagesByRoomId = async (bodyData) => {
     bodyData
   )
 }
-
+// *****************************************************************************
+//                          discount  end points
+// *****************************************************************************
+const getDiscountByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'discount',
+    'getDiscountByHotelId',
+    bodyData
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -59,4 +74,5 @@ export {
   getRoomByHotelId,
   getRoomsByHotelIdAndRoomType,
   getAllImagesByRoomId,
+  getDiscountByHotelId,
 }

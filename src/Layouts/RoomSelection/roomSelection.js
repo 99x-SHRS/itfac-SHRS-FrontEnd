@@ -154,6 +154,13 @@ const RoomSelection = ({ roomTypeId }) => {
     fetchRoomData(0)
   }, [roomTypeId])
 
+  useEffect(() => {
+    if (loading) {
+      document.getElementById('pagination-div').style.display = 'none'
+    } else {
+      document.getElementById('pagination-div').style.display = 'block'
+    }
+  }, [loading])
   const fetchRoomData = async (page) => {
     const dataModel = {
       location: searchedParams.get('location') || '',
@@ -201,7 +208,7 @@ const RoomSelection = ({ roomTypeId }) => {
             <div class='col-sm-12 col-md-1'>Rooms</div>
             <div class='col-sm-12 col-md-4'>Benefits</div>
           </li>
-          {loading || rooms == null || rooms == undefined ? (
+          {loading ? (
             <div className='hotel-loader'>
               <HashLoader
                 loading={loading}
@@ -215,28 +222,35 @@ const RoomSelection = ({ roomTypeId }) => {
               <TableBody rooms={rooms} souvenirs1={souvenirs1} />
             </>
           )}
-
-          <div className='mt-3 pagination-container' id='pagination-div'>
-            <ReactPaginate
-              previousLabel={'previous'}
-              nextLabel={'next'}
-              breakLabel={'...'}
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={3}
-              onPageChange={handlePageClick}
-              containerClassName={'pagination justify-content-center'}
-              pageClassName={'page-item'}
-              pageLinkClassName={'page-link'}
-              previousClassName={'page-item'}
-              previousLinkClassName={'page-link'}
-              nextClassName={'page-item'}
-              nextLinkClassName={'page-link'}
-              breakClassName={'page-item'}
-              breakLinkClassName={'page-link'}
-              activeClassName={'active'}
-            />
-          </div>
+          {rooms.length != 0 ? (
+            <div className='mt-3 pagination-container' id='pagination-div'>
+              <ReactPaginate
+                previousLabel={'previous'}
+                nextLabel={'next'}
+                breakLabel={'...'}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick}
+                containerClassName={'pagination justify-content-center'}
+                pageClassName={'page-item'}
+                pageLinkClassName={'page-link'}
+                previousClassName={'page-item'}
+                previousLinkClassName={'page-link'}
+                nextClassName={'page-item'}
+                nextLinkClassName={'page-link'}
+                breakClassName={'page-item'}
+                breakLinkClassName={'page-link'}
+                activeClassName={'active'}
+              />
+            </div>
+          ) : (
+            <>
+              <div class='alert alert-primary' role='alert'>
+                Nothing to display.
+              </div>
+            </>
+          )}
         </ul>
       </div>
     </div>
