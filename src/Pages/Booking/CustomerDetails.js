@@ -1,7 +1,8 @@
-import React, { Component, useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import React from 'react'
+
 import HotelHeader from '../../Layouts/HotelHeader/hotelHeader.js'
 import BookingCusDetails from '../../Layouts/PersonalDetails/BookingCusDetails.js'
+
 import Footer from '../../Layouts/Footer/footer.js'
 
 import '../../Assets/styles/css/Layouts/CustomerDetails.css'

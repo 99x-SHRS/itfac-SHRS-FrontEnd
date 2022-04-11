@@ -5,6 +5,7 @@ import HorizontalLine from '../../Components/HorizontalLine/horizontalLine'
 import NumberInputBox from '../../Components/NumberInputBox/inputBoxNumber'
 import { getDiscountByHotelId } from '../../Services/Api/Utilities/index.js'
 import NumericInput from 'react-numeric-input'
+
 const TableBody = ({ rooms, souvenirs1 }) => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [roomsData, setRoomsData] = useState([])
@@ -138,7 +139,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                 {roomQty != 0 && setedRoom == room.roomId ? (
                   <button className='reserve-button'>
                     <Link
-                      to={`/booking/details?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}`}
+                      to={`/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}`}
                     >
                       Reserve
                     </Link>

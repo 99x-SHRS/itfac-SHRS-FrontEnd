@@ -72,7 +72,6 @@ const BookingCusDetails = () => {
         <div className='col-md-4 col-lg-3 '>
           <SideSummary />
         </div>
-
         <div className='col-md-7 col-lg-8  '>
           <div className='border'>
             <div>

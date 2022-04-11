@@ -74,6 +74,14 @@ const getDiscountByHotelId = async (bodyData) => {
 const placeBooking = async (bodyData) => {
   return await provider.insertData(BASE_URL, 'booking', '', bodyData)
 }
+
+// *****************************************************************************
+//                          vas  end points
+// *****************************************************************************
+
+const getVasByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'vas', 'getVASByHotelId', bodyData)
+}
 export {
   getAllHotels,
   searchHotels,
@@ -84,4 +92,5 @@ export {
   getAllImagesByRoomId,
   getDiscountByHotelId,
   placeBooking,
+  getVasByHotelId,
 }
