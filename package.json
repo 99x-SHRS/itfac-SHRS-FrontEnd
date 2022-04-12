@@ -25,6 +25,7 @@
     "evolved-react-image-gallery": "^0.6.0",
     "flickity": "^2.3.0",
     "jquery": "^3.6.0",
+    "mdbreact": "^5.2.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.2",

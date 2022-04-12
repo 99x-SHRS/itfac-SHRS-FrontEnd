@@ -3,10 +3,12 @@ import { useSearchParams } from 'react-router-dom'
 import SideSummary from '../Payment/SideSummary'
 import DialogModal from '../../Components/VasModal/VasModal.js'
 import { getVasByHotelId } from '../../Services/Api/Utilities/index.js'
+import NewTable from '../../Components/Table/SearchPaginationTable'
 import '../../Assets/styles/css/Layouts/bookingVAS.css'
 const BookingVAS = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [vas, setVAS] = useState([])
+  const [suggestions, setSuggestions] = useState([])
   useEffect(() => {
     let hotelId = searchedParams.get('hotel') || ''
     console.log(hotelId)
@@ -30,6 +32,7 @@ const BookingVAS = () => {
         console.log(err)
       })
   }
+
   return (
     <div>
       <div className='container'>
@@ -45,21 +48,7 @@ const BookingVAS = () => {
               , you can select one or more sevices.{' '}
               <small>Charges can be vary.</small>
             </h4>
-            <div className='row'>
-              <div className='vas-searchbox'>
-                <input
-                  type='search'
-                  id='form1'
-                  class='form-control'
-                  placeholder='Ex: BBQ party'
-                  aria-label='Search'
-                  aria-describedby='search-addon'
-                />
-                <button type='button' class='btn btn-primary'>
-                  <i class='fas fa-search'></i>
-                </button>
-              </div>
-            </div>
+            <NewTable vas={vas} />
           </div>
         </div>
       </div>

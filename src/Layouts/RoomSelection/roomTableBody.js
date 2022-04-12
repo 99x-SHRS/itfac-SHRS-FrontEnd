@@ -3,7 +3,10 @@ import { Link, useSearchParams } from 'react-router-dom'
 import RoomImages from '../../Components/RoomTypeSelector/roomImages'
 import HorizontalLine from '../../Components/HorizontalLine/horizontalLine'
 import NumberInputBox from '../../Components/NumberInputBox/inputBoxNumber'
-import { getDiscountByHotelId } from '../../Services/Api/Utilities/index.js'
+import {
+  getDiscountByHotelId,
+  placeBooking,
+} from '../../Services/Api/Utilities/index.js'
 import NumericInput from 'react-numeric-input'
 
 const TableBody = ({ rooms, souvenirs1 }) => {
@@ -31,6 +34,33 @@ const TableBody = ({ rooms, souvenirs1 }) => {
     }
     setParams(dataModel)
   }, [])
+  const bookRoom = async (setedRoom) => {
+    const dataModal = {
+      checkInDate: searchedParams.get('checkin-date') || '',
+      checkOutDate: searchedParams.get('checkout-date') || '',
+      specialRequest: null,
+      arrivalTime: null,
+      guestName: null,
+      rentCar: null,
+      location: searchedParams.get('location') || '',
+      customerId: 1,
+      roomId: setedRoom,
+      vasId: null,
+      noRooms: searchedParams.get('rooms') || '',
+    }
+    await placeBooking(dataModal)
+      .then((res) => {
+        try {
+          const bookingId = res.data.bookingId
+          window.location.href = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
+        } catch (error) {
+          console.log(error)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   const getRoomDiscount = async (id) => {
     const dataModel = {
       id: 1,
@@ -137,12 +167,13 @@ const TableBody = ({ rooms, souvenirs1 }) => {
               )}
               <div>
                 {roomQty != 0 && setedRoom == room.roomId ? (
-                  <button className='reserve-button'>
-                    <Link
-                      to={`/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}`}
-                    >
-                      Reserve
-                    </Link>
+                  <button
+                    className='reserve-button'
+                    onClick={() => {
+                      bookRoom(setedRoom)
+                    }}
+                  >
+                    Reserve
                   </button>
                 ) : (
                   <button className='reserve-button' disabled>
