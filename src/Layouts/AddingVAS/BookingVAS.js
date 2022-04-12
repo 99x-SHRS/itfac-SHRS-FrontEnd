@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
+
 import SideSummary from '../Payment/SideSummary'
 import DialogModal from '../../Components/VasModal/VasModal.js'
 import { getVasByHotelId } from '../../Services/Api/Utilities/index.js'
@@ -9,9 +10,9 @@ const BookingVAS = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [vas, setVAS] = useState([])
   const [suggestions, setSuggestions] = useState([])
+  const navigate = useNavigate()
   useEffect(() => {
     let hotelId = searchedParams.get('hotel') || ''
-    console.log(hotelId)
     if (hotelId != 0) {
       getAllVAS(hotelId)
     } else {
@@ -26,7 +27,6 @@ const BookingVAS = () => {
     await getVasByHotelId(dataModel)
       .then((res) => {
         setVAS(res.data)
-        console.log(vas)
       })
       .catch((err) => {
         console.log(err)
@@ -49,6 +49,22 @@ const BookingVAS = () => {
               <small>Charges can be vary.</small>
             </h4>
             <NewTable vas={vas} />
+            <div className='next-container'>
+              <button
+                className='previous-button btn btn-primary'
+                onClick={() => {
+                  navigate(-1)
+                }}
+              >
+                {'<'} Previous!
+              </button>
+
+              <Link to={'/booking/details'} className='next-link'>
+                <button className='next-button btn btn-primary'>
+                  Almost done! {'>'}
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

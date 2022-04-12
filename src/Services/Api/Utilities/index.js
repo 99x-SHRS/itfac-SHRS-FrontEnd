@@ -90,6 +90,23 @@ const subscribeVAS = async (bodyData) => {
     bodyData
   )
 }
+const unSubscribeVAS = async (params) => {
+  return await provider.deleteData(
+    BASE_URL,
+    'vas',
+    'deleteVASByBookingAndVASId',
+    params
+  )
+}
+const getVASByBookingId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'vas',
+    'getVASByBookingId',
+    bodyData
+  )
+}
+
 export {
   getAllHotels,
   searchHotels,
@@ -102,4 +119,6 @@ export {
   placeBooking,
   getVasByHotelId,
   subscribeVAS,
+  unSubscribeVAS,
+  getVASByBookingId,
 }

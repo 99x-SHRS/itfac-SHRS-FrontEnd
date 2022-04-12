@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { MDBDataTable, MDBIcon } from 'mdbreact'
 import { Link, useSearchParams } from 'react-router-dom'
-import { subscribeVAS } from '../../Services/Api/Utilities'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import {
+  subscribeVAS,
+  getVASByBookingId,
+  unSubscribeVAS,
+} from '../../Services/Api/Utilities'
 const NewTable = ({ vas }) => {
   const [searchedParams, setSearchedparams] = useSearchParams()
+  const [subscribedVAS, setSubscribedVAS] = useState([])
+  useEffect(() => {
+    getAllVAS()
+    toast.configure()
+  }, [])
   const data = {
     columns: [
       {
@@ -27,51 +38,122 @@ const NewTable = ({ vas }) => {
       {
         label: 'Add',
         field: 'add',
-        // sort: 'asc',
+        sort: 'asc',
         width: 100,
       },
     ],
     rows: vas,
   }
-
-  const addVAS = async (vasid) => {
+  function notify(message) {
+    toast.success(message)
+  }
+  const getAllVAS = async () => {
     const datModel = {
-      bookingId: searchedParams.get('booking') || '',
-      vasId: vasid,
+      id: searchedParams.get('booking') || '',
     }
-    console.log(datModel)
-    await subscribeVAS(datModel)
+    // console.log(datModel)
+    await getVASByBookingId(datModel)
       .then((response) => {
-        console.log(response)
+        setSubscribedVAS(response.data)
       })
       .catch((err) => {
         console.log(err)
       })
   }
-  data.rows = data.rows.map((obj, i) => ({
-    ...obj,
-    index: i + 1,
-    add: (
-      <button
-      // type='button'
-      // class='btn btn-primary'
-      // style={{
-      //   fontSize: 'xx-small',
-      //   height: '2rem',
-      // }}
-      // onclick={subscribeVAS(1)}
-      >
-        <a
-          onClick={() => {
-            addVAS(obj.vasId)
-          }}
-        >
-          {' '}
-          <MDBIcon icon='cart-arrow-down' /> Choose
-        </a>
-      </button>
-    ),
-  }))
+  const addVAS = async (vasid) => {
+    const datModel = {
+      bookingId: searchedParams.get('booking') || '',
+      vasId: vasid,
+    }
+    // console.log(datModel)
+    await subscribeVAS(datModel)
+      .then((response) => {
+        // console.log(response)
+        getAllVAS()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const removeVAS = async (vasid) => {
+    const params = [searchedParams.get('booking') || '', vasid]
+
+    await unSubscribeVAS(params)
+      .then((response) => {
+        console.log(response)
+        getAllVAS()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const ifExcitingVAS = (vasId) => {
+    for (let i = 0; i < subscribedVAS.length; i++) {
+      if (vasId == subscribedVAS[i].vasId) {
+        return false
+      }
+    }
+    return true
+  }
+  data.rows = data.rows.map((obj, i) => {
+    if (ifExcitingVAS(obj.vasId)) {
+      return {
+        ...obj,
+        index: i + 1,
+        add: (
+          <button
+          // type='button'
+          // class='btn btn-primary'
+          // style={{
+          //   fontSize: 'xx-small',
+          //   height: '2rem',
+          // }}
+          // onclick={subscribeVAS(1)}
+          >
+            <a
+              onClick={() => {
+                addVAS(obj.vasId)
+                notify('You have subscribed value added service successfully.')
+              }}
+            >
+              {' '}
+              <MDBIcon icon='cart-arrow-down' /> Subscribe
+            </a>
+          </button>
+        ),
+      }
+    } else {
+      return {
+        ...obj,
+        index: i + 1,
+        add: (
+          <button
+          // type='button'
+          // class='btn btn-primary'
+          // style={{
+          //   fontSize: 'xx-small',
+          //   height: '2rem',
+          // }}
+          // onclick={subscribeVAS(1)}
+          >
+            <a
+              onClick={() => {
+                removeVAS(obj.vasId)
+                notify(
+                  'You have unsubscribed value added service successfully.'
+                )
+              }}
+            >
+              {' '}
+              <MDBIcon icon='trash-alt' /> Unsubscribe
+            </a>
+          </button>
+        ),
+      }
+    }
+  })
 
   return <MDBDataTable striped bordered small data={data} />
 }

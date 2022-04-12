@@ -42,6 +42,12 @@ const insertData = async (url, type, task, data) => {
     .then(handleResponse)
     .catch(handleError)
 }
+const deleteData = async (url, type, task, data) => {
+  return axios
+    .delete(`${url}/${type}/${task}/${data[0]}/${data[1]}`)
+    .then(handleResponse)
+    .catch(handleError)
+}
 
 export default {
   getAll,
@@ -50,4 +56,5 @@ export default {
   getAllById,
   getOneByIdPost,
   insertData,
+  deleteData,
 }

@@ -1,5 +1,5 @@
 import React, { Component, useState, useMemo, useEffect } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { placeBooking } from '../../Services/Api/Utilities/index.js'
 import PhoneInput, {
   formatPhoneNumber,
@@ -18,7 +18,7 @@ const BookingCusDetails = () => {
   const [country, setCountry] = useState('LK')
   const [number, setNumber] = useState(0)
   const [searchedParams, setSearchedparams] = useSearchParams()
-
+  const navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault()
     // const details = {
@@ -278,13 +278,23 @@ const BookingCusDetails = () => {
                 <p>
                   By continuing to the next step, you agree to these house rules
                 </p>
-
-                <button className='reserve-button ' type='submit'>
-                  submit
-                </button>
               </div>
             </div>
           </form>
+          <div className='next-container'>
+            <button
+              className='previous-button btn btn-primary'
+              onClick={() => {
+                navigate(-1)
+              }}
+            >
+              {'<'} Previous!
+            </button>
+
+            <button className='next-button btn btn-primary'>
+              Almost done! {'>'}
+            </button>
+          </div>
         </div>
       </div>
     </div>

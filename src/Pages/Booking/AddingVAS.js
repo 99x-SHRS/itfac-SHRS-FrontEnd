@@ -18,7 +18,7 @@ const AddingVAS = () => {
       <div className='person-details-container mt-3'>
         <BookingVAS />
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   )
 }

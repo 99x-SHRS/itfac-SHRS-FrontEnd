@@ -21,3 +21,20 @@
      
  }
 }
+.next-container{
+    display: flex !important;
+    justify-content: space-between;
+}
+.next-link,.next-button{
+    display:inline-block;
+}
+/* .next-link{
+    margin-right:0px;
+    margin-left: 0px;
+    display:inline-block;
+}
+.next-button{
+    margin-right:0px;
+    margin-left: auto;
+    display:block;
+} */
