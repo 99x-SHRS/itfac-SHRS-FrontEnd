@@ -1,6 +1,6 @@
 import React, { Component, useState, useMemo, useEffect } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
-import { placeBooking } from '../../Services/Api/Utilities/index.js'
+import { updateBookingById } from '../../Services/Api/Utilities/index.js'
 import PhoneInput, {
   formatPhoneNumber,
   formatPhoneNumberIntl,
@@ -32,35 +32,38 @@ const BookingCusDetails = () => {
     //   special_request: event.target.special_request.value,
     // }
     // window.location.href = `/hotels?${URL}`
+    console.log(event.target.arrival_time.value)
+    function getDateFromHours(time) {
+      time = time.split(':')
+      let now = new Date()
 
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate(), ...time)
+    }
+
+    const bookingId = searchedParams.get('booking') || ''
     const dataModel = {
-      checkInDate: searchedParams.get('checkin-date') || '',
-      checkOutDate: searchedParams.get('checkout-date') || '',
       specialRequest: event.target.special_request.value,
-      arrivalTime: event.target.arrival_time.value,
-      guestName: 'guest',
+      arrivalTime: getDateFromHours('12:00:01'),
+      guestName:
+        event.target.first_name.value + ' ' + event.target.last_name.value,
       rentCar: event.target.rent_car.checked,
-      location: searchedParams.get('location') || '',
       customerId: 1,
-      roomId: searchedParams.get('roomno') || '',
-      vasId: null,
-      noRooms: searchedParams.get('rooms') || '',
       // adult: searchedParams.get('rooms') || '',
       // children: searchedParams.get('children') || '',
       // rooms: searchedParams.get('rooms') || '',
       // hotelId: searchedParams.get('hotel') || '',
     }
-    console.log(dataModel)
-    bookRoom(dataModel)
+    console.log(getDateFromHours('12:00:01'))
+    updateBooking(bookingId, dataModel)
   }
 
-  const bookRoom = async (dataModel) => {
-    await placeBooking(dataModel)
+  const updateBooking = async (bookingId, dataModel) => {
+    await updateBookingById(bookingId, dataModel)
       .then((res) => {
         console.log(res)
-        const bookingId = res.data.bookingId
-
-        window.location.href = `/booking/${bookingId}/details/payment`
+        window.location.href = `/booking/${
+          searchedParams.get('booking') || ''
+        }/details/payment`
       })
       .catch((err) => {
         console.log(err)
@@ -223,6 +226,7 @@ const BookingCusDetails = () => {
                     id='inputMDEx1'
                     class='form-control arrival_time'
                     name='arrival_time'
+                    value='10:00:00'
                   />
                   <label for='inputMDEx1'>Choose your arrival time</label>
                 </div>
@@ -280,21 +284,21 @@ const BookingCusDetails = () => {
                 </p>
               </div>
             </div>
-          </form>
-          <div className='next-container'>
-            <button
-              className='previous-button btn btn-primary'
-              onClick={() => {
-                navigate(-1)
-              }}
-            >
-              {'<'} Previous!
-            </button>
+            <div className='next-container'>
+              <button
+                className='previous-button btn btn-primary'
+                onClick={() => {
+                  navigate(-1)
+                }}
+              >
+                {'<'} Previous!
+              </button>
 
-            <button className='next-button btn btn-primary'>
-              Almost done! {'>'}
-            </button>
-          </div>
+              <button type='submit' className='next-button btn btn-primary'>
+                Almost done! {'>'}
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>

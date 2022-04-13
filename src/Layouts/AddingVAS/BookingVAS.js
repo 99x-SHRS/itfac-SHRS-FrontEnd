@@ -59,9 +59,14 @@ const BookingVAS = () => {
                 {'<'} Previous!
               </button>
 
-              <Link to={'/booking/details'} className='next-link'>
+              <Link
+                to={`/booking/details?booking=${
+                  searchedParams.get('booking') || ''
+                }`}
+                className='next-link'
+              >
                 <button className='next-button btn btn-primary'>
-                  Almost done! {'>'}
+                  Complete the booking! {'>'}
                 </button>
               </Link>
             </div>

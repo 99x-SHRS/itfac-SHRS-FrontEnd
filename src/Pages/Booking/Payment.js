@@ -20,6 +20,7 @@ const Payament = () => {
         <br />
         <ul class='list-unstyled multi-steps'>
           <li>Select your room</li>
+          <li>Add services</li>
           <li>Enter your details</li>
           <li class='is-active'>Finalize your payament</li>
         </ul>

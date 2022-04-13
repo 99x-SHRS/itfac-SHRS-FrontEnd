@@ -16,6 +16,7 @@ const CustomerDetails = () => {
         <br />
         <ul class='list-unstyled multi-steps'>
           <li>Select your room</li>
+          <li>Add services</li>
           <li class='is-active'>Enter your details</li>
           <li>Finalize your pay ?</li>
         </ul>

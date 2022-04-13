@@ -74,7 +74,15 @@ const getDiscountByHotelId = async (bodyData) => {
 const placeBooking = async (bodyData) => {
   return await provider.insertData(BASE_URL, 'booking', '', bodyData)
 }
-
+const updateBookingById = async (id, bodyData) => {
+  return await provider.updateById(
+    BASE_URL,
+    'booking',
+    'updateBookingById',
+    id,
+    bodyData
+  )
+}
 // *****************************************************************************
 //                          vas  end points
 // *****************************************************************************
@@ -121,4 +129,5 @@ export {
   subscribeVAS,
   unSubscribeVAS,
   getVASByBookingId,
+  updateBookingById,
 }
