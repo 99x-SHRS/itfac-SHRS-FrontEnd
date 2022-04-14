@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Modal, Button } from 'react-bootstrap'
+import { Link, useSearchParams } from 'react-router-dom'
 const DialogModal = () => {
   const [show, setShow] = useState(true)
   const [vasStatus, setVASStatus] = useState(false)
-
+  const [searchedParams, setSearchedparams] = useSearchParams()
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
   useEffect(() => {
     if (!vasStatus && !show) {
-      window.location.href = `/booking/details`
+      window.location.href = `/booking/details?booking=${
+        searchedParams.get('booking') || ''
+      }`
     }
   }, [show])
   return (
@@ -35,7 +38,9 @@ const DialogModal = () => {
           <Button
             variant='secondary'
             onClick={() => {
-              window.location.href = `/booking/details`
+              window.location.href = `/booking/details?booking=${
+                searchedParams.get('booking') || ''
+              }`
               handleClose()
             }}
           >

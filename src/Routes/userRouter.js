@@ -18,11 +18,7 @@ const UserRoutes = (
     <Route path='/hotel/page' element={<HotelPage />}></Route>
     <Route path='/booking/vas' element={<AddingVAS />}></Route>
     <Route path='/booking/details' element={<CustomerDetails />}></Route>
-    <Route
-      exact
-      path='/booking/:id/details/payment'
-      element={<Payment />}
-    ></Route>
+    <Route exact path='/payment' element={<Payment />}></Route>
     <Route exact path='/saved-hotel' element={<SavedHotel />}></Route>
     <Route exact path='/booking-history' element={<BookingHistory />}></Route>
     <Route

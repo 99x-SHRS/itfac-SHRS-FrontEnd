@@ -1,17 +1,161 @@
-import React, { Component, useEffect } from 'react'
-
+import React, { Component, useEffect, useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import HotelHeader from '../../Layouts/HotelHeader/hotelHeader.js'
 import SelectPayment from '../../Layouts/Payment/SelectPayment.js'
 import SideSummary from '../../Layouts/Payment/SideSummary.js'
 import InfoToolTip from '../../Components/ToolTip/InfoToolTip.js'
 import Footer from '../../Layouts/Footer/footer.js'
-
+import HashLoader from 'react-spinners/HashLoader'
+import { toast } from 'react-toastify'
+import {
+  getBookingDetailsById,
+  getRoomDetailsById,
+  getVASByBookingId,
+  getTotalAmountByBookingId,
+  validateCoupon,
+  getCustomerDiscount,
+} from '../../Services/Api/Utilities/index.js'
 import '../../Assets/styles/css/Pages/payment.css'
-import { red } from '@material-ui/core/colors'
+
 const Payament = () => {
+  const [loading, setLoading] = useState(true)
+  const [searchedParams, setSearchedparams] = useSearchParams()
+  const [bookingDetails, setBookkingDetails] = useState(null)
+  const [roomDetails, setRoomDetails] = useState(null)
+  const [subscribedVAS, setSubscribedVAS] = useState(null)
+  const [subPayment, setsubPayment] = useState(null)
+  const [discount, setDiscount] = useState(null)
+  const [loyalty, setLoyalty] = useState(null)
+  const [totalPayment, setTotalPayment] = useState(null)
+
   useEffect(() => {
     window.scrollTo(0, 0)
+    toast.configure()
   }, [])
+
+  useEffect(() => {
+    getBookingDetails()
+  }, [])
+  const notify = (message) => {
+    toast.success(message)
+  }
+
+  const getBookingDetails = async () => {
+    const dataModel = {
+      id: searchedParams.get('booking') || '',
+    }
+    await getBookingDetailsById(dataModel)
+      .then((res) => {
+        setBookkingDetails(res.data)
+        console.log(res.data)
+        getRoomDetails(res.data.roomRoomId)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
+  const getRoomDetails = async (roomId) => {
+    const dataModel = {
+      id: roomId,
+    }
+    await getRoomDetailsById(dataModel)
+      .then((res) => {
+        setRoomDetails(res.data)
+        console.log(res)
+        getAllVAS()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const getAllVAS = async () => {
+    const dataModel = {
+      id: searchedParams.get('booking') || '',
+    }
+    await getVASByBookingId(dataModel)
+      .then((res) => {
+        setSubscribedVAS(res.data)
+        console.log(res)
+        getTotalCost()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const getTotalCost = async () => {
+    const dataModel = {
+      id: searchedParams.get('booking') || '',
+    }
+    await getTotalAmountByBookingId(dataModel)
+      .then((res) => {
+        console.log(res)
+        setsubPayment(res.data)
+        setTotalPayment(res.data)
+        loyaltyReward(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const validateVoucher = async (dataModel, event) => {
+    console.log(dataModel)
+    await validateCoupon(dataModel)
+      .then((res) => {
+        if (res.data == '') {
+          setDiscount(null)
+          notify(
+            'Sorry, this voucher is not valid. Please check for any typing errors'
+          )
+          event.target.token.value = ''
+        } else {
+          setDiscount(res.data)
+          setTotalPayment(totalPayment - res.data[0].discount * subPayment)
+          notify('You have successfully redeemed!')
+          document.getElementById('voucherInputBox').disabled = true
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const loyaltyReward = async (totPayment) => {
+    const dataModel = {
+      userId: 1,
+      amount: totPayment,
+    }
+    console.log(dataModel)
+    await getCustomerDiscount(dataModel)
+      .then((res) => {
+        console.log(res)
+        setLoyalty(res.data)
+        console.log(totPayment - res.data)
+        setTotalPayment(totPayment - res.data)
+        calculateTotalPayment()
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const calculateTotalPayment = () => {
+    console.log('Payments')
+    console.log(subPayment)
+    console.log(discount)
+    console.log(loyalty)
+  }
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    console.log('called')
+    const dataModel = {
+      coupon: event.target.token.value,
+      amount: subPayment,
+      hotelId: bookingDetails.hotelHotelId,
+    }
+    if (discount == null) {
+      validateVoucher(dataModel, event)
+    }
+  }
   return (
     <div>
       <HotelHeader />
@@ -43,99 +187,148 @@ const Payament = () => {
                   </thead>
 
                   <tbody>
-                    <tr>
-                      <td scope='row'>Deluxe Double</td>
-                      <td>Rs. 6,900.38</td>
-                      <td>2</td>
-                      <td className='text-right'> Rs.15,800</td>
-                    </tr>
-                    <tr>
-                      <td scope='row'>Singale Double</td>
-                      <td>Rs. 5,400.38</td>
-                      <td>3</td>
-                      <td className='text-right'> Rs.24,800</td>
-                    </tr>
-                    <tr>
-                      <td scope='row'>Deluxe Double</td>
-                      <td>Rs. 5,400.38</td>
-                      <td>2</td>
-                      <td className='text-right'> Rs.24,800</td>
-                    </tr>
-                    <tr>
-                      <td scope='row'>Large BBQ party</td>
-                      <td>Rs. 5,400.38</td>
-                      <td>1</td>
-                      <td className='text-right'> Rs.24,800</td>
-                    </tr>
-
-                    <tr>
-                      <td colspan='3'>
-                        <b>Subtotal</b>
-                      </td>
-                      <td className='text-right'> Rs.24,800</td>
-                    </tr>
-                    <tr style={{ color: 'gray' }}>
-                      <td colspan='3'>Service charge</td>
-                      <td className='text-right'>Rs.2,000</td>
-                    </tr>
-                    <tr>
-                      <td colspan='4'>
-                        <div className='voucher-input-box'>
-                          <form>
-                            <div className='row'>
-                              <div className='col-lg-8 col-sm-12'>
-                                <div class='form-group mb-2'>
-                                  <label for='inputPassword2' class='sr-only'>
-                                    Enter voucher code
-                                  </label>
-                                  <input
-                                    type='text'
-                                    class='form-control'
-                                    id='inputPassword2'
-                                    placeholder=' Enter voucher code'
-                                  />
+                    {loading ? (
+                      <tr>
+                        <td colspan='4'>
+                          <div className='payment-loader'>
+                            <HashLoader
+                              loading={loading}
+                              size={25}
+                              margin={2}
+                              color='#00AD5F'
+                            />
+                          </div>
+                        </td>
+                      </tr>
+                    ) : (
+                      <>
+                        <tr>
+                          <td scope='row'>Deluxe Double</td>
+                          <td>Rs. {roomDetails[0].rate}</td>
+                          <td>{bookingDetails.noRooms}</td>
+                          <td className='text-right'>
+                            {' '}
+                            Rs.{roomDetails[0].rate * bookingDetails.noRooms}
+                          </td>
+                        </tr>
+                        {subscribedVAS.map((vas, i) => {
+                          return (
+                            <tr>
+                              <td scope='row'>{vas.name}</td>
+                              <td>Rs. {vas.rate}</td>
+                              <td>{bookingDetails.noRooms}</td>
+                              <td className='text-right'>
+                                {' '}
+                                Rs.
+                                {vas.rate}
+                              </td>
+                            </tr>
+                          )
+                        })}
+                        <tr>
+                          <td colspan='3'>
+                            <b>Subtotal</b>
+                          </td>
+                          <td className='text-right'> Rs.{subPayment}</td>
+                        </tr>
+                        {/* <tr style={{ color: 'gray' }}>
+                          <td colspan='3'>Service charge</td>
+                          <td className='text-right'>Rs.2,000</td>
+                        </tr> */}
+                        <tr>
+                          <td colspan='4'>
+                            <div className='voucher-input-box'>
+                              <form onSubmit={handleSubmit}>
+                                <div className='row'>
+                                  <div className='col-lg-8 col-sm-12'>
+                                    <div class='form-group mb-2'>
+                                      <label
+                                        for='inputPassword2'
+                                        class='sr-only'
+                                      >
+                                        Enter voucher code
+                                      </label>
+                                      <input
+                                        type='text'
+                                        class='form-control'
+                                        id='voucherInputBox'
+                                        placeholder=' Enter voucher code'
+                                        name='token'
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className='col-lg-3 col-sm-12'>
+                                    <button
+                                      type='submit'
+                                      class='btn btn-primary mb-2'
+                                    >
+                                      Reedem
+                                    </button>
+                                  </div>
                                 </div>
-                              </div>
-                              <div className='col-lg-3 col-sm-12'>
-                                <button
-                                  type='submit'
-                                  class='btn btn-primary mb-2'
-                                >
-                                  Reedem
-                                </button>
-                              </div>
+                              </form>
                             </div>
-                          </form>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan='3'>
-                        <b>Voucher offer</b>
-                      </td>
-                      <td className='text-right'>
-                        <b>(Rs.3,800)</b>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan='3'>
-                        <b>loyaly reward</b>
-                      </td>
-                      <td className='text-right'>
-                        <b>(Rs.4,800)</b>
-                      </td>
-                    </tr>
-                    <tr className='total-amount'>
-                      <td colspan='3'>
-                        <b>Total payment</b>
-                      </td>
-                      <td
-                        className='text-right'
-                        style={{ color: 'red', fontWeight: 'bolder' }}
-                      >
-                        <b>Rs.64,800</b>
-                      </td>
-                    </tr>
+                          </td>
+                        </tr>
+
+                        {discount != null ? (
+                          <tr>
+                            <td colspan='3'>
+                              <b>Voucher offer</b>
+                            </td>
+                            <td className='text-right'>
+                              <b>
+                                ({' Rs. '}
+                                {discount != null ? (
+                                  (Math.round(
+                                    discount[0].discount * subPayment
+                                  ) *
+                                    100) /
+                                  100
+                                ) : (
+                                  <></>
+                                )}
+                                )
+                              </b>
+                            </td>
+                          </tr>
+                        ) : (
+                          <></>
+                        )}
+                        {loyalty != null ? (
+                          <tr>
+                            <td colspan='3'>
+                              <b>loyaly reward</b>
+                            </td>
+                            <td className='text-right'>
+                              <b>
+                                ({' Rs. '}.{loyalty})
+                              </b>
+                            </td>
+                          </tr>
+                        ) : (
+                          <></>
+                        )}
+                        <tr className='total-amount'>
+                          <td colspan='3'>
+                            <b>Total payment</b>
+                          </td>
+                          <td
+                            className='text-right'
+                            style={{ color: 'red', fontWeight: 'bolder' }}
+                          >
+                            <b>
+                              Rs.
+                              {totalPayment != null ? (
+                                (Math.round(totalPayment) * 100) / 100
+                              ) : (
+                                <>{subPayment}</>
+                              )}
+                            </b>
+                          </td>
+                        </tr>
+                      </>
+                    )}
                   </tbody>
                 </table>
               </div>

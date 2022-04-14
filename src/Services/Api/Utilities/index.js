@@ -55,6 +55,9 @@ const getAllImagesByRoomId = async (bodyData) => {
     bodyData
   )
 }
+const getRoomDetailsById = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'room', 'getRoomById', bodyData)
+}
 // *****************************************************************************
 //                          discount  end points
 // *****************************************************************************
@@ -80,6 +83,14 @@ const updateBookingById = async (id, bodyData) => {
     'booking',
     'updateBookingById',
     id,
+    bodyData
+  )
+}
+const getBookingDetailsById = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'booking',
+    'getBookingById',
     bodyData
   )
 }
@@ -115,6 +126,41 @@ const getVASByBookingId = async (bodyData) => {
   )
 }
 
+// *****************************************************************************
+//                          payment  end points
+// *****************************************************************************
+const getTotalAmountByBookingId = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'payment',
+    'totalAmountByBookingId',
+    bodyData
+  )
+}
+// *****************************************************************************
+//                          voucher  end points
+// *****************************************************************************
+const validateCoupon = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'coupon',
+    'validateCoupon',
+    bodyData
+  )
+}
+
+// *****************************************************************************
+//                          customer grade  end points
+// *****************************************************************************
+
+const getCustomerDiscount = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'loyalty',
+    'getCustomerDiscount',
+    bodyData
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -130,4 +176,9 @@ export {
   unSubscribeVAS,
   getVASByBookingId,
   updateBookingById,
+  getBookingDetailsById,
+  getRoomDetailsById,
+  getTotalAmountByBookingId,
+  validateCoupon,
+  getCustomerDiscount,
 }

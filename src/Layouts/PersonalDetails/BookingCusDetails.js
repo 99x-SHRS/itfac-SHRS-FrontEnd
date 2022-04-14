@@ -61,9 +61,12 @@ const BookingCusDetails = () => {
     await updateBookingById(bookingId, dataModel)
       .then((res) => {
         console.log(res)
-        window.location.href = `/booking/${
+        // window.location.href = `/booking/${
+        //   searchedParams.get('booking') || ''
+        // }/details/payment`
+        window.location.href = `/payment?booking=${
           searchedParams.get('booking') || ''
-        }/details/payment`
+        }`
       })
       .catch((err) => {
         console.log(err)
