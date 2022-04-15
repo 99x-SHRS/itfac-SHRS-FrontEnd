@@ -5,12 +5,14 @@ import { toast } from 'react-toastify'
 import Paypal from '../../Services/PaymentGateways/PayPal'
 import Gpay from '../../Services/PaymentGateways/Gpay'
 import PayHere from '../../Services/PaymentGateways/PayHere'
-const PaymentOptions = (paymentMethod) => {
+const PaymentOptions = (payment) => {
   // useEffect(() => {}, [paymentMethod])
   let navigate = useNavigate()
+
   useEffect(() => {
     toast.configure()
-  }, [])
+    console.log(payment.payment)
+  }, [payment])
   function notify(message) {
     toast.success(message)
     // history.push('/booking-history')
@@ -19,7 +21,7 @@ const PaymentOptions = (paymentMethod) => {
   return (
     <div className='payment-gateway-interface'>
       <div>
-        {paymentMethod.method === 'default' ? (
+        {payment.method === 'default' ? (
           <div>
             <button
               className='reserve-button final-payment-btn'
@@ -33,27 +35,27 @@ const PaymentOptions = (paymentMethod) => {
         ) : (
           <></>
         )}
-        {paymentMethod.method === 'paypal' ? (
+        {payment.method === 'paypal' ? (
           <div className='paypal-btn'>
-            <Paypal />
+            <Paypal amount={payment.payment} />
           </div>
         ) : (
           <></>
         )}
-        {paymentMethod.method === 'gpay' ? (
+        {payment.method === 'gpay' ? (
           <div className='gpay-btn'>
-            <Gpay />
+            <Gpay payment={payment.payment} />
           </div>
         ) : (
           <></>
         )}
-        {paymentMethod.method === 'payhere' ? (
+        {payment.method === 'payhere' ? (
           <div className='payhere-btn'>
             <PayHere
               // Use a unique value for the orderId
               orderId={45896588}
               name='Just For You Mom Ribbon Cake'
-              amount='4500'
+              amount={payment.payment}
             />
           </div>
         ) : (

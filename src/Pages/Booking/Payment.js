@@ -336,7 +336,7 @@ const Payament = () => {
             <div className='col-md-4 col-lg-4 '>
               <div className='border mt-1'>
                 <h4>How do you wish to pay ?</h4>
-                <SelectPayment />
+                <SelectPayment amount={totalPayment} />
               </div>
             </div>
           </div>

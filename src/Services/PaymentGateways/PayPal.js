@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-export default function Paypal() {
+export default function Paypal({ amount }) {
   const paypal = useRef()
   let navigate = useNavigate()
   useEffect(() => {
@@ -19,10 +19,10 @@ export default function Paypal() {
             intent: 'CAPTURE',
             purchase_units: [
               {
-                description: 'Cool looking table',
+                description: 'BookNow.lk payment',
                 amount: {
-                  currency_code: 'USD',
-                  value: 1.0,
+                  currency_code: 'LKR',
+                  value: amount.toFixed(2),
                 },
               },
             ],

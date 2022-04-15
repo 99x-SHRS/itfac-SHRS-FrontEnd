@@ -7,7 +7,8 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import Box from '@mui/material/Box'
 
 export default function BasicDateRangePicker(props) {
-  const [dateRange, setDateRange] = React.useState([null, null])
+  const today = new Date()
+  const [dateRange, setDateRange] = React.useState([today, today])
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>

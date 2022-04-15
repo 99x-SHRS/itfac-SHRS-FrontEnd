@@ -20,10 +20,8 @@ const TableBody = ({ rooms, souvenirs1 }) => {
   const [avQty, setAvQty] = useState(null)
 
   useEffect(() => {
-    console.log('data')
     setRoomsData(rooms)
     setRoomQty(0)
-    console.log(rooms)
     setAvQty(searchedParams.get('rooms') || '')
   }, [rooms])
   useEffect(() => {
@@ -79,22 +77,6 @@ const TableBody = ({ rooms, souvenirs1 }) => {
       })
   }
 
-  // const getAvailableRoomQty = async (room) => {
-  //   const dataModel = {
-  //     roomId: room,
-  //     checkInDate: searchedParams.get('checkin-date') || '',
-  //     checkOutDate: searchedParams.get('checkout-date') || '',
-  //   }
-  //   // console.log(dataModel)
-  //   await getAvailableRoomQtyByRoomId(dataModel)
-  //     .then((res) => {
-  //       setAvQty(res.data.available)
-  //     })
-  //     .catch((err) => {
-  //       console.log(err)
-  //       setAvQty(0)
-  //     })
-  // }
   return (
     <>
       {roomsData.map((room) => {
@@ -131,7 +113,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                 )}
 
                 <div className='room-price'>
-                  {/* Rs.{room.rate * (1 - discount / 100)} */}
+                  Rs.{room.rate * (1 - discount / 100)}
                 </div>
               </div>
             </div>
@@ -179,7 +161,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                 <div>
                   <div className='tot-price'>
                     You can reserve this property today Rs.
-                    {room.price * (1 - room.disount) * roomQty}
+                    {room.rate * (1 - discount / 100) * roomQty}
                   </div>
                   <HorizontalLine />
                   <br />
