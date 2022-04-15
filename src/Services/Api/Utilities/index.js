@@ -55,8 +55,17 @@ const getAllImagesByRoomId = async (bodyData) => {
     bodyData
   )
 }
+
 const getRoomDetailsById = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'room', 'getRoomById', bodyData)
+}
+const getAvailableRoomQtyByRoomId = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'room',
+    'getAvailableRoomQtyByRoomId',
+    bodyData
+  )
 }
 // *****************************************************************************
 //                          discount  end points
@@ -181,4 +190,5 @@ export {
   getTotalAmountByBookingId,
   validateCoupon,
   getCustomerDiscount,
+  getAvailableRoomQtyByRoomId,
 }

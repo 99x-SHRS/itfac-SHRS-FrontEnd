@@ -6,6 +6,7 @@ import NumberInputBox from '../../Components/NumberInputBox/inputBoxNumber'
 import {
   getDiscountByHotelId,
   placeBooking,
+  getAvailableRoomQtyByRoomId,
 } from '../../Services/Api/Utilities/index.js'
 import NumericInput from 'react-numeric-input'
 
@@ -16,11 +17,14 @@ const TableBody = ({ rooms, souvenirs1 }) => {
   const [roomQty, setRoomQty] = useState(0)
   const [setedRoom, setRoom] = useState(0)
   const [discount, setDiscount] = useState(0)
+  const [avQty, setAvQty] = useState(null)
+
   useEffect(() => {
     console.log('data')
     setRoomsData(rooms)
     setRoomQty(0)
     console.log(rooms)
+    setAvQty(searchedParams.get('rooms') || '')
   }, [rooms])
   useEffect(() => {
     const dataModel = {
@@ -52,6 +56,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
       .then((res) => {
         try {
           const bookingId = res.data.bookingId
+          console.log(res)
           window.location.href = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
         } catch (error) {
           console.log(error)
@@ -61,7 +66,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
         console.log(err)
       })
   }
-  const getRoomDiscount = async (id) => {
+  const getRoomDiscount = async (hotelId, roomId) => {
     const dataModel = {
       id: 1,
     }
@@ -73,12 +78,29 @@ const TableBody = ({ rooms, souvenirs1 }) => {
         console.log(err)
       })
   }
+
+  // const getAvailableRoomQty = async (room) => {
+  //   const dataModel = {
+  //     roomId: room,
+  //     checkInDate: searchedParams.get('checkin-date') || '',
+  //     checkOutDate: searchedParams.get('checkout-date') || '',
+  //   }
+  //   // console.log(dataModel)
+  //   await getAvailableRoomQtyByRoomId(dataModel)
+  //     .then((res) => {
+  //       setAvQty(res.data.available)
+  //     })
+  //     .catch((err) => {
+  //       console.log(err)
+  //       setAvQty(0)
+  //     })
+  // }
   return (
     <>
       {roomsData.map((room) => {
-        //get room (hotel) discount
         let hotelId = searchedParams.get('hotel') || ''
-        getRoomDiscount(hotelId)
+        getRoomDiscount(hotelId, room.roomId)
+
         return (
           <li class='table-row border border-dark'>
             <div class='col-sm-12 col-md-4  mb-3 '>
@@ -118,7 +140,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                 {roomQty == 0 ? (
                   <NumericInput
                     min={0}
-                    max={100}
+                    max={avQty}
                     value={0}
                     onChange={(value) => {
                       setRoomQty(value)
@@ -128,14 +150,14 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                 ) : setedRoom == room.roomId ? (
                   <NumericInput
                     min={0}
-                    max={100}
+                    max={avQty}
                     onChange={(value) => {
                       setRoomQty(value)
                       setRoom(room.roomId)
                     }}
                   />
                 ) : (
-                  <NumericInput min={0} max={100} value={0} disabled />
+                  <NumericInput min={0} max={0} value={0} disabled />
                 )}
               </div>
             </div>
