@@ -1,40 +1,55 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/themes/splide-default.min.css'
-
+import { getAllImagesByRoomId } from '../../Services/Api/Utilities/index.js'
 import '../../Assets/styles/css/Components/souvenir.css'
-
-const initialItems = Array.apply(null, Array(6)).map(
-  (value, index) => index + 1
-)
 
 const souvenirs1 = [
   {
-    path: '/images/property-types/kabana.jpg',
+    image: '/images/property-types/kabana.jpg',
   },
   {
-    path: '/images/property-types/villa.jpg',
+    image: '/images/property-types/villa.jpg',
   },
   {
-    path: '/images/property-types/villa.jpg',
+    image: '/images/property-types/villa.jpg',
   },
   {
-    path: '/images/property-types/bangalow.jpg',
+    image: '/images/property-types/bangalow.jpg',
   },
   {
-    path: '/images/property-types/guest-houses.jpg',
+    image: '/images/property-types/guest-houses.jpg',
   },
   {
-    path: '/images/property-types/guest-houses.jpg',
+    image: '/images/property-types/guest-houses.jpg',
   },
   {
-    path: '/images/property-types/guest-houses.jpg',
+    image: '/images/property-types/guest-houses.jpg',
   },
 ]
 
-const SplideSlider = () => {
-  const [items, setItems] = useState(initialItems)
+const SplideSlider = ({ roomId }) => {
+  const [images, setRoomImages] = useState([])
+  useEffect(() => {
+    getImages()
+  }, [roomId])
 
+  useEffect(() => {
+    getImages()
+  }, [images.length])
+
+  const getImages = async () => {
+    const dataModel = {
+      id: roomId,
+    }
+    await getAllImagesByRoomId(dataModel)
+      .then((res) => {
+        setRoomImages(res.data)
+      })
+      .catch((err) => {
+        setRoomImages(souvenirs1)
+      })
+  }
   return (
     <>
       <Splide
@@ -61,13 +76,10 @@ const SplideSlider = () => {
           },
         }}
       >
-        {items.map((item) => {
+        {images.map((item) => {
           return (
-            <SplideSlide key={item} className='slide'>
-              <img
-                src={`https://source.unsplash.com/random/400x500?sig=${item}`}
-                alt={`${item}`}
-              />
+            <SplideSlide className='slide'>
+              <img src={item.image} />
             </SplideSlide>
           )
         })}

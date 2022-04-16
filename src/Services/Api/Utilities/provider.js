@@ -1,31 +1,68 @@
 import axios from 'axios'
 import { handleResponse, handleError } from './response'
 
-const BASE_URL = 'http://127.0.0.1:8000/api'
-
-const getAll = (resource) => {
+//get methods
+const getAll = async (url, type, task) => {
+  console.log(`${url}/${type}/${task}`)
   return axios
-    .get(`${BASE_URL}/${resource}`)
+    .get(`${url}/${type}/${task}`)
+    .then(handleResponse)
+    .catch(handleError)
+}
+const getOneById = (url, type, task) => {
+  return axios
+    .get(`${url}/${type}/${task}`)
     .then(handleResponse)
     .catch(handleError)
 }
 
-const post = (resource, model) => {
+//post methods
+const getAllPOST = async (url, type, task, data) => {
   return axios
-    .post(`${BASE_URL}/${resource}`, model)
+    .post(`${url}/${type}/${task}`, data)
     .then(handleResponse)
     .catch(handleError)
 }
 
-const remove = (resource, id) => {
+const getAllById = async (url, type, task, data) => {
   return axios
-    .delete(`${BASE_URL}/${resource}`, id)
+    .post(`${url}/${type}/${task}`, data)
     .then(handleResponse)
     .catch(handleError)
 }
-
-export const apiProvider = {
+const getOneByIdPost = async (url, type, task, data) => {
+  return axios
+    .post(`${url}/${type}/${task}`, data)
+    .then(handleResponse)
+    .catch(handleError)
+}
+const insertData = async (url, type, task, data) => {
+  return axios
+    .post(`${url}/${type}/${task}`, data)
+    .then(handleResponse)
+    .catch(handleError)
+}
+const deleteData = async (url, type, task, data) => {
+  return axios
+    .delete(`${url}/${type}/${task}/${data[0]}/${data[1]}`)
+    .then(handleResponse)
+    .catch(handleError)
+}
+const updateById = async (url, type, task, id, data) => {
+  console.log('---------')
+  console.log(id)
+  return axios
+    .put(`${url}/${type}/${task}/${id}}`, data)
+    .then(handleResponse)
+    .catch(handleError)
+}
+export default {
   getAll,
-  post,
-  remove,
+  getOneById,
+  getAllPOST,
+  getAllById,
+  getOneByIdPost,
+  insertData,
+  deleteData,
+  updateById,
 }

@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PropagateLoader from 'react-spinners/PropagateLoader'
 import React, { useState, useEffect } from 'react'
-
+import History from './Components/History/history'
 import UserRoutes from './Routes/userRouter'
 import ChatBot from './Services/ChatBot/chatBot.js'
 import 'slick-carousel/slick/slick.css'
@@ -19,11 +19,11 @@ function App() {
   }, [])
 
   return (
-    <Router>
+    <Router history={History}>
       <div className='App'>
-        {/* <Routes>{UserRoutes}</Routes> */}
+        <Routes>{UserRoutes}</Routes>
         {/* <ChatBot /> */}
-        {loading ? (
+        {/* {loading ? (
           <div className='Loader'>
             <PropagateLoader
               loading={loading}
@@ -37,7 +37,7 @@ function App() {
             <Routes>{UserRoutes}</Routes>
             <ChatBot />
           </>
-        )}
+        )} */}
       </div>
     </Router>
   )

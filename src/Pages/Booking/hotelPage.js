@@ -10,25 +10,23 @@ import HotelLocation from '../../Layouts/Location/hotelLocation.js'
 import Footer from '../../Layouts/Footer/footer.js'
 
 import '../../Assets/styles/css/Pages/hotelPage.css'
-class hotelPage extends Component {
-  render() {
-    return (
-      <div>
-        <HotelHeader />
-        <div className='container hotel-room-seletor-container'>
-          <Souvenir />
-          <HotelPageTabs />
-          <HotelDescription />
-          <RoomTypeSelector />
-          <Facilities />
-          <Review />
-          <HotelLocation />
-        </div>
 
-        <Footer />
+const hotelPage = () => {
+  return (
+    <div>
+      <HotelHeader />
+      <div className='container hotel-room-seletor-container'>
+        <Souvenir />
+        <HotelPageTabs />
+        <HotelDescription />
+        <RoomTypeSelector />
+        <Facilities />
+        <Review />
+        <HotelLocation />
       </div>
-    )
-  }
+      <Footer />
+    </div>
+  )
 }
 
 export default hotelPage

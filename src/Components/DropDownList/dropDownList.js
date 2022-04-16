@@ -7,12 +7,22 @@ class DropDownList extends Component {
   render() {
     return (
       <div>
-        <select class='form-select' aria-label='Default select example'>
-          <option selected>Select your preference </option>
+        <select
+          class='form-select'
+          id='roomtype'
+          aria-label='Default select example'
+          onChange={(data) => {
+            var x = document.getElementById('roomtype').value
+            this.props.setRoomType(x)
+          }}
+        >
+          {/* <option selected disabled>
+            Select your preference{' '}
+          </option> */}
           {this.props.roomTypes.map((roomType, index) => {
             return (
-              <option key={index} value={roomType.name}>
-                {roomType.name}
+              <option key={roomType.roomTypeId} value={roomType.roomTypeId}>
+                {roomType.type}
               </option>
             )
           })}

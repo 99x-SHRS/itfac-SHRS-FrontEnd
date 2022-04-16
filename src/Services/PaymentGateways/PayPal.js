@@ -1,16 +1,36 @@
 import React, { useRef, useEffect } from 'react'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
-export default function Paypal() {
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { pay } from '../../Services/Api/Utilities/index.js'
+export default function Paypal({ amount }) {
   const paypal = useRef()
   let navigate = useNavigate()
+  const [searchedParams, setSearchedparams] = useSearchParams()
+
   useEffect(() => {
     toast.configure()
   }, [])
+
   function notify(message) {
     toast.success(message)
     navigate('../booking-history', { replace: true })
   }
+  const payBooking = async () => {
+    console.log('called')
+    const dataModel = {
+      paymenttypeId: 16,
+      bookingId: searchedParams.get('booking') || '',
+      payment: amount,
+    }
+    await pay(dataModel)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   useEffect(() => {
     window.paypal
       .Buttons({
@@ -19,10 +39,10 @@ export default function Paypal() {
             intent: 'CAPTURE',
             purchase_units: [
               {
-                description: 'Cool looking table',
+                description: 'BookNow.lk payment',
                 amount: {
                   currency_code: 'USD',
-                  value: 1.0,
+                  value: amount.toFixed(2),
                 },
               },
             ],
@@ -32,6 +52,7 @@ export default function Paypal() {
           const order = await actions.order.capture()
           if ((order.status = 'COMPLETED')) {
             console.log('COMPLETED')
+            payBooking()
             notify('Payment was successfully finished!')
           }
         },

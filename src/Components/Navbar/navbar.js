@@ -28,7 +28,6 @@ const Navbars = () => {
     return LoginSignup
   }
   const onOpenModal = () => {
-    console.log()
     setSign(true)
   }
   const onOpenModalLogin = () => {
@@ -48,9 +47,7 @@ const Navbars = () => {
   const homepage = () => {
     window.location.href = '/'
   }
-  const loginForm = () => {
-    console.log('asd')
-  }
+  const loginForm = () => {}
   var prevScrollpos = window.pageYOffset
 
   window.onscroll = () => {
@@ -60,7 +57,7 @@ const Navbars = () => {
     } else {
       document.getElementById('navbar').style.top = '-100px'
     }
-    console.log(prevScrollpos)
+
     prevScrollpos = currentScrollPos
   }
 

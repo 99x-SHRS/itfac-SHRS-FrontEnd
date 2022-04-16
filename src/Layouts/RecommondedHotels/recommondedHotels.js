@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect, useState } from 'react'
 import HotelCard from '../../Components/HotelCard/HotelCard'
 
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
@@ -6,35 +6,20 @@ import Hotel_2 from '../../Assets/images/hotels/hotel2.jpg'
 import Hotel_3 from '../../Assets/images/hotels/hotel3.jpg'
 import Hotel_4 from '../../Assets/images/hotels/hotel4.jpg'
 
+import { getAllHotels } from '../../Services/Api/Utilities/index.js'
+
 const Recommendeds = () => {
   ///call the api ->return JSON
+  const [recommondedHotel, setRecommondedHotel] = useState([])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    pageOnLoad()
+  }, [])
 
-  const hotelData = [
-    {
-      name: 'Avenra',
-      description:
-        '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum voluptates officiis suscipit sed a distinctio facilis similique ratione animi voluptas?',
-      image: Hotel_1,
-    },
-    {
-      name: 'Hareesha',
-      description:
-        '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum voluptates officiis suscipit sed a distinctio facilis similique ratione animi voluptas?',
-      image: Hotel_2,
-    },
-    {
-      name: 'Jetwings',
-      description:
-        '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum voluptates officiis suscipit sed a distinctio facilis similique ratione animi voluptas?',
-      image: Hotel_3,
-    },
-    {
-      name: 'SunQueen',
-      description:
-        '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Earum voluptates officiis suscipit sed a distinctio facilis similique ratione animi voluptas?',
-      image: Hotel_1,
-    },
-  ]
+  const pageOnLoad = async () => {
+    const recommondedData = await getAllHotels()
+    setRecommondedHotel(recommondedData.data.slice(0, 4))
+  }
 
   return (
     <div className='container'>
@@ -42,7 +27,7 @@ const Recommendeds = () => {
         <h2>Recommonded from us</h2>
       </div>
       <div className='row '>
-        {hotelData.map((hotel, index) => {
+        {recommondedHotel.map((hotel, index) => {
           return (
             <div class='col-6 col-lg-3 '>
               <HotelCard hotel={hotel} />

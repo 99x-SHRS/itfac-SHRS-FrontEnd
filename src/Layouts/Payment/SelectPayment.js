@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react'
+import React, { Component, useState, useEffect } from 'react'
 import PaymentOptions from '../../Layouts/Payment/PaymentOptions.js'
 import '../../Assets/styles/css/Layouts/payment.css'
-const SelectPayment = () => {
+const SelectPayment = ({ amount }) => {
   const [paymentMethod, setPaymentMethod] = useState('')
   return (
     <div className='payment-gateway-interface'>
@@ -75,7 +75,7 @@ const SelectPayment = () => {
           </div>
         </div>
       </div>
-      <PaymentOptions method={paymentMethod} />
+      <PaymentOptions method={paymentMethod} payment={amount} />
     </div>
   )
 }
