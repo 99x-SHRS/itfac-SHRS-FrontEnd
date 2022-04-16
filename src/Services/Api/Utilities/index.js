@@ -170,6 +170,14 @@ const getCustomerDiscount = async (bodyData) => {
     bodyData
   )
 }
+
+// *****************************************************************************
+//                          payment   end points
+// *****************************************************************************
+
+const pay = async (bodyData) => {
+  return await provider.insertData(BASE_URL, 'payment', 'pay', bodyData)
+}
 export {
   getAllHotels,
   searchHotels,
@@ -191,4 +199,5 @@ export {
   validateCoupon,
   getCustomerDiscount,
   getAvailableRoomQtyByRoomId,
+  pay,
 }

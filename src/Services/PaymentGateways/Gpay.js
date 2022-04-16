@@ -1,6 +1,6 @@
 import React, { Component, useEffect } from 'react'
 import GooglePayButton from '@google-pay/button-react'
-const Gpay = ({ payment }) => {
+const Gpay = ({ payment, payBooking }) => {
   useEffect(() => {
     console.log(payment)
   }, [])
@@ -46,6 +46,7 @@ const Gpay = ({ payment }) => {
         }}
         onPaymentAuthorized={(paymentData) => {
           console.log('Payment Authorised Success', paymentData)
+          payBooking()
           return { transactionState: 'SUCCESS' }
         }}
         onPaymentDataChanged={(paymentData) => {

@@ -302,7 +302,7 @@ const Payament = () => {
                             </td>
                             <td className='text-right'>
                               <b>
-                                ({' Rs. '}.{loyalty})
+                                ({' Rs. '}.{loyalty.toFixed(2)})
                               </b>
                             </td>
                           </tr>

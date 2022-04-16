@@ -1,22 +1,38 @@
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import Paypal from '../../Services/PaymentGateways/PayPal'
 import Gpay from '../../Services/PaymentGateways/Gpay'
 import PayHere from '../../Services/PaymentGateways/PayHere'
-const PaymentOptions = (payment) => {
-  // useEffect(() => {}, [paymentMethod])
-  let navigate = useNavigate()
 
+import { pay } from '../../Services/Api/Utilities/index.js'
+const PaymentOptions = (payment) => {
+  let navigate = useNavigate()
+  const [searchedParams, setSearchedparams] = useSearchParams()
   useEffect(() => {
     toast.configure()
-    console.log(payment.payment)
-  }, [payment])
+  }, [])
+
   function notify(message) {
     toast.success(message)
     // history.push('/booking-history')
     navigate('../booking-history', { replace: true })
+  }
+  const payBooking = async () => {
+    console.log('called')
+    const dataModel = {
+      paymenttypeId: 16,
+      bookingId: searchedParams.get('booking') || '',
+      payment: payment.payment,
+    }
+    await pay(dataModel)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
   return (
     <div className='payment-gateway-interface'>
@@ -26,6 +42,7 @@ const PaymentOptions = (payment) => {
             <button
               className='reserve-button final-payment-btn'
               onClick={() => {
+                payBooking()
                 notify('Your booking is placed !')
               }}
             >
