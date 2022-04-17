@@ -374,3 +374,7 @@
     padding: -50px !important;
   }
 }
+
+.booking-history-loader{
+  text-align: center;
+}

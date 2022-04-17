@@ -103,6 +103,31 @@ const getBookingDetailsById = async (bodyData) => {
     bodyData
   )
 }
+const getCurrentBookingByUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getCurrentBookingByUserId',
+    bodyData
+  )
+}
+const getPastBookingByUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getPastBookingByUserId',
+    bodyData
+  )
+}
+const getBookingByUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getBookingByUserId',
+    bodyData
+  )
+}
+
 // *****************************************************************************
 //                          vas  end points
 // *****************************************************************************
@@ -143,6 +168,14 @@ const getTotalAmountByBookingId = async (bodyData) => {
     BASE_URL,
     'payment',
     'totalAmountByBookingId',
+    bodyData
+  )
+}
+const paymentStatusByBookingId = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'payment',
+    'paymentStatusByBookingId',
     bodyData
   )
 }
@@ -200,4 +233,8 @@ export {
   getCustomerDiscount,
   getAvailableRoomQtyByRoomId,
   pay,
+  paymentStatusByBookingId,
+  getBookingByUserId,
+  getCurrentBookingByUserId,
+  getPastBookingByUserId,
 }

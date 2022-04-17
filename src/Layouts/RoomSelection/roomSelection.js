@@ -192,7 +192,6 @@ const RoomSelection = ({ roomTypeId }) => {
 
   const handlePageClick = async (data) => {
     let currentPage = data.selected
-    console.log(currentPage)
     fetchRoomData(currentPage)
     window.scrollTo(0, 1100)
   }
