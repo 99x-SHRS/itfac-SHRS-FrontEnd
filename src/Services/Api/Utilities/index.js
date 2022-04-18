@@ -7,6 +7,9 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 const getAllHotels = async () => {
   return await provider.getAll(BASE_URL, 'hotel', 'getAllHotels')
 }
+const getHotelById = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'hotel', 'getHotelById', bodyData)
+}
 
 const searchHotels = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'search', bodyData)
@@ -30,6 +33,22 @@ const getAvailbleRooms = async (bodyData) => {
 
 const saveHotelById = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'saveHotel', bodyData)
+}
+const getSavedhotelByCustomerId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'getSavedhotelByCustomerId',
+    bodyData
+  )
+}
+const deleteSaveHotelById = async (bodyData) => {
+  return await provider.deleteData(
+    BASE_URL,
+    'hotel',
+    'deleteSavedHotel',
+    bodyData
+  )
 }
 // *****************************************************************************
 //                          rooms  end points
@@ -241,4 +260,7 @@ export {
   getCurrentBookingByUserId,
   getPastBookingByUserId,
   saveHotelById,
+  deleteSaveHotelById,
+  getSavedhotelByCustomerId,
+  getHotelById,
 }

@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
-import { saveHotelById } from '../../Services/Api/Utilities'
+import {
+  saveHotelById,
+  deleteSaveHotelById,
+} from '../../Services/Api/Utilities'
+
 import 'react-toastify/dist/ReactToastify.css'
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
 import '../../Assets/styles/css/Components/searchedHotelCard.css'
@@ -22,17 +26,40 @@ class HotelCard extends Component {
       isSaved: !state.isSaved,
     }))
     if (this.state.isSaved) {
-      console.log(this.state.isSaved)
-      this.notify('You removed a hotel successfully !')
+      this.removehotelSave()
     } else {
-      console.log(this.state.isSaved)
-      this.notify('You Saved a hotel successfully !')
+      this.hotelSave()
     }
   }
   async hotelSave() {
-    await saveHotelById()
+    const dataModel = {
+      customerId: 1, //user id
+      hotelId: this.props.hotelData.hotelHotelId,
+    }
+    await saveHotelById(dataModel)
       .then((res) => {
-        console.log(res)
+        if (res.status == 200 && res.data == 'saved') {
+          this.notify('You have already saved this hotel!')
+        } else if (res.status == 200) {
+          this.notify('You Saved a hotel successfully !')
+        } else {
+          this.notify('Something went wrong. !')
+        }
+      })
+      .catch((err) => {
+        this.notify('Something went wrong. !')
+      })
+  }
+  async removehotelSave() {
+    const dataModel = [this.props.hotelData.hotelHotelId, 1]
+
+    await deleteSaveHotelById(dataModel)
+      .then((res) => {
+        if (res.status == 200) {
+          this.notify('You removed a hotel successfully !')
+        } else {
+          this.notify('Something went wrong. !')
+        }
       })
       .catch((err) => {
         console.log(err)
@@ -57,7 +84,7 @@ class HotelCard extends Component {
             <div
               class='w-full sm:w-2/4 hotel-cover bg-center bg-cover border relative h-g sm:h-auto shadow-inner'
               style={{
-                backgroundImage: `url(${Hotel_1})`,
+                backgroundImage: `url(${this.props.hotelData.hotel.image})`,
               }}
             >
               <div className='save-hotel m-2'>
