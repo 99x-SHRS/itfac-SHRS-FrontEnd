@@ -28,6 +28,9 @@ const getAvailbleRooms = async (bodyData) => {
   )
 }
 
+const saveHotelById = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'hotel', 'saveHotel', bodyData)
+}
 // *****************************************************************************
 //                          rooms  end points
 // *****************************************************************************
@@ -237,4 +240,5 @@ export {
   getBookingByUserId,
   getCurrentBookingByUserId,
   getPastBookingByUserId,
+  saveHotelById,
 }

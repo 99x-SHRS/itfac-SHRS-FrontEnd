@@ -99,12 +99,12 @@ const TableBody = ({ rooms, souvenirs1 }) => {
 
             <div class='col-sm-12 col-md-2 mb-3'>
               <div className='prices-container'>
-                {discount != 0 ? (
+                {discount != null ? (
                   <div className='save-today'>Save {discount} % Today</div>
                 ) : (
                   ''
                 )}
-                {discount != 0 ? (
+                {discount != null ? (
                   <del>
                     <div class='or-amount'>Rs.{room.rate}</div>
                   </del>
@@ -112,9 +112,13 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                   ''
                 )}
 
-                <div className='room-price'>
-                  Rs.{room.rate * (1 - discount / 100)}
-                </div>
+                {discount != null ? (
+                  <div className='room-price'>
+                    Rs.{room.rate * (1 - discount / 100)}
+                  </div>
+                ) : (
+                  <div className='room-price'>Rs.{room.rate}</div>
+                )}
               </div>
             </div>
             <div class='col-sm-12 col-md-1  mb-3'>
@@ -161,7 +165,9 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                 <div>
                   <div className='tot-price'>
                     You can reserve this property today Rs.
-                    {room.rate * (1 - discount / 100) * roomQty}
+                    {discount != null
+                      ? room.rate * (1 - discount / 100) * roomQty
+                      : room.rate}
                   </div>
                   <HorizontalLine />
                   <br />

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
-
+import { saveHotelById } from '../../Services/Api/Utilities'
 import 'react-toastify/dist/ReactToastify.css'
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
 import '../../Assets/styles/css/Components/searchedHotelCard.css'
@@ -29,7 +29,15 @@ class HotelCard extends Component {
       this.notify('You Saved a hotel successfully !')
     }
   }
-
+  async hotelSave() {
+    await saveHotelById()
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   getStars(params) {
     let content = []
     for (let i = 0; i < params; i++) {
