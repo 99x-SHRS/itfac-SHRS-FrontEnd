@@ -1,7 +1,7 @@
 import React from 'react'
 import CardStats from '../../Components/Cards/CardStats'
 import '../../Assets/styles/css/Seller/Components/sellerDashboard.css'
-const SellerDashboard = () => {
+const HeaderStats = () => {
   return (
     <div>
       <div className='relative bg-lightBlue-600 md:pt-32 pb-32 pt-12'>
@@ -11,7 +11,7 @@ const SellerDashboard = () => {
             <div className='flex flex-wrap'>
               <div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
                 <CardStats
-                  statSubtitle='NEW USERS'
+                  statSubtitle='Bookings'
                   statTitle='350,897'
                   statArrow='up'
                   statPercent='3.48'
@@ -35,7 +35,7 @@ const SellerDashboard = () => {
               </div>
               <div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
                 <CardStats
-                  statSubtitle='LOGINS'
+                  statSubtitle='LISTINGS'
                   statTitle='924'
                   statArrow='down'
                   statPercent='1.10'
@@ -47,7 +47,7 @@ const SellerDashboard = () => {
               </div>
               <div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
                 <CardStats
-                  statSubtitle='LISTINGS'
+                  statSubtitle='Feedback'
                   statTitle='49,65%'
                   statArrow='up'
                   statPercent='12'
@@ -65,4 +65,4 @@ const SellerDashboard = () => {
   )
 }
 
-export default SellerDashboard
+export default HeaderStats
