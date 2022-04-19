@@ -13,7 +13,7 @@ export default function Paypal({ amount }) {
 
   function notify(message) {
     toast.success(message)
-    navigate('../booking-history', { replace: true })
+    navigate('../booking-history')
   }
   const payBooking = async () => {
     console.log('called')

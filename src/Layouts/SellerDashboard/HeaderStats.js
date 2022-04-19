@@ -1,7 +1,10 @@
 import React from 'react'
 import CardStats from '../../Components/Cards/CardStats'
+import { useNavigate } from 'react-router-dom'
+
 import '../../Assets/styles/css/Seller/Components/sellerDashboard.css'
 const HeaderStats = () => {
+  let navigate = useNavigate()
   return (
     <div>
       <div className='relative bg-lightBlue-600 md:pt-32 pb-32 pt-12'>
@@ -9,7 +12,13 @@ const HeaderStats = () => {
           <div>
             {/* Card stats */}
             <div className='flex flex-wrap'>
-              <div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
+              <div
+                className='w-full lg:w-6/12 xl:w-3/12 px-4'
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  navigate('../seller/hotels')
+                }}
+              >
                 <CardStats
                   statSubtitle='Bookings'
                   statTitle='350,897'
@@ -21,7 +30,13 @@ const HeaderStats = () => {
                   statIconColor='bg-red-500'
                 />
               </div>
-              <div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
+              <div
+                className='w-full lg:w-6/12 xl:w-3/12 px-4'
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  navigate('../seller/hotels')
+                }}
+              >
                 <CardStats
                   statSubtitle='REVENUE'
                   statTitle='2,356'
@@ -33,7 +48,13 @@ const HeaderStats = () => {
                   statIconColor='bg-orange-500'
                 />
               </div>
-              <div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
+              <div
+                className='w-full lg:w-6/12 xl:w-3/12 px-4'
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  navigate('../seller/hotels')
+                }}
+              >
                 <CardStats
                   statSubtitle='LISTINGS'
                   statTitle='924'
@@ -45,7 +66,13 @@ const HeaderStats = () => {
                   statIconColor='bg-pink-500'
                 />
               </div>
-              <div className='w-full lg:w-6/12 xl:w-3/12 px-4'>
+              <div
+                className='w-full lg:w-6/12 xl:w-3/12 px-4'
+                style={{ cursor: 'pointer' }}
+                onClick={() => {
+                  navigate('../seller/hotels')
+                }}
+              >
                 <CardStats
                   statSubtitle='Feedback'
                   statTitle='49,65%'
