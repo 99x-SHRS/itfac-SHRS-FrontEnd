@@ -1,7 +1,26 @@
-.hotel-register-container{
-    width:80%;
-    position:relative;
-    top:5rem;
-    margin-right:auto;
-    margin-left:auto;
+.hotel-register-container {
+  width: 80%;
+  top: 3rem;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.hotel-register-container .PhoneInputCountryIcon {
+  width: 3rem;
+  height: 1.3rem;
+}
+
+.hotel-register-container .next-container {
+  justify-content: flex-end;
+}
+
+@media only screen and (max-width: 992px) {
+  .hotel-register-container {
+    top: 3rem;
+    width: 100%;
+  }
+  .hotel-register-container .next-container button {
+    width: 100% !important;
+  }
 }

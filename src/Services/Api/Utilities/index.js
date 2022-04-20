@@ -4,6 +4,10 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 // *****************************************************************************
 //                          hotels end points
 // *****************************************************************************
+const registerHotel = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'hotel', 'registerHotel', bodyData)
+}
+
 const getAllHotels = async () => {
   return await provider.getAll(BASE_URL, 'hotel', 'getAllHotels')
 }
@@ -263,4 +267,5 @@ export {
   deleteSaveHotelById,
   getSavedhotelByCustomerId,
   getHotelById,
+  registerHotel,
 }
