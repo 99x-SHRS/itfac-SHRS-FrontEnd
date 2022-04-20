@@ -24,6 +24,7 @@ const ListedHotels = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

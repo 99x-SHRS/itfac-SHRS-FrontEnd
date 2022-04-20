@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 const InfomationCard = () => {
   return (
     <div>
@@ -11,9 +11,9 @@ const InfomationCard = () => {
                 List more hotels & get more benifits!
               </h3>
               <p>
-                <a href='#' class='button'>
-                  Get started !
-                </a>
+                <Link to='/seller/hotel/register'>
+                  <a class='button'>Get started !</a>
+                </Link>
               </p>
             </div>
             <div class='w-full md:w-1/2 p-4 md:p-0 bg-blue'>
