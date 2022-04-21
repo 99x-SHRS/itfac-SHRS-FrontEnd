@@ -1,28 +1,31 @@
 import React, { Component, useState, useMemo, useEffect } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
-
+import { toast } from 'react-toastify'
 import { registerHotel } from '../../Services/Api/Utilities/index.js'
 import PhoneInput, {
   formatPhoneNumber,
   formatPhoneNumberIntl,
   isValidPhoneNumber,
 } from 'react-phone-number-input'
-import {
-  CountryDropdown,
-  RegionDropdown,
-  CountryRegionData,
-} from 'react-country-region-selector'
+
+import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround.js'
 import Navbars from '../../Components/Navbar/navbar'
 import AddressSelector from '../../Components/AddressSelector/AddressSelector.js'
 import '../../Assets/styles/css/Seller/Layouts/registerHotel.css'
+import Footer from '../Footer/footer.js'
 const RegisterHotel = () => {
   const [country, setCountry] = useState('LK')
   const [number, setNumber] = useState(0)
   const [searchedParams, setSearchedparams] = useSearchParams()
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
   useEffect(() => {
     window.scrollTo(0, 0)
+    toast.configure()
   }, [])
+  const notifyError = (message) => {
+    toast.error(message)
+  }
   const handleSubmit = async (event) => {
     event.preventDefault()
     const dataModel = {
@@ -41,9 +44,18 @@ const RegisterHotel = () => {
     await registerHotel(dataModel)
       .then((res) => {
         console.log(res)
-        alert(res.status)
+        if (res.status == 200) {
+          setLoading(true)
+          setTimeout(() => {
+            setLoading(false)
+            navigate('/seller/hotel/register/upload')
+          }, 2000)
+        } else {
+          notifyError('Something went wrong!')
+        }
       })
       .catch((err) => {
+        notifyError('Something went wrong!')
         console.log(err)
       })
   }
@@ -193,6 +205,11 @@ const RegisterHotel = () => {
           </div>
         </div>
       </div>
+      <DarkOverlaybackGround
+        loading={loading}
+        content={'Creating your property'}
+      />
+      <Footer />
     </div>
   )
 }
