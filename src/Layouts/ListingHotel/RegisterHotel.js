@@ -48,7 +48,7 @@ const RegisterHotel = () => {
           setLoading(true)
           setTimeout(() => {
             setLoading(false)
-            navigate('/seller/hotel/register/upload')
+            navigate(`/seller/hotel/image?id=${res.data.hotelId}`)
           }, 2000)
         } else {
           notifyError('Something went wrong!')
@@ -64,13 +64,14 @@ const RegisterHotel = () => {
     <div>
       <Navbars />
       <div className='hotel-register-container'>
-        <div class='container step-indicator'>
+        <div class=' step-indicator'>
           <ul class='list-unstyled multi-steps'>
             <li class='is-active'>Basic Information</li>
-            <li>Upload image</li>
+            <li>Upload hotel Image</li>
+            <li>Upload souvenir Images</li>
             <li>Add value added servces</li>
           </ul>
-          <div>
+          <div className='container'>
             <form onSubmit={handleSubmit}>
               <div className='border mt-3 p-3'>
                 <h3>Enter your property details</h3>

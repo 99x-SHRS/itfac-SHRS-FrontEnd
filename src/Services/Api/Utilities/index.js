@@ -7,6 +7,9 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 const registerHotel = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'registerHotel', bodyData)
 }
+const addHotelImage = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'uploads', 'hotel', bodyData)
+}
 
 const getAllHotels = async () => {
   return await provider.getAll(BASE_URL, 'hotel', 'getAllHotels')
@@ -237,6 +240,26 @@ const getCustomerDiscount = async (bodyData) => {
 const pay = async (bodyData) => {
   return await provider.insertData(BASE_URL, 'payment', 'pay', bodyData)
 }
+// *****************************************************************************
+//                          souvenir   end points
+// *****************************************************************************
+
+const getAllsouvenirByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'souvenir',
+    'getSouvenirByHotelId',
+    bodyData
+  )
+}
+const deleteSouvenirById = async (params) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'souvenir',
+    'deleteSouvenirById',
+    params
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -268,4 +291,7 @@ export {
   getSavedhotelByCustomerId,
   getHotelById,
   registerHotel,
+  addHotelImage,
+  getAllsouvenirByHotelId,
+  deleteSouvenirById,
 }

@@ -48,6 +48,12 @@ const deleteData = async (url, type, task, data) => {
     .then(handleResponse)
     .catch(handleError)
 }
+const deleteDataById = async (url, type, task, id) => {
+  return axios
+    .delete(`${url}/${type}/${task}/${id}`)
+    .then(handleResponse)
+    .catch(handleError)
+}
 const updateById = async (url, type, task, id, data) => {
   console.log('---------')
   console.log(id)
@@ -64,5 +70,6 @@ export default {
   getOneByIdPost,
   insertData,
   deleteData,
+  deleteDataById,
   updateById,
 }

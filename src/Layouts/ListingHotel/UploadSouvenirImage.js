@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { useParams, useSearchParams, useLocation } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import { toast } from 'react-toastify'
 import Navbars from '../../Components/Navbar/navbar'
 import Footer from '../Footer/footer.js'
+import UploadedSouvenirImages from './UploadedSouvenirImages'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import UploadService from '../../Services/Api/Utilities/FileUploader/UploadFilesService'
-class UploadImage extends Component {
+class UploadSouvenirImage extends Component {
   constructor(props) {
     super(props)
     this.upload = this.upload.bind(this)
@@ -19,13 +20,13 @@ class UploadImage extends Component {
       message: '',
       fileInfos: [],
       hotelId: window.location.href,
-      uploaded: false,
+      uploadedImages: [],
     }
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0)
     toast.configure()
+    window.scrollTo(0, 0)
     this.setState({
       hotelId: this.state.hotelId.split('=')[1],
     })
@@ -38,6 +39,9 @@ class UploadImage extends Component {
   }
   upload() {
     let currentFile = this.state.selectedFiles[0]
+    let title = document.getElementsByName('title')[0].value
+    let subTitle = document.getElementsByName('sub_title')[0].value
+    let description = document.getElementsByName('description')[0].value
 
     this.setState({
       progress: 0,
@@ -45,24 +49,27 @@ class UploadImage extends Component {
       loading: true,
     })
 
-    UploadService.upload(
+    UploadService.uploadSouvenir(
       currentFile,
       (event) => {
         this.setState({
           progress: Math.round((100 * event.loaded) / event.total),
         })
       },
+      title,
+      subTitle,
+      description,
       this.state.hotelId
     )
       .then((response) => {
-        console.log(response)
+        document.getElementsByName('title')[0].value = ''
+        document.getElementsByName('sub_title')[0].value = ''
+        document.getElementsByName('description')[0].value = ''
         this.setState({
           message: response.data.message,
-          progress: 100,
+          progress: 0,
           loading: false,
-          uploaded: true,
         })
-
         this.notifySuccess('successfully uploaded')
       })
 
@@ -71,6 +78,7 @@ class UploadImage extends Component {
           progress: 0,
           message: 'Could not upload the file!',
           currentFile: undefined,
+          loading: false,
         })
         this.notifyError('Could not upload the file!')
       })
@@ -95,24 +103,62 @@ class UploadImage extends Component {
       fileInfos,
       loading,
       hotelId,
-      uploaded,
+      uploadedImages,
     } = this.state
 
     return (
       <div>
         <Navbars />
         <div className='upload-container'>
-          <div class='container step-indicator '>
+          <div class=' step-indicator '>
             <ul class='list-unstyled multi-steps'>
               <li>Basic Information</li>
-              <li class='is-active'>Upload hotel Image</li>
-              <li>Upload souvenir Images</li>
+              <li>Upload hotel Image</li>
+              <li class='is-active'>Upload souvenir Images</li>
               <li>Add value added servces</li>
             </ul>
           </div>
           <div className='container mt-5'>
+            <div>
+              <div className='row'>
+                <div class='form-group col-lg-6'>
+                  <label for='last Name'> Titles *</label>
+                  <input
+                    type='text'
+                    class='form-control'
+                    placeholder='Enter title'
+                    name='title'
+                    required
+                  />
+                </div>
+                <div class='form-group col-lg-6'>
+                  <label for='last Name'>Sub Title *</label>
+                  <input
+                    type='text'
+                    class='form-control sub_title'
+                    placeholder='Enter sub title'
+                    name='sub_title'
+                    required
+                  />
+                </div>
+              </div>
+              <div className='row'>
+                <label for='floatingTextarea2'>Description </label>
+                <div class='form-floating'>
+                  <textarea
+                    class='form-control'
+                    placeholder='Leave a comment here'
+                    id='floatingTextarea2'
+                    style={{ height: '100px' }}
+                    name='description'
+                    required
+                  ></textarea>
+                </div>
+              </div>
+            </div>
             <small id='emailHelp' class='form-text text-muted'>
-              This image is visible on search result !
+              You can upload multiple images. these images are display on your
+              hotel page !
             </small>
             {currentFile && (
               <div className='progress mb-3'>
@@ -154,6 +200,7 @@ class UploadImage extends Component {
                 </section>
               )}
             </Dropzone>
+            <UploadedSouvenirImages trigger={loading} />
             <div className='next-container'>
               <button
                 className='previous-button btn btn-primary'
@@ -163,17 +210,14 @@ class UploadImage extends Component {
               >
                 {'<'} Previous!
               </button>
-              {this.state.uploaded ? (
-                <Link to={`/seller/hotel/souvenir?id=${this.state.hotelId}`}>
-                  <button type='submit' className='next-button btn btn-primary'>
-                    Mext! {'>'}
-                  </button>
-                </Link>
-              ) : (
-                <button className='next-button btn btn-primary' disabled>
-                  Next! {'>'}
-                </button>
-              )}
+
+              <button
+                type='submit'
+                className='next-button btn btn-primary'
+                onClick={this.upload}
+              >
+                Next ! {'>'}
+              </button>
             </div>
           </div>
         </div>
@@ -188,4 +232,4 @@ class UploadImage extends Component {
   }
 }
 
-export default UploadImage
+export default UploadSouvenirImage
