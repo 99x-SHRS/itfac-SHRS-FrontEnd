@@ -38,6 +38,14 @@ const getAvailbleRooms = async (bodyData) => {
   )
 }
 
+const getHotelByUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'getHotelByUserId',
+    bodyData
+  )
+}
 const saveHotelById = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'saveHotel', bodyData)
 }
@@ -302,4 +310,5 @@ export {
   deleteSouvenirById,
   addValueAddedServices,
   deleteVASById,
+  getHotelByUserId,
 }
