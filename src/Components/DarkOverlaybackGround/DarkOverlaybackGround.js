@@ -31,6 +31,11 @@ const styles = {
   fontSize: 'large',
 }
 const DarkOverlaybackGround = ({ loading, content }) => {
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     loading = false
+  //   }, 5000)
+  // })
   return (
     <div>
       <DarkBackground disappear={loading}>

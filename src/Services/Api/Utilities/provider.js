@@ -55,7 +55,6 @@ const deleteDataById = async (url, type, task, id) => {
     .catch(handleError)
 }
 const updateById = async (url, type, task, id, data) => {
-  console.log('---------')
   console.log(id)
   return axios
     .put(`${url}/${type}/${task}/${id}}`, data)

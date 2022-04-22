@@ -161,6 +161,9 @@ const getBookingByUserId = async (bodyData) => {
 //                          vas  end points
 // *****************************************************************************
 
+const addValueAddedServices = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'vas', 'createVAS', bodyData)
+}
 const getVasByHotelId = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'vas', 'getVASByHotelId', bodyData)
 }
@@ -187,6 +190,9 @@ const getVASByBookingId = async (bodyData) => {
     'getVASByBookingId',
     bodyData
   )
+}
+const deleteVASById = async (params) => {
+  return await provider.deleteDataById(BASE_URL, 'vas', 'deleteVASById', params)
 }
 
 // *****************************************************************************
@@ -294,4 +300,6 @@ export {
   addHotelImage,
   getAllsouvenirByHotelId,
   deleteSouvenirById,
+  addValueAddedServices,
+  deleteVASById,
 }

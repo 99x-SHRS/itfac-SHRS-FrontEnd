@@ -120,6 +120,11 @@ class UploadSouvenirImage extends Component {
           </div>
           <div className='container mt-5'>
             <div>
+              <small id='emailHelp' class='form-text text-muted'>
+                Important !
+              </small>
+              You have to upload 3 minimum images and fill other required
+              fields.Then you can go to next page .
               <div className='row'>
                 <div class='form-group col-lg-6'>
                   <label for='last Name'> Titles *</label>
@@ -201,24 +206,6 @@ class UploadSouvenirImage extends Component {
               )}
             </Dropzone>
             <UploadedSouvenirImages trigger={loading} />
-            <div className='next-container'>
-              <button
-                className='previous-button btn btn-primary'
-                // onClick={() => {
-                //   navigate(-1)
-                // }}
-              >
-                {'<'} Previous!
-              </button>
-
-              <button
-                type='submit'
-                className='next-button btn btn-primary'
-                onClick={this.upload}
-              >
-                Next ! {'>'}
-              </button>
-            </div>
           </div>
         </div>
 

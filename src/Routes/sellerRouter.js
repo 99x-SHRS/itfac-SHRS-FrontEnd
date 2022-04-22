@@ -3,6 +3,7 @@ import ListedHotels from '../Pages/Seller/Hotels/ListedHotels.js'
 import RegisterHotel from '../Layouts/ListingHotel/RegisterHotel.js'
 import UploadImage from '../Layouts/ListingHotel/UploadImage.js'
 import UploadSouvenirImage from '../Layouts/ListingHotel/UploadSouvenirImage.js'
+import AddValueAddedServices from '../Layouts/ListingHotel/AddValueAddedServices.js'
 const SellerRoutes = (
   <>
     <Route exact path='/seller/hotels' element={<ListedHotels />}></Route>
@@ -16,6 +17,11 @@ const SellerRoutes = (
       exact
       path='/seller/hotel/souvenir'
       element={<UploadSouvenirImage />}
+    ></Route>
+    <Route
+      exact
+      path='/seller/hotel/value-added-services'
+      element={<AddValueAddedServices />}
     ></Route>
   </>
 )
