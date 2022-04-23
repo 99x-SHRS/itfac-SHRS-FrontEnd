@@ -13,6 +13,10 @@
 .room-type-adding-icon i:hover {
   opacity: 0.5;
 }
+.footer-div {
+  position: relative;
+  top: 15rem;
+}
 
 @media only screen and (max-width: 992px) {
   .mob-room-type {

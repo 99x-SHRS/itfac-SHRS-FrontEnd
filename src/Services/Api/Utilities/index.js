@@ -21,14 +21,7 @@ const getHotelById = async (bodyData) => {
 const searchHotels = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'search', bodyData)
 }
-const getRoomTypesByHotelId = async (bodyData) => {
-  return await provider.getAllPOST(
-    BASE_URL,
-    'roomtype',
-    'getRoomTypesByHotelId',
-    bodyData
-  )
-}
+
 const getAvailbleRooms = async (bodyData) => {
   return await provider.getAllPOST(
     BASE_URL,
@@ -115,7 +108,22 @@ const createRoomtype = async (bodyData) => {
     bodyData
   )
 }
-
+const getRoomTypesByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'roomtype',
+    'getRoomTypesByHotelId',
+    bodyData
+  )
+}
+const removeRoomType = async (params) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'roomtype',
+    'deleteRoomTypeById',
+    params
+  )
+}
 // *****************************************************************************
 //                          discount  end points
 // *****************************************************************************
@@ -324,4 +332,5 @@ export {
   deleteVASById,
   getHotelByUserId,
   createRoomtype,
+  removeRoomType,
 }

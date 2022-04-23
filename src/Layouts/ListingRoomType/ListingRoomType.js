@@ -3,6 +3,8 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { createRoomtype } from '../../Services/Api/Utilities/index.js'
 import Navbars from '../../Components/Navbar/navbar'
+import Footer from '../Footer/footer.js'
+import RoomTypeTable from '../../Components/Table/RoomTypeTable.js'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround.js'
 import '../../Assets/styles/css/Seller/Layouts/listingRoomType.css'
 const ListingRoomType = () => {
@@ -36,8 +38,10 @@ const ListingRoomType = () => {
           document.getElementsByName('remark')[0].value = ''
           document.getElementsByName('type_beds')[0].value = ''
           document.getElementsByName('type_area')[0].value = ''
+          notifySuccess('You have successfully added room type')
+        } else {
+          notifyError('Some thing went wrong')
         }
-        notifySuccess('You have successfully added room type')
       })
       .catch((err) => {
         console.log(err)
@@ -49,7 +53,7 @@ const ListingRoomType = () => {
     <div>
       <Navbars />
       <div className='room-adding-container container room-type-container'>
-        <h4>add room type</h4>
+        <h4>Add room type</h4>
         <form onSubmit={handleSubmit}>
           <div className='row  mt-4'>
             <div class='form-group col-lg-3'>
@@ -103,8 +107,12 @@ const ListingRoomType = () => {
             </div>
           </div>
         </form>
+        <RoomTypeTable loading={loading} />
       </div>
       <DarkOverlaybackGround loading={loading} content={'Adding room type.'} />
+      <div className='footer-div'>
+        <Footer />
+      </div>
     </div>
   )
 }

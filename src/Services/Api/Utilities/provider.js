@@ -49,6 +49,7 @@ const deleteData = async (url, type, task, data) => {
     .catch(handleError)
 }
 const deleteDataById = async (url, type, task, id) => {
+  console.log(`${url}/${type}/${task}/${id}`)
   return axios
     .delete(`${url}/${type}/${task}/${id}`)
     .then(handleResponse)
