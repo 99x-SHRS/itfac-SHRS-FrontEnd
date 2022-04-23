@@ -105,6 +105,18 @@ const getAvailableRoomQtyByRoomId = async (bodyData) => {
   )
 }
 // *****************************************************************************
+//                          room types  end points
+// ****************************************************************************
+const createRoomtype = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'roomtype',
+    'createRoomtype',
+    bodyData
+  )
+}
+
+// *****************************************************************************
 //                          discount  end points
 // *****************************************************************************
 const getDiscountByHotelId = async (bodyData) => {
@@ -311,4 +323,5 @@ export {
   addValueAddedServices,
   deleteVASById,
   getHotelByUserId,
+  createRoomtype,
 }

@@ -42,7 +42,19 @@ const ListedHotels = () => {
               )
             })
           ) : (
-            <></>
+            <>
+              {' '}
+              <div
+                class='alert alert-primary'
+                role='alert'
+                style={{
+                  height: '20rem',
+                  textAlign: 'center',
+                }}
+              >
+                Nothing to display.
+              </div>
+            </>
           )}
         </div>
       </div>
