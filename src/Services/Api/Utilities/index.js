@@ -61,6 +61,9 @@ const deleteSaveHotelById = async (bodyData) => {
 // *****************************************************************************
 //                          rooms  end points
 // *****************************************************************************
+const createRoom = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'room', 'createRoom', bodyData)
+}
 const getRoomByHotelId = async (bodyData) => {
   return await provider.getAllPOST(
     BASE_URL,
@@ -333,4 +336,5 @@ export {
   getHotelByUserId,
   createRoomtype,
   removeRoomType,
+  createRoom,
 }

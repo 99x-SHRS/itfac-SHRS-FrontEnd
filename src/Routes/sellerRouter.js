@@ -6,6 +6,7 @@ import UploadSouvenirImage from '../Layouts/ListingHotel/UploadSouvenirImage.js'
 import AddValueAddedServices from '../Layouts/ListingHotel/AddValueAddedServices.js'
 import RegisterRoom from '../Layouts/ListingRoom/RegisterRoom.js'
 import ListingRoomType from '../Layouts/ListingRoomType/ListingRoomType.js'
+import ListedRooms from '../Layouts/ListingRoom/ListedRooms.js'
 const SellerRoutes = (
   <>
     <Route exact path='/seller/hotels' element={<ListedHotels />}></Route>
@@ -27,13 +28,18 @@ const SellerRoutes = (
     ></Route>
     <Route
       exact
-      path='/seller/hotel/:hotelId/room'
+      path='/seller/hotel/:hotelId/create-room'
       element={<RegisterRoom />}
     ></Route>
     <Route
       exact
       path='/seller/hotel/:hotelId/roomtype'
       element={<ListingRoomType />}
+    ></Route>
+    <Route
+      exact
+      path='/seller/hotel/:hotelId/rooms'
+      element={<ListedRooms />}
     ></Route>
   </>
 )

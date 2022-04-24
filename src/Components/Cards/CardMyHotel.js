@@ -16,13 +16,13 @@ const CardMyHotel = ({ hotel }) => {
             </Link>
           </div>
           <div className='row'>
-            <Link to={`/seller/hotel/${hotel.hotelId}/room`}>
+            <Link to={`/seller/hotel/${hotel.hotelId}/create-room`}>
               <button>Add room</button>
             </Link>
           </div>
           <div className='row'>
-            <Link to={`/seller/hotel/${hotel.hotelId}/room`}>
-              <button>Switch to hotel</button>
+            <Link to={`/seller/hotel/${hotel.hotelId}/rooms`}>
+              <button>Available Rooms</button>
             </Link>
           </div>
         </figcaption>
