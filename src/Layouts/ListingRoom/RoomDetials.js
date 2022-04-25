@@ -1,52 +1,110 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
-import { createRoom } from '../../Services/Api/Utilities'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import {
+  createRoom,
+  getRoomById,
+  updateRoomById,
+} from '../../Services/Api/Utilities'
 import { toast } from 'react-toastify'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 const RoomDetials = ({ roomType, setRoomType }) => {
   const navigate = useNavigate()
   const params = useParams()
+  const [searchedParams, setSearchedparams] = useSearchParams()
   const [loading, setLoading] = useState(false)
+  const [roomDetails, setRoomDetails] = useState([])
+
+  const [description, setDescription] = useState('')
+  const [room_rate, setRoom_rate] = useState('')
+  const [no_guest, setNo_guest] = useState('')
+  const [no_rooms, setNo_rooms] = useState('')
+  const mode = searchedParams.get('edit') || ''
   useEffect(() => {
     toast.configure()
+    getRoomDetails()
   }, [])
+
   const notifyError = (message) => {
     toast.error(message)
   }
   const notifySuccess = (message) => {
     toast.success(message)
   }
-  const handleSubmit = async (event) => {
-    event.preventDefault()
-    setLoading(true)
+  const getRoomDetails = async () => {
     const dataModel = {
-      description: document.getElementsByName('description')[0].value,
-      rate: document.getElementsByName('room_rate')[0].value,
-      hotelId: params.hotelId,
-      persons: document.getElementsByName('no_guest')[0].value,
-      roomTypeId: roomType,
-      qty: document.getElementsByName('no_rooms')[0].value,
+      id: searchedParams.get('room') || '',
     }
-    await createRoom(dataModel)
+    await getRoomById(dataModel)
       .then((res) => {
-        console.log(res)
-        if (res.status == 200) {
-          document.getElementsByName('description')[0].value = ''
-          document.getElementsByName('room_rate')[0].value = ''
-          document.getElementsByName('no_guest')[0].value = ''
-          document.getElementsByName('no_rooms')[0].value = ''
-          document.getElementsByName('room_area')[0].value = ''
-          setRoomType(null)
-          notifySuccess('You have successfully created room')
-          navigate(
-            `/seller/${params.hotelId}/room/upload-image?id=${res.data.roomId}`
-          )
-        }
+        setRoomDetails(res.data)
+        setDescription(res.data[0].description)
+        setRoom_rate(res.data[0].rate)
+        setNo_guest(res.data[0].persons)
+        setNo_rooms(res.data[0].qty)
+        setRoomType(res.data[0].roomtypeRoomTypeId)
       })
       .catch((err) => {
         console.log(err)
-        notifyError('Some thing went wrong')
       })
+  }
+  const handleSubmit = async (event) => {
+    event.preventDefault()
+
+    setLoading(true)
+
+    if (!mode) {
+      const dataModel = {
+        description: description,
+        rate: room_rate,
+        hotelId: params.hotelId,
+        persons: no_guest,
+        roomTypeId: roomType,
+        qty: no_rooms,
+      }
+      await createRoom(dataModel)
+        .then((res) => {
+          console.log(res)
+          if (res.status == 200) {
+            notifySuccess('You have successfully created room')
+            navigate(
+              `/seller/${params.hotelId}/room/upload-image?id=${
+                searchedParams.get('room') || ''
+              }`
+            )
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          notifyError('Some thing went wrong')
+        })
+    } else {
+      const dataModel = {
+        description: description,
+        rate: room_rate,
+        hotelId: params.hotelId,
+        persons: no_guest,
+        roomtypeRoomTypeId: roomType,
+        qty: no_rooms,
+      }
+
+      const id = searchedParams.get('room') || ''
+      await updateRoomById(id, dataModel)
+        .then((res) => {
+          if (res.status == 200) {
+            notifySuccess('You have successfully created room')
+            navigate(
+              `/seller/${params.hotelId}/room/upload-image?id=${
+                searchedParams.get('room') || ''
+              }`
+            )
+          }
+        })
+        .catch((err) => {
+          console.log(err)
+          notifyError('Some thing went wrong')
+        })
+    }
+
     setLoading(false)
   }
   return (
@@ -64,6 +122,8 @@ const RoomDetials = ({ roomType, setRoomType }) => {
               placeholder='0'
               name='no_rooms'
               required
+              value={no_rooms}
+              onChange={(e) => setNo_rooms(e.target.value)}
             />
           </div>
         </div>
@@ -79,6 +139,8 @@ const RoomDetials = ({ roomType, setRoomType }) => {
               placeholder='0'
               name='no_guest'
               required
+              value={no_guest}
+              onChange={(e) => setNo_guest(e.target.value)}
             />
           </div>
         </div>
@@ -107,6 +169,8 @@ const RoomDetials = ({ roomType, setRoomType }) => {
               placeholder='0'
               name='room_rate'
               required
+              value={room_rate}
+              onChange={(e) => setRoom_rate(e.target.value)}
             />
           </div>
         </div>
@@ -120,6 +184,8 @@ const RoomDetials = ({ roomType, setRoomType }) => {
               style={{ height: '100px' }}
               name='description'
               required
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             ></textarea>
           </div>
         </div>
@@ -134,7 +200,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
           </button>
 
           <button type='submit' className='next-button btn btn-primary'>
-            Next! {'>'}
+            {!mode ? <>Next! </> : <>Update</>} {'>'}
           </button>
         </div>
       </form>

@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { getRoomTypesByHotelId } from '../../Services/Api/Utilities'
-const RoomTypeSelector = ({ setRoomType }) => {
+import { useParams, Link, useSearchParams } from 'react-router-dom'
+import {
+  getRoomTypesByHotelId,
+  getRoomById,
+} from '../../Services/Api/Utilities'
+const RoomTypeSelector = ({ setRoomType, roomType }) => {
   const params = useParams()
+  const [searchedParams, setSearchedparams] = useSearchParams()
   const [roomTypes, setRoomTypes] = useState([])
   const [selectedroomType, setSelectedRoomType] = useState(null)
-
+  const [roomDetails, setRoomDetails] = useState([])
   useEffect(() => {
     getRoomTypes()
+    getRoomDetails()
   }, [])
+  useEffect(() => {
+    getRoomTypes()
+    getRoomDetails()
+  }, [roomType])
 
   const getRoomTypes = async () => {
     const dataModel = {
@@ -16,8 +25,20 @@ const RoomTypeSelector = ({ setRoomType }) => {
     }
     await getRoomTypesByHotelId(dataModel)
       .then((res) => {
-        console.log(res)
         setRoomTypes(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const getRoomDetails = async () => {
+    const dataModel = {
+      id: searchedParams.get('room') || '',
+    }
+    await getRoomById(dataModel)
+      .then((res) => {
+        setRoomDetails(res.data)
+        setSelectedRoomType(res.data[0].roomtypeRoomTypeId)
       })
       .catch((err) => {
         console.log(err)

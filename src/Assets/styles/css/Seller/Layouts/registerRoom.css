@@ -51,6 +51,11 @@
   margin-left: auto;
   margin-right: auto;
 }
+.room-footer {
+  position: absolute;
+  width: 100%;
+  top: 90%;
+}
 
 @media only screen and (max-width: 992px) {
   .room-adding-container {
@@ -59,5 +64,9 @@
   }
   .room-type-adding-icon i {
     display: none;
+  }
+  .room-footer {
+    position: relative;
+    top: 15rem;
   }
 }

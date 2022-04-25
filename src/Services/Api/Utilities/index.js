@@ -64,6 +64,15 @@ const deleteSaveHotelById = async (bodyData) => {
 const createRoom = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'room', 'createRoom', bodyData)
 }
+const updateRoomById = async (id, bodyData) => {
+  return await provider.updateById(
+    BASE_URL,
+    'room',
+    'updateRoomById',
+    id,
+    bodyData
+  )
+}
 const getRoomByHotelId = async (bodyData) => {
   return await provider.getAllPOST(
     BASE_URL,
@@ -97,6 +106,14 @@ const getAvailableRoomQtyByRoomId = async (bodyData) => {
     BASE_URL,
     'room',
     'getAvailableRoomQtyByRoomId',
+    bodyData
+  )
+}
+const getRoomById = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'room',
+    'getRoomById',
     bodyData
   )
 }
@@ -347,4 +364,6 @@ export {
   removeRoomType,
   createRoom,
   deleteRoomById,
+  getRoomById,
+  updateRoomById,
 }

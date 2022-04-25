@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import Navbars from '../../Components/Navbar/navbar'
 import Footer from '../Footer/footer.js'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
@@ -11,6 +11,7 @@ const ListedRooms = () => {
   const [loading, setLoading] = useState(false)
   const [deleted, setDeleted] = useState(false)
   const params = useParams()
+  const navigate = useNavigate()
   useEffect(() => {
     getRooms()
     toast.configure()
@@ -124,7 +125,15 @@ const ListedRooms = () => {
                         </div>
                         <div className='action-container'>
                           <div>
-                            <i class='fa fa-pencil' aria-hidden='true'></i>
+                            <i
+                              class='fa fa-pencil'
+                              aria-hidden='true'
+                              onClick={() => {
+                                navigate(
+                                  `/seller/hotel/${params.hotelId}/create-room?room=${room.roomId}&edit=true`
+                                )
+                              }}
+                            ></i>
                             <i
                               class='far fa-trash-alt'
                               onClick={() => {
@@ -151,6 +160,9 @@ const ListedRooms = () => {
             </>
           )}
         </div>
+      </div>
+      <div className='room-footer'>
+        <Footer />
       </div>
       <DarkOverlaybackGround loading={deleted} content={'Deleting room .'} />
     </div>
