@@ -100,6 +100,15 @@ const getAvailableRoomQtyByRoomId = async (bodyData) => {
     bodyData
   )
 }
+const deleteRoomById = async (params) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'room',
+    'deleteRoomById',
+    params
+  )
+}
+
 // *****************************************************************************
 //                          room types  end points
 // ****************************************************************************
@@ -337,4 +346,5 @@ export {
   createRoomtype,
   removeRoomType,
   createRoom,
+  deleteRoomById,
 }

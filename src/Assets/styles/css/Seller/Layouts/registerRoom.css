@@ -19,7 +19,7 @@
   transition: 0.3s;
 }
 .roomtype-card:hover {
-  transform: scale(1.1);
+  transform: scale(1.03);
   /* transform-origin: bottom right; */
 }
 .current-room-type {
@@ -32,6 +32,26 @@
   position: relative;
   top: 10rem;
 }
+.action-container i {
+  margin-right: 1rem;
+}
+.listed-room .savedAt {
+  position: absolute;
+  right: 10px;
+  bottom: 30px;
+}
+.action-container div {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.room-image img {
+  height: 10rem;
+  min-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media only screen and (max-width: 992px) {
   .room-adding-container {
     top: 5rem;

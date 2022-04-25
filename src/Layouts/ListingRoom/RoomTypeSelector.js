@@ -25,6 +25,12 @@ const RoomTypeSelector = ({ setRoomType }) => {
   }
   return (
     <div>
+      <div class=' step-indicator '>
+        <ul class='list-unstyled multi-steps'>
+          <li class='is-active'>Basic Information</li>
+          <li>Upload Room Image</li>
+        </ul>
+      </div>
       Select room type
       <div className='row ml-1'>
         {roomTypes.map((roomType) => {

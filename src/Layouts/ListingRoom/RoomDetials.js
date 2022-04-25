@@ -38,7 +38,9 @@ const RoomDetials = ({ roomType, setRoomType }) => {
           document.getElementsByName('room_area')[0].value = ''
           setRoomType(null)
           notifySuccess('You have successfully created room')
-          navigate(`/seller/hotel/${params.hotelId}/rooms`)
+          navigate(
+            `/seller/${params.hotelId}/room/upload-image?id=${res.data.roomId}`
+          )
         }
       })
       .catch((err) => {
@@ -110,7 +112,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
         </div>
         <div className='row'>
           <label for='floatingTextarea2'>Description </label>
-          <div class='form-floating'>
+          <div class='form-floating col-lg-6'>
             <textarea
               class='form-control'
               placeholder='Leave a comment here'
@@ -132,7 +134,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
           </button>
 
           <button type='submit' className='next-button btn btn-primary'>
-            Create Room! {'>'}
+            Next! {'>'}
           </button>
         </div>
       </form>

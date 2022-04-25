@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { useParams, useSearchParams, useLocation } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import { toast } from 'react-toastify'
+import Navbars from '../../Components/Navbar/navbar'
 import UploadedSouvenirImages from '../ListingHotel/UploadedSouvenirImages'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import UploadService from '../../Services/Api/Utilities/FileUploader/UploadFilesService'
-
+import UploadedImages from './UploadedImages'
 class AddRoomImage extends Component {
   constructor(props) {
     super(props)
@@ -18,7 +19,7 @@ class AddRoomImage extends Component {
       progress: 0,
       message: '',
       fileInfos: [],
-      hotelId: 1,
+      roomId: window.location.href,
       uploadedImages: [],
     }
   }
@@ -27,8 +28,9 @@ class AddRoomImage extends Component {
     toast.configure()
     window.scrollTo(0, 0)
     this.setState({
-      hotelId: 1,
+      roomId: this.state.roomId.split('=')[1],
     })
+    console.log(this.props)
   }
   notifySuccess = (message) => {
     toast.success(message)
@@ -38,9 +40,6 @@ class AddRoomImage extends Component {
   }
   upload() {
     let currentFile = this.state.selectedFiles[0]
-    let title = document.getElementsByName('title')[0].value
-    let subTitle = document.getElementsByName('sub_title')[0].value
-    let description = document.getElementsByName('description')[0].value
 
     this.setState({
       progress: 0,
@@ -48,17 +47,14 @@ class AddRoomImage extends Component {
       loading: true,
     })
 
-    UploadService.uploadSouvenir(
+    UploadService.uploadRoomImage(
       currentFile,
       (event) => {
         this.setState({
           progress: Math.round((100 * event.loaded) / event.total),
         })
       },
-      title,
-      subTitle,
-      description,
-      this.state.hotelId
+      this.state.roomId
     )
       .then((response) => {
         this.setState({
@@ -98,17 +94,23 @@ class AddRoomImage extends Component {
       message,
       fileInfos,
       loading,
-      hotelId,
-      uploadedImages,
+      roomId,
     } = this.state
 
     return (
       <div>
+        <Navbars />
         <div className='upload-container'>
+          <div class=' step-indicator '>
+            <ul class='list-unstyled multi-steps'>
+              <li>Basic Information</li>
+              <li class='is-active'>Upload hotel Image</li>
+            </ul>
+          </div>
           <div className='container mt-5'>
             <small id='emailHelp' class='form-text text-muted'>
               You can upload multiple images. these images are display on your
-              hotel page !
+              room !
             </small>
             {currentFile && (
               <div className='progress mb-3'>
@@ -150,7 +152,7 @@ class AddRoomImage extends Component {
                 </section>
               )}
             </Dropzone>
-            <UploadedSouvenirImages trigger={loading} />
+            <UploadedImages loading={loading} />
           </div>
         </div>
 

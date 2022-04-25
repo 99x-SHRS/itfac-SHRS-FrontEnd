@@ -40,6 +40,21 @@ class UploadFilesService {
       onUploadProgress,
     })
   }
+
+  uploadRoomImage(file, onUploadProgress, roomId) {
+    let formData = new FormData()
+    formData.append('roomId', roomId)
+    formData.append('image', file)
+
+    console.log(formData)
+
+    return http.post('/api/v1/uploads/room', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+      onUploadProgress,
+    })
+  }
 }
 
 export default new UploadFilesService()
