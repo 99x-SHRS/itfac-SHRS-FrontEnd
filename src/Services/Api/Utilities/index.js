@@ -1,5 +1,5 @@
 import provider from './provider'
-const BASE_URL = process.env.REACT_APP_BASE_URL
+const BASE_URL = 'https://hotelreservationapiv1.herokuapp.com/api/v1'
 
 // *****************************************************************************
 //                          hotels end points
