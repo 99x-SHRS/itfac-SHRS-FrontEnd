@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import NumericInput from 'react-numeric-input'
 import {
   createRoom,
   getRoomById,
@@ -15,9 +16,10 @@ const RoomDetials = ({ roomType, setRoomType }) => {
   const [roomDetails, setRoomDetails] = useState([])
 
   const [description, setDescription] = useState('')
-  const [room_rate, setRoom_rate] = useState('')
-  const [no_guest, setNo_guest] = useState('')
-  const [no_rooms, setNo_rooms] = useState('')
+  const [room_rate, setRoom_rate] = useState(0)
+  const [no_guest, setNo_guest] = useState(0)
+  const [no_rooms, setNo_rooms] = useState(0)
+  const [room_area, setRoom_area] = useState(0)
   const mode = searchedParams.get('edit') || ''
   useEffect(() => {
     toast.configure()
@@ -42,6 +44,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
         setNo_guest(res.data[0].persons)
         setNo_rooms(res.data[0].qty)
         setRoomType(res.data[0].roomtypeRoomTypeId)
+        setRoom_area(res.data[0].area)
       })
       .catch((err) => {
         console.log(err)
@@ -60,16 +63,16 @@ const RoomDetials = ({ roomType, setRoomType }) => {
         persons: no_guest,
         roomTypeId: roomType,
         qty: no_rooms,
+        area: room_area,
       }
+
       await createRoom(dataModel)
         .then((res) => {
           console.log(res)
           if (res.status == 200) {
             notifySuccess('You have successfully created room')
             navigate(
-              `/seller/${params.hotelId}/room/upload-image?id=${
-                searchedParams.get('room') || ''
-              }`
+              `/seller/${params.hotelId}/room/upload-image?id=${res.data.roomId}`
             )
           }
         })
@@ -85,6 +88,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
         persons: no_guest,
         roomtypeRoomTypeId: roomType,
         qty: no_rooms,
+        area: room_area,
       }
 
       const id = searchedParams.get('room') || ''
@@ -111,16 +115,16 @@ const RoomDetials = ({ roomType, setRoomType }) => {
     <div className='ml-1'>
       <h5>No of beds</h5>
       <form onSubmit={handleSubmit}>
-        <div className='row '>
-          <div class='form-group col-lg-6 '>
+        <div className='row'>
+          <div class='form-group col-lg-3 '>
             <label for='First Name'>
               How many beds available in this room ? *
             </label>
-            <input
+            <NumericInput
               type='number'
-              class='form-control '
-              placeholder='0'
+              className='form-control'
               name='no_rooms'
+              min={0}
               required
               value={no_rooms}
               onChange={(e) => setNo_rooms(e.target.value)}
@@ -129,14 +133,14 @@ const RoomDetials = ({ roomType, setRoomType }) => {
         </div>
         <h5>Room details</h5>
         <div className='row'>
-          <div class='form-group col-lg-6 '>
+          <div class='form-group col-lg-3 '>
             <label for='First Name'>
               How many guests can stay in this room ? *
             </label>
-            <input
+            <NumericInput
               type='number'
-              class='form-control'
-              placeholder='0'
+              className='form-control'
+              min={0}
               name='no_guest'
               required
               value={no_guest}
@@ -144,14 +148,16 @@ const RoomDetials = ({ roomType, setRoomType }) => {
             />
           </div>
         </div>
+        Area
         <div className='row'>
           <div class='form-group col-lg-3 '>
-            <input
-              type='number'
-              class='form-control '
-              placeholder='0'
-              name='room_area'
+            <NumericInput
+              className='form-control'
+              min={0}
               required
+              value={room_area}
+              name='room_area'
+              onChange={(e) => setRoom_area(e.target.value)}
             />
           </div>
           <div className='col-sm-3'>
@@ -160,14 +166,14 @@ const RoomDetials = ({ roomType, setRoomType }) => {
             </select>
           </div>
         </div>
-        rates
+        Rates
         <div className='row'>
           <div class='form-group col-lg-3 '>
-            <input
+            <NumericInput
               type='number'
-              class='form-control '
-              placeholder='0'
-              name='room_rate'
+              className='form-control'
+              name='room_area'
+              min={0}
               required
               value={room_rate}
               onChange={(e) => setRoom_rate(e.target.value)}

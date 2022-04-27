@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { createRoomtype } from '../../Services/Api/Utilities/index.js'
 import Navbars from '../../Components/Navbar/navbar'
@@ -26,7 +26,6 @@ const ListingRoomType = () => {
       type: document.getElementsByName('type_name')[0].value,
       description: document.getElementsByName('remark')[0].value,
       beds: document.getElementsByName('type_beds')[0].value,
-      area: document.getElementsByName('type_area')[0].value,
       hotelId: params.hotelId,
     }
     console.log(dataModel)
@@ -37,7 +36,6 @@ const ListingRoomType = () => {
           document.getElementsByName('type_name')[0].value = ''
           document.getElementsByName('remark')[0].value = ''
           document.getElementsByName('type_beds')[0].value = ''
-          document.getElementsByName('type_area')[0].value = ''
           notifySuccess('You have successfully added room type')
         } else {
           notifyError('Some thing went wrong')
@@ -77,16 +75,7 @@ const ListingRoomType = () => {
                 required
               />
             </div>
-            <div class='form-group col-lg-2'>
-              <label for='last Name'>Area*</label>
-              <input
-                type='text'
-                class='form-control '
-                placeholder='Enter area'
-                name='type_area'
-                required
-              />
-            </div>
+
             <div class='form-group col-lg-4'>
               <label for='last Name'>Remark</label>
               <input
@@ -101,10 +90,17 @@ const ListingRoomType = () => {
               <button type='submit'>
                 <i class='fa fa-plus-circle' aria-hidden='true'></i>
               </button>
-              <button type='button' class='btn btn-primary mob-room-type'>
+              <button type='submit' class='btn btn-primary mob-room-type'>
                 Add a new room type
               </button>
             </div>
+          </div>
+          <div className='row'>
+            <Link to={`/seller/hotel/${params.hotelId}/create-room`}>
+              <small class='form-text text-muted text-primary '>
+                Do you want to create a new room?
+              </small>
+            </Link>
           </div>
         </form>
         <RoomTypeTable loading={loading} />

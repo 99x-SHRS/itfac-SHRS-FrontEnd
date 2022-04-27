@@ -40,7 +40,7 @@ const RegisterHotel = () => {
       Street2: event.target.street_02.value,
       userId: 1,
     }
-
+    console.log(dataModel)
     await registerHotel(dataModel)
       .then((res) => {
         console.log(res)

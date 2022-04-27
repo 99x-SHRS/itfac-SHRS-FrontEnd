@@ -68,12 +68,6 @@ const RoomTypeTable = ({ loading }) => {
       },
 
       {
-        label: 'Area',
-        field: 'area',
-        sort: 'asc',
-        width: 100,
-      },
-      {
         label: 'Beds',
         field: 'beds',
         sort: 'asc',

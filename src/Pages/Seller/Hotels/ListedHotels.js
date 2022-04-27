@@ -36,7 +36,7 @@ const ListedHotels = () => {
           {hotels != null ? (
             hotels.map((hotel) => {
               return (
-                <div class=' col-lg-3 col-sm-12 col-md-6 mt-2 '>
+                <div class=' col-lg-3 col-sm-8 col-md-6 mt-2 '>
                   <CardMyHotel hotel={hotel} />
                 </div>
               )
@@ -58,7 +58,9 @@ const ListedHotels = () => {
           )}
         </div>
       </div>
-      <Footer />
+      <div className='footer-div'>
+        <Footer />
+      </div>
     </div>
   )
 }

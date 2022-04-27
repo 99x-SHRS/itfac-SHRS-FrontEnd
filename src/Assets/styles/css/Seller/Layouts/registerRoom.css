@@ -17,6 +17,7 @@
 .roomtype-card {
   cursor: pointer;
   transition: 0.3s;
+  width: 90% !important;
 }
 .roomtype-card:hover {
   transform: scale(1.03);
@@ -59,7 +60,7 @@
 
 @media only screen and (max-width: 992px) {
   .room-adding-container {
-    top: 5rem;
+    top: 6rem;
     width: 100%;
   }
   .room-type-adding-icon i {
