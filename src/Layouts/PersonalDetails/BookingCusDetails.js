@@ -48,6 +48,7 @@ const BookingCusDetails = () => {
         event.target.first_name.value + ' ' + event.target.last_name.value,
       rentCar: event.target.rent_car.checked,
       customerId: 1,
+      contactNo: number,
       // adult: searchedParams.get('rooms') || '',
       // children: searchedParams.get('children') || '',
       // rooms: searchedParams.get('rooms') || '',

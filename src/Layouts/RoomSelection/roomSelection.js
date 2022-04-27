@@ -139,13 +139,12 @@ const RoomSelection = ({ roomTypeId }) => {
 
   const [searchedParams, setSearchedparams] = useSearchParams()
 
-  const [rooms, setRooms] = useState({})
+  const [rooms, setRooms] = useState([])
   const [pageCount, setpageCount] = useState(0)
   const limit = 10
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    console.log('changed to :' + roomTypeId)
     fetchRoomData(0)
     setLoading(true)
   }, [limit])
@@ -154,13 +153,13 @@ const RoomSelection = ({ roomTypeId }) => {
     fetchRoomData(0)
   }, [roomTypeId])
 
-  useEffect(() => {
-    if (loading) {
-      document.getElementById('pagination-div').style.display = 'none'
-    } else {
-      document.getElementById('pagination-div').style.display = 'block'
-    }
-  }, [loading])
+  // useEffect(() => {
+  //   if (loading) {
+  //     document.getElementById('pagination-div').style.display = 'none'
+  //   } else {
+  //     document.getElementById('pagination-div').style.display = 'block'
+  //   }
+  // }, [loading])
   const fetchRoomData = async (page) => {
     const dataModel = {
       location: searchedParams.get('location') || '',
@@ -173,14 +172,15 @@ const RoomSelection = ({ roomTypeId }) => {
       roomTypeId: roomTypeId,
       page: page,
     }
+
     console.log(dataModel)
 
     await getAvailbleRooms(dataModel)
       .then((res) => {
-        setRooms(res.data.rows)
-
+        console.log(res.data.rows)
         let totalRows = res.data.count
         if (res.status == 200) {
+          setRooms(res.data.rows)
           setLoading(false)
         }
         setpageCount(Math.ceil(totalRows / limit))
@@ -192,7 +192,6 @@ const RoomSelection = ({ roomTypeId }) => {
 
   const handlePageClick = async (data) => {
     let currentPage = data.selected
-    console.log(currentPage)
     fetchRoomData(currentPage)
     window.scrollTo(0, 1100)
   }
@@ -219,7 +218,8 @@ const RoomSelection = ({ roomTypeId }) => {
             </div>
           ) : (
             <>
-              <TableBody rooms={rooms} souvenirs1={souvenirs1} />
+              {' '}
+              <TableBody rooms={rooms} souvenirs1={souvenirs1} />{' '}
             </>
           )}
           {rooms.length != 0 ? (

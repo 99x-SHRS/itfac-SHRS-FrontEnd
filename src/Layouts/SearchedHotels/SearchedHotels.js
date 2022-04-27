@@ -59,8 +59,8 @@ const SearchedHotels = (props) => {
     setURLparams(dataModel)
     await searchHotels(dataModel).then((data) => {
       setHotels(data.data.rows)
-      console.log(data)
-      let totalRows = data.data.count
+      console.log(data.data.count.length)
+      let totalRows = data.data.count.length
       if (data.status == 200) {
         setLoading(false)
       }

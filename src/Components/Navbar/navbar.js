@@ -100,7 +100,7 @@ const Navbars = () => {
                 <a href='#'>
                   <div class='notBtn' href='#'>
                     <div class='number'>2</div>
-                    <i class='fas fa-bell'></i>
+                    <i class='fas fa-bell '></i>
 
                     <div class='box'>
                       <div class='display'>
@@ -165,7 +165,9 @@ const Navbars = () => {
                     Loyalty
                   </Dropdown.Item>
                   <Dropdown.Item>Messeges</Dropdown.Item>
-                  <Dropdown.Item>My Account</Dropdown.Item>
+                  <Dropdown.Item as={Link} to={'/seller/dashboard'}>
+                    My Account
+                  </Dropdown.Item>
                   <Dropdown.Item
                     href='#/action-3'
                     onClick={() => {

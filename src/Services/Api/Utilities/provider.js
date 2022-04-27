@@ -48,11 +48,18 @@ const deleteData = async (url, type, task, data) => {
     .then(handleResponse)
     .catch(handleError)
 }
-const updateById = async (url, type, task, id, data) => {
-  console.log('---------')
-  console.log(id)
+const deleteDataById = async (url, type, task, id) => {
+  console.log(`${url}/${type}/${task}/${id}`)
   return axios
-    .put(`${url}/${type}/${task}/${id}}`, data)
+    .delete(`${url}/${type}/${task}/${id}`)
+    .then(handleResponse)
+    .catch(handleError)
+}
+const updateById = async (url, type, task, id, data) => {
+  console.log(`${url}/${type}/${task}/${id}`)
+
+  return axios
+    .put(`${url}/${type}/${task}/${id}`, data)
     .then(handleResponse)
     .catch(handleError)
 }
@@ -64,5 +71,6 @@ export default {
   getOneByIdPost,
   insertData,
   deleteData,
+  deleteDataById,
   updateById,
 }

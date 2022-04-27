@@ -4,21 +4,24 @@ const BASE_URL = process.env.REACT_APP_BASE_URL
 // *****************************************************************************
 //                          hotels end points
 // *****************************************************************************
+const registerHotel = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'hotel', 'registerHotel', bodyData)
+}
+const addHotelImage = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'uploads', 'hotel', bodyData)
+}
+
 const getAllHotels = async () => {
   return await provider.getAll(BASE_URL, 'hotel', 'getAllHotels')
+}
+const getHotelById = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'hotel', 'getHotelById', bodyData)
 }
 
 const searchHotels = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'search', bodyData)
 }
-const getRoomTypesByHotelId = async (bodyData) => {
-  return await provider.getAllPOST(
-    BASE_URL,
-    'roomtype',
-    'getRoomTypesByHotelId',
-    bodyData
-  )
-}
+
 const getAvailbleRooms = async (bodyData) => {
   return await provider.getAllPOST(
     BASE_URL,
@@ -28,9 +31,48 @@ const getAvailbleRooms = async (bodyData) => {
   )
 }
 
+const getHotelByUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'getHotelByUserId',
+    bodyData
+  )
+}
+const saveHotelById = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'hotel', 'saveHotel', bodyData)
+}
+const getSavedhotelByCustomerId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'getSavedhotelByCustomerId',
+    bodyData
+  )
+}
+const deleteSaveHotelById = async (bodyData) => {
+  return await provider.deleteData(
+    BASE_URL,
+    'hotel',
+    'deleteSavedHotel',
+    bodyData
+  )
+}
 // *****************************************************************************
 //                          rooms  end points
 // *****************************************************************************
+const createRoom = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'room', 'createRoom', bodyData)
+}
+const updateRoomById = async (id, bodyData) => {
+  return await provider.updateById(
+    BASE_URL,
+    'room',
+    'updateRoomById',
+    id,
+    bodyData
+  )
+}
 const getRoomByHotelId = async (bodyData) => {
   return await provider.getAllPOST(
     BASE_URL,
@@ -65,6 +107,50 @@ const getAvailableRoomQtyByRoomId = async (bodyData) => {
     'room',
     'getAvailableRoomQtyByRoomId',
     bodyData
+  )
+}
+const getRoomById = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'room',
+    'getRoomById',
+    bodyData
+  )
+}
+const deleteRoomById = async (params) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'room',
+    'deleteRoomById',
+    params
+  )
+}
+
+// *****************************************************************************
+//                          room types  end points
+// ****************************************************************************
+const createRoomtype = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'roomtype',
+    'createRoomtype',
+    bodyData
+  )
+}
+const getRoomTypesByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'roomtype',
+    'getRoomTypesByHotelId',
+    bodyData
+  )
+}
+const removeRoomType = async (params) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'roomtype',
+    'deleteRoomTypeById',
+    params
   )
 }
 // *****************************************************************************
@@ -103,10 +189,38 @@ const getBookingDetailsById = async (bodyData) => {
     bodyData
   )
 }
+const getCurrentBookingByUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getCurrentBookingByUserId',
+    bodyData
+  )
+}
+const getPastBookingByUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getPastBookingByUserId',
+    bodyData
+  )
+}
+const getBookingByUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getBookingByUserId',
+    bodyData
+  )
+}
+
 // *****************************************************************************
 //                          vas  end points
 // *****************************************************************************
 
+const addValueAddedServices = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'vas', 'createVAS', bodyData)
+}
 const getVasByHotelId = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'vas', 'getVASByHotelId', bodyData)
 }
@@ -134,6 +248,9 @@ const getVASByBookingId = async (bodyData) => {
     bodyData
   )
 }
+const deleteVASById = async (params) => {
+  return await provider.deleteDataById(BASE_URL, 'vas', 'deleteVASById', params)
+}
 
 // *****************************************************************************
 //                          payment  end points
@@ -143,6 +260,14 @@ const getTotalAmountByBookingId = async (bodyData) => {
     BASE_URL,
     'payment',
     'totalAmountByBookingId',
+    bodyData
+  )
+}
+const paymentStatusByBookingId = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'payment',
+    'paymentStatusByBookingId',
     bodyData
   )
 }
@@ -178,6 +303,26 @@ const getCustomerDiscount = async (bodyData) => {
 const pay = async (bodyData) => {
   return await provider.insertData(BASE_URL, 'payment', 'pay', bodyData)
 }
+// *****************************************************************************
+//                          souvenir   end points
+// *****************************************************************************
+
+const getAllsouvenirByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'souvenir',
+    'getSouvenirByHotelId',
+    bodyData
+  )
+}
+const deleteSouvenirById = async (params) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'souvenir',
+    'deleteSouvenirById',
+    params
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -200,4 +345,25 @@ export {
   getCustomerDiscount,
   getAvailableRoomQtyByRoomId,
   pay,
+  paymentStatusByBookingId,
+  getBookingByUserId,
+  getCurrentBookingByUserId,
+  getPastBookingByUserId,
+  saveHotelById,
+  deleteSaveHotelById,
+  getSavedhotelByCustomerId,
+  getHotelById,
+  registerHotel,
+  addHotelImage,
+  getAllsouvenirByHotelId,
+  deleteSouvenirById,
+  addValueAddedServices,
+  deleteVASById,
+  getHotelByUserId,
+  createRoomtype,
+  removeRoomType,
+  createRoom,
+  deleteRoomById,
+  getRoomById,
+  updateRoomById,
 }

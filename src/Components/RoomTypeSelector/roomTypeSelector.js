@@ -33,7 +33,11 @@ const RoomTypeSelector = () => {
     await getRoomTypesByHotelId(dataModel)
       .then((res) => {
         setRoomTypes(res.data)
-        // setRoomType(roomTypes)
+        console.log(res.data[0].roomTypeId)
+        if (res.data.lengt != 0) {
+          setRoomType(res.data[0].roomTypeId)
+        }
+
         console.log(roomTypes)
       })
       .catch((err) => {

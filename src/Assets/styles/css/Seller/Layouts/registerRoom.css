@@ -1,0 +1,73 @@
+.room-adding-container {
+  top: 8rem;
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+}
+.mob-room-type {
+  display: none !important;
+}
+.new-room-type-adding-btn {
+  width: 100%;
+  margin: 0px !important;
+}
+.my-hotel-card button {
+  width: 60%;
+}
+.roomtype-card {
+  cursor: pointer;
+  transition: 0.3s;
+  width: 90% !important;
+}
+.roomtype-card:hover {
+  transform: scale(1.03);
+  /* transform-origin: bottom right; */
+}
+.current-room-type {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  color: greenyellow;
+}
+.room-type-footer {
+  position: relative;
+  top: 10rem;
+}
+.action-container i {
+  margin-right: 1rem;
+}
+.listed-room .savedAt {
+  position: absolute;
+  right: 10px;
+  bottom: 30px;
+}
+.action-container div {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+}
+.room-image img {
+  height: 10rem;
+  min-width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.room-footer {
+  position: absolute;
+  width: 100%;
+  top: 90%;
+}
+
+@media only screen and (max-width: 992px) {
+  .room-adding-container {
+    top: 6rem;
+    width: 100%;
+  }
+  .room-type-adding-icon i {
+    display: none;
+  }
+  .room-footer {
+    position: relative;
+    top: 15rem;
+  }
+}
