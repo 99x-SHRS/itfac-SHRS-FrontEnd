@@ -127,7 +127,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
               min={0}
               required
               value={no_rooms}
-              onChange={(e) => setNo_rooms(e.target.value)}
+              onChange={(value) => setNo_rooms(value)}
             />
           </div>
         </div>
@@ -144,7 +144,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
               name='no_guest'
               required
               value={no_guest}
-              onChange={(e) => setNo_guest(e.target.value)}
+              onChange={(value) => setNo_guest(value)}
             />
           </div>
         </div>
@@ -157,7 +157,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
               required
               value={room_area}
               name='room_area'
-              onChange={(e) => setRoom_area(e.target.value)}
+              onChange={(value) => setRoom_area(value)}
             />
           </div>
           <div className='col-sm-3'>
@@ -176,7 +176,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
               min={0}
               required
               value={room_rate}
-              onChange={(e) => setRoom_rate(e.target.value)}
+              onChange={(value) => setRoom_rate(value)}
             />
           </div>
         </div>
