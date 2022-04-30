@@ -323,6 +323,17 @@ const deleteSouvenirById = async (params) => {
     params
   )
 }
+// *****************************************************************************
+//                          review   end points
+// *****************************************************************************
+const getReviewByCustomerId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'review',
+    'getReviewByCustomerId',
+    bodyData
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -366,4 +377,5 @@ export {
   deleteRoomById,
   getRoomById,
   updateRoomById,
+  getReviewByCustomerId
 }

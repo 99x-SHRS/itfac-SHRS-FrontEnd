@@ -166,6 +166,9 @@ const Navbars = () => {
                   </Dropdown.Item>
                   <Dropdown.Item>Messeges</Dropdown.Item>
                   <Dropdown.Item as={Link} to={'/seller/dashboard'}>
+                    Seller Account
+                  </Dropdown.Item>
+                  <Dropdown.Item as={Link} to={'/my-account'}>
                     My Account
                   </Dropdown.Item>
                   <Dropdown.Item
