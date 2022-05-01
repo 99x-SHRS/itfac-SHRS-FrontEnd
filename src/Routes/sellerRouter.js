@@ -47,6 +47,11 @@ const SellerRoutes = (
       path='/seller/:hotelId/room/upload-image'
       element={<AddRoomImage />}
     ></Route>
+    {/* <Route
+      exact
+      path='/seller/:hotelId/room/upload-image'
+      element={<AddRoomImage />}
+    ></Route> */}
   </>
 )
 
