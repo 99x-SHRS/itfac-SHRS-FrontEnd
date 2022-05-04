@@ -10,7 +10,7 @@ import SavedHotel from '../Pages/Saved/savedHotel'
 import BookingHistory from '../Pages/BookingHistory/bookingHistory.js'
 import BookingDetails from '../Layouts/BookingHistroy/bookingDetails'
 import LoyaltyDescription from '../Pages/Loyalty/loyaltyDescription'
-import SellerDashboard from '../Pages/Seller/Dashboard/Dashboard'
+
 // /hotels/:location/:checkin/:checkout/:adults/:children/:rooms
 const UserRoutes = (
   <>
@@ -33,7 +33,6 @@ const UserRoutes = (
       path='/loyalty-program'
       element={<LoyaltyDescription />}
     ></Route>
-    <Route exact path='/seller/dashboard' element={<SellerDashboard />}></Route>
   </>
 )
 
