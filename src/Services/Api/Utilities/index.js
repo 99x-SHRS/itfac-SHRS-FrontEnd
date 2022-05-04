@@ -213,6 +213,31 @@ const getBookingByUserId = async (bodyData) => {
     bodyData
   )
 }
+const getAllBookigsByHotelAdminId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getAllBookigsByHotelAdminId',
+    bodyData
+  )
+}
+const getCurrentBookigsByHotelAdminId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getCurrentBookigsByHotelAdminId',
+    bodyData
+  )
+}
+
+const getPastBookigsByHotelAdminId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getPastBookigsByHotelAdminId',
+    bodyData
+  )
+}
 
 // *****************************************************************************
 //                          vas  end points
@@ -366,4 +391,7 @@ export {
   deleteRoomById,
   getRoomById,
   updateRoomById,
+  getAllBookigsByHotelAdminId,
+  getCurrentBookigsByHotelAdminId,
+  getPastBookigsByHotelAdminId,
 }
