@@ -13,7 +13,7 @@ const PastBookings = () => {
   useEffect(() => {
     getBookings(0)
     setLoading(true)
-  }, [])
+  }, [limit])
   const getBookings = async (currentPage) => {
     const dataModel = {
       id: 1, //user id
@@ -113,7 +113,7 @@ const PastBookings = () => {
                             delay={{ show: 250, hide: 400 }}
                             overlay={renderTooltip}
                           >
-                            <Link to={'/booking-history/details'}>
+                            <Link to={`/seller/booking/${item.bookingId}`}>
                               <i
                                 class='fa fa-info-circle'
                                 style={{ fontSize: '1.5rem' }}
@@ -166,7 +166,7 @@ const PastBookings = () => {
                             delay={{ show: 250, hide: 250 }}
                             overlay={renderTooltip}
                           >
-                            <Link to={'/booking-history/details'}>
+                            <Link to={`/seller/booking/${item.bookingId}`}>
                               <i
                                 class='fa fa-info-circle'
                                 style={{ fontSize: '1.5rem' }}

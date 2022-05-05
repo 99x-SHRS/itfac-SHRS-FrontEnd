@@ -83,21 +83,6 @@ const CurrentBookingHistory = () => {
   return (
     <div>
       <div>
-        {/* {items.map((item) => {
-          return (
-            <div key={item.id} className='col-sm-6 col-md-12 v my-2'>
-              <div className='card shadow-sm w-100' style={{ minHeight: 150 }}>
-                <div className='card-body'>
-                  <h5 className='card-title text-center h2'>Id :{item.id} </h5>
-                  <h6 className='card-subtitle mb-2 text-muted text-center'>
-                    {item.email}
-                  </h6>
-                  <p className='card-text'>{item.body}</p>
-                </div>
-              </div>
-            </div>
-          )
-        })} */}
         <div className='mt-2'>
           <div className='table-web'>
             <table class='table'>
@@ -129,6 +114,7 @@ const CurrentBookingHistory = () => {
                 ) : (
                   bookings.map((item, i) => {
                     // paymentStatus(item.bookingId)
+                    console.log(item)
                     return (
                       <tr>
                         <th scope='row'>B-{item.bookingId}</th>
@@ -149,7 +135,18 @@ const CurrentBookingHistory = () => {
                             delay={{ show: 250, hide: 400 }}
                             overlay={renderTooltip}
                           >
-                            <Link to={'/booking-history/details'}>
+                            <Link
+                              to={`/booking/vas?location=galle&checkin-date=${
+                                item.checkInDate.split('T')[0]
+                              }&checkout-date=${
+                                item.checkOutDate.split('T')[0]
+                              }&adults=1&children=0&hotel=${
+                                item.hotelHotelId
+                              }&rooms=${item.noRooms}&roomno=${
+                                item.roomRoomId
+                              }&booking=${item.bookingId}`}
+                            >
+                              {/* <Link to={'/booking-history/details'}> this is tempory link  until get page from sau*/}
                               <i
                                 class='fa fa-info-circle'
                                 style={{ fontSize: '1.5rem' }}
@@ -202,7 +199,8 @@ const CurrentBookingHistory = () => {
                             delay={{ show: 250, hide: 250 }}
                             overlay={renderTooltip}
                           >
-                            <Link to={'/booking-history/details'}>
+                            <Link to={'/booking/vas'}>
+                              {/* <Link to={'/booking-history/details'}> this is tempory link  until get page from sau*/}
                               <i
                                 class='fa fa-info-circle'
                                 style={{ fontSize: '1.5rem' }}
