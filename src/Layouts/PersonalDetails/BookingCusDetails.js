@@ -1,51 +1,79 @@
 import React, { Component, useState, useMemo, useEffect } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
-import { updateBookingById } from '../../Services/Api/Utilities/index.js'
-import PhoneInput, {
-  formatPhoneNumber,
-  formatPhoneNumberIntl,
-  isValidPhoneNumber,
-} from 'react-phone-number-input'
 import {
-  CountryDropdown,
-  RegionDropdown,
-  CountryRegionData,
-} from 'react-country-region-selector'
+  updateBookingById,
+  getBookingDetailsById,
+} from '../../Services/Api/Utilities/index.js'
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
+import { CountryDropdown } from 'react-country-region-selector'
 import SideSummary from '../../Layouts/Payment/SideSummary.js'
 import 'react-phone-number-input/style.css'
-
+import { toast } from 'react-toastify'
 const BookingCusDetails = () => {
+  const [searchedParams, setSearchedparams] = useSearchParams()
+  const [special_request, setSpecial_request] = useState('')
+
+  const [first_name, setFirst_name] = useState('')
+  const [last_name, setLast_name] = useState('')
+  const [rent_car, setRent_car] = useState(false)
+  const [email, setEmail] = useState('abs@gmail.com')
   const [country, setCountry] = useState('LK')
   const [number, setNumber] = useState(0)
-  const [searchedParams, setSearchedparams] = useSearchParams()
+  const [arrival_time, setArrivalTime] = useState('')
+  const [isUpdate, setUpdate] = useState(false)
   const navigate = useNavigate()
+
+  useEffect(() => {
+    setUpdate(searchedParams.get('edit') || '')
+    if (searchedParams.get('edit') || '') {
+      getBookingDetails()
+    }
+    toast.configure()
+  }, [])
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
+  }
+  const getBookingDetails = async () => {
+    const dataModel = {
+      id: searchedParams.get('booking') || '',
+    }
+    await getBookingDetailsById(dataModel)
+      .then((res) => {
+        console.log(res)
+        setFirst_name(res.data.guestName.split(' ')[0])
+        setLast_name(res.data.guestName.split(' ')[1])
+        setCountry('Sri Lanka')
+        setNumber(res.data.contactNo)
+        setSpecial_request(res.data.specialRequest)
+        setArrivalTime(res.data.arrivalTime)
+        var dates = new Date(res.data.arrivalTime)
+        var currentTime = dates.toISOString().substring(11, 16)
+        document.getElementById('arrivalTime').value = currentTime
+        if (res.data.rentCar) {
+          document.getElementById('rent_car').checked = true
+        } else {
+          document.getElementById('rent_car').checked = false
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   const handleSubmit = (event) => {
     event.preventDefault()
-    // const details = {
-    //   firstName: event.target.first_name.value,
-    //   lastName: event.target.last_name.value,
-    //   email: event.target.email.value,
-    //   settedContry: country,
-    //   telephone_number: number,
-    //   arrival_time: event.target.arrival_time.value,
-    //   rent_car: event.target.rent_car.checked,
-    //   special_request: event.target.special_request.value,
-    // }
-    // window.location.href = `/hotels?${URL}`
-    console.log(event.target.arrival_time.value)
     function getDateFromHours(time) {
       time = time.split(':')
       let now = new Date()
-
       return new Date(now.getFullYear(), now.getMonth(), now.getDate(), ...time)
     }
-
     const bookingId = searchedParams.get('booking') || ''
     const dataModel = {
-      specialRequest: event.target.special_request.value,
-      arrivalTime: getDateFromHours('12:00:01'),
-      guestName:
-        event.target.first_name.value + ' ' + event.target.last_name.value,
+      specialRequest: special_request,
+      arrivalTime: document.getElementById('arrivalTime').value,
+      guestName: first_name + ' ' + last_name,
       rentCar: event.target.rent_car.checked,
       customerId: 1,
       contactNo: number,
@@ -54,20 +82,26 @@ const BookingCusDetails = () => {
       // rooms: searchedParams.get('rooms') || '',
       // hotelId: searchedParams.get('hotel') || '',
     }
-    console.log(getDateFromHours('12:00:01'))
+    console.log(dataModel)
     updateBooking(bookingId, dataModel)
   }
 
   const updateBooking = async (bookingId, dataModel) => {
     await updateBookingById(bookingId, dataModel)
       .then((res) => {
-        console.log(res)
-        // window.location.href = `/booking/${
-        //   searchedParams.get('booking') || ''
-        // }/details/payment`
-        window.location.href = `/payment?booking=${
-          searchedParams.get('booking') || ''
-        }`
+        if (!isUpdate) {
+          window.location.href = `/payment?booking=${
+            searchedParams.get('booking') || ''
+          }`
+          if (res.status === 200) {
+            notifySuccess('Your booking is placed !')
+          }
+        } else {
+          window.location.href = `/booking-history`
+          if (res.status === 200) {
+            notifySuccess('Your booking is updated !')
+          }
+        }
       })
       .catch((err) => {
         console.log(err)
@@ -120,6 +154,10 @@ const BookingCusDetails = () => {
                       placeholder='Enter first name'
                       name='first_name'
                       required
+                      value={first_name}
+                      onChange={(value) => {
+                        setFirst_name(value.target.value)
+                      }}
                     />
                   </div>
                   <div class='form-group col-lg-6'>
@@ -130,6 +168,8 @@ const BookingCusDetails = () => {
                       placeholder='Enter last name'
                       name='last_name'
                       required
+                      value={last_name}
+                      onChange={(value) => setLast_name(value.target.value)}
                     />
                   </div>
                 </div>
@@ -144,6 +184,8 @@ const BookingCusDetails = () => {
                       placeholder='Enter email'
                       name='email'
                       required
+                      value={email}
+                      onChange={(value) => setEmail(value.target.value)}
                     />
                     <small id='emailHelp' class='form-text text-muted'>
                       Confirmation email sent to this address
@@ -211,7 +253,7 @@ const BookingCusDetails = () => {
                   class='form-check-input rent_car'
                   type='checkbox'
                   name='rent_car'
-                  id='flexCheckDefault'
+                  id='rent_car'
                 />
                 <label for='flexCheckDefault'>
                   I'm interested in renting a car
@@ -227,10 +269,11 @@ const BookingCusDetails = () => {
                 <div class='md-form mx-5 my-5'>
                   <input
                     type='time'
-                    id='inputMDEx1'
+                    id='arrivalTime'
                     class='form-control arrival_time'
                     name='arrival_time'
-                    value='10:00:00'
+                    value={arrival_time}
+                    onChange={(value) => setArrivalTime(value.target.value)}
                   />
                   <label for='inputMDEx1'>Choose your arrival time</label>
                 </div>
@@ -252,6 +295,8 @@ const BookingCusDetails = () => {
                   id='exampleFormControlTextarea1'
                   rows='5'
                   name='special_request'
+                  value={special_request}
+                  onChange={(value) => setSpecial_request(value.target.value)}
                 ></textarea>
               </div>
             </div>
@@ -299,7 +344,7 @@ const BookingCusDetails = () => {
               </button>
 
               <button type='submit' className='next-button btn btn-primary'>
-                Almost done! {'>'}
+                {isUpdate ? <> Update ! {'>'}</> : <> Almost done! {'>'}</>}
               </button>
             </div>
           </form>

@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from 'react'
 import ReactPaginate from 'react-paginate'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { Tooltip, OverlayTrigger, Button } from 'react-bootstrap'
 import BookingDetaill from '../../Layouts/BookingHistroy/bookingDetails.js'
 import {
@@ -11,6 +11,7 @@ import HashLoader from 'react-spinners/HashLoader'
 
 const CurrentBookingHistory = () => {
   let limit = 5
+  const [searchedParams, setSearchedparams] = useSearchParams()
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [pageCount, setpageCount] = useState(0)
@@ -144,7 +145,7 @@ const CurrentBookingHistory = () => {
                                 item.hotelHotelId
                               }&rooms=${item.noRooms}&roomno=${
                                 item.roomRoomId
-                              }&booking=${item.bookingId}`}
+                              }&booking=${item.bookingId}&edit=true`}
                             >
                               {/* <Link to={'/booking-history/details'}> this is tempory link  until get page from sau*/}
                               <i
@@ -199,13 +200,23 @@ const CurrentBookingHistory = () => {
                             delay={{ show: 250, hide: 250 }}
                             overlay={renderTooltip}
                           >
-                            <Link to={'/booking/vas'}>
+                            <Link
+                              to={`/booking/vas?location=galle&checkin-date=${
+                                item.checkInDate.split('T')[0]
+                              }&checkout-date=${
+                                item.checkOutDate.split('T')[0]
+                              }&adults=1&children=0&hotel=${
+                                item.hotelHotelId
+                              }&rooms=${item.noRooms}&roomno=${
+                                item.roomRoomId
+                              }&booking=${item.bookingId}&edit=true`}
+                            >
                               {/* <Link to={'/booking-history/details'}> this is tempory link  until get page from sau*/}
                               <i
                                 class='fa fa-info-circle'
                                 style={{ fontSize: '1.5rem' }}
                                 aria-hidden='true'
-                                href={'/booking-history/details'}
+                                // href={'/booking-history/details'}
                               ></i>
                             </Link>
                           </OverlayTrigger>

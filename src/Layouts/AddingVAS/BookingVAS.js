@@ -10,7 +10,9 @@ const BookingVAS = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [vas, setVAS] = useState([])
   const [suggestions, setSuggestions] = useState([])
+  const [isUpdate, setUpdate] = useState(false)
   const navigate = useNavigate()
+
   useEffect(() => {
     let hotelId = searchedParams.get('hotel') || ''
     if (hotelId != 0) {
@@ -18,6 +20,7 @@ const BookingVAS = () => {
     } else {
       alert('went wrong')
     }
+    setUpdate(searchedParams.get('edit') || '')
   }, [vas.length])
 
   const getAllVAS = async (hotelId) => {
@@ -58,17 +61,33 @@ const BookingVAS = () => {
               >
                 {'<'} Previous!
               </button>
-
-              <Link
-                to={`/booking/details?booking=${
-                  searchedParams.get('booking') || ''
-                }`}
-                className='next-link'
-              >
-                <button className='next-button btn btn-primary'>
-                  Complete the booking! {'>'}
-                </button>
-              </Link>
+              {isUpdate ? (
+                <>
+                  <Link
+                    to={`/booking/details?booking=${
+                      searchedParams.get('booking') || ''
+                    }&edit=true`}
+                    className='next-link'
+                  >
+                    <button className='next-button btn btn-primary'>
+                      <> Update my booking! {'>'}</>
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    to={`/booking/details?booking=${
+                      searchedParams.get('booking') || ''
+                    }`}
+                    className='next-link'
+                  >
+                    <button className='next-button btn btn-primary'>
+                      <> Complete the booking! {'>'}</>
+                    </button>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>
