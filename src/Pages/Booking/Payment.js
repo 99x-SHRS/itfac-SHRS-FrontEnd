@@ -1,9 +1,7 @@
-import React, { Component, useEffect, useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import HotelHeader from '../../Layouts/HotelHeader/hotelHeader.js'
 import SelectPayment from '../../Layouts/Payment/SelectPayment.js'
-import SideSummary from '../../Layouts/Payment/SideSummary.js'
-import InfoToolTip from '../../Components/ToolTip/InfoToolTip.js'
 import Footer from '../../Layouts/Footer/footer.js'
 import HashLoader from 'react-spinners/HashLoader'
 import { toast } from 'react-toastify'
@@ -29,13 +27,11 @@ const Payament = () => {
   const [totalPayment, setTotalPayment] = useState(null)
 
   useEffect(() => {
+    getBookingDetails()
     window.scrollTo(0, 0)
     toast.configure()
   }, [])
 
-  useEffect(() => {
-    getBookingDetails()
-  }, [])
   const notify = (message) => {
     toast.success(message)
   }
@@ -47,11 +43,11 @@ const Payament = () => {
     await getBookingDetailsById(dataModel)
       .then((res) => {
         setBookkingDetails(res.data)
-        console.log(res.data)
+        //console.log(res.data)
         getRoomDetails(res.data.roomRoomId)
       })
       .catch((err) => {
-        console.log(err)
+        //console.log(err)
       })
   }
 
@@ -62,11 +58,11 @@ const Payament = () => {
     await getRoomDetailsById(dataModel)
       .then((res) => {
         setRoomDetails(res.data)
-        console.log(res)
+        //console.log(res)
         getAllVAS()
       })
       .catch((err) => {
-        console.log(err)
+        //console.log(err)
       })
   }
   const getAllVAS = async () => {
@@ -76,11 +72,11 @@ const Payament = () => {
     await getVASByBookingId(dataModel)
       .then((res) => {
         setSubscribedVAS(res.data)
-        console.log(res)
+        //console.log(res)
         getTotalCost()
       })
       .catch((err) => {
-        console.log(err)
+        //console.log(err)
       })
   }
   const getTotalCost = async () => {
@@ -89,17 +85,17 @@ const Payament = () => {
     }
     await getTotalAmountByBookingId(dataModel)
       .then((res) => {
-        console.log(res)
+        //console.log(res)
         setsubPayment(res.data)
         setTotalPayment(res.data)
         loyaltyReward(res.data)
       })
       .catch((err) => {
-        console.log(err)
+        //console.log(err)
       })
   }
   const validateVoucher = async (dataModel, event) => {
-    console.log(dataModel)
+    //console.log(dataModel)
     await validateCoupon(dataModel)
       .then((res) => {
         if (res.data == '') {
@@ -116,7 +112,7 @@ const Payament = () => {
         }
       })
       .catch((err) => {
-        console.log(err)
+        //console.log(err)
       })
   }
   const loyaltyReward = async (totPayment) => {
@@ -124,29 +120,24 @@ const Payament = () => {
       userId: 1,
       amount: totPayment,
     }
-    console.log(dataModel)
+    //console.log(dataModel)
     await getCustomerDiscount(dataModel)
       .then((res) => {
-        console.log(res)
+        //console.log(res)
         setLoyalty(res.data)
-        console.log(totPayment - res.data)
+        //console.log(totPayment - res.data)
         setTotalPayment(totPayment - res.data)
-        calculateTotalPayment()
+
         setLoading(false)
       })
       .catch((err) => {
-        console.log(err)
+        //console.log(err)
       })
   }
-  const calculateTotalPayment = () => {
-    console.log('Payments')
-    console.log(subPayment)
-    console.log(discount)
-    console.log(loyalty)
-  }
+
   const handleSubmit = (event) => {
     event.preventDefault()
-    console.log('called')
+    //console.log('called')
     const dataModel = {
       coupon: event.target.token.value,
       amount: subPayment,
@@ -156,6 +147,7 @@ const Payament = () => {
       validateVoucher(dataModel, event)
     }
   }
+
   return (
     <div>
       <HotelHeader />

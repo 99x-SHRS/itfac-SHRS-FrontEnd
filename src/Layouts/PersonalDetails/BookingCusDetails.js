@@ -1,5 +1,5 @@
-import React, { Component, useState, useMemo, useEffect } from 'react'
-import { Link, useSearchParams, useNavigate } from 'react-router-dom'
+import React, { useState, useMemo, useEffect } from 'react'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 import {
   updateBookingById,
   getBookingDetailsById,
@@ -15,7 +15,6 @@ const BookingCusDetails = () => {
 
   const [first_name, setFirst_name] = useState('')
   const [last_name, setLast_name] = useState('')
-  const [rent_car, setRent_car] = useState(false)
   const [email, setEmail] = useState('abs@gmail.com')
   const [country, setCountry] = useState('LK')
   const [number, setNumber] = useState(0)
@@ -77,10 +76,6 @@ const BookingCusDetails = () => {
       rentCar: event.target.rent_car.checked,
       customerId: 1,
       contactNo: number,
-      // adult: searchedParams.get('rooms') || '',
-      // children: searchedParams.get('children') || '',
-      // rooms: searchedParams.get('rooms') || '',
-      // hotelId: searchedParams.get('hotel') || '',
     }
     console.log(dataModel)
     updateBooking(bookingId, dataModel)
@@ -90,16 +85,18 @@ const BookingCusDetails = () => {
     await updateBookingById(bookingId, dataModel)
       .then((res) => {
         if (!isUpdate) {
-          window.location.href = `/payment?booking=${
-            searchedParams.get('booking') || ''
-          }`
           if (res.status === 200) {
             notifySuccess('Your booking is placed !')
+            window.location.href = `/payment?booking=${
+              searchedParams.get('booking') || ''
+            }`
           }
         } else {
-          window.location.href = `/booking-history`
           if (res.status === 200) {
             notifySuccess('Your booking is updated !')
+            window.location.href = `/payment?booking=${
+              searchedParams.get('booking') || ''
+            }&edit=true`
           }
         }
       })
@@ -192,21 +189,6 @@ const BookingCusDetails = () => {
                     </small>
                   </div>
                 </div>
-                {/* <div className='row'>
-                  <div class='form-group col-lg-12 '>
-                    <label for='exampleInputEmail1'>
-                      Confirm Email Address *
-                    </label>
-                    <input
-                      type='email'
-                      class='form-control re_email'
-                      id='exampleInputEmail1'
-                      aria-describedby='emailHelp'
-                      placeholder='Enter email'
-                      required
-                    />
-                  </div>
-                </div> */}
                 <div className='row'>
                   <div>
                     <label for='country'>Country/Region * </label>
@@ -214,7 +196,6 @@ const BookingCusDetails = () => {
                     <CountryDropdown
                       className='border country-selector country'
                       value={country}
-                      // defaultOptionLabel={'Sri Lanka'}
                       onChange={setCountry}
                       required
                     />

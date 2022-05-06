@@ -280,6 +280,18 @@ const deleteVASById = async (params) => {
 // *****************************************************************************
 //                          payment  end points
 // *****************************************************************************
+
+const pay = async (bodyData) => {
+  return await provider.insertData(BASE_URL, 'payment', 'pay', bodyData)
+}
+const getAllPaymentsBybookingId = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'payment',
+    'getAllPaymentsBybookingId',
+    bodyData
+  )
+}
 const getTotalAmountByBookingId = async (bodyData) => {
   return await provider.getOneByIdPost(
     BASE_URL,
@@ -321,13 +333,6 @@ const getCustomerDiscount = async (bodyData) => {
   )
 }
 
-// *****************************************************************************
-//                          payment   end points
-// *****************************************************************************
-
-const pay = async (bodyData) => {
-  return await provider.insertData(BASE_URL, 'payment', 'pay', bodyData)
-}
 // *****************************************************************************
 //                          souvenir   end points
 // *****************************************************************************
@@ -394,4 +399,5 @@ export {
   getAllBookigsByHotelAdminId,
   getCurrentBookigsByHotelAdminId,
   getPastBookigsByHotelAdminId,
+  getAllPaymentsBybookingId,
 }
