@@ -1,5 +1,6 @@
 import provider from './provider'
 const BASE_URL = 'https://hotelreservationapiv1.herokuapp.com/api/v1'
+// const BASE_URL = 'localhost:8000/api/v1'
 
 // *****************************************************************************
 //                          hotels end points
@@ -47,6 +48,14 @@ const getSavedhotelByCustomerId = async (bodyData) => {
     BASE_URL,
     'hotel',
     'getSavedhotelByCustomerId',
+    bodyData
+  )
+}
+const sortHotelsByBookingCount = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'sortHotelsByBookingCount',
     bodyData
   )
 }
@@ -400,4 +409,5 @@ export {
   getCurrentBookigsByHotelAdminId,
   getPastBookigsByHotelAdminId,
   getAllPaymentsBybookingId,
+  sortHotelsByBookingCount,
 }

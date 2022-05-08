@@ -12,7 +12,7 @@ class HotelCard extends Component {
   render() {
     return (
       <div class='card recommonded-hotels'>
-        <img src={Hotel_1} class='card-img-top' alt='...' />
+        <img src={this.props.hotel.image} class='card-img-top' alt='...' />
         <div class='card-body'>
           <h4 class='card-title'>
             {this.props.hotel.name} {this.getStars(1)}
@@ -40,9 +40,9 @@ class HotelCard extends Component {
               </a>
             </p>
           </div>
-          <p class='card-text text-justify mt-3'>
-            {this.props.hotel.description}
-          </p>
+          {/* <p class='card-text text-justify mt-3'>
+            {this.props.hotel.description.}
+          </p> */}
         </div>
       </div>
     )
