@@ -3,9 +3,6 @@ import { Link } from 'react-router-dom'
 import HotelCard from '../../Components/HotelCard/HotelCard'
 
 const Recommendeds = (hotels) => {
-  useEffect(() => {
-    console.log(hotels.hotels)
-  }, [])
   return (
     <div className='container'>
       <div className='mb-5 mt-5'>
@@ -14,12 +11,9 @@ const Recommendeds = (hotels) => {
       <div className='row '>
         {hotels.length != 0 ? (
           hotels.hotels.map((item, index) => {
-            console.log(item)
             return (
               <div class='col-6 col-lg-3 '>
-                <Link to={'/'}>
-                  <HotelCard hotel={item.hotel} />
-                </Link>
+                <HotelCard hotel={item.hotel} />
               </div>
             )
           })
