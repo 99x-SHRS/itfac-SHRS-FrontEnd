@@ -1,0 +1,25 @@
+.css-17vdz66 {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.modal-input-container {
+  display: flex !important;
+  justify-content: center;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.modal-input-container button,
+.modal-input-container input {
+  display: inline-block;
+  height: 2rem;
+}
+.modal-input-container input {
+  max-width: 6rem;
+  margin-top: auto !important;
+  margin-bottom: auto !important;
+}
+.modal-input-container button {
+  text-align: center;
+  font-weight: bolder;
+}
