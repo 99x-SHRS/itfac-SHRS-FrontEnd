@@ -77,10 +77,13 @@ const HotelCard = ({ hotel }) => {
             }}
           >
             <Modal.Header closeButton>
-              <Modal.Title>Modal heading</Modal.Title>
+              <Modal.Title>Pickup your date</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <SearchDatePicker />
+              <SearchDatePicker
+                hotelId={hotel.hotelId}
+                hotelName={hotel.name}
+              />
             </Modal.Body>
             <Modal.Footer></Modal.Footer>
           </Modal>

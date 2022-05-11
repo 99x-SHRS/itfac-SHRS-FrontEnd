@@ -5,8 +5,9 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import Box from '@mui/material/Box'
 
-const DatepickerModal = () => {
-  const [value, setValue] = React.useState([null, null])
+const DatepickerModal = ({ setDateRange }) => {
+  const today = new Date()
+  const [value, setValue] = React.useState([today, today])
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DateRangePicker
@@ -14,7 +15,7 @@ const DatepickerModal = () => {
         endText='Check-out'
         value={value}
         onChange={(newValue) => {
-          setValue(newValue)
+          setDateRange(newValue)
         }}
         renderInput={(startProps, endProps) => (
           <React.Fragment>

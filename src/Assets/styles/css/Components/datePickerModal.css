@@ -15,11 +15,32 @@
   height: 2rem;
 }
 .modal-input-container input {
-  max-width: 6rem;
+  min-width: 15rem;
+  max-width: 8rem;
   margin-top: auto !important;
   margin-bottom: auto !important;
 }
 .modal-input-container button {
   text-align: center;
   font-weight: bolder;
+}
+.search-room-details {
+  text-align: center;
+}
+.final-search-room-details {
+  min-width: 25rem;
+  margin-left: 3rem;
+}
+.recommonded-hotels .modal-body {
+  padding: 0rem !important;
+}
+
+.search-modal-container {
+  min-width: 25rem;
+  max-width: 25rem;
+  margin-right: auto !important;
+  margin-left: auto !important;
+}
+.search-modal-btn {
+  width: 100%;
 }

@@ -1,65 +1,118 @@
 import React, { useEffect, useState } from 'react'
-import $ from 'jquery'
+import { getAvailableRoomQtyByRoomId } from '../../Services/Api/Utilities'
 import DatepickerModal from '../DatePicker/DatepickerModal'
-import NumericInput from 'react-numeric-input'
 import '../../Assets/styles/css/Components/datePickerModal.css'
-const SearchDatePicker = () => {
-  const [rooms, setRooms] = useState(0)
-  const [persons, setPersons] = useState(0)
-  const increase = () => {
-    alert('ad')
+import { useNavigate } from 'react-router-dom'
+
+const SearchDatePicker = ({ hotelId, hotelName }) => {
+  let [rooms, setRooms] = useState(1)
+  let [persons, setPersons] = useState(1)
+  const navigate = useNavigate()
+  var today = new Date().toISOString().slice(0, 10)
+
+  const [dateRange, setDateRange] = useState([today, today])
+
+  const increase = (status) => {
+    if (status == 1) {
+      setPersons((persons += 1))
+    } else {
+      setRooms((rooms += 1))
+    }
   }
+  const decrease = (status) => {
+    if (status == 1) {
+      if (persons >= 0) {
+        setPersons(persons--)
+      }
+    } else {
+      if (rooms >= 0) {
+        setRooms(rooms--)
+      }
+    }
+    console.log(persons)
+    console.log(rooms)
+  }
+  const submitHandle = () => {
+    const URL = `/hotels?location=${hotelName}&checkin-date=${dateRange[0]}&checkout-date=${dateRange[1]}&adults=${persons}&children=0&rooms=${rooms}`
+    // window.location.href = `/hotels?${URL}`
+    navigate(URL)
+  }
+
   return (
-    <div>
+    <form onSubmit={submitHandle}>
       <div className='row'>
-        <div className='col-md-12'>
-          <div class='input-group'>
-            {/* <i class='zmdi zmdi-calendar-alt input-group-symbol'></i> */}
-            <DatepickerModal />
-          </div>
-        </div>
-      </div>
-      <div className='row'>
-        <div className='col-md-12'>
-          <div className='modal-input-container'>
-            <button type='button' class='btn btn-primary'>
+        <div className='search-modal-container'>
+          <DatepickerModal setDateRange={setDateRange} />
+          <input
+            type='text'
+            class='form-control mt-2 text-center'
+            name='street_01'
+            value={persons + ' persons and ' + rooms + ' rooms'}
+            disabled
+          />
+
+          <div className='modal-input-container mt-2'>
+            <button
+              type='button'
+              class='btn btn-primary'
+              onClick={() => {
+                decrease(1)
+              }}
+            >
               -
             </button>
             <input
               type='text'
-              class='form-control '
-              placeholder='No rooms'
-              name='street_01'
-              required
-              value={rooms}
-              disabled
-            />
-            <button type='button' class='btn btn-primary'>
-              +
-            </button>
-          </div>
-        </div>
-        <div className='col-md-12'>
-          <div className='modal-input-container'>
-            <button type='button' class='btn btn-primary'>
-              -
-            </button>
-            <input
-              type='text'
-              class='form-control '
+              class='form-control  search-room-details'
               placeholder='No persons'
               name='street_01'
               required
-              disabled
-              value={persons}
+              value={persons > 0 ? persons + ' rooms' : 'No persons'}
             />
-            <button type='button' class='btn btn-primary' onclick={increase}>
+            <button
+              type='button'
+              class='btn btn-primary'
+              onClick={() => {
+                increase(1)
+              }}
+            >
               +
             </button>
           </div>
+          <div className='modal-input-container '>
+            <button
+              type='button'
+              class='btn btn-primary'
+              onClick={() => {
+                decrease(0)
+              }}
+            >
+              -
+            </button>
+            <input
+              type='text'
+              class='form-control search-room-details'
+              placeholder='No rooms'
+              name='street_01'
+              required
+              value={rooms > 0 ? rooms + ' rooms' : 'No rooms'}
+            />
+            <button
+              type='button'
+              class='btn btn-primary'
+              onClick={() => {
+                increase(0)
+              }}
+            >
+              +
+            </button>
+          </div>
+          <button class='btn btn-primary search-modal-btn' type='submit'>
+            <p>Check availability</p>
+          </button>
         </div>
       </div>
-    </div>
+    </form>
   )
 }
 

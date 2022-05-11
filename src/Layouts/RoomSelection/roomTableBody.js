@@ -6,7 +6,6 @@ import NumberInputBox from '../../Components/NumberInputBox/inputBoxNumber'
 import {
   getDiscountByHotelId,
   placeBooking,
-  getAvailableRoomQtyByRoomId,
 } from '../../Services/Api/Utilities/index.js'
 import NumericInput from 'react-numeric-input'
 
