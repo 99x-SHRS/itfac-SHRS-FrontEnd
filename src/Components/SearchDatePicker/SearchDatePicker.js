@@ -4,7 +4,7 @@ import DatepickerModal from '../DatePicker/DatepickerModal'
 import '../../Assets/styles/css/Components/datePickerModal.css'
 import { useNavigate } from 'react-router-dom'
 
-const SearchDatePicker = ({ hotelId, hotelName }) => {
+const SearchDatePicker = ({ hotelName }) => {
   let [rooms, setRooms] = useState(1)
   let [persons, setPersons] = useState(1)
   const navigate = useNavigate()
@@ -34,7 +34,6 @@ const SearchDatePicker = ({ hotelId, hotelName }) => {
   }
   const submitHandle = () => {
     const URL = `/hotels?location=${hotelName}&checkin-date=${dateRange[0]}&checkout-date=${dateRange[1]}&adults=${persons}&children=0&rooms=${rooms}`
-    // window.location.href = `/hotels?${URL}`
     navigate(URL)
   }
 

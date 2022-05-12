@@ -1,7 +1,7 @@
-import React, { Component, useState } from 'react'
-import { Button, Modal } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Modal } from 'react-bootstrap'
 import '../../Assets/styles/css/Components/hotelCard.css'
-import Searchbox from '../Searchbar'
+
 import SearchDatePicker from '../SearchDatePicker/SearchDatePicker'
 const HotelCard = ({ hotel }) => {
   const [show, setShow] = useState(false)
@@ -80,10 +80,7 @@ const HotelCard = ({ hotel }) => {
               <Modal.Title>Pickup your date</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <SearchDatePicker
-                hotelId={hotel.hotelId}
-                hotelName={hotel.name}
-              />
+              <SearchDatePicker hotelName={hotel.name} />
             </Modal.Body>
             <Modal.Footer></Modal.Footer>
           </Modal>

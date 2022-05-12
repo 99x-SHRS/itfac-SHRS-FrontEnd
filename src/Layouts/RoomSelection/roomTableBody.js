@@ -86,7 +86,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
           <li class='table-row border border-dark'>
             <div class='col-sm-12 col-md-4  mb-3 '>
               <img src={souvenirs1[0].path} alt='' />
-              {/* <RoomImages roomId={room.roomId} /> */}
+              <RoomImages roomId={room.roomId} />
             </div>
             <div class='col-sm-12 col-1  mb-3 bed-icon'>
               <div className='verticle-center'>
