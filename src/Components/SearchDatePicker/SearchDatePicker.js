@@ -6,7 +6,8 @@ import { useNavigate } from 'react-router-dom'
 
 const SearchDatePicker = ({ hotelName }) => {
   let [rooms, setRooms] = useState(1)
-  let [persons, setPersons] = useState(1)
+  let [adults, setAdults] = useState(1)
+  let [children, setChildren] = useState(0)
   const navigate = useNavigate()
   var today = new Date().toISOString().slice(0, 10)
 
@@ -14,26 +15,31 @@ const SearchDatePicker = ({ hotelName }) => {
 
   const increase = (status) => {
     if (status == 1) {
-      setPersons((persons += 1))
-    } else {
+      setAdults((adults += 1))
+    } else if (status == 2) {
       setRooms((rooms += 1))
+    } else {
+      setChildren((children += 1))
     }
   }
   const decrease = (status) => {
     if (status == 1) {
-      if (persons >= 0) {
-        setPersons(persons--)
+      if (adults >= 0) {
+        setAdults(adults--)
       }
-    } else {
+    } else if (status == 2) {
       if (rooms >= 0) {
         setRooms(rooms--)
       }
+    } else {
+      if (rooms >= 0) {
+        setChildren(children--)
+      }
     }
-    console.log(persons)
-    console.log(rooms)
   }
+
   const submitHandle = () => {
-    const URL = `/hotels?location=${hotelName}&checkin-date=${dateRange[0]}&checkout-date=${dateRange[1]}&adults=${persons}&children=0&rooms=${rooms}`
+    const URL = `/hotels?location=${hotelName}&checkin-date=${dateRange[0]}&checkout-date=${dateRange[1]}&adults=${adults}&children=${children}&rooms=${rooms}`
     navigate(URL)
   }
 
@@ -45,8 +51,7 @@ const SearchDatePicker = ({ hotelName }) => {
           <input
             type='text'
             class='form-control mt-2 text-center'
-            name='street_01'
-            value={persons + ' persons and ' + rooms + ' rooms'}
+            value={adults + ' adults and ' + rooms + ' rooms'}
             disabled
           />
 
@@ -63,10 +68,9 @@ const SearchDatePicker = ({ hotelName }) => {
             <input
               type='text'
               class='form-control  search-room-details'
-              placeholder='No persons'
-              name='street_01'
+              placeholder='No adults'
               required
-              value={persons > 0 ? persons + ' rooms' : 'No persons'}
+              value={adults > 0 ? adults + ' adults' : 'No adults'}
             />
             <button
               type='button'
@@ -83,7 +87,34 @@ const SearchDatePicker = ({ hotelName }) => {
               type='button'
               class='btn btn-primary'
               onClick={() => {
-                decrease(0)
+                decrease(3)
+              }}
+            >
+              -
+            </button>
+            <input
+              type='text'
+              class='form-control search-room-details'
+              placeholder='No children'
+              required
+              value={children > 0 ? children + ' children' : 'No children'}
+            />
+            <button
+              type='button'
+              class='btn btn-primary'
+              onClick={() => {
+                increase(3)
+              }}
+            >
+              +
+            </button>
+          </div>
+          <div className='modal-input-container '>
+            <button
+              type='button'
+              class='btn btn-primary'
+              onClick={() => {
+                decrease(2)
               }}
             >
               -
@@ -92,7 +123,6 @@ const SearchDatePicker = ({ hotelName }) => {
               type='text'
               class='form-control search-room-details'
               placeholder='No rooms'
-              name='street_01'
               required
               value={rooms > 0 ? rooms + ' rooms' : 'No rooms'}
             />
@@ -100,12 +130,13 @@ const SearchDatePicker = ({ hotelName }) => {
               type='button'
               class='btn btn-primary'
               onClick={() => {
-                increase(0)
+                increase(2)
               }}
             >
               +
             </button>
           </div>
+
           <button class='btn btn-primary search-modal-btn' type='submit'>
             <p>Check availability</p>
           </button>

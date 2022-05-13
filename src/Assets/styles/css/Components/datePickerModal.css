@@ -44,3 +44,6 @@
 .search-modal-btn {
   width: 100%;
 }
+.modal-body {
+  padding-top: 10px !important;
+}

@@ -256,7 +256,7 @@ class Searchbox extends Component {
                           <div class='quantity quantity1'>
                             <span class='minus'>-</span>
                             <input
-                              class='inputQty'
+                              class='inputQty '
                               type='number'
                               name='Adults'
                               min='0'

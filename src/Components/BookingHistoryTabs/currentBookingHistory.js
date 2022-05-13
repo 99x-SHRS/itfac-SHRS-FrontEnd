@@ -115,7 +115,6 @@ const CurrentBookingHistory = () => {
                 ) : (
                   bookings.map((item, i) => {
                     // paymentStatus(item.bookingId)
-                    console.log(item)
                     return (
                       <tr>
                         <th scope='row'>B-{item.bookingId}</th>

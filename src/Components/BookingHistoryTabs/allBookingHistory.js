@@ -47,8 +47,6 @@ const AllBookingHistory = () => {
         if (res.status == 200) {
           setBookings(res.data.rows)
           setLoading(false)
-          console.log(loading)
-          console.log(bookings)
           setpageCount(Math.ceil(res.data.count / limit))
         }
       })

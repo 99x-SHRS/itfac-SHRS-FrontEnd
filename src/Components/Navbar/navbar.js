@@ -203,8 +203,8 @@ const Navbars = () => {
           <Signup />
         </Modal>
         <Modal open={login} onClose={onCloseModalclose}>
-          <SignupAndLogin />
-          <Login />
+          <SignupAndLogin setLogin={setLogin} />
+          <Login setLogin={setLogin} />
         </Modal>
       </div>
     </>

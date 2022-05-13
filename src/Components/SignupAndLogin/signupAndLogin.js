@@ -1,7 +1,12 @@
-import React, { Component, useEffect } from 'react'
+import React, { Component, useEffect, useState } from 'react'
+import { userLogin, registerHotel } from '../../Services/Api/Utilities'
+import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
 import '../../Assets/styles/css/Components/signupAndLogin.css'
 
-const SignupAndLogin = () => {
+const SignupAndLogin = ({ setLogin }) => {
+  const [content, setContent] = useState('')
+  const [loading, setLoading] = useState(false)
+
   useEffect(() => {
     const signUpButton = document.getElementById('signUp')
     const signInButton = document.getElementById('signIn')
@@ -15,6 +20,28 @@ const SignupAndLogin = () => {
       container.classList.remove('right-panel-active')
     })
   }, [])
+
+  const loginHandle = async () => {
+    setContent('sign in to you account')
+    setLoading(true)
+    const dataModel = {
+      email: document.getElementById('loginEmail').value,
+      password: document.getElementById('loginPassword').value,
+    }
+
+    await userLogin(dataModel)
+      .then((res) => {
+        if (res.data.status === 'success') {
+          localStorage.setItem('atoken', res.data.accessToken)
+          localStorage.setItem('rtoken', res.data.refreshToken)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    setLoading(false)
+    setLogin(false)
+  }
   return (
     <div className='login-model'>
       <div class='container' id='container'>
@@ -34,14 +61,14 @@ const SignupAndLogin = () => {
             </div>
             <span>or use your email for registration</span>
 
-            <input type='email' placeholder='Email' />
-            <input type='password' placeholder='Password' />
-            <input type='password' placeholder='re-password' />
+            <input type='email' placeholder='Email' required />
+            <input type='password' placeholder='Password' required />
+            <input type='password' placeholder='re-password' required />
             <button>Sign Up</button>
           </form>
         </div>
         <div class='form-container sign-in-container'>
-          <form action='#'>
+          <form onSubmit={loginHandle}>
             <h1>Sign in</h1>
             <div class='social-container'>
               <a href='#' class='social'>
@@ -55,10 +82,15 @@ const SignupAndLogin = () => {
               </a>
             </div>
             <span>or use your account</span>
-            <input type='email' placeholder='Email' />
-            <input type='password' placeholder='Password' />
+            <input type='email' placeholder='Email' id='loginEmail' required />
+            <input
+              type='password'
+              placeholder='Password'
+              id='loginPassword'
+              required
+            />
             <a href='#'>Forgot your password?</a>
-            <button>Sign In</button>
+            <button type='submit'>Sign In</button>
           </form>
         </div>
         <div class='overlay-container'>
@@ -82,6 +114,7 @@ const SignupAndLogin = () => {
           </div>
         </div>
       </div>
+      <DarkOverlaybackGround loading={loading} content={content} />
     </div>
   )
 }
