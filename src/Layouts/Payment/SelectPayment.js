@@ -1,8 +1,33 @@
 import React, { Component, useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import PaymentOptions from '../../Layouts/Payment/PaymentOptions.js'
+import { getAllPaymentsBybookingId } from '../../Services/Api/Utilities/index.js'
 import '../../Assets/styles/css/Layouts/payment.css'
 const SelectPayment = ({ amount }) => {
+  const [searchedParams, setSearchedparams] = useSearchParams()
+  useEffect(() => {
+    if (searchedParams.get('edit') || '') {
+      getpaymentdetails()
+    }
+  }, [])
   const [paymentMethod, setPaymentMethod] = useState('')
+  const getpaymentdetails = async () => {
+    const dataModel = {
+      id: searchedParams.get('booking') || '',
+    }
+    await getAllPaymentsBybookingId(dataModel)
+      .then((res) => {
+        console.log(res.data[0].paymenttype)
+        if (res.status == 200) {
+          let method = res.data[0].paymenttype
+          document.getElementById(method).checked = true
+          setPaymentMethod(method)
+        }
+      })
+      .catch((err) => {
+        //console.log(err)
+      })
+  }
   return (
     <div className='payment-gateway-interface'>
       <div className='select-payment-method ml-5 pl-5'>
@@ -12,7 +37,7 @@ const SelectPayment = ({ amount }) => {
               class='form-check-input'
               type='radio'
               name='flexRadioDefault'
-              id='flexRadioDefault2'
+              id='default'
               onClick={() => {
                 setPaymentMethod('default')
               }}

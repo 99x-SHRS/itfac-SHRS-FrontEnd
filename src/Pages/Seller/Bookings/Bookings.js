@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import AllBookings from './AllBookings.js'
 import CurrenetBookings from './CurrenetBookings.js'
 import PastBookings from './PastBookings.js'
@@ -7,6 +7,12 @@ import Footer from '../../../Layouts/Footer/footer'
 import '../../../Assets/styles/css/Seller/Pages/bookings.css'
 import '../../../Assets/styles/css/Layouts/bookingHistoryTable.css'
 const Bookings = () => {
+  useEffect(() => {
+    const checkTable = () => {
+      document.getElementById('tab1').checked = true
+    }
+    checkTable()
+  }, [])
   return (
     <div>
       <Navbar />

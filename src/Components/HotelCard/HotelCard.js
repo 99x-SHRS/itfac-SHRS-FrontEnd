@@ -1,21 +1,44 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
+import { Modal } from 'react-bootstrap'
 import '../../Assets/styles/css/Components/hotelCard.css'
-import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
-class HotelCard extends Component {
-  getStars(params) {
+
+import SearchDatePicker from '../SearchDatePicker/SearchDatePicker'
+const HotelCard = ({ hotel }) => {
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => {
+    setShow(false)
+  }
+  const handleShow = () => {
+    setShow(true)
+  }
+
+  const getStars = () => {
     let content = []
-    for (let i = 0; i < params; i++) {
+    for (let i = 0; i < 1; i++) {
       content.push(<i class='fa fa-star' aria-hidden='true'></i>)
     }
     return content
   }
-  render() {
-    return (
+  return (
+    <div>
       <div class='card recommonded-hotels'>
-        <img src={Hotel_1} class='card-img-top' alt='...' />
-        <div class='card-body'>
+        <img
+          src={hotel.image}
+          class='card-img-top'
+          alt='...'
+          onClick={() => {
+            handleShow()
+          }}
+        />
+        <div
+          class='card-body'
+          onClick={() => {
+            handleShow()
+          }}
+        >
           <h4 class='card-title'>
-            {this.props.hotel.name} {this.getStars(1)}
+            {hotel.name} {getStars(1)}
           </h4>
           <div class='flex items-center'>
             <svg
@@ -35,18 +58,36 @@ class HotelCard extends Component {
             </svg>
             <p class='text-xs text-gray-600'>
               Galle
-              <a class='font-semibold text-gray-700 ml-2' href=''>
-                Show on Map
-              </a>
+              <a class='font-semibold text-gray-700 ml-2'>Show on Map</a>
             </p>
           </div>
-          <p class='card-text text-justify mt-3'>
-            {this.props.hotel.description}
-          </p>
+          {/* <p class='card-text text-justify mt-3'>
+            {this.props.hotel.description.}
+          </p> */}
+        </div>
+        <div>
+          {/* <Button variant='primary' onClick={handleShow}>
+            Launch demo modal
+          </Button> */}
+
+          <Modal
+            show={show}
+            onHide={() => {
+              handleClose()
+            }}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Pickup your date</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <SearchDatePicker hotelName={hotel.name} />
+            </Modal.Body>
+            <Modal.Footer></Modal.Footer>
+          </Modal>
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default HotelCard

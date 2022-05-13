@@ -13,7 +13,7 @@ const CurrenetBookings = () => {
   useEffect(() => {
     getBookings(0)
     setLoading(true)
-  }, [])
+  }, [limit])
   const getBookings = async (currentPage) => {
     const dataModel = {
       id: 1, //user id
@@ -23,10 +23,8 @@ const CurrenetBookings = () => {
       .then((res) => {
         if (res.status == 200) {
           setBookings(res.data.rows)
-          setLoading(false)
-          console.log(loading)
-          console.log(bookings)
           setpageCount(Math.ceil(res.data.count / limit))
+          setLoading(false)
         }
       })
       .catch((err) => {
@@ -35,7 +33,6 @@ const CurrenetBookings = () => {
   }
   const handlePageClick = async (data) => {
     let currentPage = data.selected
-    console.log(currentPage)
     getBookings(currentPage)
   }
 
@@ -68,7 +65,7 @@ const CurrenetBookings = () => {
               <thead class='thead-dark'>
                 <tr>
                   <th scope='col'>Booking ID</th>
-                  <th scope='col'>Hotel Name</th>
+                  <th scope='col'>Customer Name</th>
                   <th scope='col'>To be checking</th>
                   {/* <th scope='col'>Status</th> */}
                   <th scope='col'>Info</th>
@@ -96,7 +93,7 @@ const CurrenetBookings = () => {
                     return (
                       <tr>
                         <th scope='row'>B-{item.bookingId}</th>
-                        <td>{item.hotel.name}</td>
+                        <td>{item.customerId}</td>
                         <td>
                           {item.checkInDate.split('T')[0]} to{' '}
                           {item.checkOutDate.split('T')[0]}{' '}
@@ -113,7 +110,7 @@ const CurrenetBookings = () => {
                             delay={{ show: 250, hide: 400 }}
                             overlay={renderTooltip}
                           >
-                            <Link to={'/booking-history/details'}>
+                            <Link to={`/seller/booking/${item.bookingId}`}>
                               <i
                                 class='fa fa-info-circle'
                                 style={{ fontSize: '1.5rem' }}
@@ -158,15 +155,14 @@ const CurrenetBookings = () => {
                     return (
                       <tr>
                         <th scope='row'>B-{item.bookingId}</th>
-                        <td>{item.hotel.name}</td>
-
+                        <td>{item.customerId}</td>
                         <td>
                           <OverlayTrigger
                             placement='left'
                             delay={{ show: 250, hide: 250 }}
                             overlay={renderTooltip}
                           >
-                            <Link to={'/booking-history/details'}>
+                            <Link to={`/seller/booking/${item.bookingId}`}>
                               <i
                                 class='fa fa-info-circle'
                                 style={{ fontSize: '1.5rem' }}

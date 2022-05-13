@@ -1,8 +1,6 @@
 import React, { Component, createRef } from 'react'
-import { Link } from 'react-router-dom'
 import DatePicker from '../DatePicker/datepicker.js'
 import jQuery from 'jquery'
-import History from '../History/history.js'
 
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'

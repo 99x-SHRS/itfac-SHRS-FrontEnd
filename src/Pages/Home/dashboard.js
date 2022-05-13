@@ -4,16 +4,35 @@ import TopDestination from '../../Layouts/TopDestination/topDestination.js'
 import Browsetype from '../../Components/Carousel/browsetype.js'
 import RecommondedHotels from '../../Layouts/RecommondedHotels/recommondedHotels.js'
 import Footer from '../../Layouts/Footer/footer.js'
-
+import { sortHotelsByBookingCount } from '../../Services/Api/Utilities/index.js'
 const Dashboard = () => {
+  const [recommondedHotel, setRecommondedHotel] = useState([])
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    pageOnLoad()
+  }, [])
+
+  const pageOnLoad = async () => {
+    const dataModel = {
+      id: 1, //user id
+    }
+    await sortHotelsByBookingCount(dataModel)
+      .then((res) => {
+        console.log(res.data)
+        setRecommondedHotel(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   return (
     <div>
       <Header />
-      <RecommondedHotels />
+      <RecommondedHotels hotels={recommondedHotel} />
       <TopDestination />
-      <RecommondedHotels />
+      <RecommondedHotels hotels={recommondedHotel} />
       <Browsetype />
-      <RecommondedHotels />
+      <RecommondedHotels hotels={recommondedHotel} />
       <Footer />
     </div>
   )

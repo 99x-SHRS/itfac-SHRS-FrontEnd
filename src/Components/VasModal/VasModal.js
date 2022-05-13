@@ -9,9 +9,16 @@ const DialogModal = () => {
   const handleShow = () => setShow(true)
   useEffect(() => {
     if (!vasStatus && !show) {
-      window.location.href = `/booking/details?booking=${
-        searchedParams.get('booking') || ''
-      }`
+      let edit = searchedParams.get('edit') || ''
+      if (edit) {
+        window.location.href = `/booking/details?booking=${
+          searchedParams.get('booking') || ''
+        }&edit=true`
+      } else {
+        window.location.href = `/booking/details?booking=${
+          searchedParams.get('booking') || ''
+        }`
+      }
     }
   }, [show])
   return (

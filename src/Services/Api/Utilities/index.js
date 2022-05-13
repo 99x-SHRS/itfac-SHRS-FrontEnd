@@ -1,5 +1,6 @@
 import provider from './provider'
 const BASE_URL = 'https://hotelreservationapiv1.herokuapp.com/api/v1'
+// const BASE_URL = 'localhost:8000/api/v1'
 
 // *****************************************************************************
 //                          hotels end points
@@ -47,6 +48,14 @@ const getSavedhotelByCustomerId = async (bodyData) => {
     BASE_URL,
     'hotel',
     'getSavedhotelByCustomerId',
+    bodyData
+  )
+}
+const sortHotelsByBookingCount = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'sortHotelsByBookingCount',
     bodyData
   )
 }
@@ -280,6 +289,18 @@ const deleteVASById = async (params) => {
 // *****************************************************************************
 //                          payment  end points
 // *****************************************************************************
+
+const pay = async (bodyData) => {
+  return await provider.insertData(BASE_URL, 'payment', 'pay', bodyData)
+}
+const getAllPaymentsBybookingId = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'payment',
+    'getAllPaymentsBybookingId',
+    bodyData
+  )
+}
 const getTotalAmountByBookingId = async (bodyData) => {
   return await provider.getOneByIdPost(
     BASE_URL,
@@ -321,13 +342,6 @@ const getCustomerDiscount = async (bodyData) => {
   )
 }
 
-// *****************************************************************************
-//                          payment   end points
-// *****************************************************************************
-
-const pay = async (bodyData) => {
-  return await provider.insertData(BASE_URL, 'payment', 'pay', bodyData)
-}
 // *****************************************************************************
 //                          souvenir   end points
 // *****************************************************************************
@@ -394,4 +408,6 @@ export {
   getAllBookigsByHotelAdminId,
   getCurrentBookigsByHotelAdminId,
   getPastBookigsByHotelAdminId,
+  getAllPaymentsBybookingId,
+  sortHotelsByBookingCount,
 }

@@ -10,6 +10,8 @@ import ListedRooms from '../Layouts/ListingRoom/ListedRooms.js'
 import AddRoomImage from '../Layouts/ListingRoom/AddRoomImage.js'
 import SellerDashboard from '../Pages/Seller/Dashboard/Dashboard'
 import Bookings from '../Pages/Seller/Bookings/Bookings.js'
+import BookingDetails from '../Pages/Seller/Bookings/BookingDetails.js'
+import Revenue from '../Pages/Seller/Revenue/Revenue.js'
 const SellerRoutes = (
   <>
     <Route exact path='/seller/hotels' element={<ListedHotels />}></Route>
@@ -51,6 +53,12 @@ const SellerRoutes = (
     ></Route>
     <Route exact path='/seller/dashboard' element={<SellerDashboard />}></Route>
     <Route exact path='/seller/bookings' element={<Bookings />}></Route>
+    <Route
+      exact
+      path='/seller/booking/:id'
+      element={<BookingDetails />}
+    ></Route>
+    <Route exact path='/seller/revenue' element={<Revenue />}></Route>
   </>
 )
 

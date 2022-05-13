@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -22,7 +22,7 @@ const PaymentOptions = (payment) => {
   const payBooking = async () => {
     console.log('called')
     const dataModel = {
-      paymenttypeId: 16,
+      paymenttype: payment.method,
       bookingId: searchedParams.get('booking') || '',
       payment: payment.payment,
     }
@@ -34,6 +34,7 @@ const PaymentOptions = (payment) => {
         console.log(err)
       })
   }
+
   return (
     <div className='payment-gateway-interface'>
       <div>
