@@ -1,11 +1,25 @@
 import React, { Component, useEffect, useState } from 'react'
-import { userLogin } from '../../Services/Api/Utilities'
+import { userLogin, updateUserById } from '../../Services/Api/Utilities'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
 import '../../Assets/styles/css/Components/login.css'
 
 const Login = ({ setLogin }) => {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
+
+  const updateRefreshToken = async () => {
+    const uId = localStorage.getItem('uId')
+    const dataModal = {
+      refreshToken: localStorage.getItem('rtoken'),
+    }
+    await updateUserById(uId, dataModal)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
 
   const loginHandle = async () => {
     setContent('sign in to your account')
@@ -14,12 +28,12 @@ const Login = ({ setLogin }) => {
       email: document.getElementById('loginEmail2').value,
       password: document.getElementById('loginPassword2').value,
     }
-    console.log(dataModel)
     await userLogin(dataModel)
       .then((res) => {
         if (res.data.status === 'success') {
           localStorage.setItem('atoken', res.data.accessToken)
           localStorage.setItem('rtoken', res.data.refreshToken)
+          localStorage.setItem('uId', 1)
         }
 
         console.log(res)
