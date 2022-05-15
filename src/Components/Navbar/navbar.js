@@ -23,13 +23,19 @@ const Navbars = () => {
     toast.configure()
     let session = localStorage.getItem('session')
     let currency = localStorage.getItem('currency')
+    console.log(session)
     if (session) {
       setLoggedin(true)
+    } else {
+      setLoggedin(false)
     }
     if (currency != null || currency != undefined) {
       setCurrency(currency)
     }
   }, [])
+  useEffect(() => {
+    document.getElementById('currency-selector').hidden = !loggedin
+  }, [loggedin])
 
   const loginMount = () => {
     return LoginSignup
@@ -117,6 +123,7 @@ const Navbars = () => {
           <div className='nav-items'>
             <select
               className='currency-selector'
+              id='currency-selector'
               onChange={(e) => {
                 setCurrency(e.target.value)
                 changeCurrency(e.target.value)
@@ -243,8 +250,8 @@ const Navbars = () => {
 
       <div>
         <Modal open={sign} onClose={onCloseModal}>
-          <SignupAndLogin />
-          <Signup />
+          <SignupAndLogin setSign={setSign} setLoggedin={setLoggedin} />
+          <Signup setSign={setSign} setLoggedin={setLoggedin} />
         </Modal>
         <Modal open={login} onClose={onCloseModalclose}>
           <SignupAndLogin setLogin={setLogin} setLoggedin={setLoggedin} />

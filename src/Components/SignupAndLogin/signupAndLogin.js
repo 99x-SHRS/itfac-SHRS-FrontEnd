@@ -1,11 +1,11 @@
 import React, { Component, useEffect, useState } from 'react'
-import { userLogin, registerHotel } from '../../Services/Api/Utilities'
+import { userLogin, addUser } from '../../Services/Api/Utilities'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
 import '../../Assets/styles/css/Components/signupAndLogin.css'
 
-const SignupAndLogin = ({ setLogin, setLoggedin }) => {
+const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
@@ -46,6 +46,7 @@ const SignupAndLogin = ({ setLogin, setLoggedin }) => {
           localStorage.setItem('refreshToken', res.data.refreshToken)
           localStorage.setItem('user', res.data.userId)
           localStorage.setItem('currency', res.data.currency)
+          console.log(res.data.currency)
           localStorage.setItem('session', true)
           setLoggedin(true)
           notifySuccess('You have loggedin successfully')
@@ -60,11 +61,54 @@ const SignupAndLogin = ({ setLogin, setLoggedin }) => {
     setLogin(false)
     navigate('/')
   }
+  const signUpHandle = async (event) => {
+    event.preventDefault()
+    setContent('Creating your account')
+    setLoading(true)
+    let password = document.getElementById('signupPassword').value
+    let repassword = document.getElementById('reEnterPassword').value
+
+    if (password === repassword) {
+      const dataModel = {
+        email: document.getElementById('signupEmail').value,
+        password: document.getElementById('signupPassword').value,
+      }
+      await addUser(dataModel)
+        .then((res) => {
+          console.log(res)
+          if (res.data) {
+            notifySuccess(
+              'Successfully created your account and please check you email to verify the account'
+            )
+            setLoading(false)
+            setSign(false)
+            navigate('/')
+          } else {
+            notifyError('This email is aleady taken')
+            document.getElementById('signupEmail').value = null
+            document.getElementById('signupPassword').value = null
+            document.getElementById('reEnterPassword').value = null
+            setLoading(false)
+          }
+        })
+        .catch((err) => {
+          console.log('err')
+          setLoading(false)
+          setSign(false)
+          navigate('/')
+        })
+    } else {
+      document.getElementById('signupPassword').value = null
+      document.getElementById('reEnterPassword').value = null
+      notifyError('password comfirmation is incorrect')
+      setLoading(false)
+    }
+  }
   return (
     <div className='login-model'>
       <div class='container' id='container'>
         <div class='form-container sign-up-container'>
-          <form action='#'>
+          <form onSubmit={signUpHandle}>
             <h1>Create Account</h1>
             <div class='social-container'>
               <a href='#' class='social'>
@@ -79,10 +123,20 @@ const SignupAndLogin = ({ setLogin, setLoggedin }) => {
             </div>
             <span>or use your email for registration</span>
 
-            <input type='email' placeholder='Email' required />
-            <input type='password' placeholder='Password' required />
-            <input type='password' placeholder='re-password' required />
-            <button>Sign Up</button>
+            <input type='text' placeholder='Email' id='signupEmail' required />
+            <input
+              type='password'
+              placeholder='password'
+              id='signupPassword'
+              required
+            />
+            <input
+              type='password'
+              placeholder='Re enter Password'
+              id='reEnterPassword'
+              required
+            />
+            <button type='submit'>Sign Up</button>
           </form>
         </div>
         <div class='form-container sign-in-container'>

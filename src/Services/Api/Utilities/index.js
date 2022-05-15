@@ -18,7 +18,9 @@ const updateUserById = async (id, bodyData) => {
     bodyData
   )
 }
-
+const addUser = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'user', 'addUser', bodyData)
+}
 // *****************************************************************************
 //                          hotels end points
 // *****************************************************************************
@@ -429,4 +431,5 @@ export {
   sortHotelsByBookingCount,
   userLogin,
   updateUserById,
+  addUser,
 }
