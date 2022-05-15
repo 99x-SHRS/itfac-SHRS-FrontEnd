@@ -1,14 +1,25 @@
 import React, { Component, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { userLogin, updateUserById } from '../../Services/Api/Utilities'
+import { toast } from 'react-toastify'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
 import '../../Assets/styles/css/Components/login.css'
 
-const Login = ({ setLogin }) => {
+const Login = ({ setLogin, setLoggedin }) => {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
-
+  const navigate = useNavigate()
+  useEffect(() => {
+    toast.configure()
+  }, [])
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
+  }
   const updateRefreshToken = async () => {
-    const uId = localStorage.getItem('uId')
+    const uId = localStorage.getItem('user')
     const dataModal = {
       refreshToken: localStorage.getItem('rtoken'),
     }
@@ -21,7 +32,8 @@ const Login = ({ setLogin }) => {
       })
   }
 
-  const loginHandle = async () => {
+  const loginHandle = async (event) => {
+    event.preventDefault()
     setContent('sign in to your account')
     setLoading(true)
     const dataModel = {
@@ -30,19 +42,25 @@ const Login = ({ setLogin }) => {
     }
     await userLogin(dataModel)
       .then((res) => {
-        if (res.data.status === 'success') {
-          localStorage.setItem('atoken', res.data.accessToken)
-          localStorage.setItem('rtoken', res.data.refreshToken)
-          localStorage.setItem('uId', 1)
+        if (res.data.status) {
+          localStorage.setItem('accessToken', res.data.accessToken)
+          localStorage.setItem('refreshToken', res.data.refreshToken)
+          localStorage.setItem('user', res.data.userId)
+          localStorage.setItem('session', true)
+          setLoggedin(true)
+          notifySuccess('You have loggedin successfully')
+        } else {
+          notifyError('User name or password is incorrect')
         }
-
         console.log(res)
       })
       .catch((err) => {
         console.log(err)
       })
+
     setLoading(false)
     setLogin(false)
+    navigate('/')
   }
   return (
     <div className='modal-body login-container'>

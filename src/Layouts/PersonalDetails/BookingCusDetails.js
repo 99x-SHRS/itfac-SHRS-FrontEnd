@@ -74,7 +74,7 @@ const BookingCusDetails = () => {
       arrivalTime: document.getElementById('arrivalTime').value,
       guestName: first_name + ' ' + last_name,
       rentCar: event.target.rent_car.checked,
-      customerId: 1,
+      customerId: localStorage.getItem('user'), //user id
       contactNo: number,
     }
     console.log(dataModel)

@@ -33,7 +33,7 @@ class HotelCard extends Component {
   }
   async hotelSave() {
     const dataModel = {
-      customerId: 1, //user id
+      customerId: localStorage.getItem('user'), //user id
       hotelId: this.props.hotelData.hotelHotelId,
     }
     await saveHotelById(dataModel)

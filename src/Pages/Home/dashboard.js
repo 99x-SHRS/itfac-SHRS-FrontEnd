@@ -14,7 +14,7 @@ const Dashboard = () => {
 
   const pageOnLoad = async () => {
     const dataModel = {
-      id: 1, //user id
+      id: localStorage.getItem('user'), //user id
     }
     await sortHotelsByBookingCount(dataModel)
       .then((res) => {

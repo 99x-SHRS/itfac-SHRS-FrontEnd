@@ -1,14 +1,13 @@
 import React, { Component, useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Dropdown, Nav, Container, Button } from 'react-bootstrap'
 import Modal from 'react-responsive-modal'
 import { toast } from 'react-toastify'
 import Login from '../Login/login'
 import Signup from '../Signup/signup'
-import Dashboard from '../../Pages/Home/dashboard'
 import SignupAndLogin from '../SignupAndLogin/signupAndLogin'
 import LoginSignup from '../../Layouts/LoginSignup/loginSignup'
-import Profile from '../../Assets/images/profile/loggedIn-user.jpg'
+import { updateUserById } from '../../Services/Api/Utilities'
 import '../../Assets/styles/css/Components/navbar.css'
 import 'react-responsive-modal/styles.css'
 
@@ -17,11 +16,15 @@ const Navbars = () => {
   const [currency, setCurrency] = useState('USD')
   const [login, setLogin] = useState(false)
   const [sign, setSign] = useState(false)
-  const [loggedin, setLoggedin] = useState(true)
-
+  const [loggedin, setLoggedin] = useState(false)
+  const navigate = useNavigate()
   useEffect(() => {
     window.scrollTo(0, 0)
     toast.configure()
+    let session = localStorage.getItem('session')
+    if (session) {
+      setLoggedin(true)
+    }
   }, [])
 
   const loginMount = () => {
@@ -45,7 +48,7 @@ const Navbars = () => {
   }
 
   const homepage = () => {
-    window.location.href = '/'
+    navigate('/')
   }
   const loginForm = () => {}
   var prevScrollpos = window.pageYOffset
@@ -60,7 +63,23 @@ const Navbars = () => {
 
     prevScrollpos = currentScrollPos
   }
-
+  const logOut = async () => {
+    const id = localStorage.getItem('user')
+    const dataModal = {
+      refreshToken: null,
+    }
+    await updateUserById(id, dataModal)
+      .then((res) => {
+        console.log(res)
+        if (res.status == 200) {
+          localStorage.clear()
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    navigate('/')
+  }
   return (
     <>
       <div className='nav-bar-container' id='navbar'>
@@ -169,9 +188,10 @@ const Navbars = () => {
                     My Account
                   </Dropdown.Item>
                   <Dropdown.Item
-                    href='#/action-3'
                     onClick={() => {
                       setLoggedin(false)
+                      logOut()
+                      homepage()
                     }}
                   >
                     Sign Out
@@ -203,8 +223,8 @@ const Navbars = () => {
           <Signup />
         </Modal>
         <Modal open={login} onClose={onCloseModalclose}>
-          <SignupAndLogin setLogin={setLogin} />
-          <Login setLogin={setLogin} />
+          <SignupAndLogin setLogin={setLogin} setLoggedin={setLoggedin} />
+          <Login setLogin={setLogin} setLoggedin={setLoggedin} />
         </Modal>
       </div>
     </>

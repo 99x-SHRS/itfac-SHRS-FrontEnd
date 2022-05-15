@@ -20,7 +20,7 @@ const SavedHotel = () => {
 
   const getAllSavedHotels = async () => {
     const dataModel = {
-      id: 1, //user id
+      id: localStorage.getItem('user'), //user id
     }
     await getSavedhotelByCustomerId(dataModel)
       .then((res) => {
@@ -37,7 +37,7 @@ const SavedHotel = () => {
   }
 
   const removeSaveHotel = async (hotelId) => {
-    const dataModel = [hotelId, 1] //user id
+    const dataModel = [hotelId, localStorage.getItem('user')] //user id
     await deleteSaveHotelById(dataModel)
       .then((res) => {
         console.log(res)

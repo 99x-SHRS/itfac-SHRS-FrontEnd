@@ -1,13 +1,17 @@
 import React, { Component, useEffect, useState } from 'react'
 import { userLogin, registerHotel } from '../../Services/Api/Utilities'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
 import '../../Assets/styles/css/Components/signupAndLogin.css'
 
-const SignupAndLogin = ({ setLogin }) => {
+const SignupAndLogin = ({ setLogin, setLoggedin }) => {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
 
   useEffect(() => {
+    toast.configure()
     const signUpButton = document.getElementById('signUp')
     const signInButton = document.getElementById('signIn')
     const container = document.getElementById('container')
@@ -20,20 +24,32 @@ const SignupAndLogin = ({ setLogin }) => {
       container.classList.remove('right-panel-active')
     })
   }, [])
-
-  const loginHandle = async () => {
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
+  }
+  const loginHandle = async (event) => {
+    event.preventDefault()
     setContent('sign in to you account')
     setLoading(true)
     const dataModel = {
       email: document.getElementById('loginEmail').value,
       password: document.getElementById('loginPassword').value,
     }
-
     await userLogin(dataModel)
       .then((res) => {
-        if (res.data.status === 'success') {
-          localStorage.setItem('atoken', res.data.accessToken)
-          localStorage.setItem('rtoken', res.data.refreshToken)
+        console.log(res)
+        if (res.data.status) {
+          localStorage.setItem('accessToken', res.data.accessToken)
+          localStorage.setItem('refreshToken', res.data.refreshToken)
+          localStorage.setItem('user', res.data.userId)
+          localStorage.setItem('session', true)
+          setLoggedin(true)
+          notifySuccess('You have loggedin successfully')
+        } else {
+          notifyError('User name or password is incorrect')
         }
       })
       .catch((err) => {
@@ -41,6 +57,7 @@ const SignupAndLogin = ({ setLogin }) => {
       })
     setLoading(false)
     setLogin(false)
+    navigate('/')
   }
   return (
     <div className='login-model'>
