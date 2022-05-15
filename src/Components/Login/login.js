@@ -46,6 +46,7 @@ const Login = ({ setLogin, setLoggedin }) => {
           localStorage.setItem('accessToken', res.data.accessToken)
           localStorage.setItem('refreshToken', res.data.refreshToken)
           localStorage.setItem('user', res.data.userId)
+          localStorage.setItem('user', res.data.currency)
           localStorage.setItem('session', true)
           setLoggedin(true)
           notifySuccess('You have loggedin successfully')
