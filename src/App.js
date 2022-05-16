@@ -5,6 +5,7 @@ import History from './Components/History/history'
 import UserRoutes from './Routes/userRouter'
 import SellerRoutes from './Routes/sellerRouter'
 import ChatBot from './Services/ChatBot/chatBot.js'
+import ShareButton from './Components/ShareButton/ShareButton'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './App.css'
@@ -24,7 +25,8 @@ function App() {
       <div className='App'>
         <Routes>{UserRoutes}</Routes>
         <Routes>{SellerRoutes}</Routes>
-        {/* <ChatBot /> */}
+        <ShareButton />
+        <ChatBot />
         {/* {loading ? (
           <div className='Loader'>
             <PropagateLoader
