@@ -34,7 +34,7 @@ const ShareButton = () => {
         }}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Invite your friend</Modal.Title>
+          <Modal.Title>Invite your friends</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ShareModal />

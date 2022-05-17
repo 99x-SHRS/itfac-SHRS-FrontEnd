@@ -11,7 +11,7 @@ const ShareModal = () => {
   const copyText = () => {
     let copiedText = document.getElementById('copiedText').value
     navigator.clipboard.writeText(copiedText)
-    notifySuccess('Copied sharerable link ' + copiedText)
+    notifySuccess('Copied sharerable link to the clipboard')
   }
   const notifySuccess = (message) => {
     toast.success(message)
