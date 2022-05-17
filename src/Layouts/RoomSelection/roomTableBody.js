@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import RoomImages from '../../Components/RoomTypeSelector/roomImages'
 import HorizontalLine from '../../Components/HorizontalLine/horizontalLine'
 import NumberInputBox from '../../Components/NumberInputBox/inputBoxNumber'
@@ -17,6 +17,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
   const [setedRoom, setRoom] = useState(0)
   const [discount, setDiscount] = useState(0)
   const [avQty, setAvQty] = useState(null)
+  const navigate = useNavigate()
 
   useEffect(() => {
     setRoomsData(rooms)
@@ -54,7 +55,8 @@ const TableBody = ({ rooms, souvenirs1 }) => {
         try {
           const bookingId = res.data.bookingId
           console.log(res)
-          window.location.href = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
+          let URL = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
+          navigate(URL)
         } catch (error) {
           console.log(error)
         }
