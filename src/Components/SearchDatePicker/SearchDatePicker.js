@@ -39,7 +39,11 @@ const SearchDatePicker = ({ hotelName }) => {
   }
 
   const submitHandle = () => {
-    const URL = `/hotels?location=${hotelName}&checkin-date=${dateRange[0]}&checkout-date=${dateRange[1]}&adults=${adults}&children=${children}&rooms=${rooms}`
+    const URL = `/hotels?location=${hotelName}&checkin-date=${dateRange[0]
+      .toISOString()
+      .slice(0, 10)}&checkout-date=${dateRange[1]
+      .toISOString()
+      .slice(0, 10)}&adults=${adults}&children=${children}&rooms=${rooms}`
     navigate(URL)
   }
 
