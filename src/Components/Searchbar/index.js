@@ -1,19 +1,40 @@
-import React, { Component, createRef } from 'react'
+import React, { Component, createRef, useEffect, useState } from 'react'
 import DatePicker from '../DatePicker/datepicker.js'
-import jQuery from 'jquery'
 import { useNavigate } from 'react-router-dom'
+import jQuery from 'jquery'
+
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
 
 import '../../Assets/styles/css/Components/searchbar.css'
 
-class Searchbox extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { dateRange: [], URL: '' }
+const Searchbox = () => {
+  const [dateRange, setDateRange] = useState([])
+  const navigate = useNavigate()
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    let data = {
+      location: event.target.address.value,
+      checkInDate: dateRange[0],
+      checkOutDate: dateRange[1],
+      adult: event.target.Adults.value,
+      children: event.target.Children.value,
+      rooms: event.target.Rooms.value,
+    }
+    let URL = `/hotels?location=${data.location}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
+    navigate(URL)
   }
-  componentDidMount() {
+  const getDateRange = (date) => {
+    let dates = [
+      new Date(date[0]).toISOString().slice(0, 10),
+      new Date(date[1]).toISOString().slice(0, 10),
+    ]
+
+    setDateRange(dates)
+  }
+  useEffect(() => {
     ;(function ($) {
       try {
         var body = $('body,html')
@@ -180,151 +201,108 @@ class Searchbox extends Component {
         console.log(err)
       }
     })(jQuery)
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    console.log('called')
-    let data = {
-      location: event.target.address.value,
-      checkInDate: this.state.dateRange[0],
-      checkOutDate: this.state.dateRange[1],
-      adult: event.target.Adults.value,
-      children: event.target.Children.value,
-      rooms: event.target.Rooms.value,
-    }
-    const temp = `/hotels?location=${data.location}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
-    this.setState({ URL: temp })
-  }
-  getDateRange = (date) => {
-    let dates = [
-      new Date(date[0]).toISOString().slice(0, 10),
-      new Date(date[1]).toISOString().slice(0, 10),
-    ]
-
-    this.setState({
-      dateRange: dates,
-    })
-  }
-  eventhandler = (data) => console.log(data)
-  render() {
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <div className=' searchcontainer '>
-            <div className='row'>
-              <div className='col-md-3'>
-                <div class='input-group '>
-                  <label class='label'>Going to</label>
-                  <input
-                    class='input--style-1'
-                    type='text'
-                    name='address'
-                    placeholder='Destination, hotel name'
-                    required='required'
-                  />
-                  <i class='zmdi zmdi-pin input-group-symbol'></i>
-                </div>
-              </div>
-              <div className='col-md-4'>
-                <div class='input-group'>
-                  <DatePicker getDateRange={this.getDateRange} />
-                  <i class='zmdi zmdi-calendar-alt input-group-symbol'></i>
-                </div>
-              </div>
-
-              <div className='col-md-3 travellers ' id='show'>
-                <div class='input-group' id='js-select-special'>
-                  <label class='label'>Travellers</label>
-                  <i class='zmdi zmdi-pin input-group-symbol'></i>
-                  <input
-                    class='input--style-1'
-                    type='text'
-                    name='traveller'
-                    value='1 Adult, 0 Children, 1 Room'
-                    disabled='disabled'
-                    id='info'
-                  />
-                  <i class='zmdi zmdi-chevron-down input-icon'></i>
-                </div>
-                <div class='dropdown-select'>
-                  <ul class='list-room'>
-                    <li class='list-room__item'>
-                      <ul class='list-person'>
-                        <li class='list-person__item'>
-                          <span class='name'>Adults</span>
-                          <div class='quantity quantity1'>
-                            <span class='minus'>-</span>
-                            <input
-                              class='inputQty '
-                              type='number'
-                              name='Adults'
-                              min='0'
-                              value='1'
-                            />
-
-                            <span class='plus'>+</span>
-                          </div>
-                        </li>
-                        <li class='list-person__item'>
-                          <span class='name'>Children</span>
-                          <div class='quantity quantity2'>
-                            <span class='minus'>-</span>
-                            <input
-                              class='inputQty'
-                              type='number'
-                              name='Children'
-                              min='0'
-                              value='0'
-                            />
-                            <span class='plus'>+</span>
-                          </div>
-                        </li>
-                        <li class='list-person__item'>
-                          <span class='name'>Rooms</span>
-                          <div class='quantity quantity3'>
-                            <span class='minus'>-</span>
-                            <input
-                              class='inputQty'
-                              type='number'
-                              name='Rooms'
-                              min='1'
-                              value='1'
-                            />
-                            <span class='plus'>+</span>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className='col-md-2 search-button'>
-                <ButtonSearch URL={this.state.URL} />
-              </div>
-            </div>
-          </div>
-        </form>
-      </div>
-    )
-  }
-}
-
-export default Searchbox
-
-const ButtonSearch = ({ URL }) => {
-  const navigate = useNavigate()
+  }, [])
   return (
     <div>
-      <button
-        class='btn-submit submit-Btn'
-        type='submit'
-        onClick={() => {
-          navigate(URL)
-        }}
-      >
-        <p>search</p>
-      </button>
+      <form onSubmit={handleSubmit}>
+        <div className=' searchcontainer '>
+          <div className='row'>
+            <div className='col-md-3'>
+              <div class='input-group '>
+                <label class='label'>Going to</label>
+                <input
+                  class='input--style-1'
+                  type='text'
+                  name='address'
+                  placeholder='Destination, hotel name'
+                  required='required'
+                />
+                <i class='zmdi zmdi-pin input-group-symbol'></i>
+              </div>
+            </div>
+            <div className='col-md-4'>
+              <div class='input-group'>
+                <DatePicker getDateRange={getDateRange} />
+                <i class='zmdi zmdi-calendar-alt input-group-symbol'></i>
+              </div>
+            </div>
+
+            <div className='col-md-3 travellers ' id='show'>
+              <div class='input-group' id='js-select-special'>
+                <label class='label'>Travellers</label>
+                <i class='zmdi zmdi-pin input-group-symbol'></i>
+                <input
+                  class='input--style-1'
+                  type='text'
+                  name='traveller'
+                  value='1 Adult, 0 Children, 1 Room'
+                  disabled='disabled'
+                  id='info'
+                />
+                <i class='zmdi zmdi-chevron-down input-icon'></i>
+              </div>
+              <div class='dropdown-select'>
+                <ul class='list-room'>
+                  <li class='list-room__item'>
+                    <ul class='list-person'>
+                      <li class='list-person__item'>
+                        <span class='name'>Adults</span>
+                        <div class='quantity quantity1'>
+                          <span class='minus'>-</span>
+                          <input
+                            class='inputQty '
+                            type='number'
+                            name='Adults'
+                            min='0'
+                            value='1'
+                          />
+
+                          <span class='plus'>+</span>
+                        </div>
+                      </li>
+                      <li class='list-person__item'>
+                        <span class='name'>Children</span>
+                        <div class='quantity quantity2'>
+                          <span class='minus'>-</span>
+                          <input
+                            class='inputQty'
+                            type='number'
+                            name='Children'
+                            min='0'
+                            value='0'
+                          />
+                          <span class='plus'>+</span>
+                        </div>
+                      </li>
+                      <li class='list-person__item'>
+                        <span class='name'>Rooms</span>
+                        <div class='quantity quantity3'>
+                          <span class='minus'>-</span>
+                          <input
+                            class='inputQty'
+                            type='number'
+                            name='Rooms'
+                            min='1'
+                            value='1'
+                          />
+                          <span class='plus'>+</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className='col-md-2 search-button'>
+              <button class='btn-submit submit-Btn' type='submit'>
+                <p>search</p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   )
 }
+
+export default Searchbox
