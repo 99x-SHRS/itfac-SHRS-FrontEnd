@@ -1,7 +1,7 @@
 import React, { Component, createRef } from 'react'
 import DatePicker from '../DatePicker/datepicker.js'
 import jQuery from 'jquery'
-
+import { useNavigate } from 'react-router-dom'
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
@@ -11,7 +11,7 @@ import '../../Assets/styles/css/Components/searchbar.css'
 class Searchbox extends Component {
   constructor(props) {
     super(props)
-    this.state = { dateRange: [] }
+    this.state = { dateRange: [], URL: '' }
   }
   componentDidMount() {
     ;(function ($) {
@@ -193,8 +193,8 @@ class Searchbox extends Component {
       children: event.target.Children.value,
       rooms: event.target.Rooms.value,
     }
-    const URL = `location=${data.location}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
-    window.location.href = `/hotels?${URL}`
+    const temp = `/hotels?location=${data.location}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
+    this.setState({ URL: temp })
   }
   getDateRange = (date) => {
     let dates = [
@@ -256,7 +256,7 @@ class Searchbox extends Component {
                           <div class='quantity quantity1'>
                             <span class='minus'>-</span>
                             <input
-                              class='inputQty'
+                              class='inputQty '
                               type='number'
                               name='Adults'
                               min='0'
@@ -300,9 +300,7 @@ class Searchbox extends Component {
                 </div>
               </div>
               <div className='col-md-2 search-button'>
-                <button class='btn-submit submit-Btn' type='submit'>
-                  <p>search</p>
-                </button>
+                <ButtonSearch URL={this.state.URL} />
               </div>
             </div>
           </div>
@@ -313,3 +311,20 @@ class Searchbox extends Component {
 }
 
 export default Searchbox
+
+const ButtonSearch = ({ URL }) => {
+  const navigate = useNavigate()
+  return (
+    <div>
+      <button
+        class='btn-submit submit-Btn'
+        type='submit'
+        onClick={() => {
+          navigate(URL)
+        }}
+      >
+        <p>search</p>
+      </button>
+    </div>
+  )
+}

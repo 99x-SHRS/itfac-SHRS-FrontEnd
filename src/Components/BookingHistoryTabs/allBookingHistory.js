@@ -39,7 +39,7 @@ const AllBookingHistory = () => {
 
   const getBookings = async (currentPage) => {
     const dataModel = {
-      id: 1,
+      id: localStorage.getItem('user'), //user id
       page: currentPage,
     }
     await getBookingByUserId(dataModel)
@@ -47,8 +47,6 @@ const AllBookingHistory = () => {
         if (res.status == 200) {
           setBookings(res.data.rows)
           setLoading(false)
-          console.log(loading)
-          console.log(bookings)
           setpageCount(Math.ceil(res.data.count / limit))
         }
       })

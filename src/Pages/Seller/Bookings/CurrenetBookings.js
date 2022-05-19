@@ -16,7 +16,7 @@ const CurrenetBookings = () => {
   }, [limit])
   const getBookings = async (currentPage) => {
     const dataModel = {
-      id: 1, //user id
+      id: localStorage.getItem('user'), //user id
       page: currentPage,
     }
     await getCurrentBookigsByHotelAdminId(dataModel)

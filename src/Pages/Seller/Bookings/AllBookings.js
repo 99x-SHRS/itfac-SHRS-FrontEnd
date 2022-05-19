@@ -16,7 +16,7 @@ const AllBookings = () => {
   }, [])
   const getBookings = async (currentPage) => {
     const dataModel = {
-      id: 1, //user id
+      id: localStorage.getItem('user'), //user id
       page: currentPage,
     }
     await getAllBookigsByHotelAdminId(dataModel)
@@ -24,8 +24,6 @@ const AllBookings = () => {
         if (res.status == 200) {
           setBookings(res.data.rows)
           setLoading(false)
-          console.log(loading)
-          console.log(bookings)
           setpageCount(Math.ceil(res.data.count / limit))
         }
       })

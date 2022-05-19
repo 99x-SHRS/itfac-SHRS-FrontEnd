@@ -1,8 +1,17 @@
-import React, { Component, useEffect } from 'react'
+import React, { Component, useEffect, useState } from 'react'
+import { userLogin, addUser } from '../../Services/Api/Utilities'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
 import '../../Assets/styles/css/Components/signupAndLogin.css'
 
-const SignupAndLogin = () => {
+const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
+  const [content, setContent] = useState('')
+  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate()
+
   useEffect(() => {
+    toast.configure()
     const signUpButton = document.getElementById('signUp')
     const signInButton = document.getElementById('signIn')
     const container = document.getElementById('container')
@@ -15,11 +24,91 @@ const SignupAndLogin = () => {
       container.classList.remove('right-panel-active')
     })
   }, [])
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
+  }
+  const loginHandle = async (event) => {
+    event.preventDefault()
+    setContent('sign in to you account')
+    setLoading(true)
+    const dataModel = {
+      email: document.getElementById('loginEmail').value,
+      password: document.getElementById('loginPassword').value,
+    }
+    await userLogin(dataModel)
+      .then((res) => {
+        console.log(res)
+        if (res.data.status) {
+          localStorage.setItem('accessToken', res.data.accessToken)
+          localStorage.setItem('refreshToken', res.data.refreshToken)
+          localStorage.setItem('user', res.data.userId)
+          localStorage.setItem('currency', res.data.currency)
+          console.log(res.data.currency)
+          localStorage.setItem('session', true)
+          setLoggedin(true)
+          notifySuccess('You have loggedin successfully')
+        } else {
+          notifyError('User name or password is incorrect')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    setLoading(false)
+    setLogin(false)
+    navigate('/')
+  }
+  const signUpHandle = async (event) => {
+    event.preventDefault()
+    setContent('Creating your account')
+    setLoading(true)
+    let password = document.getElementById('signupPassword').value
+    let repassword = document.getElementById('reEnterPassword').value
+
+    if (password === repassword) {
+      const dataModel = {
+        email: document.getElementById('signupEmail').value,
+        password: document.getElementById('signupPassword').value,
+      }
+      await addUser(dataModel)
+        .then((res) => {
+          console.log(res)
+          if (res.data) {
+            notifySuccess(
+              'Successfully created your account and please check you email to verify the account'
+            )
+            setLoading(false)
+            setSign(false)
+            navigate('/')
+          } else {
+            notifyError('This email is aleady taken')
+            document.getElementById('signupEmail').value = null
+            document.getElementById('signupPassword').value = null
+            document.getElementById('reEnterPassword').value = null
+            setLoading(false)
+          }
+        })
+        .catch((err) => {
+          console.log('err')
+          setLoading(false)
+          setSign(false)
+          navigate('/')
+        })
+    } else {
+      document.getElementById('signupPassword').value = null
+      document.getElementById('reEnterPassword').value = null
+      notifyError('password comfirmation is incorrect')
+      setLoading(false)
+    }
+  }
   return (
     <div className='login-model'>
       <div class='container' id='container'>
         <div class='form-container sign-up-container'>
-          <form action='#'>
+          <form onSubmit={signUpHandle}>
             <h1>Create Account</h1>
             <div class='social-container'>
               <a href='#' class='social'>
@@ -34,14 +123,24 @@ const SignupAndLogin = () => {
             </div>
             <span>or use your email for registration</span>
 
-            <input type='email' placeholder='Email' />
-            <input type='password' placeholder='Password' />
-            <input type='password' placeholder='re-password' />
-            <button>Sign Up</button>
+            <input type='text' placeholder='Email' id='signupEmail' required />
+            <input
+              type='password'
+              placeholder='password'
+              id='signupPassword'
+              required
+            />
+            <input
+              type='password'
+              placeholder='Re enter Password'
+              id='reEnterPassword'
+              required
+            />
+            <button type='submit'>Sign Up</button>
           </form>
         </div>
         <div class='form-container sign-in-container'>
-          <form action='#'>
+          <form onSubmit={loginHandle}>
             <h1>Sign in</h1>
             <div class='social-container'>
               <a href='#' class='social'>
@@ -55,10 +154,15 @@ const SignupAndLogin = () => {
               </a>
             </div>
             <span>or use your account</span>
-            <input type='email' placeholder='Email' />
-            <input type='password' placeholder='Password' />
+            <input type='email' placeholder='Email' id='loginEmail' required />
+            <input
+              type='password'
+              placeholder='Password'
+              id='loginPassword'
+              required
+            />
             <a href='#'>Forgot your password?</a>
-            <button>Sign In</button>
+            <button type='submit'>Sign In</button>
           </form>
         </div>
         <div class='overlay-container'>
@@ -82,6 +186,7 @@ const SignupAndLogin = () => {
           </div>
         </div>
       </div>
+      <DarkOverlaybackGround loading={loading} content={content} />
     </div>
   )
 }

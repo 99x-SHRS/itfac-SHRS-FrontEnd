@@ -13,7 +13,7 @@ const ListedHotels = () => {
   }, [])
   const getHotels = async () => {
     const dataModel = {
-      id: 1, // user id
+      id: localStorage.getItem('user'), //user id
     }
     await getHotelByUserId(dataModel)
       .then((res) => {
