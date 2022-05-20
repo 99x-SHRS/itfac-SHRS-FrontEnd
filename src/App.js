@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     if (session == true) {
       setTimeout(() => {
-        setShare(true)
+        setShare(localStorage.getItem('session'))
       }, 4000)
     } else {
       setShare(false)
