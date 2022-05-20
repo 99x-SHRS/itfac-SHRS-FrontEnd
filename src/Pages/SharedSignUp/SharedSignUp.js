@@ -47,6 +47,7 @@ const SharedSignUp = () => {
               'Successfully created your account and please check you email to verify the account'
             )
             setLoading(false)
+            localStorage.clear()
             navigate('/')
           } else {
             notifyError('This email is aleady taken')

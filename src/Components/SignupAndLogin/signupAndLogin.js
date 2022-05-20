@@ -46,7 +46,6 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           localStorage.setItem('refreshToken', res.data.refreshToken)
           localStorage.setItem('user', res.data.userId)
           localStorage.setItem('currency', res.data.currency)
-          console.log(res.data.currency)
           localStorage.setItem('session', true)
           setLoggedin(true)
           notifySuccess('You have loggedin successfully')
