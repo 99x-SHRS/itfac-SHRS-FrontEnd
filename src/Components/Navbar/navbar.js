@@ -24,7 +24,7 @@ const Navbars = () => {
     toast.configure()
     session = localStorage.getItem('session')
     let currency = localStorage.getItem('currency')
-    if (session) {
+    if (session == true) {
       setLoggedin(true)
     } else {
       setLoggedin(false)

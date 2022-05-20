@@ -2,7 +2,10 @@ import React, { useEffect } from 'react'
 import '../../Assets/styles/css/Pages/exceptions.css'
 const Exception404 = () => {
   useEffect(() => {
-    localStorage.clear()
+    localStorage.setItem('session', false)
+    if (!localStorage.getItem('session')) {
+      window.location.reload()
+    }
   }, [])
   return (
     <div>

@@ -20,21 +20,20 @@ function App() {
   useEffect(() => {
     setSession(localStorage.getItem('session'))
     setLoading(true)
-    setTimeout(() => {
-      setLoading(false)
-    }, 5000)
   }, [])
 
   useEffect(() => {
-    if (session) {
+    if (session == true) {
       setTimeout(() => {
         setShare(true)
       }, 4000)
+    } else {
+      setShare(false)
     }
+
     if (session == false || session == null) {
       setShare(false)
     }
-    console.log(session)
   }, [session])
 
   return (
