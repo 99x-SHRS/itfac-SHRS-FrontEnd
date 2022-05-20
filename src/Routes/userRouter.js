@@ -10,8 +10,8 @@ import SavedHotel from '../Pages/Saved/savedHotel'
 import BookingHistory from '../Pages/BookingHistory/bookingHistory.js'
 import BookingDetails from '../Layouts/BookingHistroy/bookingDetails'
 import LoyaltyDescription from '../Pages/Loyalty/loyaltyDescription'
+import SharedSignUp from '../Pages/SharedSignUp/SharedSignUp'
 
-// /hotels/:location/:checkin/:checkout/:adults/:children/:rooms
 const UserRoutes = (
   <>
     <Route exact path='/' element={<Dashboard />}></Route>
@@ -33,6 +33,7 @@ const UserRoutes = (
       path='/loyalty-program'
       element={<LoyaltyDescription />}
     ></Route>
+    <Route path='/share' element={<SharedSignUp />}></Route>
   </>
 )
 

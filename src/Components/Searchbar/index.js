@@ -13,7 +13,7 @@ const Searchbox = () => {
   const [dateRange, setDateRange] = useState([])
   const navigate = useNavigate()
   const handleSubmit = (event) => {
-    event.preventDefault()
+    // event.preventDefault()
 
     let data = {
       location: event.target.address.value,

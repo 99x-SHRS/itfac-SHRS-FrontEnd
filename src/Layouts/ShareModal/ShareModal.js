@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 const ShareModal = () => {
   const [refferal, setRefferal] = useState(
-    'https://booknowlk.netlify.app/share?token=3HeuUse#12'
+    window.location.href + 'share?token=3HeuUse#12'
   )
   useEffect(() => {
     toast.configure()
