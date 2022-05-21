@@ -381,6 +381,27 @@ const deleteSouvenirById = async (params) => {
     params
   )
 }
+
+// *****************************************************************************
+//                          refferal   end points
+// *****************************************************************************
+
+const createRefferal = async (bodyData) => {
+  return await provider.insertData(
+    BASE_URL,
+    'refferal',
+    'createRefferal',
+    bodyData
+  )
+}
+const refferalValidate = async (params) => {
+  return await provider.getWithOneParams(
+    BASE_URL,
+    'refferal',
+    'refferalValidate',
+    params
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -432,4 +453,6 @@ export {
   userLogin,
   updateUserById,
   addUser,
+  createRefferal,
+  refferalValidate,
 }

@@ -1,6 +1,10 @@
 import React, { Component, useEffect, useState } from 'react'
-import { userLogin, addUser } from '../../Services/Api/Utilities'
-import { useNavigate } from 'react-router-dom'
+import {
+  userLogin,
+  addUser,
+  refferalValidate,
+} from '../../Services/Api/Utilities'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import Footer from '../../Layouts/Footer/footer'
@@ -9,17 +13,18 @@ import '../../Assets/styles/css/Components/signupAndLogin.css'
 const SharedSignUp = () => {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
+  const [searchedParams, setSearchedparams] = useSearchParams()
   const navigate = useNavigate()
+  const params = useParams()
 
   useEffect(() => {
     toast.configure()
     const signUpButton = document.getElementById('signUp')
-
     const container = document.getElementById('container')
-
     signUpButton.addEventListener('click', () => {
       container.classList.add('right-panel-active')
     })
+    // console.log(searchedParams.get('token') || '')
   }, [])
   const notifyError = (message) => {
     toast.error(message)
@@ -46,6 +51,7 @@ const SharedSignUp = () => {
             notifySuccess(
               'Successfully created your account and please check you email to verify the account'
             )
+            validateRefferal()
             setLoading(false)
             localStorage.clear()
             navigate('/')
@@ -68,6 +74,18 @@ const SharedSignUp = () => {
       notifyError('password comfirmation is incorrect')
       setLoading(false)
     }
+  }
+  const validateRefferal = async () => {
+    const dataModel = {
+      token: searchedParams.get('token') || '',
+    }
+    await refferalValidate(dataModel)
+      .then((data) => {
+        console.log(data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
   return (
     <div>
@@ -114,7 +132,7 @@ const SharedSignUp = () => {
           <div class='overlay-container'>
             <div class='overlay'>
               <div class='overlay-panel overlay-right'>
-                <h1>Welcome Back!</h1>
+                <h1>Welcome !</h1>
                 <p>
                   To keep connected with us please login with your personal info
                 </p>

@@ -15,7 +15,16 @@ const getOneById = (url, type, task) => {
     .then(handleResponse)
     .catch(handleError)
 }
-
+const getWithOneParams = (url, type, task, params) => {
+  return axios
+    .get(
+      `${url}/${type}/${task}?${Object.keys(params)[0]}=${
+        params[Object.keys(params)[0]]
+      }`
+    )
+    .then(handleResponse)
+    .catch(handleError)
+}
 //post methods
 const getAllPOST = async (url, type, task, data) => {
   return axios
@@ -73,4 +82,5 @@ export default {
   deleteData,
   deleteDataById,
   updateById,
+  getWithOneParams,
 }

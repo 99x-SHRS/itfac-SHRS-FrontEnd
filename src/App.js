@@ -15,7 +15,7 @@ function App() {
   const [loading, setLoading] = useState(false)
   let [color, setColor] = useState('#ffffff')
   const [share, setShare] = useState(false)
-  const [session, setSession] = useState(localStorage.getItem('session'))
+  const [session, setSession] = useState(true)
 
   useEffect(() => {
     setSession(localStorage.getItem('session'))
@@ -26,7 +26,7 @@ function App() {
     if (session == true) {
       setTimeout(() => {
         setShare(localStorage.getItem('session'))
-      }, 4000)
+      }, 0)
     } else {
       setShare(false)
     }
