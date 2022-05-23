@@ -22,9 +22,6 @@ const RoomTypeSelector = () => {
       fetchData()
     }
   }, [roomTypes.length])
-  useEffect(() => {
-    console.log('changed')
-  }, [roomType])
 
   const fetchData = async () => {
     const dataModel = {
@@ -33,12 +30,9 @@ const RoomTypeSelector = () => {
     await getRoomTypesByHotelId(dataModel)
       .then((res) => {
         setRoomTypes(res.data)
-        console.log(res.data[0].roomTypeId)
         if (res.data.lengt != 0) {
           setRoomType(res.data[0].roomTypeId)
         }
-
-        console.log(roomTypes)
       })
       .catch((err) => {
         console.log(err)

@@ -4,30 +4,6 @@ import '@splidejs/splide/dist/css/themes/splide-default.min.css'
 import { getAllImagesByRoomId } from '../../Services/Api/Utilities/index.js'
 import '../../Assets/styles/css/Components/souvenir.css'
 
-const souvenirs1 = [
-  {
-    image: '/images/property-types/kabana.jpg',
-  },
-  {
-    image: '/images/property-types/villa.jpg',
-  },
-  {
-    image: '/images/property-types/villa.jpg',
-  },
-  {
-    image: '/images/property-types/bangalow.jpg',
-  },
-  {
-    image: '/images/property-types/guest-houses.jpg',
-  },
-  {
-    image: '/images/property-types/guest-houses.jpg',
-  },
-  {
-    image: '/images/property-types/guest-houses.jpg',
-  },
-]
-
 const SplideSlider = ({ roomId }) => {
   const [images, setRoomImages] = useState([])
   useEffect(() => {
@@ -45,10 +21,9 @@ const SplideSlider = ({ roomId }) => {
     await getAllImagesByRoomId(dataModel)
       .then((res) => {
         setRoomImages(res.data)
-        console.log(res)
       })
       .catch((err) => {
-        setRoomImages(souvenirs1)
+        console.log(err)
       })
   }
   return (
