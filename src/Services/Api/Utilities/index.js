@@ -402,6 +402,21 @@ const refferalValidate = async (params) => {
     params
   )
 }
+
+// *****************************************************************************
+//                          message   end points
+// *****************************************************************************
+const sendMessage = async (bodyData) => {
+  return await provider.insertData(BASE_URL, 'message', 'sendMessage', bodyData)
+}
+const getUnreadCountByRecieverId = async (bodyData) => {
+  return await provider.insertData(
+    BASE_URL,
+    'message',
+    'getUnreadCountByRecieverId',
+    bodyData
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -455,4 +470,6 @@ export {
   addUser,
   createRefferal,
   refferalValidate,
+  sendMessage,
+  getUnreadCountByRecieverId,
 }
