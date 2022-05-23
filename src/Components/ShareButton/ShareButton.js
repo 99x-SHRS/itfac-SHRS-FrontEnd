@@ -1,10 +1,19 @@
 import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { Modal } from 'react-bootstrap'
 import ShareModal from '../../Layouts/ShareModal/ShareModal'
 import '../../Assets/styles/css/Components/shareButton.css'
 const ShareButton = () => {
+  const [searchedParams, setSearchedparams] = useSearchParams()
   const [show, setShow] = useState(false)
+  const [token, setToken] = useState(null)
 
+  useEffect(() => {
+    setToken(searchedParams.get('token') || '')
+    if ((searchedParams.get('token') || '') != '') {
+      document.getElementById('shareButton').style.display = 'none'
+    }
+  }, [])
   const handleClose = () => {
     setShow(false)
   }
@@ -13,7 +22,7 @@ const ShareButton = () => {
   }
 
   return (
-    <div className='shareButton'>
+    <div className='shareButton' id='shareButton'>
       <svg
         xmlns='http://www.w3.org/2000/svg'
         width='30'

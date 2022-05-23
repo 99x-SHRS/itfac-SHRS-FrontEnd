@@ -267,4 +267,22 @@
   .login-model {
     display: none !important;
   }
+  .shared-model {
+    display: block !important;
+  }
+  .shared-model .overlay-container {
+    display: none !important;
+  }
+  .shared-model .form-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    margin-top: 2rem;
+  }
+}
+
+.shared-model {
+  position: relative;
+  top: 5rem;
 }

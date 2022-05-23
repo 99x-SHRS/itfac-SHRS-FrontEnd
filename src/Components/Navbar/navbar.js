@@ -18,19 +18,20 @@ const Navbars = () => {
   const [sign, setSign] = useState(false)
   const [loggedin, setLoggedin] = useState(false)
   const navigate = useNavigate()
+  let session = localStorage.getItem('session')
+
   useEffect(() => {
     window.scrollTo(0, 0)
     toast.configure()
-    let session = localStorage.getItem('session')
-    let currency = localStorage.getItem('currency')
-    console.log(session)
-    if (session) {
+    session = localStorage.getItem('session')
+    let localCurrency = localStorage.getItem('currency')
+    if (localStorage.getItem('session')) {
       setLoggedin(true)
     } else {
       setLoggedin(false)
     }
-    if (currency != null || currency != undefined) {
-      setCurrency(currency)
+    if (localCurrency != null || localCurrency != undefined) {
+      setCurrency(localCurrency)
     }
   }, [])
   useEffect(() => {

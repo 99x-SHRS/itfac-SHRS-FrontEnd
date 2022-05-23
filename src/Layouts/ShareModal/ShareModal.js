@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { createRefferal } from '../../Services/Api/Utilities'
 import { toast } from 'react-toastify'
 const ShareModal = () => {
-  const [refferal, setRefferal] = useState(
-    'https://booknowlk.netlify.app/share?token=3HeuUse#12'
-  )
+  const [refferal, setRefferal] = useState('')
+  const [token, setToken] = useState(null)
   useEffect(() => {
     toast.configure()
+    const sharedToken = localStorage.getItem('sharedToken')
+    if (sharedToken == null || sharedToken == undefined || sharedToken == '') {
+      genarateToken()
+    }
   }, [])
 
   const copyText = () => {
@@ -15,6 +19,21 @@ const ShareModal = () => {
   }
   const notifySuccess = (message) => {
     toast.success(message)
+  }
+  const genarateToken = async () => {
+    const dataModel = {
+      userId: localStorage.getItem('user'),
+    }
+    await createRefferal(dataModel)
+      .then((data) => {
+        localStorage.setItem('sharedToken', data.data.token)
+        // setToken(data.data.token)
+        setRefferal(window.location.href + 'share?token=' + data.data.token)
+        console.log(data.data.token)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
   return (
     <div className='shareModal'>

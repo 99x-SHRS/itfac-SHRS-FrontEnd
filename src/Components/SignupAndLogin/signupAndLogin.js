@@ -46,7 +46,6 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           localStorage.setItem('refreshToken', res.data.refreshToken)
           localStorage.setItem('user', res.data.userId)
           localStorage.setItem('currency', res.data.currency)
-          console.log(res.data.currency)
           localStorage.setItem('session', true)
           setLoggedin(true)
           notifySuccess('You have loggedin successfully')
@@ -168,7 +167,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
         <div class='overlay-container'>
           <div class='overlay'>
             <div class='overlay-panel overlay-left'>
-              <h1>Welcome Back!</h1>
+              <h1>Welcome !</h1>
               <p>
                 To keep connected with us please login with your personal info
               </p>

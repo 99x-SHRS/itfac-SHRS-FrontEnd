@@ -28,12 +28,6 @@ const DialogModal = () => {
         onHide={handleClose}
         animation={true}
         aria-labelledby='example-modal-sizes-title-sm'
-        style={{
-          width: '400px',
-          left: '40%',
-
-          overflow: 'hidden',
-        }}
       >
         <Modal.Header closeButton>
           <Modal.Title>Value added services</Modal.Title>
