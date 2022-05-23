@@ -116,7 +116,6 @@ const ListedRooms = () => {
                 rooms.map((room) => {
                   return (
                     <div className='col-md-3 border m-2 shadow p-3  bg-white rounded roomtype-card listed-room'>
-                      {/* <img src={hotelDetails.image} class='card-img-top' alt='...' /> */}
                       <div class='card-body'>
                         <h4 class='card-title'>{room.roomType}</h4>
                         <p class='card-text text-justify'>{room.description}</p>

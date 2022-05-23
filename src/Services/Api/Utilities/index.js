@@ -126,6 +126,14 @@ const getAllImagesByRoomId = async (bodyData) => {
   )
 }
 
+const deleteRoomImageById = async (params) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'uploads/room',
+    'delete',
+    params
+  )
+}
 const getRoomDetailsById = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'room', 'getRoomById', bodyData)
 }
@@ -472,4 +480,5 @@ export {
   refferalValidate,
   sendMessage,
   getUnreadCountByRecieverId,
+  deleteRoomImageById,
 }

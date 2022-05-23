@@ -9,7 +9,7 @@ const CardMyHotel = ({ hotel }) => {
         <img src={hotel.image} alt='' />
         <figcaption>
           <h3>More Info</h3>
-          <p>{hotel.description}</p>
+          <p>''</p>
           <div className='row'>
             <Link to={`/seller/hotel/${hotel.hotelId}/roomtype`}>
               <button>Add room type</button>

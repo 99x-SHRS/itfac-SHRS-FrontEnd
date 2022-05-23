@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
+import { toast } from 'react-toastify'
 import { useParams, useSearchParams, useNavigate } from 'react-router-dom'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
-import { getAllImagesByRoomId } from '../../Services/Api/Utilities'
+import {
+  getAllImagesByRoomId,
+  deleteRoomImageById,
+} from '../../Services/Api/Utilities'
 const UploadedImages = ({ loading }) => {
   useEffect(() => {
+    toast.configure()
     getImages()
   }, [loading])
   const navigate = useNavigate()
@@ -17,12 +22,31 @@ const UploadedImages = ({ loading }) => {
     }
     await getAllImagesByRoomId(dataModel)
       .then((res) => {
-        console.log(res)
         setImages(res.data)
       })
       .catch((err) => {
-        console.log()
+        console.log(err)
       })
+  }
+  const deleteImage = async (imageId) => {
+    await deleteRoomImageById(imageId)
+      .then((res) => {
+        if (res.status === 200) {
+          notifySuccess('Image was deleted')
+          getImages()
+        } else {
+          notifyError('Something went wrong!')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
   }
   return (
     <>
@@ -31,6 +55,12 @@ const UploadedImages = ({ loading }) => {
           return (
             <div className='col-lg-2 m-3 room-image'>
               <img src={image.image} alt='' />
+              <i
+                class='far fa-trash-alt delete-icon'
+                onClick={() => {
+                  deleteImage(image.imageId)
+                }}
+              ></i>
             </div>
           )
         })}
@@ -38,9 +68,9 @@ const UploadedImages = ({ loading }) => {
       <div className='next-container'>
         <button
           className='previous-button btn btn-primary'
-          // onClick={() => {
-          //   navigate(-1)
-          // }}
+          onClick={() => {
+            navigate(-1)
+          }}
           disabled
         >
           {'<'} Previous!
