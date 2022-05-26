@@ -70,6 +70,7 @@ const RegisterHotel = () => {
             <li>Upload hotel Image</li>
             <li>Upload souvenir Images</li>
             <li>Add value added servces</li>
+            <li>Facilities</li>
           </ul>
           <div className='container'>
             <form onSubmit={handleSubmit}>

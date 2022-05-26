@@ -425,6 +425,26 @@ const getUnreadCountByRecieverId = async (bodyData) => {
     bodyData
   )
 }
+
+// *****************************************************************************
+//                          facility   end points
+// *****************************************************************************
+const createFacilityType = async (bodyData) => {
+  return await provider.insertData(
+    BASE_URL,
+    'facilitytype',
+    'createFacilityType',
+    bodyData
+  )
+}
+// const getUnreadCountByRecieverId = async (bodyData) => {
+//   return await provider.insertData(
+//     BASE_URL,
+//     'message',
+//     'getUnreadCountByRecieverId',
+//     bodyData
+//   )
+// }
 export {
   getAllHotels,
   searchHotels,
@@ -481,4 +501,5 @@ export {
   sendMessage,
   getUnreadCountByRecieverId,
   deleteRoomImageById,
+  createFacilityType,
 }

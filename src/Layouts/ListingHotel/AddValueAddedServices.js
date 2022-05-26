@@ -11,6 +11,7 @@ const AddValueAddedServices = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [finished, setFinished] = useState(false)
   const [finishedLoarding, setFinishedLoarding] = useState(false)
+  const navigate = useNavigate()
   useEffect(() => {
     toast.configure()
   }, [])
@@ -54,6 +55,7 @@ const AddValueAddedServices = () => {
             <li>Upload hotel Image</li>
             <li>Upload souvenir Images</li>
             <li class='is-active'>Add value added servces</li>
+            <li>Facilities</li>
           </ul>
         </div>
         <div className='container mt-5'>
@@ -113,7 +115,8 @@ const AddValueAddedServices = () => {
                   setFinishedLoarding(true)
                   setTimeout(() => {
                     setFinishedLoarding(false)
-                    window.location.href = `/seller/hotels`
+                    const hotelId = searchedParams.get('id') || ''
+                    navigate(`/seller/hotel/facilities?id=${hotelId}`)
                   }, 3000)
                 }}
               >

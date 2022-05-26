@@ -30,7 +30,6 @@ const ShareModal = () => {
         localStorage.setItem('sharedToken', data.data.token)
         // setToken(data.data.token)
         setRefferal(window.location.href + 'share?token=' + data.data.token)
-        console.log(data.data.token)
       })
       .catch((err) => {
         console.log(err)

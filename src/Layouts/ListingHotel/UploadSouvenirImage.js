@@ -116,6 +116,7 @@ class UploadSouvenirImage extends Component {
               <li>Upload hotel Image</li>
               <li class='is-active'>Upload souvenir Images</li>
               <li>Add value added servces</li>
+              <li>Facilities</li>
             </ul>
           </div>
           <div className='container mt-5'>
