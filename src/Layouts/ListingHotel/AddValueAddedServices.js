@@ -10,7 +10,7 @@ const AddValueAddedServices = () => {
   const [loading, setLoading] = useState(false)
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [finished, setFinished] = useState(false)
-  const [finishedLoarding, setFinishedLoarding] = useState(false)
+
   const navigate = useNavigate()
   useEffect(() => {
     toast.configure()
@@ -112,15 +112,11 @@ const AddValueAddedServices = () => {
                 type='submit'
                 className='next-button btn btn-primary'
                 onClick={() => {
-                  setFinishedLoarding(true)
-                  setTimeout(() => {
-                    setFinishedLoarding(false)
-                    const hotelId = searchedParams.get('id') || ''
-                    navigate(`/seller/hotel/facilities?id=${hotelId}`)
-                  }, 3000)
+                  const hotelId = searchedParams.get('id') || ''
+                  navigate(`/seller/hotel/facilities?id=${hotelId}`)
                 }}
               >
-                Finish listing! {'>'}
+                Next ! {'>'}
               </button>
             ) : (
               <>
@@ -129,7 +125,7 @@ const AddValueAddedServices = () => {
                   className='next-button btn btn-primary'
                   disabled
                 >
-                  Finish listing! ! {'>'}
+                  Next ! {'>'}
                 </button>
               </>
             )}
@@ -141,10 +137,7 @@ const AddValueAddedServices = () => {
         loading={loading}
         content={'Adding value added service'}
       />
-      <DarkOverlaybackGround
-        loading={finishedLoarding}
-        content={'Finalize your listing.'}
-      />
+
       <Footer />
     </div>
   )

@@ -427,7 +427,7 @@ const getUnreadCountByRecieverId = async (bodyData) => {
 }
 
 // *****************************************************************************
-//                          facility   end points
+//                          facility type   end points
 // *****************************************************************************
 const createFacilityType = async (bodyData) => {
   return await provider.insertData(
@@ -437,14 +437,36 @@ const createFacilityType = async (bodyData) => {
     bodyData
   )
 }
-// const getUnreadCountByRecieverId = async (bodyData) => {
-//   return await provider.insertData(
-//     BASE_URL,
-//     'message',
-//     'getUnreadCountByRecieverId',
-//     bodyData
-//   )
-// }
+
+const getFacilityTypesByHotelId = async (bodyData) => {
+  return await provider.insertData(
+    BASE_URL,
+    'facilitytype',
+    'getFacilityTypesByHotelId',
+    bodyData
+  )
+}
+const getAllFacilitiesByHotelId = async (bodyData) => {
+  return await provider.insertData(
+    BASE_URL,
+    'facility',
+    'getAllFacilitiesByHotelId',
+    bodyData
+  )
+}
+// *****************************************************************************
+//                          facility   end points
+// *****************************************************************************
+
+const createFacility = async (bodyData) => {
+  return await provider.insertData(
+    BASE_URL,
+    'facility',
+    'createFacility',
+    bodyData
+  )
+}
+
 export {
   getAllHotels,
   searchHotels,
@@ -502,4 +524,7 @@ export {
   getUnreadCountByRecieverId,
   deleteRoomImageById,
   createFacilityType,
+  getFacilityTypesByHotelId,
+  getAllFacilitiesByHotelId,
+  createFacility,
 }

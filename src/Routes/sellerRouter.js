@@ -47,11 +47,7 @@ const SellerRoutes = (
       path='/seller/hotel/:hotelId/rooms'
       element={<ListedRooms />}
     ></Route>
-    <Route
-      exact
-      path='/seller/hotel/:hotelId/facilities'
-      element={<Facilities />}
-    ></Route>
+    <Route path='/seller/hotel/facilities' element={<Facilities />}></Route>
     <Route
       exact
       path='/seller/:hotelId/room/upload-image'
