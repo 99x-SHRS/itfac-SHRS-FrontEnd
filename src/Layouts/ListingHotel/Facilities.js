@@ -297,10 +297,10 @@ const Facilities = () => {
           <Footer />
         </div>
       </div>
-      <DarkOverlaybackGround
+      {/* <DarkOverlaybackGround
         loading={finishedLoarding}
         content={'Finalize your listing.'}
-      />
+      /> */}
     </div>
   )
 }
