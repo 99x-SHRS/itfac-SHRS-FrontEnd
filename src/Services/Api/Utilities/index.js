@@ -466,7 +466,22 @@ const createFacility = async (bodyData) => {
     bodyData
   )
 }
-
+const deleteFacilityById = async (bodyData) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'facility',
+    'deleteFacilityById',
+    bodyData
+  )
+}
+const deleteFacilityTypeById = async (bodyData) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'facilitytype',
+    'deleteFacilityTypeById',
+    bodyData
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -527,4 +542,6 @@ export {
   getFacilityTypesByHotelId,
   getAllFacilitiesByHotelId,
   createFacility,
+  deleteFacilityById,
+  deleteFacilityTypeById,
 }

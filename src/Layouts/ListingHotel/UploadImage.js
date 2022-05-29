@@ -108,14 +108,14 @@ class UploadImage extends Component {
               <li class='is-active'>Upload hotel Image</li>
               <li>Upload souvenir Images</li>
               <li>Add value added servces</li>
-              <li>Facilities</li>
+              <li>Facilities</li>{' '}
             </ul>
           </div>
           <div className='container mt-5'>
             <small id='emailHelp' class='form-text text-muted'>
               This image is visible on search result !
             </small>
-            {currentFile && (
+            {currentFile && this.state.loading && (
               <div className='progress mb-3'>
                 <div
                   className='progress-bar progress-bar-info progress-bar-striped'
@@ -167,7 +167,7 @@ class UploadImage extends Component {
               {this.state.uploaded ? (
                 <Link to={`/seller/hotel/souvenir?id=${this.state.hotelId}`}>
                   <button type='submit' className='next-button btn btn-primary'>
-                    Mext! {'>'}
+                    Next! {'>'}
                   </button>
                 </Link>
               ) : (

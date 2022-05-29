@@ -6,12 +6,13 @@ import {
   getFacilityTypesByHotelId,
   getAllFacilitiesByHotelId,
   createFacility,
+  deleteFacilityById,
+  deleteFacilityTypeById,
 } from '../../Services/Api/Utilities'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import Footer from '../Footer/footer'
 import { MDBDataTable, MDBIcon } from 'mdbreact'
 import Navbars from '../../Components/Navbar/navbar'
-import { event } from 'jquery'
 
 const Facilities = () => {
   const [loading, setLoading] = useState(false)
@@ -106,6 +107,40 @@ const Facilities = () => {
       })
     document.getElementById('facility').value = null
   }
+  const removeFacility = async (facilityId) => {
+    await deleteFacilityById(facilityId)
+      .then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          getfacilityTypes()
+          getFacilities()
+          notifySuccess('Deleted facility')
+        } else {
+          notifyError('Some thing went wrong')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+        notifyError('Some thing went wrong')
+      })
+  }
+  const removeFacilityType = async (facilityTypeId) => {
+    await deleteFacilityTypeById(facilityTypeId)
+      .then((res) => {
+        console.log(res)
+        if (res.status === 200) {
+          getfacilityTypes()
+          getFacilities()
+          notifySuccess('Deleted facility type')
+        } else {
+          notifyError('Some thing went wrong')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+        notifyError('Some thing went wrong')
+      })
+  }
 
   const data = {
     columns: [
@@ -142,7 +177,7 @@ const Facilities = () => {
               <button>
                 <a
                   onClick={() => {
-                    // alert(obj.roomTypeId)
+                    removeFacilityType(obj.facilityTypeId)
                   }}
                 >
                   {' '}
@@ -161,13 +196,13 @@ const Facilities = () => {
                 return (
                   <>
                     <li>
-                      <div className='row'>
+                      <div className='row ml-1'>
                         <div className='col-8'>{item.name}</div>
                         <div className='col-4'>
                           <button>
                             <a
                               onClick={() => {
-                                // alert(obj.roomTypeId)
+                                removeFacility(item.facilityId)
                               }}
                             >
                               {' '}
@@ -183,8 +218,8 @@ const Facilities = () => {
             })}
           </ul>
           <form onSubmit={handleSubmitCreateFacility}>
-            <div className='row mt-3'>
-              <div class='form-group col-lg-8 '>
+            <div className='row mt-3  ml-1'>
+              <div class='form-group col-sm-8 '>
                 <input
                   type='text'
                   class='form-control first_name'
@@ -194,7 +229,7 @@ const Facilities = () => {
                   required
                 />
               </div>
-              <div class='col-lg-4'>
+              <div class='col-sm-4'>
                 <button
                   type='submit'
                   onClick={() => {
@@ -297,10 +332,10 @@ const Facilities = () => {
           <Footer />
         </div>
       </div>
-      {/* <DarkOverlaybackGround
+      <DarkOverlaybackGround
         loading={finishedLoarding}
         content={'Finalize your listing.'}
-      /> */}
+      />
     </div>
   )
 }
