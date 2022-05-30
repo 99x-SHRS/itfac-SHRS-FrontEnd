@@ -181,7 +181,7 @@ const Facilities = () => {
                   }}
                 >
                   {' '}
-                  <MDBIcon icon='trash' />
+                  <i class='far fa-trash-alt'></i>
                 </a>
               </button>
             </div>
@@ -206,7 +206,7 @@ const Facilities = () => {
                               }}
                             >
                               {' '}
-                              <MDBIcon icon='trash' />
+                              <i class='far fa-trash-alt mt-1'></i>
                             </a>
                           </button>
                         </div>
@@ -229,14 +229,15 @@ const Facilities = () => {
                   required
                 />
               </div>
-              <div class='col-sm-4'>
+              <div class='col-sm-4 mt-2'>
                 <button
                   type='submit'
+                  className=' '
                   onClick={() => {
                     setFacilityType(obj.facilityTypeId)
                   }}
                 >
-                  <i class='fa fa-plus-circle' aria-hidden='true'></i>
+                  <i class='fa fa-plus-circle ' aria-hidden='true'></i>
                 </button>
               </div>
             </div>
@@ -285,7 +286,7 @@ const Facilities = () => {
                   class='btn btn-primary'
                   style={{ margin: '0px', width: '100%' }}
                 >
-                  <i class='fas fa-plus-circle'></i> Add new
+                  <i class='fas fa-plus-circle '></i> Add new
                 </button>
               </div>
             </div>
