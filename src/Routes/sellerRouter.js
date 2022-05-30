@@ -16,11 +16,7 @@ import Facilities from '../Layouts/ListingHotel/Facilities.js'
 const SellerRoutes = (
   <>
     <Route exact path='/seller/hotels' element={<ListedHotels />}></Route>
-    <Route
-      exact
-      path='/seller/hotel/register'
-      element={<RegisterHotel />}
-    ></Route>
+    <Route path='/seller/hotel/register' element={<RegisterHotel />}></Route>
     <Route exact path='/seller/hotel/image' element={<UploadImage />}></Route>
     <Route
       exact

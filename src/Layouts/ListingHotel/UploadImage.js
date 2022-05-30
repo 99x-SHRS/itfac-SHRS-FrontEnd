@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component, useEffect, useState } from 'react'
+import { Modal } from 'react-bootstrap'
+import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import { toast } from 'react-toastify'
 import Navbars from '../../Components/Navbar/navbar'
 import Footer from '../Footer/footer.js'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
+import { getHotelById } from '../../Services/Api/Utilities'
 import UploadService from '../../Services/Api/Utilities/FileUploader/UploadFilesService'
 class UploadImage extends Component {
   constructor(props) {
@@ -20,64 +22,64 @@ class UploadImage extends Component {
       fileInfos: [],
       hotelId: window.location.href,
       uploaded: false,
+      show: false,
+      propertyImage: null,
     }
   }
-
   componentDidMount() {
     window.scrollTo(0, 0)
     toast.configure()
     this.setState({
       hotelId: this.state.hotelId.split('=')[1],
     })
+    this.getHotelInfo()
   }
-  notifySuccess = (message) => {
-    toast.success(message)
-  }
-  notifyError = (message) => {
-    toast.error(message)
-  }
+
   upload() {
-    let currentFile = this.state.selectedFiles[0]
-
-    this.setState({
-      progress: 0,
-      currentFile: currentFile,
-      loading: true,
-    })
-
-    UploadService.upload(
-      currentFile,
-      (event) => {
-        this.setState({
-          progress: Math.round((100 * event.loaded) / event.total),
-        })
-      },
-      this.state.hotelId
-    )
-      .then((response) => {
-        console.log(response)
-        this.setState({
-          message: response.data.message,
-          progress: 100,
-          loading: false,
-          uploaded: true,
-        })
-
-        this.notifySuccess('successfully uploaded')
+    if (!this.state.uploaded) {
+      let currentFile = this.state.selectedFiles[0]
+      this.setState({
+        progress: 0,
+        currentFile: currentFile,
+        loading: true,
       })
+      UploadService.upload(
+        currentFile,
+        (event) => {
+          this.setState({
+            progress: Math.round((100 * event.loaded) / event.total),
+          })
+        },
+        this.state.hotelId
+      )
+        .then((response) => {
+          this.setState({
+            message: response.data.message,
+            progress: 100,
+            loading: false,
+            uploaded: true,
+          })
 
-      .catch(() => {
-        this.setState({
-          progress: 0,
-          message: 'Could not upload the file!',
-          currentFile: undefined,
+          this.notifySuccess('successfully uploaded')
         })
-        this.notifyError('Could not upload the file!')
-      })
 
-    this.setState({
-      selectedFiles: undefined,
-    })
+        .catch(() => {
+          this.setState({
+            progress: 0,
+            message: 'Could not upload the file!',
+            currentFile: undefined,
+          })
+          this.notifyError('Could not upload the file!')
+        })
+
+      this.setState({
+        selectedFiles: undefined,
+      })
+    } else {
+      this.setState({
+        show: true,
+      })
+    }
   }
 
   onDrop(files) {
@@ -85,7 +87,45 @@ class UploadImage extends Component {
       this.setState({ selectedFiles: files })
     }
   }
+  getHotelInfo = async () => {
+    console.log('called')
+    const dataModel = {
+      id: this.state.hotelId.split('=')[1],
+    }
+    console.log(this.state.hotelId.split('=')[1])
+    await getHotelById(dataModel)
+      .then((res) => {
+        if (res.status == 200 && res.data[0].image != null) {
+          console.log(res.data[0].image)
+          this.setState({
+            uploaded: true,
+          })
+          this.setState({
+            propertyImage: res.data[0].image,
+          })
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  handleClose = () => {
+    this.setState({
+      show: false,
+    })
+  }
+  handleShow = () => {
+    this.setState({
+      show: true,
+    })
+  }
 
+  notifySuccess = (message) => {
+    toast.success(message)
+  }
+  notifyError = (message) => {
+    toast.error(message)
+  }
   render() {
     const {
       selectedFiles,
@@ -129,7 +169,6 @@ class UploadImage extends Component {
                 </div>
               </div>
             )}
-
             <Dropzone onDrop={this.onDrop} multiple={false}>
               {({ getRootProps, getInputProps }) => (
                 <section>
@@ -177,6 +216,57 @@ class UploadImage extends Component {
               )}
             </div>
           </div>
+          <Modal
+            show={this.state.show}
+            onHide={() => {
+              this.handleClose()
+            }}
+          >
+            <Modal.Header closeButton>
+              <Modal.Title>Property Image</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <div className='modal-propertyImage'>
+                <img src={this.state.propertyImage} alt='' />
+                <div className='row mt-3'>
+                  Do you want to overwrite this image?
+                  <small>
+                    Important! This image will disappear after when you
+                    overwrite
+                  </small>
+                </div>
+                <div className='row'>
+                  <div className='col-6'>
+                    <button
+                      className='btn btn-primary modal-btn-image'
+                      onClick={() => {
+                        this.setState({
+                          uploaded: false,
+                          show: false,
+                        })
+                        this.upload()
+                      }}
+                    >
+                      Yes
+                    </button>
+                  </div>
+                  <div className='col-6'>
+                    <button
+                      className='btn btn-primary modal-btn-image'
+                      onClick={() => {
+                        this.setState({
+                          show: false,
+                        })
+                      }}
+                    >
+                      No
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </Modal.Body>
+            <Modal.Footer></Modal.Footer>
+          </Modal>
         </div>
 
         <DarkOverlaybackGround

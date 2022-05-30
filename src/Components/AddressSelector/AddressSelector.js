@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 
-const AddressSelector = () => {
+const AddressSelector = ({ dis, prov }) => {
   const [province, setProvince] = useState(null)
   const [districts, setDistricts] = useState([])
 
   useEffect(() => {
-    setDistricts(getDistrinct(province))
+    setDistricts(getDistrinct(province || prov))
   }, [province])
 
   const getDistrinct = (province) => {
@@ -30,9 +30,20 @@ const AddressSelector = () => {
             setProvince(document.getElementById('province').value)
           }}
         >
-          <option selected>Select Province</option>
+          {prov != null ? (
+            <>
+              <option selected>{prov}</option>
+            </>
+          ) : (
+            <>
+              <option selected>Select Province</option>
+            </>
+          )}
+
           {Object.keys(ProvinceDistrict).map((province) => {
-            return <option value={province}>{province}</option>
+            if (province != prov) {
+              return <option value={province}>{province}</option>
+            }
           })}
         </select>
       </div>
@@ -41,14 +52,21 @@ const AddressSelector = () => {
           class='form-select'
           aria-label='Default select example'
           id='district'
-          // onChange={() => {
-          //   setDistricts(document.getElementById('district').value)
-          // }}
         >
-          <option selected>Select District</option>
+          {dis != null ? (
+            <>
+              <option selected>{dis}</option>
+            </>
+          ) : (
+            <>
+              <option selected>Select District</option>
+            </>
+          )}
           {districts != null ? (
-            districts.map((province) => {
-              return <option value={province}>{province}</option>
+            districts.map((district) => {
+              if (district != dis) {
+                return <option value={district}>{district}</option>
+              }
             })
           ) : (
             <></>

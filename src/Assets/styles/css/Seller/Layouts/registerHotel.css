@@ -43,7 +43,17 @@
   color: #000;
   font-weight: bold;
 }
-
+.modal-propertyImage {
+  width: 100%;
+}
+.modal-propertyImage img {
+  margin-left: auto;
+  margin-right: auto;
+}
+.modal-btn-image {
+  position: relative;
+  right: -40%;
+}
 @media only screen and (max-width: 767px) {
   .upload-container {
     position: relative;

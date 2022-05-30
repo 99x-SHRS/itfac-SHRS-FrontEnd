@@ -86,6 +86,16 @@ const deleteSaveHotelById = async (bodyData) => {
     bodyData
   )
 }
+const updateHotelById = async (id, bodyData) => {
+  return await provider.updateById(
+    BASE_URL,
+    'hotel',
+    'updateHotelById',
+    id,
+    bodyData
+  )
+}
+
 // *****************************************************************************
 //                          rooms  end points
 // *****************************************************************************
@@ -544,4 +554,5 @@ export {
   createFacility,
   deleteFacilityById,
   deleteFacilityTypeById,
+  updateHotelById,
 }

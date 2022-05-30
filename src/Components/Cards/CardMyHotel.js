@@ -18,7 +18,9 @@ const CardMyHotel = ({ hotel }) => {
         <figcaption>
           {/* <h3>More Info</h3> */}
           <div className='row'>
-            <button>Manage Hotel info</button>
+            <Link to={`/seller/hotel/register?id=${hotel.hotelId}&edit=true`}>
+              <button>Manage Hotel info</button>
+            </Link>
           </div>
           <div className='row'>
             <button
