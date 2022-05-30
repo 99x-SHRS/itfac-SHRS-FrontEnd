@@ -285,6 +285,15 @@ const getPastBookigsByHotelAdminId = async (bodyData) => {
   )
 }
 
+const getBookingCountByHotelAdminUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getBookingCountByHotelAdminUserId',
+    bodyData
+  )
+}
+
 // *****************************************************************************
 //                          vas  end points
 // *****************************************************************************
@@ -555,4 +564,5 @@ export {
   deleteFacilityById,
   deleteFacilityTypeById,
   updateHotelById,
+  getBookingCountByHotelAdminUserId,
 }

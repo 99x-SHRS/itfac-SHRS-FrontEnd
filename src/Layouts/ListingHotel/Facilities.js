@@ -54,6 +54,7 @@ const Facilities = () => {
     await getAllFacilitiesByHotelId(dataModal)
       .then((res) => {
         setFacilities(res.data)
+        console.log(res)
       })
       .catch((err) => {
         console.log(err)
@@ -295,9 +296,9 @@ const Facilities = () => {
           <div className='next-container'>
             <button
               className='previous-button btn btn-primary'
-              // onClick={() => {
-              //   navigate(-1)
-              // }}
+              onClick={() => {
+                navigate(-1)
+              }}
             >
               {'<'} Previous!
             </button>

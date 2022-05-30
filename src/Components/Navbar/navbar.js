@@ -11,6 +11,7 @@ import {
   updateUserById,
   getUnreadCountByRecieverId,
 } from '../../Services/Api/Utilities'
+
 import '../../Assets/styles/css/Components/navbar.css'
 import 'react-responsive-modal/styles.css'
 
@@ -39,13 +40,11 @@ const Navbars = () => {
     }
     unreadMessageCount()
   }, [])
+
   useEffect(() => {
     document.getElementById('currency-selector').hidden = !loggedin
   }, [loggedin])
 
-  const loginMount = () => {
-    return LoginSignup
-  }
   const onOpenModal = () => {
     setSign(true)
   }
@@ -123,7 +122,6 @@ const Navbars = () => {
     }
     await getUnreadCountByRecieverId(dataModel)
       .then((res) => {
-        console.log(res.data.length)
         setMessageCount(res.data.length)
       })
       .catch((err) => {
