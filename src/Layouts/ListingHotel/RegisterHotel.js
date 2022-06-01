@@ -86,7 +86,6 @@ const RegisterHotel = () => {
     if (isUpdate) {
       await updateHotelById(id, dataModel)
         .then((res) => {
-          console.log(res)
           if (res.status == 200) {
             setLoading(true)
             setTimeout(() => {
@@ -104,7 +103,6 @@ const RegisterHotel = () => {
     } else {
       await registerHotel(dataModel)
         .then((res) => {
-          console.log(res)
           if (res.status == 200) {
             setLoading(true)
             setTimeout(() => {

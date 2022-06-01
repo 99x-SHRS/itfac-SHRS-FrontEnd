@@ -29,7 +29,6 @@ const RoomTypeTable = ({ loading }) => {
     }
     await getRoomTypesByHotelId(dataModel)
       .then((res) => {
-        console.log(res)
         setRoomTypes(res.data)
       })
       .catch((err) => {
@@ -40,7 +39,6 @@ const RoomTypeTable = ({ loading }) => {
     setDeleted(true)
     await removeRoomType(id)
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           notifySuccess('You have successfully removed room type')
         }

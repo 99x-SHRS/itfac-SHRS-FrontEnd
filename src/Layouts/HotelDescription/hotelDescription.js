@@ -17,7 +17,6 @@ const HotelDescription = () => {
     }
     await getHotelById(dataModal)
       .then((res) => {
-        console.log(res.data[0])
         if (res.status === 200) {
           console.log('asd')
           setHotelDetails(res.data[0])
@@ -36,12 +35,9 @@ const HotelDescription = () => {
           <div className='mt-4 p-2 '>
             <h2>Stay in the {hotelDetails.name}</h2>
             <div>
-              <br />
-              <br />
               <p>{hotelDetails.description}</p>
               <br />
               <br />
-
               <p className='booknow-description'>
                 <b>
                   {hotelDetails.name} has been welcoming BookNow.LK guests since

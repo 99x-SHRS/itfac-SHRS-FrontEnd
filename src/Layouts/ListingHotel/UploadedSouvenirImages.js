@@ -22,7 +22,6 @@ const UploadedSouvenirImages = ({ trigger }) => {
     await getAllsouvenirByHotelId(dataModel)
       .then((res) => {
         setSouvenirs(res.data)
-        console.log(res)
       })
       .catch((err) => {
         console.log(err)
@@ -38,7 +37,6 @@ const UploadedSouvenirImages = ({ trigger }) => {
     const dataModel = [params]
     await deleteSouvenirById(dataModel)
       .then((res) => {
-        console.log(res)
         notifySuccess('Deleted souvenir successfully')
         getSouvenirImages()
       })

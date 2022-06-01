@@ -54,7 +54,6 @@ const Facilities = () => {
     await getAllFacilitiesByHotelId(dataModal)
       .then((res) => {
         setFacilities(res.data)
-        console.log(res)
       })
       .catch((err) => {
         console.log(err)
@@ -93,7 +92,6 @@ const Facilities = () => {
     }
     await createFacility(dataModal)
       .then((res) => {
-        console.log(res)
         if (res.status === 200) {
           getfacilityTypes()
           getFacilities()
@@ -111,7 +109,6 @@ const Facilities = () => {
   const removeFacility = async (facilityId) => {
     await deleteFacilityById(facilityId)
       .then((res) => {
-        console.log(res)
         if (res.status === 200) {
           getfacilityTypes()
           getFacilities()
@@ -128,7 +125,6 @@ const Facilities = () => {
   const removeFacilityType = async (facilityTypeId) => {
     await deleteFacilityTypeById(facilityTypeId)
       .then((res) => {
-        console.log(res)
         if (res.status === 200) {
           getfacilityTypes()
           getFacilities()

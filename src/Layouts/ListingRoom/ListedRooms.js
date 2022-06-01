@@ -32,7 +32,6 @@ const ListedRooms = () => {
     }
     await getRoomByHotelId(dataModel)
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           setRooms(res.data)
         }
@@ -47,7 +46,6 @@ const ListedRooms = () => {
     setDeleted(true)
     await deleteRoomById(id)
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           // getRooms()
           notifySuccess('You have successfully removed room ')

@@ -437,7 +437,7 @@ const sendMessage = async (bodyData) => {
   return await provider.insertData(BASE_URL, 'message', 'sendMessage', bodyData)
 }
 const getUnreadCountByRecieverId = async (bodyData) => {
-  return await provider.insertData(
+  return await provider.getAllPOST(
     BASE_URL,
     'message',
     'getUnreadCountByRecieverId',
@@ -458,21 +458,22 @@ const createFacilityType = async (bodyData) => {
 }
 
 const getFacilityTypesByHotelId = async (bodyData) => {
-  return await provider.insertData(
+  return await provider.getAllPOST(
     BASE_URL,
     'facilitytype',
     'getFacilityTypesByHotelId',
     bodyData
   )
 }
-const getAllFacilitiesByHotelId = async (bodyData) => {
-  return await provider.insertData(
+const deleteFacilityTypeById = async (bodyData) => {
+  return await provider.deleteDataById(
     BASE_URL,
-    'facility',
-    'getAllFacilitiesByHotelId',
+    'facilitytype',
+    'deleteFacilityTypeById',
     bodyData
   )
 }
+
 // *****************************************************************************
 //                          facility   end points
 // *****************************************************************************
@@ -493,11 +494,12 @@ const deleteFacilityById = async (bodyData) => {
     bodyData
   )
 }
-const deleteFacilityTypeById = async (bodyData) => {
-  return await provider.deleteDataById(
+
+const getAllFacilitiesByHotelId = async (bodyData) => {
+  return await provider.insertData(
     BASE_URL,
-    'facilitytype',
-    'deleteFacilityTypeById',
+    'facility',
+    'getAllFacilitiesByHotelId',
     bodyData
   )
 }

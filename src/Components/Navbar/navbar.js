@@ -87,7 +87,6 @@ const Navbars = () => {
     }
     await updateUserById(id, dataModal)
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           localStorage.clear()
         }
@@ -105,7 +104,6 @@ const Navbars = () => {
     }
     await updateUserById(id, dataModel)
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           localStorage.setItem('currency', data)
           notifySuccess('You changed currency to ' + data)

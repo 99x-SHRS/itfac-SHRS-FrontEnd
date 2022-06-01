@@ -41,7 +41,6 @@ const BookingCusDetails = () => {
     }
     await getBookingDetailsById(dataModel)
       .then((res) => {
-        console.log(res)
         setFirst_name(res.data.guestName.split(' ')[0])
         setLast_name(res.data.guestName.split(' ')[1])
         setCountry('Sri Lanka')

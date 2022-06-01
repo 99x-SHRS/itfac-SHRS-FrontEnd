@@ -33,7 +33,6 @@ const AddValueAddedServices = () => {
 
     await addValueAddedServices(dataModel)
       .then((res) => {
-        console.log(res)
         document.getElementsByName('service_name')[0].value = ''
         document.getElementsByName('service_rate')[0].value = ''
         notifySuccess('successfully added services')
