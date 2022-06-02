@@ -221,7 +221,7 @@ const Searchbox = () => {
               </div>
             </div>
             <div className='col-md-4'>
-              <div class='input-group'>
+              <div class='input-group ' style={{ paddingTop: '0.7rem' }}>
                 <DatePicker getDateRange={getDateRange} />
                 <i class='zmdi zmdi-calendar-alt input-group-symbol'></i>
               </div>
