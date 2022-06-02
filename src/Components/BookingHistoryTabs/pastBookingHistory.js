@@ -101,7 +101,7 @@ const PastBookingHistory = () => {
         <div className='mt-2'>
           <div className='table-web'>
             <table class='table'>
-              <thead class='thead-dark'>
+              <thead class='b-priamry t-light'>
                 <tr>
                   <th scope='col'>Booking ID</th>
                   <th scope='col'>Hotel Name</th>
@@ -161,7 +161,7 @@ const PastBookingHistory = () => {
           </div>
           <div className='table-mob'>
             <table class='table'>
-              <thead class='thead-dark'>
+              <thead class='b-primary'>
                 <tr>
                   <th scope='col'>Booking ID</th>
                   <th scope='col'>Hotel Name</th>

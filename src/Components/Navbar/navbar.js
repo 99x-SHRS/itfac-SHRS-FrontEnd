@@ -236,6 +236,9 @@ const Navbars = () => {
                   <Dropdown.Item as={Link} to={'/seller/dashboard'}>
                     My Account
                   </Dropdown.Item>
+                  <Dropdown.Item as={Link} to={'/my-account'}>
+                    Account
+                  </Dropdown.Item>
                   <Dropdown.Item
                     onClick={() => {
                       setLoggedin(false)
