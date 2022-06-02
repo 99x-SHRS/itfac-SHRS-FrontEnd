@@ -496,10 +496,22 @@ const deleteFacilityById = async (bodyData) => {
 }
 
 const getAllFacilitiesByHotelId = async (bodyData) => {
-  return await provider.insertData(
+  return await provider.getAllPOST(
     BASE_URL,
     'facility',
     'getAllFacilitiesByHotelId',
+    bodyData
+  )
+}
+// *****************************************************************************
+//                          Review end points
+// *****************************************************************************
+
+const getReviewByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'review',
+    'getReviewByHotelId',
     bodyData
   )
 }
@@ -567,4 +579,5 @@ export {
   deleteFacilityTypeById,
   updateHotelById,
   getBookingCountByHotelAdminUserId,
+  getReviewByHotelId,
 }
