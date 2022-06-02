@@ -31,7 +31,6 @@ const ListingRoomType = () => {
     console.log(dataModel)
     await createRoomtype(dataModel)
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           document.getElementsByName('type_name')[0].value = ''
           document.getElementsByName('remark')[0].value = ''

@@ -4,30 +4,6 @@ import '@splidejs/splide/dist/css/themes/splide-default.min.css'
 import { getAllImagesByRoomId } from '../../Services/Api/Utilities/index.js'
 import '../../Assets/styles/css/Components/souvenir.css'
 
-const souvenirs1 = [
-  {
-    image: '/images/property-types/kabana.jpg',
-  },
-  {
-    image: '/images/property-types/villa.jpg',
-  },
-  {
-    image: '/images/property-types/villa.jpg',
-  },
-  {
-    image: '/images/property-types/bangalow.jpg',
-  },
-  {
-    image: '/images/property-types/guest-houses.jpg',
-  },
-  {
-    image: '/images/property-types/guest-houses.jpg',
-  },
-  {
-    image: '/images/property-types/guest-houses.jpg',
-  },
-]
-
 const SplideSlider = ({ roomId }) => {
   const [images, setRoomImages] = useState([])
   useEffect(() => {
@@ -47,7 +23,7 @@ const SplideSlider = ({ roomId }) => {
         setRoomImages(res.data)
       })
       .catch((err) => {
-        setRoomImages(souvenirs1)
+        console.log(err)
       })
   }
   return (
@@ -55,10 +31,10 @@ const SplideSlider = ({ roomId }) => {
       <Splide
         options={{
           rewind: false,
-          perPage: 5,
-          perMove: 5,
-          gap: 20,
-          padding: '3rem',
+          perPage: 2,
+          perMove: 2,
+          gap: 1,
+          padding: '2px',
           pagination: false,
           breakpoints: {
             623: {
@@ -66,19 +42,19 @@ const SplideSlider = ({ roomId }) => {
               perMove: 2,
             },
             935: {
-              perPage: 3,
-              perMove: 3,
+              perPage: 2,
+              perMove: 2,
             },
             1247: {
-              perPage: 4,
-              perMove: 4,
+              perPage: 2,
+              perMove: 2,
             },
           },
         }}
       >
         {images.map((item) => {
           return (
-            <SplideSlide className='slide'>
+            <SplideSlide className='slide souvenir-images'>
               <img src={item.image} />
             </SplideSlide>
           )

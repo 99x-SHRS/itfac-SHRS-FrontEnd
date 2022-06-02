@@ -78,7 +78,7 @@ class HotelCard extends Component {
       <div>
         <div
           id='hotel-card'
-          class='flex items-center justify-center h-full bg-gray-200 p-3 '
+          class='flex items-center justify-center h-full p-3 '
         >
           <div class='w-full shadow-lg max-w-6xl bg-white sm:flex'>
             <div

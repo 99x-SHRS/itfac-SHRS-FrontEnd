@@ -54,7 +54,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
       .then((res) => {
         try {
           const bookingId = res.data.bookingId
-          console.log(res)
+
           let URL = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
           navigate(URL)
         } catch (error) {
@@ -118,7 +118,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                     Rs.{room.rate * (1 - discount / 100)}
                   </div>
                 ) : (
-                  <div className='room-price'>Rs.{room.rate}</div>
+                  <div className='room-price b-light'>Rs.{room.rate}</div>
                 )}
               </div>
             </div>

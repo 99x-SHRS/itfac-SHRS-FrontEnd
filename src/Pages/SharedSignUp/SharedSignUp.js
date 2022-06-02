@@ -46,7 +46,6 @@ const SharedSignUp = () => {
       }
       await addUser(dataModel)
         .then((res) => {
-          console.log(res)
           if (res.data) {
             notifySuccess(
               'Successfully created your account and please check you email to verify the account'

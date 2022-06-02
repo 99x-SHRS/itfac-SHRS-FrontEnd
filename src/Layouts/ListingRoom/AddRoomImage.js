@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { useParams, useSearchParams, useLocation } from 'react-router-dom'
-import Dropzone from 'react-dropzone'
 import { toast } from 'react-toastify'
+import Dropzone from 'react-dropzone'
 import Navbars from '../../Components/Navbar/navbar'
-import UploadedSouvenirImages from '../ListingHotel/UploadedSouvenirImages'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import UploadService from '../../Services/Api/Utilities/FileUploader/UploadFilesService'
 import UploadedImages from './UploadedImages'
@@ -40,7 +38,6 @@ class AddRoomImage extends Component {
   }
   upload() {
     let currentFile = this.state.selectedFiles[0]
-
     this.setState({
       progress: 0,
       currentFile: currentFile,
@@ -112,7 +109,7 @@ class AddRoomImage extends Component {
               You can upload multiple images. these images are display on your
               room !
             </small>
-            {currentFile && (
+            {currentFile && this.state.loading && (
               <div className='progress mb-3'>
                 <div
                   className='progress-bar progress-bar-info progress-bar-striped'

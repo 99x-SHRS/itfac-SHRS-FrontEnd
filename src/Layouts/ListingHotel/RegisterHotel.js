@@ -1,7 +1,11 @@
 import React, { Component, useState, useMemo, useEffect } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { registerHotel } from '../../Services/Api/Utilities/index.js'
+import {
+  registerHotel,
+  getHotelById,
+  updateHotelById,
+} from '../../Services/Api/Utilities/index.js'
 import PhoneInput, {
   formatPhoneNumber,
   formatPhoneNumberIntl,
@@ -13,18 +17,56 @@ import Navbars from '../../Components/Navbar/navbar'
 import AddressSelector from '../../Components/AddressSelector/AddressSelector.js'
 import '../../Assets/styles/css/Seller/Layouts/registerHotel.css'
 import Footer from '../Footer/footer.js'
+
 const RegisterHotel = () => {
+  const [searchedParams, setSearchedparams] = useSearchParams()
   const [country, setCountry] = useState('LK')
   const [number, setNumber] = useState(0)
-  const [searchedParams, setSearchedparams] = useSearchParams()
   const [loading, setLoading] = useState(false)
+  const [content, setContent] = useState('Creating your property')
+  const [isUpdate, setUpdate] = useState(false)
   const navigate = useNavigate()
+
+  const [name, setName] = useState(null)
+  const [description, setDescription] = useState(null)
+  const [province, setProvince] = useState(null)
+  const [district, setDistrict] = useState(null)
+  const [town, setTown] = useState(null)
+  const [street1, setStreet1] = useState(null)
+  const [street2, setStreet2] = useState(null)
+
   useEffect(() => {
     window.scrollTo(0, 0)
     toast.configure()
+    let id = searchedParams.get('id') || ''
+    let edit = searchedParams.get('edit') || ''
+    if (id != '' && edit) {
+      setUpdate(true)
+      getHotelInfo()
+      setContent('Updating your property')
+    }
   }, [])
   const notifyError = (message) => {
     toast.error(message)
+  }
+  const getHotelInfo = async () => {
+    const dataModel = {
+      id: searchedParams.get('id') || '',
+    }
+    await getHotelById(dataModel)
+      .then((res) => {
+        setName(res.data[0].name)
+        setDescription(res.data[0].description)
+        setProvince(res.data[0].province)
+        setDistrict(res.data[0].district)
+        setTown(res.data[0].town)
+        setStreet1(res.data[0].Street1)
+        setStreet2(res.data[0].Street2)
+        setNumber(res.data[0].phoneNumber)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -40,24 +82,42 @@ const RegisterHotel = () => {
       Street2: event.target.street_02.value,
       userId: 1,
     }
-    console.log(dataModel)
-    await registerHotel(dataModel)
-      .then((res) => {
-        console.log(res)
-        if (res.status == 200) {
-          setLoading(true)
-          setTimeout(() => {
-            setLoading(false)
-            navigate(`/seller/hotel/image?id=${res.data.hotelId}`)
-          }, 2000)
-        } else {
+    let id = searchedParams.get('id') || ''
+    if (isUpdate) {
+      await updateHotelById(id, dataModel)
+        .then((res) => {
+          if (res.status == 200) {
+            setLoading(true)
+            setTimeout(() => {
+              setLoading(false)
+              navigate(`/seller/hotel/image?id=${id}`)
+            }, 2000)
+          } else {
+            notifyError('Something went wrong!')
+          }
+        })
+        .catch((err) => {
           notifyError('Something went wrong!')
-        }
-      })
-      .catch((err) => {
-        notifyError('Something went wrong!')
-        console.log(err)
-      })
+          console.log(err)
+        })
+    } else {
+      await registerHotel(dataModel)
+        .then((res) => {
+          if (res.status == 200) {
+            setLoading(true)
+            setTimeout(() => {
+              setLoading(false)
+              navigate(`/seller/hotel/image?id=${res.data.hotelId}`)
+            }, 2000)
+          } else {
+            notifyError('Something went wrong!')
+          }
+        })
+        .catch((err) => {
+          notifyError('Something went wrong!')
+          console.log(err)
+        })
+    }
   }
 
   return (
@@ -70,6 +130,7 @@ const RegisterHotel = () => {
             <li>Upload hotel Image</li>
             <li>Upload souvenir Images</li>
             <li>Add value added servces</li>
+            <li>Facilities</li>
           </ul>
           <div className='container'>
             <form onSubmit={handleSubmit}>
@@ -84,6 +145,8 @@ const RegisterHotel = () => {
                         class='form-control hotel_name'
                         placeholder='Enter Hotel Name'
                         name='hotel_name'
+                        value={name}
+                        onChange={(event) => setName(event.target.value)}
                         required
                       />
                     </div>
@@ -123,7 +186,7 @@ const RegisterHotel = () => {
                     </small>
                   </div>
                   <div>
-                    <AddressSelector />
+                    <AddressSelector dis={district} prov={province} />
                   </div>
 
                   <div className='row'>
@@ -134,6 +197,8 @@ const RegisterHotel = () => {
                         class='form-control first_name'
                         placeholder='Enter Town'
                         name='town'
+                        value={town}
+                        onChange={(event) => setTown(event.target.value)}
                         required
                       />
                     </div>
@@ -144,6 +209,8 @@ const RegisterHotel = () => {
                         class='form-control street_01'
                         placeholder='Enter Street 01'
                         name='street_01'
+                        value={street1}
+                        onChange={(event) => setStreet1(event.target.value)}
                         required
                       />
                     </div>
@@ -154,6 +221,8 @@ const RegisterHotel = () => {
                         class='form-control street_02'
                         placeholder='Enter Street 02'
                         name='street_02'
+                        value={street2}
+                        onChange={(event) => setStreet2(event.target.value)}
                         required
                       />
                     </div>
@@ -199,17 +268,14 @@ const RegisterHotel = () => {
               </div>
               <div className='next-container'>
                 <button type='submit' className='next-button btn btn-primary'>
-                  Next! {'>'}
+                  {isUpdate ? <> Update! {'>'}</> : <> Next! {'>'}</>}
                 </button>
               </div>
             </form>
           </div>
         </div>
       </div>
-      <DarkOverlaybackGround
-        loading={loading}
-        content={'Creating your property'}
-      />
+      <DarkOverlaybackGround loading={loading} content={content} />
       <Footer />
     </div>
   )

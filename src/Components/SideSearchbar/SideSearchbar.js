@@ -267,7 +267,7 @@ class SideSearchbar extends Component {
                 </div>
               </div>
               <div className='search-button'>
-                <button class='btn-submit submit-Btn' type='submit'>
+                <button class='btn-submit submit-Btn b-priamry' type='submit'>
                   <Link to='/hotels'>search</Link>
                 </button>
               </div>

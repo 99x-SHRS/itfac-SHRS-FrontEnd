@@ -3,12 +3,13 @@ import { createRefferal } from '../../Services/Api/Utilities'
 import { toast } from 'react-toastify'
 const ShareModal = () => {
   const [refferal, setRefferal] = useState('')
-  const [token, setToken] = useState(null)
   useEffect(() => {
     toast.configure()
     const sharedToken = localStorage.getItem('sharedToken')
     if (sharedToken == null || sharedToken == undefined || sharedToken == '') {
       genarateToken()
+    } else {
+      setRefferal(window.location.href + 'share?token=' + sharedToken)
     }
   }, [])
 
@@ -29,7 +30,6 @@ const ShareModal = () => {
         localStorage.setItem('sharedToken', data.data.token)
         // setToken(data.data.token)
         setRefferal(window.location.href + 'share?token=' + data.data.token)
-        console.log(data.data.token)
       })
       .catch((err) => {
         console.log(err)
@@ -44,7 +44,6 @@ const ShareModal = () => {
             type='text'
             class='form-control mt-2 shareModal-inputbox'
             value={refferal}
-            disabled
             id='copiedText'
             onClick={() => {
               copyText()

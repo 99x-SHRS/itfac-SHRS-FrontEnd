@@ -68,7 +68,6 @@ const RoomDetials = ({ roomType, setRoomType }) => {
 
       await createRoom(dataModel)
         .then((res) => {
-          console.log(res)
           if (res.status == 200) {
             notifySuccess('You have successfully created room')
             navigate(

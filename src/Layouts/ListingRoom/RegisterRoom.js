@@ -4,8 +4,6 @@ import Navbars from '../../Components/Navbar/navbar'
 import Footer from '../Footer/footer.js'
 import RoomTypeSelector from './RoomTypeSelector.js'
 import RoomDetials from './RoomDetials'
-import AddRoomImage from './AddRoomImage'
-import { getRoomById } from '../../Services/Api/Utilities'
 import '../../Assets/styles/css/Seller/Layouts/registerRoom.css'
 const RegisterRoom = () => {
   const [roomType, setRoomType] = useState(null)

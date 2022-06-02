@@ -47,3 +47,10 @@
 .modal-body {
   padding-top: 10px !important;
 }
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root {
+  font-size: 16px !important;
+  color: #555 !important;
+  text-transform: capitalize !important;
+  display: block !important;
+  font-weight: 700 !important;
+}

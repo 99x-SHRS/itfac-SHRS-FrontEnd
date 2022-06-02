@@ -7,7 +7,11 @@ import Login from '../Login/login'
 import Signup from '../Signup/signup'
 import SignupAndLogin from '../SignupAndLogin/signupAndLogin'
 import LoginSignup from '../../Layouts/LoginSignup/loginSignup'
-import { updateUserById } from '../../Services/Api/Utilities'
+import {
+  updateUserById,
+  getUnreadCountByRecieverId,
+} from '../../Services/Api/Utilities'
+
 import '../../Assets/styles/css/Components/navbar.css'
 import 'react-responsive-modal/styles.css'
 
@@ -17,6 +21,7 @@ const Navbars = () => {
   const [login, setLogin] = useState(false)
   const [sign, setSign] = useState(false)
   const [loggedin, setLoggedin] = useState(false)
+  const [messageCount, setMessageCount] = useState(0)
   const navigate = useNavigate()
   let session = localStorage.getItem('session')
 
@@ -33,14 +38,13 @@ const Navbars = () => {
     if (localCurrency != null || localCurrency != undefined) {
       setCurrency(localCurrency)
     }
+    unreadMessageCount()
   }, [])
+
   useEffect(() => {
     document.getElementById('currency-selector').hidden = !loggedin
   }, [loggedin])
 
-  const loginMount = () => {
-    return LoginSignup
-  }
   const onOpenModal = () => {
     setSign(true)
   }
@@ -83,7 +87,6 @@ const Navbars = () => {
     }
     await updateUserById(id, dataModal)
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           localStorage.clear()
         }
@@ -101,11 +104,23 @@ const Navbars = () => {
     }
     await updateUserById(id, dataModel)
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           localStorage.setItem('currency', data)
           notifySuccess('You changed currency to ' + data)
         }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const unreadMessageCount = async () => {
+    const dataModel = {
+      id: localStorage.getItem('user'),
+      // id: 14,
+    }
+    await getUnreadCountByRecieverId(dataModel)
+      .then((res) => {
+        setMessageCount(res.data.length)
       })
       .catch((err) => {
         console.log(err)
@@ -150,7 +165,9 @@ const Navbars = () => {
               <div class='notification'>
                 <a href='#'>
                   <div class='notBtn' href='#'>
-                    <div class='number'>2</div>
+                    <div class='number'>
+                      {messageCount != 0 ? messageCount : <></>}
+                    </div>
                     <i class='fas fa-bell '></i>
 
                     <div class='box'>

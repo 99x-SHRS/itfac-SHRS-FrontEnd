@@ -24,7 +24,6 @@ const SavedHotel = () => {
     }
     await getSavedhotelByCustomerId(dataModel)
       .then((res) => {
-        console.log(res)
         if (res.status == 200) {
           setHotels(res.data)
           setLoading(false)
@@ -40,7 +39,6 @@ const SavedHotel = () => {
     const dataModel = [hotelId, localStorage.getItem('user')] //user id
     await deleteSaveHotelById(dataModel)
       .then((res) => {
-        console.log(res)
         setLoading(true)
         getAllSavedHotels()
       })

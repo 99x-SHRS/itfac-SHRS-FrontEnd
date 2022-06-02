@@ -86,6 +86,16 @@ const deleteSaveHotelById = async (bodyData) => {
     bodyData
   )
 }
+const updateHotelById = async (id, bodyData) => {
+  return await provider.updateById(
+    BASE_URL,
+    'hotel',
+    'updateHotelById',
+    id,
+    bodyData
+  )
+}
+
 // *****************************************************************************
 //                          rooms  end points
 // *****************************************************************************
@@ -126,6 +136,14 @@ const getAllImagesByRoomId = async (bodyData) => {
   )
 }
 
+const deleteRoomImageById = async (params) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'uploads/room',
+    'delete',
+    params
+  )
+}
 const getRoomDetailsById = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'room', 'getRoomById', bodyData)
 }
@@ -267,6 +285,15 @@ const getPastBookigsByHotelAdminId = async (bodyData) => {
   )
 }
 
+const getBookingCountByHotelAdminUserId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'booking',
+    'getBookingCountByHotelAdminUserId',
+    bodyData
+  )
+}
+
 // *****************************************************************************
 //                          vas  end points
 // *****************************************************************************
@@ -402,6 +429,92 @@ const refferalValidate = async (params) => {
     params
   )
 }
+
+// *****************************************************************************
+//                          message   end points
+// *****************************************************************************
+const sendMessage = async (bodyData) => {
+  return await provider.insertData(BASE_URL, 'message', 'sendMessage', bodyData)
+}
+const getUnreadCountByRecieverId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'message',
+    'getUnreadCountByRecieverId',
+    bodyData
+  )
+}
+
+// *****************************************************************************
+//                          facility type   end points
+// *****************************************************************************
+const createFacilityType = async (bodyData) => {
+  return await provider.insertData(
+    BASE_URL,
+    'facilitytype',
+    'createFacilityType',
+    bodyData
+  )
+}
+
+const getFacilityTypesByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'facilitytype',
+    'getFacilityTypesByHotelId',
+    bodyData
+  )
+}
+const deleteFacilityTypeById = async (bodyData) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'facilitytype',
+    'deleteFacilityTypeById',
+    bodyData
+  )
+}
+
+// *****************************************************************************
+//                          facility   end points
+// *****************************************************************************
+
+const createFacility = async (bodyData) => {
+  return await provider.insertData(
+    BASE_URL,
+    'facility',
+    'createFacility',
+    bodyData
+  )
+}
+const deleteFacilityById = async (bodyData) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'facility',
+    'deleteFacilityById',
+    bodyData
+  )
+}
+
+const getAllFacilitiesByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'facility',
+    'getAllFacilitiesByHotelId',
+    bodyData
+  )
+}
+// *****************************************************************************
+//                          Review end points
+// *****************************************************************************
+
+const getReviewByHotelId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'review',
+    'getReviewByHotelId',
+    bodyData
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -455,4 +568,16 @@ export {
   addUser,
   createRefferal,
   refferalValidate,
+  sendMessage,
+  getUnreadCountByRecieverId,
+  deleteRoomImageById,
+  createFacilityType,
+  getFacilityTypesByHotelId,
+  getAllFacilitiesByHotelId,
+  createFacility,
+  deleteFacilityById,
+  deleteFacilityTypeById,
+  updateHotelById,
+  getBookingCountByHotelAdminUserId,
+  getReviewByHotelId,
 }

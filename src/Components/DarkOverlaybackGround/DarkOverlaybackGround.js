@@ -50,7 +50,7 @@ const DarkOverlaybackGround = ({ loading, content }) => {
             <div style={{ position: 'relative', color: 'white' }}>
               Please be patient!
               <br />
-              {content}.....
+              {content}
             </div>
           </div>
         </div>

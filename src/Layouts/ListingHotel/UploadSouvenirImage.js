@@ -116,6 +116,7 @@ class UploadSouvenirImage extends Component {
               <li>Upload hotel Image</li>
               <li class='is-active'>Upload souvenir Images</li>
               <li>Add value added servces</li>
+              <li>Facilities</li>
             </ul>
           </div>
           <div className='container mt-5'>
@@ -165,7 +166,7 @@ class UploadSouvenirImage extends Component {
               You can upload multiple images. these images are display on your
               hotel page !
             </small>
-            {currentFile && (
+            {currentFile && this.state.loading && (
               <div className='progress mb-3'>
                 <div
                   className='progress-bar progress-bar-info progress-bar-striped'

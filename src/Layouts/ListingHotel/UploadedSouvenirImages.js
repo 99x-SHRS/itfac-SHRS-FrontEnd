@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { MDBDataTable, MDBIcon } from 'mdbreact'
 import {
   getAllsouvenirByHotelId,
   deleteSouvenirById,
@@ -21,7 +22,6 @@ const UploadedSouvenirImages = ({ trigger }) => {
     await getAllsouvenirByHotelId(dataModel)
       .then((res) => {
         setSouvenirs(res.data)
-        console.log(res)
       })
       .catch((err) => {
         console.log(err)
@@ -37,7 +37,6 @@ const UploadedSouvenirImages = ({ trigger }) => {
     const dataModel = [params]
     await deleteSouvenirById(dataModel)
       .then((res) => {
-        console.log(res)
         notifySuccess('Deleted souvenir successfully')
         getSouvenirImages()
       })
@@ -46,50 +45,78 @@ const UploadedSouvenirImages = ({ trigger }) => {
         console.log(err)
       })
   }
+  const data = {
+    columns: [
+      {
+        label: 'Souvenir Id',
+        field: 'index',
+        sort: 'asc',
+        width: 150,
+      },
+      {
+        label: 'Title',
+        field: 'title',
+        sort: 'asc',
+        width: 270,
+      },
+
+      {
+        label: 'SubTitle',
+        field: 'subTitle',
+        sort: 'asc',
+        width: 150,
+      },
+      {
+        label: '',
+        field: 'action',
+        sort: 'asc',
+        width: 100,
+      },
+    ],
+    rows: souvenirs,
+  }
+  data.rows = data.rows.map((obj, i) => {
+    return {
+      ...obj,
+      index: i + 1,
+      action: (
+        <button>
+          <a
+            onClick={() => {
+              deleteSouvenir(obj.souvenirId)
+              // alert(obj.roomTypeId)
+            }}
+          >
+            {' '}
+            <i class='fas fa-plus-circle '></i>
+          </a>
+        </button>
+      ),
+    }
+  })
   return (
     <div>
       <div className='mt-2 mb-2'>
-        <table style={{ marginLeft: 'auto', marginRight: 'auto' }}>
-          {souvenirs.length != 0 ? (
-            <h4
-              style={{
-                fontWeight: 'bold',
-                marginBottom: '2rem',
-                marginTop: '2rem',
-                textAlign: 'center',
-              }}
-            >
-              Uploaded Images
-            </h4>
-          ) : (
-            <></>
-          )}
+        {souvenirs.length != 0 ? (
+          <h4
+            style={{
+              fontWeight: 'bold',
+              marginBottom: '2rem',
+              marginTop: '2rem',
+              textAlign: 'center',
+            }}
+          >
+            Uploaded Images
+          </h4>
+        ) : (
+          <></>
+        )}
 
-          {souvenirs.length != 0 ? (
-            souvenirs.map((souvenir) => {
-              console.log(souvenir)
-              return (
-                <div style={{ marginBottom: '0.4rem' }}>
-                  <tr>
-                    <td style={{ width: '20rem' }}>{souvenir.title}</td>
-                    <td>
-                      {' '}
-                      <i
-                        class='fa-solid fa-trash'
-                        style={{ color: 'green', cursor: 'pointer' }}
-                        onClick={() => {
-                          deleteSouvenir(souvenir.souvenirId)
-                        }}
-                      ></i>
-                    </td>
-                  </tr>
-                </div>
-              )
-            })
-          ) : (
-            <></>
-          )}
-        </table>
+        {souvenirs.length != 0 ? (
+          <MDBDataTable striped bordered small data={data} />
+        ) : (
+          <></>
+        )}
       </div>
       <div className='next-container'>
         <button
