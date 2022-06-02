@@ -118,7 +118,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
                     Rs.{room.rate * (1 - discount / 100)}
                   </div>
                 ) : (
-                  <div className='room-price'>Rs.{room.rate}</div>
+                  <div className='room-price b-light'>Rs.{room.rate}</div>
                 )}
               </div>
             </div>

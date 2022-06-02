@@ -17,13 +17,11 @@ const facilitiess = [
 
 const Facilities = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
-  const [hotel, setHotel] = useState(null)
   const [facilities, setFacilities] = useState(null)
   const [facilityTypes, setFacilityTypes] = useState(null)
 
   useEffect(() => {
     let hotelId = searchedParams.get('hotel') || ''
-    setHotel(hotelId)
     if (hotelId != null) {
       getFacilites()
       getFacilityTypes()
@@ -32,7 +30,7 @@ const Facilities = () => {
 
   const getFacilites = async () => {
     const dataModel = {
-      hotelId: hotel,
+      hotelId: searchedParams.get('hotel') || '',
     }
     await getFacilityTypesByHotelId(dataModel)
       .then((res) => {
@@ -46,7 +44,7 @@ const Facilities = () => {
 
   const getFacilityTypes = async () => {
     const dataModel = {
-      id: hotel,
+      id: searchedParams.get('hotel') || '',
     }
     await getAllFacilitiesByHotelId(dataModel)
       .then((res) => {
@@ -60,7 +58,7 @@ const Facilities = () => {
   }
   return (
     <div className='mt-4 pt-4' id='hotel-facilities'>
-      {facilities != null && facilityTypes != null ? (
+      {facilities != null ? (
         <>
           <h3>Facilities of Furnished apartment at Nawala</h3>
           <div className='container mt-3'>
@@ -75,21 +73,27 @@ const Facilities = () => {
                       </div>
                       <div className='mt-2 '>
                         <p>{facilityType.description}</p>
-                        <div className='mt-2'>
-                          {facilities.map((facility, index) => {
-                            if (
-                              facility.facilitytypeFacilityTypeId ==
-                              facilityType.facilityTypeId
-                            ) {
-                              return (
-                                <div className='m-1'>
-                                  <i class='fa-solid fa-check'></i>
-                                  <span className='ml-2'>{facility.name}</span>
-                                </div>
-                              )
-                            }
-                          })}
-                        </div>
+                        {facilities != null ? (
+                          <div className='mt-2'>
+                            {facilities.map((facility, index) => {
+                              if (
+                                facility.facilitytypeFacilityTypeId ==
+                                facilityType.facilityTypeId
+                              ) {
+                                return (
+                                  <div className='m-1'>
+                                    <i class='fa-solid fa-check'></i>
+                                    <span className='ml-2'>
+                                      {facility.name}
+                                    </span>
+                                  </div>
+                                )
+                              }
+                            })}
+                          </div>
+                        ) : (
+                          <></>
+                        )}
                       </div>
                     </div>
                   </>
@@ -99,7 +103,12 @@ const Facilities = () => {
           </div>
         </>
       ) : (
-        <>asd</>
+        <>
+          {' '}
+          <div class='alert alert-primary' role='alert'>
+            Nothing to display.
+          </div>
+        </>
       )}
     </div>
   )

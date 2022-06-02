@@ -101,7 +101,7 @@ const AllBookingHistory = () => {
         <div className='mt-2'>
           <div className='table-web'>
             <table class='table'>
-              <thead class='thead-dark'>
+              <thead class='thead-dark b-primary'>
                 <tr>
                   <th scope='col'>Booking ID</th>
                   <th scope='col'>Hotel Name</th>

@@ -294,7 +294,7 @@ const Searchbox = () => {
               </div>
             </div>
             <div className='col-md-2 search-button'>
-              <button class='btn-submit submit-Btn bg-priamry' type='submit'>
+              <button class='btn-submit submit-Btn b-priamry' type='submit'>
                 <p>Search</p>
               </button>
             </div>

@@ -58,76 +58,6 @@ const souvenirs2 = [
     path: '/images/property-types/guest-houses.jpg',
   },
 ]
-const hotelData = [
-  {
-    name: 'Avenra',
-    sleeps: 1,
-    price: 1000,
-    noRooms: 3,
-    disount: 0.1,
-    attributes: [
-      'Pool',
-      'Pub',
-      'DJ',
-      'Air conditioning',
-      'Private Bathroom',
-      'Flat-screen',
-      'Refrigerator',
-      'Fan',
-    ],
-  },
-  {
-    name: 'Hareesha',
-    sleeps: 2,
-    price: 1200,
-    noRooms: 2,
-    disount: 0.4,
-    attributes: [
-      'Pool',
-      'Pub',
-      'DJ',
-      'Air conditioning',
-      'Private Bathroom',
-      'Flat-screen',
-      'Refrigerator',
-      'Fan',
-    ],
-  },
-  {
-    name: 'Jetwings',
-    sleeps: 3,
-    price: 1300,
-    noRooms: 1,
-    disount: 0.2,
-    attributes: [
-      'Pool',
-      'Pub',
-      'DJ',
-      'Air conditioning',
-      'Private Bathroom',
-      'Flat-screen',
-      'Refrigerator',
-      'Fan',
-    ],
-  },
-  {
-    name: 'SunQueen',
-    sleeps: 2,
-    price: 1500,
-    noRooms: 3,
-    disount: 0.0,
-    attributes: [
-      'Pool',
-      'Pub',
-      'DJ',
-      'Air conditioning',
-      'Private Bathroom',
-      'Flat-screen',
-      'Refrigerator',
-      'Fan',
-    ],
-  },
-]
 
 function calculatePrice(e, price) {
   // alert(e.target.value)
@@ -172,9 +102,6 @@ const RoomSelection = ({ roomTypeId }) => {
       roomTypeId: roomTypeId,
       page: page,
     }
-
-    console.log(dataModel)
-
     await getAvailbleRooms(dataModel)
       .then((res) => {
         console.log(res.data.rows)
@@ -200,7 +127,10 @@ const RoomSelection = ({ roomTypeId }) => {
     <div className='room-selection'>
       <div class='room-selection-container'>
         <ul class='responsive-table'>
-          <li class='table-header bg-primary text-white'>
+          <li
+            class='table-header b-primary text-white'
+            style={{ background: '#5553B7' }}
+          >
             <div class='col-sm-12 col-md-4'>Room</div>
             <div class='col-sm-12 col-md-1'>Sleeps</div>
             <div class='col-sm-12 col-md-2'>Price per night</div>

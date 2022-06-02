@@ -5,7 +5,7 @@ class PriceRange extends Component {
   render() {
     return (
       <div className=' price-container border'>
-        <div class='card-header bg-primary text-white '>Budget</div>
+        <div class='card-header  text-white '>Budget</div>
         <div class='card-body'>
           <Form>
             <div class='form-check'>

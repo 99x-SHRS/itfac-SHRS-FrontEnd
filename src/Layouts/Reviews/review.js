@@ -122,7 +122,11 @@ const Review = () => {
                   )
                 })
               ) : (
-                <></>
+                <>
+                  <div class='alert alert-primary' role='alert'>
+                    Nothing to display.
+                  </div>
+                </>
               )}
             </div>
           </section>
