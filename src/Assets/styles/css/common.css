@@ -24,3 +24,7 @@ h3 {
 .t-light {
   color: white;
 }
+.t-dark {
+  color: black !important;
+  font-weight: bold !important;
+}

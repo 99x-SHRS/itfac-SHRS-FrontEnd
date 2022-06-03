@@ -1,11 +1,31 @@
-import React, { Component, useEffect } from 'react'
+import React, { Component, useEffect, useState } from 'react'
+import { getBookingDetailsById } from '../../Services/Api/Utilities'
 import Navbars from '../../Components/Navbar/navbar'
 import '../../Assets/styles/css/Layouts/reservedRoomStyle.css'
+
 const BookingDetails = () => {
+  const [booking, setBoooking] = useState(null)
+  useEffect(() => {
+    getBooking()
+  }, [])
+
+  const getBooking = async () => {
+    const dataModel = {
+      id: 2,
+    }
+    await getBookingDetailsById(dataModel)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   return (
     <>
       <Navbars />
-      <div className='container booking-history-container'>
+      <div className='container booking-history-container booking-details-container'>
         <div className='container-header1'>
           <h1>Hotel Riu Costa Lago - All Inclusive, Torremolinos</h1>
           <div className='row'>
@@ -39,9 +59,8 @@ const BookingDetails = () => {
                 reservation.
               </div>
               <div class='card-body text-dark'>
-                <h5 class='card-title'>View hotel details</h5>
-                <p class='card-text'>
-                  Check-in
+                <p class='card-text '>
+                  <p className='t-dark'>Check-in</p>
                   <ul>
                     <li>Check-in time starts at 3 PM</li>
                     <li>

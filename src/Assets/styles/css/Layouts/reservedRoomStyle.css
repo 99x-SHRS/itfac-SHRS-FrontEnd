@@ -23,3 +23,11 @@
 .booking-history-container .c {
   text-align: right;
 }
+.booking-details-container li {
+  font-size: 14px;
+  margin-left: 10px;
+  list-style-type: disc;
+}
+.booking-history-container h5 {
+  font-weight: bolder;
+}
