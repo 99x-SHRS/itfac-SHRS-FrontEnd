@@ -1,10 +1,34 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { getUserbyId } from "../../Services/Api/Utilities/index.js";
 
 //import Personalprovince from "../../Components/PersonalProvince/personalProvince";
 //import Personaldistrict from "../../Components/PersonalDistrict/personalDistrict";
 
+//import 'src\Services\Api\Utilities\index.js';
+
 function Personalsettings() {
+  var user = localStorage.getItem("user");
+  const [items, setItems] = useState([]);
+  useEffect(() => {
+    const getuserDetails = async () => {
+      const data = {
+        id: user,
+      };
+      await getUserbyId(data)
+        .then((response) => {
+          console.log(response);
+          const data = response.data;
+          console.log(data);
+          setItems(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    };
+    getuserDetails();
+  }, []);
   return (
     <div className="container">
       <main>
