@@ -18,6 +18,14 @@ const updateUserById = async (id, bodyData) => {
     bodyData
   )
 }
+const getUserbyId = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'user',
+    'getUserbyId',
+    bodyData
+  )
+}
 const addUser = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'user', 'addUser', bodyData)
 }
@@ -580,4 +588,5 @@ export {
   updateHotelById,
   getBookingCountByHotelAdminUserId,
   getReviewByHotelId,
+  getUserbyId,
 }
