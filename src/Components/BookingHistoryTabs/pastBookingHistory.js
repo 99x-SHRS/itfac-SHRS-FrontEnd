@@ -138,19 +138,15 @@ const PastBookingHistory = () => {
                           style={{ fontSize: '1.5rem' }}
                           aria-hidden='true'
                         ></i> */}
-                          <OverlayTrigger
-                            placement='right'
-                            delay={{ show: 250, hide: 400 }}
-                            overlay={renderTooltip}
+                          <Link
+                            to={`/booking-history/details?booking=${item.bookingId}`}
                           >
-                            <Link to={'/booking-history/details'}>
-                              <i
-                                class='fa fa-info-circle'
-                                style={{ fontSize: '1.5rem' }}
-                                aria-hidden='true'
-                              ></i>
-                            </Link>
-                          </OverlayTrigger>
+                            <i
+                              class='fa fa-info-circle'
+                              style={{ fontSize: '1.5rem' }}
+                              aria-hidden='true'
+                            ></i>
+                          </Link>
                         </td>
                       </tr>
                     )
@@ -191,20 +187,14 @@ const PastBookingHistory = () => {
                         <td>{item.hotel.name}</td>
 
                         <td>
-                          <OverlayTrigger
-                            placement='left'
-                            delay={{ show: 250, hide: 250 }}
-                            overlay={renderTooltip}
-                          >
-                            <Link to={'/booking-history/details'}>
-                              <i
-                                class='fa fa-info-circle'
-                                style={{ fontSize: '1.5rem' }}
-                                aria-hidden='true'
-                                href={'/booking-history/details'}
-                              ></i>
-                            </Link>
-                          </OverlayTrigger>
+                          <Link to={'/booking-history/details'}>
+                            <i
+                              class='fa fa-info-circle'
+                              style={{ fontSize: '1.5rem' }}
+                              aria-hidden='true'
+                              href={'/booking-history/details'}
+                            ></i>
+                          </Link>
                         </td>
                       </tr>
                     )

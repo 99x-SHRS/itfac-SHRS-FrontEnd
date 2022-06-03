@@ -78,6 +78,7 @@ const CurrentBookingHistory = () => {
       Click here to view more details
     </Tooltip>
   )
+
   const getBookingDetails = () => {
     return <BookingDetaill />
   }
@@ -92,7 +93,7 @@ const CurrentBookingHistory = () => {
                   <th scope='col'>Booking ID</th>
                   <th scope='col'>Hotel Name</th>
                   <th scope='col'>To be checking</th>
-                  {/* <th scope='col'>Status</th> */}
+                  <th scope='col'>Edit</th>
                   <th scope='col'>Info</th>
                 </tr>
               </thead>
@@ -123,37 +124,36 @@ const CurrentBookingHistory = () => {
                           {item.checkInDate.split('T')[0]} to{' '}
                           {item.checkOutDate.split('T')[0]}{' '}
                         </td>
-                        {/* <td>{payStatus}</td> */}
+
                         <td>
-                          {/* <i
-                          class='fa fa-info-circle'
-                          style={{ fontSize: '1.5rem' }}
-                          aria-hidden='true'
-                        ></i> */}
-                          <OverlayTrigger
-                            placement='right'
-                            delay={{ show: 250, hide: 400 }}
-                            overlay={renderTooltip}
+                          <Link
+                            to={`/booking/vas?location=galle&checkin-date=${
+                              item.checkInDate.split('T')[0]
+                            }&checkout-date=${
+                              item.checkOutDate.split('T')[0]
+                            }&adults=1&children=0&hotel=${
+                              item.hotelHotelId
+                            }&rooms=${item.noRooms}&roomno=${
+                              item.roomRoomId
+                            }&booking=${item.bookingId}&edit=true`}
                           >
-                            <Link
-                              to={`/booking/vas?location=galle&checkin-date=${
-                                item.checkInDate.split('T')[0]
-                              }&checkout-date=${
-                                item.checkOutDate.split('T')[0]
-                              }&adults=1&children=0&hotel=${
-                                item.hotelHotelId
-                              }&rooms=${item.noRooms}&roomno=${
-                                item.roomRoomId
-                              }&booking=${item.bookingId}&edit=true`}
-                            >
-                              {/* <Link to={'/booking-history/details'}> this is tempory link  until get page from sau*/}
-                              <i
-                                class='fa fa-info-circle'
-                                style={{ fontSize: '1.5rem' }}
-                                aria-hidden='true'
-                              ></i>
-                            </Link>
-                          </OverlayTrigger>
+                            <i
+                              class='fa fa-pencil'
+                              style={{ fontSize: '1.5rem' }}
+                              aria-hidden='true'
+                            ></i>
+                          </Link>
+                        </td>
+                        <td>
+                          <Link
+                            to={`/booking-history/details?booking=${item.bookingId}`}
+                          >
+                            <i
+                              class='fa fa-info-circle'
+                              style={{ fontSize: '1.5rem' }}
+                              aria-hidden='true'
+                            ></i>
+                          </Link>
                         </td>
                       </tr>
                     )
@@ -168,7 +168,7 @@ const CurrentBookingHistory = () => {
                 <tr>
                   <th scope='col'>Booking ID</th>
                   <th scope='col'>Hotel Name</th>
-
+                  <th scope='col'>Edit</th>
                   <th scope='col'>Info</th>
                 </tr>
               </thead>
@@ -194,31 +194,34 @@ const CurrentBookingHistory = () => {
                         <td>{item.hotel.name}</td>
 
                         <td>
-                          <OverlayTrigger
-                            placement='left'
-                            delay={{ show: 250, hide: 250 }}
-                            overlay={renderTooltip}
+                          <Link
+                            to={`/booking/vas?location=galle&checkin-date=${
+                              item.checkInDate.split('T')[0]
+                            }&checkout-date=${
+                              item.checkOutDate.split('T')[0]
+                            }&adults=1&children=0&hotel=${
+                              item.hotelHotelId
+                            }&rooms=${item.noRooms}&roomno=${
+                              item.roomRoomId
+                            }&booking=${item.bookingId}&edit=true`}
                           >
-                            <Link
-                              to={`/booking/vas?location=galle&checkin-date=${
-                                item.checkInDate.split('T')[0]
-                              }&checkout-date=${
-                                item.checkOutDate.split('T')[0]
-                              }&adults=1&children=0&hotel=${
-                                item.hotelHotelId
-                              }&rooms=${item.noRooms}&roomno=${
-                                item.roomRoomId
-                              }&booking=${item.bookingId}&edit=true`}
-                            >
-                              {/* <Link to={'/booking-history/details'}> this is tempory link  until get page from sau*/}
-                              <i
-                                class='fa fa-info-circle'
-                                style={{ fontSize: '1.5rem' }}
-                                aria-hidden='true'
-                                // href={'/booking-history/details'}
-                              ></i>
-                            </Link>
-                          </OverlayTrigger>
+                            <i
+                              class='fa fa-info-circle'
+                              style={{ fontSize: '1.5rem' }}
+                              aria-hidden='true'
+                            ></i>
+                          </Link>
+                        </td>
+                        <td>
+                          <Link
+                            to={`/booking-history/details?booking=${item.bookingId}`}
+                          >
+                            <i
+                              class='fa fa-info-circle'
+                              style={{ fontSize: '1.5rem' }}
+                              aria-hidden='true'
+                            ></i>
+                          </Link>
                         </td>
                       </tr>
                     )

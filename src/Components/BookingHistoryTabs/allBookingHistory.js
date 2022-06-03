@@ -83,21 +83,6 @@ const AllBookingHistory = () => {
   return (
     <div>
       <div>
-        {/* {items.map((item) => {
-          return (
-            <div key={item.id} className='col-sm-6 col-md-12 v my-2'>
-              <div className='card shadow-sm w-100' style={{ minHeight: 150 }}>
-                <div className='card-body'>
-                  <h5 className='card-title text-center h2'>Id :{item.id} </h5>
-                  <h6 className='card-subtitle mb-2 text-muted text-center'>
-                    {item.email}
-                  </h6>
-                  <p className='card-text'>{item.body}</p>
-                </div>
-              </div>
-            </div>
-          )
-        })} */}
         <div className='mt-2'>
           <div className='table-web'>
             <table class='table'>
@@ -138,19 +123,15 @@ const AllBookingHistory = () => {
                           style={{ fontSize: '1.5rem' }}
                           aria-hidden='true'
                         ></i> */}
-                          <OverlayTrigger
-                            placement='right'
-                            delay={{ show: 250, hide: 400 }}
-                            overlay={renderTooltip}
+                          <Link
+                            to={`/booking-history/details?booking=${item.bookingId}`}
                           >
-                            <Link to={'/booking-history/details'}>
-                              <i
-                                class='fa fa-info-circle'
-                                style={{ fontSize: '1.5rem' }}
-                                aria-hidden='true'
-                              ></i>
-                            </Link>
-                          </OverlayTrigger>
+                            <i
+                              class='fa fa-info-circle'
+                              style={{ fontSize: '1.5rem' }}
+                              aria-hidden='true'
+                            ></i>
+                          </Link>
                         </td>
                       </tr>
                     )
@@ -189,22 +170,16 @@ const AllBookingHistory = () => {
                       <tr>
                         <th scope='row'>B-{item.bookingId}</th>
                         <td>{item.hotel.name}</td>
-
                         <td>
-                          <OverlayTrigger
-                            placement='left'
-                            delay={{ show: 250, hide: 250 }}
-                            overlay={renderTooltip}
+                          <Link
+                            to={`/booking-history/details?booking=${item.bookingId}`}
                           >
-                            <Link to={'/booking-history/details'}>
-                              <i
-                                class='fa fa-info-circle'
-                                style={{ fontSize: '1.5rem' }}
-                                aria-hidden='true'
-                                href={'/booking-history/details'}
-                              ></i>
-                            </Link>
-                          </OverlayTrigger>
+                            <i
+                              class='fa fa-info-circle'
+                              style={{ fontSize: '1.5rem' }}
+                              aria-hidden='true'
+                            ></i>
+                          </Link>
                         </td>
                       </tr>
                     )
