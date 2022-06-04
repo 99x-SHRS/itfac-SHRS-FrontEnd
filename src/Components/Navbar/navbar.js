@@ -7,6 +7,7 @@ import Login from '../Login/login'
 import Signup from '../Signup/signup'
 import SignupAndLogin from '../SignupAndLogin/signupAndLogin'
 import LoginSignup from '../../Layouts/LoginSignup/loginSignup'
+import Notifications from '../NotificationDropDown/Notifications'
 import {
   updateUserById,
   getUnreadCountByRecieverId,
@@ -182,24 +183,7 @@ const Navbars = () => {
                               <button className='view-all'>View All</button>
                             </div>
                           </div>
-                          <div class='sec'>
-                            <div class='profCont'></div>
-                            <div class=';'>Welcome to the booknow.lk.</div>
-                            <div class='txt sub'> 2:30 pm</div>
-                          </div>
-
-                          <div class='sec'>
-                            <div class='profCont'></div>
-                            <div class=';'>
-                              You can create account through cliking signup .
-                            </div>
-                            <div class='txt sub'> 2:30 pm</div>
-                          </div>
-                          <div class='sec'>
-                            <div class='profCont'></div>
-                            <div class=';'>Yah...Succesfully login!</div>
-                            <div class='txt sub'> 2:30 pm</div>
-                          </div>
+                          <Notifications />
                         </div>
                       </div>
                     </div>

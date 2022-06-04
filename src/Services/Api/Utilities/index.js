@@ -453,6 +453,15 @@ const getUnreadCountByRecieverId = async (bodyData) => {
   )
 }
 
+const getMessagesByRecieverId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'message',
+    'getMessagesByRecieverId',
+    bodyData
+  )
+}
+
 // *****************************************************************************
 //                          facility type   end points
 // *****************************************************************************
@@ -589,4 +598,5 @@ export {
   getBookingCountByHotelAdminUserId,
   getReviewByHotelId,
   getUserbyId,
+  getMessagesByRecieverId,
 }
