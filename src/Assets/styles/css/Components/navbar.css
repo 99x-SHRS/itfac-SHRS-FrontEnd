@@ -213,9 +213,11 @@
 }
 
 .sec {
-  padding: 25px 10px;
+  padding: 25px 20px;
   background-color: #ffffff;
   transition: 0.5s;
+  margin: 25px 10px;
+  height: 5rem;
 }
 
 .profCont {
@@ -248,7 +250,8 @@
 }
 
 .sec:hover {
-  background-color: #eebebe;
+  background-color: #e2d0d0;
+  cursor: pointer;
 }
 .view-all-container:hover {
   background-color: white !important;
