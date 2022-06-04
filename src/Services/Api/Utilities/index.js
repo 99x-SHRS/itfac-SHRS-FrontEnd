@@ -454,6 +454,10 @@ const getMessagesByRecieverId = async (bodyData) => {
   )
 }
 
+const markAsRead = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'message', 'markAsRead', bodyData)
+}
+
 // *****************************************************************************
 //                          facility type   end points
 // *****************************************************************************
