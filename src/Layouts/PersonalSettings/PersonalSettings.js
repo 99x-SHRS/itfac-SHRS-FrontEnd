@@ -1,34 +1,102 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { getUserbyId } from "../../Services/Api/Utilities/index.js";
-
-//import Personalprovince from "../../Components/PersonalProvince/personalProvince";
-//import Personaldistrict from "../../Components/PersonalDistrict/personalDistrict";
-
-//import 'src\Services\Api\Utilities\index.js';
+import {
+  getUserbyId,
+  updateUserById,
+} from "../../Services/Api/Utilities/index.js";
 
 function Personalsettings() {
-  var user = localStorage.getItem("user");
+  const [position, setPosition] = useState(true);
+
+  const [values, setValues] = React.useState({
+    firstName: "",
+    lastName: "",
+    contactNo: "",
+    email: "",
+    street: "",
+    houseNo: "",
+    district: "",
+    province: "",
+  });
+
+  const [imgFile, setImgFile] = useState();
+  const [edit, setEdit] = useState(false);
   const [items, setItems] = useState([]);
-  useEffect(() => {
-    const getuserDetails = async () => {
-      const data = {
-        id: user,
-      };
-      await getUserbyId(data)
-        .then((response) => {
-          //console.log(response);
-          const data = response.data;
-          console.log(data);
-          setItems(data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+  const getuserDetails = async () => {
+    const data = {
+      id: localStorage.getItem("user"),
     };
+    await getUserbyId(data)
+      .then((response) => {
+        const data = response.data;
+        console.log(response.data);
+        setItems(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  useEffect(() => {
     getuserDetails();
   }, []);
+
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  function handleFile(event) {
+    setImgFile(event.target.files[0]);
+  }
+
+  function handlePosition() {
+    setPosition(false);
+  }
+  // const updateUserDetails = async () => {
+  //   const data = {
+  //     id: localStorage.getItem("user"),
+  //     values,
+  //   };
+  //   await updateUserById(data)
+  //     .then((response) => {
+  //       const data = response.data;
+  //       console.log(response.data);
+  //       setEdit(false);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // };
+
+  async function updateUserDetails() {
+    const data = {
+      id: localStorage.getItem("user"),
+      values,
+    };
+    await updateUserById(data)
+      .then((response) => {
+        const data = response.data;
+        console.log(response.data);
+        setEdit(false);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  const handleSubmit = () => {
+    // event.preventDefault()
+    handlePosition();
+    if (edit) {
+      updateUserDetails();
+      console.log("called");
+    } else {
+      setEdit(true);
+    }
+  };
+
   return (
     <div className="container">
       <main>
@@ -36,7 +104,7 @@ function Personalsettings() {
           <div className="col-md-5 col-lg-4 my-auto">
             <ul className="list-group mb-3">
               <li className="list-group-item active d-flex justify-content-center lh-base border-0">
-                <Link to="/account/settings/personal-settings">
+                <Link to="/personal-settings">
                   <div>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -98,12 +166,15 @@ function Personalsettings() {
                 <label for="inputEmail4" className="form-label">
                   <h6>First Name:</h6>
                 </label>
+
                 <input
                   type="text"
                   className="form-control"
                   id="firstName"
-                  placeholder="Navod"
+                  placeholder={items.firstName}
                   required
+                  readOnly={position}
+                  onChange={handleChange("firstName")}
                 />
               </div>
               <div className="col-md-6">
@@ -114,8 +185,10 @@ function Personalsettings() {
                   type="text"
                   className="form-control"
                   id="lastName"
-                  placeholder="Dilshan"
+                  placeholder={items.lastName}
                   required
+                  readOnly={position}
+                  onChange={handleChange("lastName")}
                 />
               </div>
               <div className="col-12">
@@ -126,7 +199,10 @@ function Personalsettings() {
                   type="email"
                   className="form-control"
                   id="email"
-                  placeholder="dilshan777@gmail.com"
+                  placeholder={items.email}
+                  required
+                  readOnly={position}
+                  onChange={handleChange("email")}
                 />
               </div>
               <div className="col-md-6">
@@ -137,8 +213,10 @@ function Personalsettings() {
                   type="text"
                   className="form-control"
                   id="firstName"
-                  placeholder="12/551"
+                  placeholder={items.street1}
                   required
+                  readOnly={position}
+                  onChange={handleChange("houseNo")}
                 />
               </div>
               <div className="col-md-6">
@@ -149,13 +227,40 @@ function Personalsettings() {
                   type="text"
                   className="form-control"
                   id="lastName"
-                  placeholder="Samanala Mawatha"
+                  placeholder={items.street2}
                   required
+                  readOnly={position}
+                  onChange={handleChange("street")}
                 />
               </div>
-              {/* <Personalprovince />
-              <Personaldistrict /> */}
-              <div className="col-md-3">
+              <div className="col-md-6">
+                <label for="inputEmail4" className="form-label">
+                  <h6>Province:</h6>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="province"
+                  placeholder={items.province}
+                  required
+                  readOnly={position}
+                  onChange={handleChange("province")}
+                />
+              </div>
+              <div className="col-md-6">
+                <label for="inputEmail4" className="form-label">
+                  <h6>District:</h6>
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="district"
+                  placeholder={items.district}
+                  readOnly={position}
+                  onChange={handleChange("district")}
+                />
+              </div>
+              <div className="col-md-6">
                 <label for="inputZip" className="form-label">
                   <h6>Contact No:</h6>
                 </label>
@@ -163,11 +268,13 @@ function Personalsettings() {
                   type="text"
                   className="form-control"
                   id="contactNo"
-                  placeholder="0764567891"
+                  placeholder={items.contactNo}
+                  readOnly={position}
+                  onChange={handleChange("contactNo")}
                 />
               </div>
 
-              <div className="col-12">
+              <div className="col-md-6">
                 <label for="inputFile" className="form-label">
                   <h6>Enter Your Photo:</h6>
                 </label>
@@ -175,12 +282,30 @@ function Personalsettings() {
                   type="file"
                   className="form-control"
                   id="exampleFormControlFile1"
+                  placeholder={items.image}
+                  readOnly={position}
+                  onChange={handleFile}
                 />
               </div>
 
+              <div className="col-md-12">
+                <h6 className="text-left">Last Edited At: {items.updatedAt}</h6>
+              </div>
+
               <div className="col-12 d-flex justify-content-center">
-                <button type="submit" className="btn btn-primary btn-lg">
-                  <h5>Submit</h5>
+                <button
+                  className="btn btn-primary btn-lg"
+                  onClick={handleSubmit}
+                >
+                  {edit ? (
+                    <>
+                      <h5>Update</h5>
+                    </>
+                  ) : (
+                    <>
+                      <h5>Edit</h5>
+                    </>
+                  )}
                 </button>
               </div>
             </form>
