@@ -18,7 +18,7 @@ function Personalsettings() {
       };
       await getUserbyId(data)
         .then((response) => {
-          console.log(response);
+          //console.log(response);
           const data = response.data;
           console.log(data);
           setItems(data);
