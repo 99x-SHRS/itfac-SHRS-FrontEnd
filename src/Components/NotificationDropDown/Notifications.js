@@ -71,8 +71,7 @@ const Notifications = () => {
             } else {
               return (
                 <div class='sec bg-light'>
-                  <div class='profCont'></div>
-                  <div class=';'>{message.notification}</div>
+                  <div class=''>{message.notification}</div>
                   <div class='txt sub'> {calculateTime(message.createdAt)}</div>
                 </div>
               )

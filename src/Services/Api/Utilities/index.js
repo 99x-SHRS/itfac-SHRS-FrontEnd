@@ -387,6 +387,14 @@ const getCustomerDiscount = async (bodyData) => {
     bodyData
   )
 }
+const getCustomerGrade = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'loyalty',
+    'getCustomerGrade',
+    bodyData
+  )
+}
 
 // *****************************************************************************
 //                          souvenir   end points
@@ -594,4 +602,5 @@ export {
   getBookingCountByHotelAdminUserId,
   getReviewByHotelId,
   getMessagesByRecieverId,
+  getCustomerGrade,
 }
