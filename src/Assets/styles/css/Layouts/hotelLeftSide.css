@@ -3,3 +3,6 @@
     display: none;
   }
 }
+.price-container .form-check {
+  width: 100%;
+}

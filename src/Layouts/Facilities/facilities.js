@@ -1,45 +1,117 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import {
+  getFacilityTypesByHotelId,
+  getAllFacilitiesByHotelId,
+} from '../../Services/Api/Utilities'
+import '../../Assets/styles/css/Layouts/facilities.css'
+const facilitiess = [
+  'Lorem ipsum dolor sit amet consectetur.',
+  'Lorem ipsum dolor sit amet consectetur.',
+  'Lorem ipsum dolor sit amet consectetur.',
+  'Lorem ipsum dolor sit amet consectetur.',
+  'Lorem ipsum dolor sit amet consectetur.',
+  'Lorem ipsum dolor sit amet consectetur.',
+  'Lorem ipsum dolor sit amet consectetur.',
+]
 
-class Facilities extends Component {
-  render() {
-    return (
-      <div className='mt-4 pt-4' id='hotel-facilities'>
-        <div>
-          <h3>Facilities</h3>
-          <p>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-            officia deserunt qui, eaque iste ratione minus iure atque, culpa
-            quae aperiam natus quaerat ducimus aliquam voluptates quasi saepe
-            adipisci? Atque.
-          </p>
-          <br />
-          <br />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus,
-            modi impedit! Corrupti ratione mollitia tempore. Laudantium
-            voluptatum nihil fugit vitae minima nemo placeat harum ea, ipsam
-            sunt deleniti, repudiandae quia.
-          </p>
-          <br />
-          <br />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus,
-            modi impedit! Corrupti ratione mollitia tempore. Laudantium
-            voluptatum nihil fugit vitae minima nemo placeat harum ea, ipsam
-            sunt deleniti, repudiandae quia.
-          </p>
-          <br />
-          <br />
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus,
-            modi impedit! Corrupti ratione mollitia tempore. Laudantium
-            voluptatum nihil fugit vitae minima nemo placeat harum ea, ipsam
-            sunt deleniti, repudiandae quia.
-          </p>
-        </div>
-      </div>
-    )
+const Facilities = () => {
+  const [searchedParams, setSearchedparams] = useSearchParams()
+  const [facilities, setFacilities] = useState(null)
+  const [facilityTypes, setFacilityTypes] = useState(null)
+
+  useEffect(() => {
+    let hotelId = searchedParams.get('hotel') || ''
+    if (hotelId != null) {
+      getFacilites()
+      getFacilityTypes()
+    }
+  }, [])
+
+  const getFacilites = async () => {
+    const dataModel = {
+      hotelId: searchedParams.get('hotel') || '',
+    }
+    await getFacilityTypesByHotelId(dataModel)
+      .then((res) => {
+        console.log(res.data)
+        setFacilityTypes(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
+
+  const getFacilityTypes = async () => {
+    const dataModel = {
+      id: searchedParams.get('hotel') || '',
+    }
+    await getAllFacilitiesByHotelId(dataModel)
+      .then((res) => {
+        // console.log('asd')
+        console.log(res.data)
+        setFacilities(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  return (
+    <div className='mt-4 pt-4' id='hotel-facilities'>
+      {facilities != null ? (
+        <>
+          <h3>Facilities of Furnished apartment at Nawala</h3>
+          <div className='container mt-3'>
+            <div className='row mb-3 '>
+              {facilityTypes.map((facilityType, index) => {
+                return (
+                  <>
+                    <div className='col-md-4  '>
+                      <div className='facility-header'>
+                        <i class='fas fa-parking'></i>
+                        <p>{facilityType.name}</p>
+                      </div>
+                      <div className='mt-2 '>
+                        <p>{facilityType.description}</p>
+                        {facilities != null ? (
+                          <div className='mt-2'>
+                            {facilities.map((facility, index) => {
+                              if (
+                                facility.facilitytypeFacilityTypeId ==
+                                facilityType.facilityTypeId
+                              ) {
+                                return (
+                                  <div className='m-1'>
+                                    <i class='fa-solid fa-check'></i>
+                                    <span className='ml-2'>
+                                      {facility.name}
+                                    </span>
+                                  </div>
+                                )
+                              }
+                            })}
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    </div>
+                  </>
+                )
+              })}
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          {' '}
+          <div class='alert alert-primary' role='alert'>
+            Nothing to display.
+          </div>
+        </>
+      )}
+    </div>
+  )
 }
 
 export default Facilities

@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
-import '../../Assets/styles/css/components/searchedHotelCard.css'
 import { toast } from 'react-toastify'
 import { Link } from 'react-router-dom'
+import {
+  saveHotelById,
+  deleteSaveHotelById,
+} from '../../Services/Api/Utilities'
 
+import 'react-toastify/dist/ReactToastify.css'
+import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
+import '../../Assets/styles/css/Components/searchedHotelCard.css'
 class HotelCard extends Component {
   constructor(props) {
     super(props)
@@ -11,6 +17,7 @@ class HotelCard extends Component {
       isSaved: false,
     }
   }
+
   notify(message) {
     toast.success(message)
   }
@@ -19,14 +26,45 @@ class HotelCard extends Component {
       isSaved: !state.isSaved,
     }))
     if (this.state.isSaved) {
-      console.log(this.state.isSaved)
-      this.notify('You removed a hotel successfully !')
+      this.removehotelSave()
     } else {
-      console.log(this.state.isSaved)
-      this.notify('You Saved a hotel successfully !')
+      this.hotelSave()
     }
   }
+  async hotelSave() {
+    const dataModel = {
+      customerId: localStorage.getItem('user'), //user id
+      hotelId: this.props.hotelData.hotelHotelId,
+    }
+    await saveHotelById(dataModel)
+      .then((res) => {
+        if (res.status == 200 && res.data == 'saved') {
+          this.notify('You have already saved this hotel!')
+        } else if (res.status == 200) {
+          this.notify('You Saved a hotel successfully !')
+        } else {
+          this.notify('Something went wrong. !')
+        }
+      })
+      .catch((err) => {
+        this.notify('Something went wrong. !')
+      })
+  }
+  async removehotelSave() {
+    const dataModel = [this.props.hotelData.hotelHotelId, 1]
 
+    await deleteSaveHotelById(dataModel)
+      .then((res) => {
+        if (res.status == 200) {
+          this.notify('You removed a hotel successfully !')
+        } else {
+          this.notify('Something went wrong. !')
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   getStars(params) {
     let content = []
     for (let i = 0; i < params; i++) {
@@ -40,13 +78,13 @@ class HotelCard extends Component {
       <div>
         <div
           id='hotel-card'
-          class='flex items-center justify-center h-full bg-gray-200 p-3 '
+          class='flex items-center justify-center h-full p-3 '
         >
           <div class='w-full shadow-lg max-w-6xl bg-white sm:flex'>
             <div
               class='w-full sm:w-2/4 hotel-cover bg-center bg-cover border relative h-g sm:h-auto shadow-inner'
               style={{
-                backgroundImage: `url(${this.props.hotel.image})`,
+                backgroundImage: `url(${this.props.hotelData.hotel.image})`,
               }}
             >
               <div className='save-hotel m-2'>
@@ -132,10 +170,10 @@ class HotelCard extends Component {
                 <div>
                   <div class='sm:flex items-center mb-1'>
                     <h2 class='text-lg font-semibold text-gray-600'>
-                      {this.props.hotel.name}
+                      {this.props.hotelData.hotel.name}
                     </h2>
                     <div class='flex sm:ml-3'>
-                      {this.getStars(this.props.hotel.stars)}
+                      {/* {this.getStars(this.props.hotel.stars)} */}
                     </div>
                   </div>
                   <div class='flex items-center'>
@@ -155,7 +193,7 @@ class HotelCard extends Component {
                       ></path>
                     </svg>
                     <p class='text-xs text-gray-600'>
-                      {this.props.hotel.province}
+                      {this.props.hotelData.hotel.province}
                       <a class='font-semibold text-gray-700 ml-2' href=''>
                         Show on Map
                       </a>
@@ -164,10 +202,8 @@ class HotelCard extends Component {
                 </div>
                 <div>
                   <div class='text-right text-xl leading-tight text-gray-600 font-semibold'>
-                    $ 869 <br />{' '}
-                    <div className='nights'>
-                      <p>2 nights</p>
-                    </div>
+                    Rs {this.props.hotelData.rate}
+                    <br /> <div className='nights'>{/* <p>2 nights</p> */}</div>
                   </div>
                 </div>
               </div>
@@ -191,10 +227,7 @@ class HotelCard extends Component {
                   </svg>
                 </div>
                 <p class='text-xs ml-1 text-gray-600'>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Tempora modi natus enim ipsa incidunt eum optio perspiciatis
-                  laboriosam reiciendis voluptatem totam, dolorem aliquid
-                  provident amet odio adipisci ullam praesentium quos.
+                  {this.props.hotelData.hotel.description}
                 </p>
               </div>
 
@@ -224,18 +257,22 @@ class HotelCard extends Component {
               <div class='sm:flex mt-3 items-center justify-between'>
                 <div>
                   <p class='text-xs text-green-700'>
-                    <strong>{this.props.hotel.stars}/5 Avgerage.</strong> See
+                    {/* <strong>{this.props.hotel.stars}/5 Avgerage.</strong> See */}
                     431 reviews
                   </p>
                 </div>
-                <div class='mt-3 sm:mt-3 book-now'>
-                  <a
-                    href='#'
-                    class='bg-blue-500 shadow text-blue-100 py-3 px-6 font-bold inline-block rounded-md'
-                  >
-                    <Link to='/booking/1'> Book Now</Link>
-                  </a>
-                </div>
+                {/* const URL = `location=${data.location}&checkin-date=$
+                {data.checkInDate}&checkout-date=${data.checkOutDate}&adults=$
+                {data.adult}&children=${data.children}&rooms=${data.rooms}&ho` */}
+                <Link
+                  to={`/hotel/page?location=${this.props.URLparams.location}&checkin-date=${this.props.URLparams.checkInDate}&checkout-date=${this.props.URLparams.checkOutDate}&adults=${this.props.URLparams.adult}&children=${this.props.URLparams.children}&rooms=${this.props.URLparams.rooms}&hotel=${this.props.hotelData.hotelHotelId}`}
+                >
+                  <div class='mt-3 sm:mt-3 book-now'>
+                    <a class='bg-blue-500 shadow text-blue-100 py-3 px-6 font-bold inline-block rounded-md'>
+                      <p>Book Now</p>
+                    </a>
+                  </div>
+                </Link>
               </div>
             </div>
           </div>
