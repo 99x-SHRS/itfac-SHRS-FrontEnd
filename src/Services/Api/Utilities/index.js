@@ -544,6 +544,10 @@ const getReviewByHotelId = async (bodyData) => {
     bodyData
   )
 }
+const createReview = async (bodyData) => {
+  return await provider.insertData(BASE_URL, 'review', 'createReview', bodyData)
+}
+
 export {
   getAllHotels,
   searchHotels,
@@ -612,4 +616,5 @@ export {
   getMessagesByRecieverId,
   getCustomerGrade,
   deleteHotelById,
+  createReview,
 }
