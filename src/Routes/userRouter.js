@@ -13,6 +13,7 @@ import LoyaltyDescription from '../Pages/Loyalty/loyaltyDescription'
 import SharedSignUp from '../Pages/SharedSignUp/SharedSignUp'
 import MyAccount from '../Pages/Account/MyAccount'
 import Review from '../Pages/Account/Review'
+import Message from '../Pages/Messages/Message'
 const UserRoutes = (
   <>
     <Route exact path='/' element={<Dashboard />}></Route>
@@ -24,7 +25,7 @@ const UserRoutes = (
     <Route exact path='/saved-hotel' element={<SavedHotel />}></Route>
     <Route exact path='/booking-history' element={<BookingHistory />}></Route>
     <Route path='/booking-history/details' element={<BookingDetails />}></Route>
-
+    <Route path='/messages' element={<Message />}></Route>
     <Route
       exact
       path='/loyalty-program'
