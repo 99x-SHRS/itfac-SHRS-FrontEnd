@@ -37,24 +37,24 @@ const SplideSlider = ({ roomId }) => {
           <>
             <Splide
               options={{
-                rewind: false,
-                perPage: 2,
-                perMove: 2,
-                gap: 1,
-                padding: '2px',
-                pagination: false,
+                rewind: true,
+                perPage: 1,
+                perMove: 1,
+                gap: 10,
+                padding: '10px',
+                pagination: true,
                 breakpoints: {
                   623: {
-                    perPage: 2,
-                    perMove: 2,
+                    perPage: 1,
+                    perMove: 1,
                   },
                   935: {
-                    perPage: 2,
-                    perMove: 2,
+                    perPage: 1,
+                    perMove: 1,
                   },
                   1247: {
-                    perPage: 2,
-                    perMove: 2,
+                    perPage: 1,
+                    perMove: 1,
                   },
                 },
               }}
