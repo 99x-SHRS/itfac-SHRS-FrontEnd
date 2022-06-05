@@ -9,6 +9,7 @@ const HotelDescription = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [hotelDetails, setHotelDetails] = useState(null)
   useEffect(() => {
+    window.scrollTo(0, 0)
     getHotelDetails()
   }, [])
   const getHotelDetails = async () => {
@@ -39,10 +40,8 @@ const HotelDescription = () => {
               <br />
               <br />
               <p className='booknow-description'>
-                <b>
-                  {hotelDetails.name} has been welcoming BookNow.LK guests since
-                  {' ' + hotelDetails.createdAt.split('-')[0]}
-                </b>
+                {hotelDetails.name} has been welcoming BookNow.LK guests since
+                {' ' + hotelDetails.createdAt.split('-')[0]}
               </p>
               <br />
               <br />

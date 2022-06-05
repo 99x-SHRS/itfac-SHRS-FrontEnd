@@ -155,7 +155,7 @@ const LoyaltyGrades = () => {
                 </div>
                 <div class='col-md-4 col-sm-6'>
                   <div class='single-price'>
-                    {gradeDetails.rank == 'Golden' ? (
+                    {gradeDetails.rank == 'Gold' ? (
                       <>
                         <div class='price-header'>
                           <div className='current-tier-header'>

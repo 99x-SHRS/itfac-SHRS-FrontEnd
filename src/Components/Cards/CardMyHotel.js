@@ -1,18 +1,55 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { Modal } from 'react-bootstrap'
+import { Modal, Button } from 'react-bootstrap'
+import { toast } from 'react-toastify'
+import { deleteHotelById } from '../../Services/Api/Utilities'
 import '../../Assets/styles/css/Seller/Components/cardMyHotel.css'
-const CardMyHotel = ({ hotel }) => {
+const CardMyHotel = ({ hotel, getHotels }) => {
   const [show, setShow] = useState(false)
+  const [confirm, setConfirm] = useState(false)
+  useEffect(() => {
+    toast.configure()
+  }, [])
   const handleClose = () => {
     setShow(false)
   }
   const handleShow = () => {
     setShow(true)
   }
+  const handleCloseConfirm = () => {
+    setConfirm(false)
+  }
+  const handleShowConfirm = () => {
+    setConfirm(true)
+  }
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
+  }
+  const deleteHotel = async () => {
+    console.log(hotel)
+    await deleteHotelById(hotel.hotelId)
+      .then((res) => {
+        console.log(res)
+        getHotels()
+        notifySuccess('You deleted a hotel sucessfully')
+      })
+      .catch((err) => {
+        console.log(err)
+        notifyError('Some thing went wrong')
+      })
+  }
   return (
     <div className='my-hotel-card'>
       <figure class='image-block'>
+        <i
+          class='far fa-trash-alt delete-icon'
+          onClick={() => {
+            handleShowConfirm()
+          }}
+        ></i>
         <h1>{hotel.name}</h1>
         <img src={hotel.image} alt='' />
         <figcaption>
@@ -60,6 +97,39 @@ const CardMyHotel = ({ hotel }) => {
           </div>
         </Modal.Body>
         <Modal.Footer></Modal.Footer>
+      </Modal>
+
+      <Modal
+        show={confirm}
+        onHide={() => {
+          handleCloseConfirm()
+        }}
+      >
+        <Modal.Header closeButton>
+          {/* <Modal.Title>Pickup your date</Modal.Title> */}
+        </Modal.Header>
+        <Modal.Body>
+          Do you want to remove this hotel from your listing ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant='secondary'
+            onClick={() => {
+              handleCloseConfirm()
+            }}
+          >
+            Close
+          </Button>
+          <Button
+            variant='primary'
+            onClick={() => {
+              deleteHotel()
+              handleCloseConfirm()
+            }}
+          >
+            Confirm
+          </Button>
+        </Modal.Footer>
       </Modal>
     </div>
   )

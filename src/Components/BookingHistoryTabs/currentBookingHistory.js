@@ -94,25 +94,23 @@ const CurrentBookingHistory = () => {
                   <th scope='col'>Hotel Name</th>
                   <th scope='col'>To be checking</th>
                   <th scope='col'>Edit</th>
-                  <th scope='col'>Info</th>
+                  <th scope='col'>Booking Info</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
-                  <>
-                    <tr>
-                      <td colspan='4'>
-                        <div className='booking-history-loader'>
-                          <HashLoader
-                            loading={loading}
-                            size={25}
-                            margin={2}
-                            color='#00AD5F'
-                          />
-                        </div>
-                      </td>
-                    </tr>
-                  </>
+                  <tr>
+                    <td colspan='5'>
+                      <div className='booking-history-loader'>
+                        <HashLoader
+                          loading={loading}
+                          size={25}
+                          margin={2}
+                          color='#00AD5F'
+                        />
+                      </div>
+                    </td>
+                  </tr>
                 ) : (
                   bookings.map((item, i) => {
                     // paymentStatus(item.bookingId)
@@ -124,7 +122,6 @@ const CurrentBookingHistory = () => {
                           {item.checkInDate.split('T')[0]} to{' '}
                           {item.checkOutDate.split('T')[0]}{' '}
                         </td>
-
                         <td>
                           <Link
                             to={`/booking/vas?location=galle&checkin-date=${
@@ -192,7 +189,6 @@ const CurrentBookingHistory = () => {
                       <tr>
                         <th scope='row'>B-{item.bookingId}</th>
                         <td>{item.hotel.name}</td>
-
                         <td>
                           <Link
                             to={`/booking/vas?location=galle&checkin-date=${
@@ -206,7 +202,7 @@ const CurrentBookingHistory = () => {
                             }&booking=${item.bookingId}&edit=true`}
                           >
                             <i
-                              class='fa fa-info-circle'
+                              class='fa fa-pencil'
                               style={{ fontSize: '1.5rem' }}
                               aria-hidden='true'
                             ></i>

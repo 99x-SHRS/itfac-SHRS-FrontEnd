@@ -95,6 +95,14 @@ const updateHotelById = async (id, bodyData) => {
     bodyData
   )
 }
+const deleteHotelById = async (params) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'hotel',
+    'deleteHotelById',
+    params
+  )
+}
 
 // *****************************************************************************
 //                          rooms  end points
@@ -536,6 +544,10 @@ const getReviewByHotelId = async (bodyData) => {
     bodyData
   )
 }
+const createReview = async (bodyData) => {
+  return await provider.insertData(BASE_URL, 'review', 'createReview', bodyData)
+}
+
 export {
   getAllHotels,
   searchHotels,
@@ -603,4 +615,6 @@ export {
   getReviewByHotelId,
   getMessagesByRecieverId,
   getCustomerGrade,
+  deleteHotelById,
+  createReview,
 }
