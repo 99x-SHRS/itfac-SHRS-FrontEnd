@@ -112,13 +112,10 @@ const RoomDetials = ({ roomType, setRoomType }) => {
   }
   return (
     <div className='ml-1'>
-      <h5>No of beds</h5>
       <form onSubmit={handleSubmit}>
         <div className='row'>
           <div class='form-group col-lg-3 '>
-            <label for='First Name'>
-              How many beds available in this room ? *
-            </label>
+            <label for='First Name'>Available room qty *</label>
             <NumericInput
               type='number'
               className='form-control'
@@ -130,7 +127,7 @@ const RoomDetials = ({ roomType, setRoomType }) => {
             />
           </div>
         </div>
-        <h5>Room details</h5>
+        <h3>Room details</h3>
         <div className='row'>
           <div class='form-group col-lg-3 '>
             <label for='First Name'>

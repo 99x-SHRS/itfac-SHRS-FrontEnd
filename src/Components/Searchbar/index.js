@@ -1,6 +1,7 @@
 import React, { Component, createRef, useEffect, useState } from 'react'
 import DatePicker from '../DatePicker/datepicker.js'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import jQuery from 'jquery'
 
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
@@ -10,30 +11,30 @@ import '../../Assets/vendor/select2/select2.min.css'
 import '../../Assets/styles/css/Components/searchbar.css'
 
 const Searchbox = () => {
-  const [dateRange, setDateRange] = useState([])
+  const [dateRange, setDateRange] = useState([null, null])
   const navigate = useNavigate()
+
   const handleSubmit = (event) => {
-    // event.preventDefault()
-
-    let data = {
-      location: event.target.address.value,
-      checkInDate: dateRange[0],
-      checkOutDate: dateRange[1],
-      adult: event.target.Adults.value,
-      children: event.target.Children.value,
-      rooms: event.target.Rooms.value,
+    event.preventDefault()
+    if (dateRange[0] != null || dateRange[1] != null) {
+      let data = {
+        location: event.target.address.value,
+        checkInDate: new Date(dateRange[0]).toLocaleDateString('en-ca'),
+        checkOutDate: new Date(dateRange[1]).toLocaleDateString('en-ca'),
+        adult: event.target.Adults.value,
+        children: event.target.Children.value,
+        rooms: event.target.Rooms.value,
+      }
+      let URL = `/hotels?location=${data.location}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
+      navigate(URL)
+    } else {
+      notifyError('Fill all the required feilds before search a hotel')
     }
-    let URL = `/hotels?location=${data.location}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
-    navigate(URL)
   }
-  const getDateRange = (date) => {
-    let dates = [
-      new Date(date[0]).toISOString().slice(0, 10),
-      new Date(date[1]).toISOString().slice(0, 10),
-    ]
+  const notifyError = (message) => {
+    toast.error(message)
+  }
 
-    setDateRange(dates)
-  }
   useEffect(() => {
     ;(function ($) {
       try {
@@ -222,7 +223,7 @@ const Searchbox = () => {
             </div>
             <div className='col-md-4'>
               <div class='input-group ' style={{ paddingTop: '0.7rem' }}>
-                <DatePicker getDateRange={getDateRange} />
+                <DatePicker setDateRange={setDateRange} dateRange={dateRange} />
                 <i class='zmdi zmdi-calendar-alt input-group-symbol'></i>
               </div>
             </div>
