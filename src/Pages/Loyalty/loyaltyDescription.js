@@ -12,7 +12,7 @@ class LoyaltyDescription extends Component {
         <Navbar />
         <div className='container loyalty-description'>
           <LoyaltyGrades />
-          <RedeemLoyalty />
+          {/* <RedeemLoyalty /> */}
         </div>
         <Footer />
       </div>

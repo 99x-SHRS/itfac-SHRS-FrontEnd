@@ -395,6 +395,14 @@ const getCustomerDiscount = async (bodyData) => {
     bodyData
   )
 }
+const getCustomerGrade = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'loyalty',
+    'getCustomerGrade',
+    bodyData
+  )
+}
 
 // *****************************************************************************
 //                          souvenir   end points
@@ -460,6 +468,10 @@ const getMessagesByRecieverId = async (bodyData) => {
     'getMessagesByRecieverId',
     bodyData
   )
+}
+
+const markAsRead = async (bodyData) => {
+  return await provider.getAllPOST(BASE_URL, 'message', 'markAsRead', bodyData)
 }
 
 // *****************************************************************************
@@ -599,4 +611,5 @@ export {
   getReviewByHotelId,
   getUserbyId,
   getMessagesByRecieverId,
+  getCustomerGrade,
 }
