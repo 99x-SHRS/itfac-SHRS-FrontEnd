@@ -16,7 +16,12 @@ const Searchbox = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    if (dateRange[0] != null || dateRange[1] != null) {
+
+    if (
+      dateRange[0] != null &&
+      dateRange[1] != null &&
+      event.target.address.value != ''
+    ) {
       let data = {
         location: event.target.address.value,
         checkInDate: new Date(dateRange[0]).toLocaleDateString('en-ca'),
@@ -216,7 +221,6 @@ const Searchbox = () => {
                   type='text'
                   name='address'
                   placeholder='Destination, hotel name'
-                  required='required'
                 />
                 <i class='zmdi zmdi-pin input-group-symbol'></i>
               </div>
