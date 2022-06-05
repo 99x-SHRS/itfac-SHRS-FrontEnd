@@ -5,17 +5,30 @@ import {
   getUserbyId,
   updateUserById,
 } from "../../Services/Api/Utilities/index.js";
+import { toast } from 'react-toastify';
+
+
 
 function Personalsettings() {
-  const [position, setPosition] = useState(true);
+  const [readOnly, setReadOnly] = useState(true);
+
+  useEffect(() => {
+    toast.configure()
+  }, [])
+
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
+  }
 
   const [values, setValues] = React.useState({
     firstName: "",
     lastName: "",
     contactNo: "",
-    email: "",
-    street: "",
-    houseNo: "",
+    street2: "",
+    street1: "",
     district: "",
     province: "",
   });
@@ -31,11 +44,10 @@ function Personalsettings() {
     await getUserbyId(data)
       .then((response) => {
         const data = response.data;
-        console.log(response.data);
         setItems(data);
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -52,33 +64,20 @@ function Personalsettings() {
   }
 
   function handlePosition() {
-    setPosition(false);
+    setReadOnly(false);
   }
-  // const updateUserDetails = async () => {
-  //   const data = {
-  //     id: localStorage.getItem("user"),
-  //     values,
-  //   };
-  //   await updateUserById(data)
-  //     .then((response) => {
-  //       const data = response.data;
-  //       console.log(response.data);
-  //       setEdit(false);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // };
-
+  
   async function updateUserDetails() {
-    const data = {
-      id: localStorage.getItem("user"),
-      values,
-    };
-    await updateUserById(data)
+    const id = localStorage.getItem("user");
+    console.log(values);
+    await updateUserById(id,values)
       .then((response) => {
-        const data = response.data;
-        console.log(response.data);
+        if (response.data) {
+          notifySuccess('Successfully Edited your Details..');
+        } else {
+          notifyError('An Error Occoured...')
+        }
+        const data = response;
         setEdit(false);
       })
       .catch((e) => {
@@ -86,12 +85,12 @@ function Personalsettings() {
       });
   }
 
-  const handleSubmit = () => {
-    // event.preventDefault()
+  const handleSubmit = (event) => {
+    event.preventDefault()
     handlePosition();
     if (edit) {
       updateUserDetails();
-      console.log("called");
+      setReadOnly(true);
     } else {
       setEdit(true);
     }
@@ -110,8 +109,9 @@ function Personalsettings() {
                       xmlns="http://www.w3.org/2000/svg"
                       width="40"
                       height="40"
-                      class="bi bi-person-fill"
+                      className="bi bi-person-fill justify-content-center"
                       viewBox="0 0 16 16"
+
                     >
                       <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
                     </svg>
@@ -173,7 +173,7 @@ function Personalsettings() {
                   id="firstName"
                   placeholder={items.firstName}
                   required
-                  readOnly={position}
+                  readOnly={readOnly}
                   onChange={handleChange("firstName")}
                 />
               </div>
@@ -187,7 +187,7 @@ function Personalsettings() {
                   id="lastName"
                   placeholder={items.lastName}
                   required
-                  readOnly={position}
+                  readOnly={readOnly}
                   onChange={handleChange("lastName")}
                 />
               </div>
@@ -201,8 +201,7 @@ function Personalsettings() {
                   id="email"
                   placeholder={items.email}
                   required
-                  readOnly={position}
-                  onChange={handleChange("email")}
+                  readOnly
                 />
               </div>
               <div className="col-md-6">
@@ -215,8 +214,8 @@ function Personalsettings() {
                   id="firstName"
                   placeholder={items.street1}
                   required
-                  readOnly={position}
-                  onChange={handleChange("houseNo")}
+                  readOnly={readOnly}
+                  onChange={handleChange("street1")}
                 />
               </div>
               <div className="col-md-6">
@@ -229,8 +228,8 @@ function Personalsettings() {
                   id="lastName"
                   placeholder={items.street2}
                   required
-                  readOnly={position}
-                  onChange={handleChange("street")}
+                  readOnly={readOnly}
+                  onChange={handleChange("street2")}
                 />
               </div>
               <div className="col-md-6">
@@ -243,7 +242,7 @@ function Personalsettings() {
                   id="province"
                   placeholder={items.province}
                   required
-                  readOnly={position}
+                  readOnly={readOnly}
                   onChange={handleChange("province")}
                 />
               </div>
@@ -256,7 +255,7 @@ function Personalsettings() {
                   className="form-control"
                   id="district"
                   placeholder={items.district}
-                  readOnly={position}
+                  readOnly={readOnly}
                   onChange={handleChange("district")}
                 />
               </div>
@@ -269,7 +268,7 @@ function Personalsettings() {
                   className="form-control"
                   id="contactNo"
                   placeholder={items.contactNo}
-                  readOnly={position}
+                  readOnly={readOnly}
                   onChange={handleChange("contactNo")}
                 />
               </div>
@@ -283,7 +282,7 @@ function Personalsettings() {
                   className="form-control"
                   id="exampleFormControlFile1"
                   placeholder={items.image}
-                  readOnly={position}
+                  readOnly={readOnly}
                   onChange={handleFile}
                 />
               </div>

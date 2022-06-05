@@ -1,7 +1,54 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import {
+  getUserbyId,
+  updateUserById,
+} from "../../Services/Api/Utilities/index.js";
+import { toast } from 'react-toastify';
 
 function SecuritySettings() {
+  const [position, setPosition] = useState(true);
+  const [items, setItems] = useState();
+
+  useEffect(() => {
+    toast.configure()
+  }, [])
+
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
+  }
+
+  const getuserDetails = async () => {
+    const data = {
+      id: localStorage.getItem("user"),
+    };
+    await getUserbyId(data)
+      .then((response) => {
+        const data = response.data;
+        console.log(data);
+        setItems(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+
+  const cheakValidation = () =>  {
+    //items.
+  };
+
+  useEffect(() => {
+    getuserDetails();
+  }, []);
+
+  function handlePosition() {
+    setPosition(false);
+  }
+
   return (
     <div className="container">
       <main>
@@ -81,6 +128,7 @@ function SecuritySettings() {
                       id="currantPassword"
                       placeholder="Currant Password..."
                       required
+                      readOnly={position}
                     />
                   </div>
                   <div className="col-md-12">
@@ -93,6 +141,7 @@ function SecuritySettings() {
                       id="newPassword"
                       placeholder="New Password..."
                       required
+                      readOnly={position}
                     />
                   </div>
                   <div className="col-md-12">
@@ -105,12 +154,14 @@ function SecuritySettings() {
                       id="confirmPassword"
                       placeholder="Confirm New Password..."
                       required
+                      readOnly={position}
                     />
                   </div>
-                  <div className="col-12 d-flex justify-content-left mt-3">
+                  <div className="col-12 d-flex justify-content-center mt-3">
                     <button
                       type="submit"
-                      className="btn btn-outline-primary btn-lg "
+                      className="btn btn-outline-primary btn-md "
+                      onClick={handlePosition}
                     >
                       Submit
                     </button>
@@ -118,7 +169,7 @@ function SecuritySettings() {
                 </form>
               </div>
             </div>
-            <div className="row g-3 rounded-3 shadow mt-4 p-3 border border-light">
+            {/* <div className="row g-3 rounded-3 shadow mt-4 p-3 border border-light">
               <div className="col-md-4">
                 <h3>Reset Password</h3>
               </div>
@@ -158,7 +209,7 @@ function SecuritySettings() {
                   </div>
                 </form>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </main>
