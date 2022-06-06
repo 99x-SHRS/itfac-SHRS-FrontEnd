@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { getAvailableRoomQtyByRoomId } from '../../Services/Api/Utilities'
 import DatepickerModal from '../DatePicker/DatepickerModal'
-import '../../Assets/styles/css/Components/datePickerModal.css'
+import '../../Assets/styles/css/components/datePickerModal.css'
 import { useNavigate } from 'react-router-dom'
 
 const SearchDatePicker = ({ hotelName }) => {

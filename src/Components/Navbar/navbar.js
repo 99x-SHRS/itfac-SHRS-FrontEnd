@@ -13,7 +13,7 @@ import {
   getUnreadCountByRecieverId,
 } from '../../Services/Api/Utilities'
 
-import '../../Assets/styles/css/Components/navbar.css'
+import '../../Assets/styles/css/components/navbar.css'
 import 'react-responsive-modal/styles.css'
 
 const Navbars = () => {

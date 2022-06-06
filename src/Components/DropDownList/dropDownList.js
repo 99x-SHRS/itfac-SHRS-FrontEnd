@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../Assets/styles/css/Components/dropDownList.css'
+import '../../Assets/styles/css/components/dropDownList.css'
 class DropDownList extends Component {
   constructor(props) {
     super(props)

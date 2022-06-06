@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import jQuery from 'jquery'
-import '../../Assets/styles/css/Components/inputBoxNumber.css'
+import '../../Assets/styles/css/components/inputBoxNumber.css'
 const NumberInputBox = () => {
   /*
    *

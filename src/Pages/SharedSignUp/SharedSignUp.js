@@ -8,7 +8,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import Footer from '../../Layouts/Footer/footer'
-import '../../Assets/styles/css/Components/signupAndLogin.css'
+import '../../Assets/styles/css/components/signupAndLogin.css'
 
 const SharedSignUp = () => {
   const [content, setContent] = useState('')

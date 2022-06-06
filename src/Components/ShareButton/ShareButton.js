@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { Modal } from 'react-bootstrap'
 import ShareModal from '../../Layouts/ShareModal/ShareModal'
-import '../../Assets/styles/css/Components/shareButton.css'
+import '../../Assets/styles/css/components/shareButton.css'
 const ShareButton = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [show, setShow] = useState(false)

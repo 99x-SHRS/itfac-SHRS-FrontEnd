@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { userLogin, updateUserById } from '../../Services/Api/Utilities'
 import { toast } from 'react-toastify'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
-import '../../Assets/styles/css/Components/login.css'
+import '../../Assets/styles/css/components/login.css'
 
 const Login = ({ setLogin, setLoggedin }) => {
   const [content, setContent] = useState('')

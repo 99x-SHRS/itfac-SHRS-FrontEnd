@@ -2,7 +2,7 @@ import React, { Component, useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import Souvenir from '../../Carousel/souvenir'
 import SplideSlider from '../../Carousel/splide'
-import '../../../Assets/styles/css/Components/roomImageModal.css'
+import '../../../Assets/styles/css/components/roomImageModal.css'
 import Browsetype from '../../Carousel/browsetype'
 
 const RoomImageModal = ({ roomId }) => {

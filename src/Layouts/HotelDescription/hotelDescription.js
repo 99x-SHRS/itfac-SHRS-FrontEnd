@@ -2,7 +2,7 @@ import React, { Component, useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { getHotelById } from '../../Services/Api/Utilities'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
-import '../../Assets/styles/css/Components/hotelPageTabs.css'
+import '../../Assets/styles/css/components/hotelPageTabs.css'
 
 const HotelDescription = () => {
   const [loading, setLoading] = useState(true)

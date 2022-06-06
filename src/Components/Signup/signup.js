@@ -3,7 +3,7 @@ import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { addUser } from '../../Services/Api/Utilities'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
-import '../../Assets/styles/css/Components/login.css'
+import '../../Assets/styles/css/components/login.css'
 
 const Signup = ({ setSign, setLoggedin, setLogin }) => {
   const navigate = useNavigate()

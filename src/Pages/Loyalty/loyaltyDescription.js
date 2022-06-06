@@ -3,7 +3,7 @@ import Navbar from '../../Components/Navbar/navbar'
 import LoyaltyGrades from '../../Layouts/LoyaltyGrades/loyaltyGrades'
 import Footer from '../../Layouts/Footer/footer.js'
 import RedeemLoyalty from '../../Layouts/LoyaltyGrades/redeemLoyalty'
-import '../../Assets/styles/css/Pages/loyaltyDescription.css'
+import '../../Assets/styles/css/pages/loyaltyDescription.css'
 
 class LoyaltyDescription extends Component {
   render() {

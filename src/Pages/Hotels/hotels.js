@@ -3,7 +3,7 @@ import HotelHeader from '../../Layouts/Header/hotelHeader.js'
 import SearchedHotels from '../../Layouts/SearchedHotels/SearchedHotels.js'
 import Searchbox from '../../Components/Searchbar/index.js'
 import Footer from '../../Layouts/Footer/footer.js'
-import '../../Assets/styles/css/Pages/hotels.css'
+import '../../Assets/styles/css/pages/hotels.css'
 
 const Hotels = (props) => {
   useEffect(() => {

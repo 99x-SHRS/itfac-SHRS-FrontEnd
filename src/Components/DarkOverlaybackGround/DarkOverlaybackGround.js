@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styled, { css } from 'styled-components'
 
 import PuffLoader from 'react-spinners/PuffLoader'
-import '../../Assets/styles/css/Components/darkOverlaybackGround.css'
+import '../../Assets/styles/css/components/darkOverlaybackGround.css'
 const DarkBackground = styled.div`
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */

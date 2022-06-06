@@ -8,7 +8,7 @@ import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
 
-import '../../Assets/styles/css/Components/searchbar.css'
+import '../../Assets/styles/css/components/searchbar.css'
 
 const Searchbox = () => {
   const [dateRange, setDateRange] = useState([null, null])

@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/themes/splide-default.min.css'
 import { getAllImagesByRoomId } from '../../Services/Api/Utilities/index.js'
-import '../../Assets/styles/css/Components/souvenir.css'
+import '../../Assets/styles/css/components/souvenir.css'
 
 const SplideSlider = ({ roomId }) => {
   const [images, setRoomImages] = useState(null)

@@ -8,7 +8,7 @@ import {
 
 import 'react-toastify/dist/ReactToastify.css'
 import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
-import '../../Assets/styles/css/Components/searchedHotelCard.css'
+import '../../Assets/styles/css/components/searchedHotelCard.css'
 class HotelCard extends Component {
   constructor(props) {
     super(props)

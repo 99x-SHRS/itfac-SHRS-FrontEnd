@@ -13,7 +13,7 @@ import {
   validateCoupon,
   getCustomerDiscount,
 } from '../../Services/Api/Utilities/index.js'
-import '../../Assets/styles/css/Pages/payment.css'
+import '../../Assets/styles/css/pages/payment.css'
 
 const Payament = () => {
   const [loading, setLoading] = useState(true)

@@ -1,5 +1,5 @@
 import React, { Component, useEffect, useState } from 'react'
-import '../../Assets/styles/css/Components/savedHotelCard.css'
+import '../../Assets/styles/css/components/savedHotelCard.css'
 import { getHotelById } from '../../Services/Api/Utilities'
 import HashLoader from 'react-spinners/HashLoader'
 const SavedHotelCard = ({ hotel, removeSaveHotel }) => {

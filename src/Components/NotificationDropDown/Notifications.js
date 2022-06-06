@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { getMessagesByRecieverId } from '../../Services/Api/Utilities'
-import '../../Assets/styles/css/Components/notification.css'
+import '../../Assets/styles/css/components/notification.css'
 const Notifications = () => {
   const [messages, setMessage] = useState(null)
   useEffect(() => {

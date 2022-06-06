@@ -3,7 +3,7 @@ import { userLogin, addUser } from '../../Services/Api/Utilities'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
-import '../../Assets/styles/css/Components/signupAndLogin.css'
+import '../../Assets/styles/css/components/signupAndLogin.css'
 
 const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
   const [content, setContent] = useState('')

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import '../../Assets/styles/css/Pages/exceptions.css'
+import '../../Assets/styles/css/pages/exceptions.css'
 const Exception404 = () => {
   useEffect(() => {
     localStorage.setItem('session', false)

@@ -9,7 +9,7 @@ import image_3 from '../../Assets/images/property-types/villa.jpg'
 import image_4 from '../../Assets/images/property-types/bangalow.jpg'
 import image_5 from '../../Assets/images/property-types/guest-houses.jpg'
 
-import '../../Assets/styles/css/Components/souvenir.css'
+import '../../Assets/styles/css/components/souvenir.css'
 
 const Souvenir = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()

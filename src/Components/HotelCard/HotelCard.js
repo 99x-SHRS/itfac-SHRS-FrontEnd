@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
-import '../../Assets/styles/css/Components/hotelCard.css'
+import '../../Assets/styles/css/components/hotelCard.css'
 
 import SearchDatePicker from '../SearchDatePicker/SearchDatePicker'
 const HotelCard = ({ hotel }) => {
