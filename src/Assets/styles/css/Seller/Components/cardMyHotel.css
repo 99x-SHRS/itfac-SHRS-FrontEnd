@@ -15,9 +15,9 @@
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
-.my-hotel-card figure:hover img {
+/* .my-hotel-card figure:hover img {
   transform: scale(1.25);
-}
+} */
 
 /* .my-hotel-card figure:hover figcaption {
   bottom: 0;
@@ -80,4 +80,11 @@
 .image-block figcaption .row button {
   margin-left: auto;
   margin-right: auto;
+}
+.my-hotel-card .delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: white !important;
+  cursor: pointer;
 }

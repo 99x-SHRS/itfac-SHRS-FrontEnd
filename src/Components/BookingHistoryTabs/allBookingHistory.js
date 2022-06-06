@@ -146,14 +146,13 @@ const AllBookingHistory = () => {
                 <tr>
                   <th scope='col'>Booking ID</th>
                   <th scope='col'>Hotel Name</th>
-
                   <th scope='col'>Info</th>
                 </tr>
               </thead>
               <tbody>
                 {loading ? (
                   <tr>
-                    <td colspan='4'>
+                    <td colspan='5'>
                       <div className='booking-history-loader'>
                         <HashLoader
                           loading={loading}

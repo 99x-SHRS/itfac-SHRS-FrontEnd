@@ -37,7 +37,7 @@ const ListedHotels = () => {
             hotels.map((hotel) => {
               return (
                 <div class=' col-lg-3 col-sm-8 col-md-6 mt-2 '>
-                  <CardMyHotel hotel={hotel} />
+                  <CardMyHotel hotel={hotel} getHotels={getHotels} />
                 </div>
               )
             })

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useSearchParams, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import RoomImages from '../../Components/RoomTypeSelector/roomImages'
 import HorizontalLine from '../../Components/HorizontalLine/horizontalLine'
 import NumberInputBox from '../../Components/NumberInputBox/inputBoxNumber'
@@ -35,6 +36,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
       hotelId: searchedParams.get('hotel') || '',
     }
     setParams(dataModel)
+    toast.configure()
   }, [])
   const bookRoom = async (setedRoom) => {
     const dataModal = {
@@ -54,9 +56,14 @@ const TableBody = ({ rooms, souvenirs1 }) => {
       .then((res) => {
         try {
           const bookingId = res.data.bookingId
-
-          let URL = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
-          navigate(URL)
+          console.log(res.data)
+          if (Number.isInteger(bookingId)) {
+            let URL = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
+            navigate(URL)
+          } else {
+            navigate('/')
+            notifyError('Some thing went wrong.')
+          }
         } catch (error) {
           console.log(error)
         }
@@ -77,7 +84,9 @@ const TableBody = ({ rooms, souvenirs1 }) => {
         console.log(err)
       })
   }
-
+  const notifyError = (message) => {
+    toast.error(message)
+  }
   return (
     <>
       {roomsData.map((room) => {
