@@ -1,92 +1,79 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
+import { Carousel } from 'react-bootstrap'
+
+import { getAllsouvenirByHotelId } from '../../Services/Api/Utilities'
 import image_1 from '../../Assets/images/property-types/luxary.jpg'
 import image_2 from '../../Assets/images/property-types/kabana.jpg'
 import image_3 from '../../Assets/images/property-types/villa.jpg'
 import image_4 from '../../Assets/images/property-types/bangalow.jpg'
 import image_5 from '../../Assets/images/property-types/guest-houses.jpg'
-import '../../Assets/styles/css/components/souvenir.css'
-import { Carousel } from 'react-bootstrap'
-class Souvenir extends Component {
-  render() {
-    return (
-      <div>
-        <div className='souvenir-container mt-5 '>
-          <Carousel fade>
-            <Carousel.Item>
-              <img
-                className='d-block w-100 carousel-img'
-                src={image_1}
-                alt='First slide'
-              />
-              <Carousel.Caption>
-                <h3>Luxary</h3>
-                <p>
-                  Nulla vitae elit libero, a pharetra augue mollis interdum.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className='d-block w-100 carousel-img'
-                src={image_2}
-                alt='Second slide'
-              />
 
-              <Carousel.Caption>
-                <h3>Kabana</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className='d-block w-100 carousel-img'
-                src={image_3}
-                alt='Third slide'
-              />
+import '../../Assets/styles/css/Components/souvenir.css'
 
-              <Carousel.Caption>
-                <h3>Villa</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className='d-block w-100 carousel-img'
-                src={image_4}
-                alt='Third slide'
-              />
+const Souvenir = () => {
+  const [searchedParams, setSearchedparams] = useSearchParams()
+  const [images, setImages] = useState(null)
 
-              <Carousel.Caption>
-                <h3>Bangalow</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-              <img
-                className='d-block w-100 carousel-img'
-                src={image_5}
-                alt='Third slide'
-              />
+  useEffect(() => {
+    console.log(images != null)
+    getSouviners()
+  }, [])
 
-              <Carousel.Caption>
-                <h3>Guest Houses</h3>
-                <p>
-                  Praesent commodo cursus magna, vel scelerisque nisl
-                  consectetur.
-                </p>
-              </Carousel.Caption>
-            </Carousel.Item>
-          </Carousel>
-        </div>
-      </div>
-    )
+  const getSouviners = async () => {
+    const dataModel = {
+      id: searchedParams.get('hotel') || '',
+    }
+    await getAllsouvenirByHotelId(dataModel)
+      .then((res) => {
+        console.log(res)
+        setImages(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }
+  return (
+    <div className='souvenir-carousol'>
+      <div className='souvenir-container mt-5 '>
+        <Carousel fade>
+          {images != null ? (
+            <>
+              <Carousel.Item>
+                <img
+                  className='d-block w-100'
+                  src={image_1}
+                  alt='First slide'
+                />
+                <Carousel.Caption>
+                  <h3>First slide label</h3>
+                  <p>
+                    Nulla vitae elit libero, a pharetra augue mollis interdum.
+                  </p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </>
+          ) : (
+            <>
+              <Carousel.Item>
+                <img
+                  className='d-block w-100'
+                  src={image_1}
+                  alt='First slide'
+                />
+                <Carousel.Caption>
+                  <h3>First slide label</h3>
+                  <p>
+                    Nulla vitae elit libero, a pharetra augue mollis interdum.
+                  </p>
+                </Carousel.Caption>
+              </Carousel.Item>
+            </>
+          )}
+        </Carousel>
+      </div>
+    </div>
+  )
 }
 
 export default Souvenir

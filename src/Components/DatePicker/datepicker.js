@@ -5,18 +5,17 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import Box from '@mui/material/Box'
 
-export default function BasicDateRangePicker() {
-  const [value, setValue] = React.useState([null, null])
-
+export default function BasicDateRangePicker({ setDateRange, dateRange }) {
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DateRangePicker
         startText='Check-in'
         endText='Check-out'
-        value={value}
+        value={dateRange}
         onChange={(newValue) => {
-          setValue(newValue)
+          setDateRange(newValue)
         }}
+        disablePast
         renderInput={(startProps, endProps) => (
           <React.Fragment>
             <TextField {...startProps} />

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import '../../Assets/styles/css/components/priceTag.css'
+import '../../Assets/styles/css/Components/priceTag.css'
 class PriceTag extends Component {
   constructor(props) {
     super(props)

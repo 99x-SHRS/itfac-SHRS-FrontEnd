@@ -1,14 +1,46 @@
-import React, { Component } from 'react'
-import '../../Assets/styles/css/searchbar.css'
+import React, { Component, createRef, useEffect, useState } from 'react'
+import DatePicker from '../DatePicker/datepicker.js'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import jQuery from 'jquery'
+
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
-import DatePicker from '../DatePicker/datepicker.js'
 
-import jQuery from 'jquery'
-import { Link } from 'react-router-dom'
-class Searchbox extends Component {
-  componentDidMount() {
+import '../../Assets/styles/css/Components/searchbar.css'
+
+const Searchbox = () => {
+  const [dateRange, setDateRange] = useState([null, null])
+  const navigate = useNavigate()
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    if (
+      dateRange[0] != null &&
+      dateRange[1] != null &&
+      event.target.address.value != ''
+    ) {
+      let data = {
+        location: event.target.address.value,
+        checkInDate: new Date(dateRange[0]).toLocaleDateString('en-ca'),
+        checkOutDate: new Date(dateRange[1]).toLocaleDateString('en-ca'),
+        adult: event.target.Adults.value,
+        children: event.target.Children.value,
+        rooms: event.target.Rooms.value,
+      }
+      let URL = `/hotels?location=${data.location}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
+      navigate(URL)
+    } else {
+      notifyError('Fill all the required feilds before search a hotel')
+    }
+  }
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+
+  useEffect(() => {
     ;(function ($) {
       try {
         var body = $('body,html')
@@ -17,8 +49,6 @@ class Searchbox extends Component {
         var info = selectSpecial.find('#info')
         var dropdownSelect = selectSpecial.parent().find('.dropdown-select')
         var listRoom = dropdownSelect.find('.list-room')
-        // var btnAddRoom = $('#btn-add-room')
-        // var totalRoom = 1
 
         selectSpecial.on('click', function (e) {
           e.stopPropagation()
@@ -177,106 +207,107 @@ class Searchbox extends Component {
         console.log(err)
       }
     })(jQuery)
-  }
-  render() {
-    return (
-      <div>
-        <form action='' method='post'>
-          <div className=' searchcontainer '>
-            <div className='row'>
-              <div className='col-md-3'>
-                <div class='input-group '>
-                  <label class='label'>Going to</label>
-                  <input
-                    class='input--style-1'
-                    type='text'
-                    name='address'
-                    placeholder='Destination, hotel name'
-                    required='required'
-                  />
-                  <i class='zmdi zmdi-pin input-group-symbol'></i>
-                </div>
-              </div>
-              <div className='col-md-4'>
-                <div class='input-group'>
-                  <DatePicker />
-                  <i class='zmdi zmdi-calendar-alt input-group-symbol'></i>
-                </div>
-              </div>
-
-              <div className='col-md-3 travellers ' id='show'>
-                <div class='input-group' id='js-select-special'>
-                  <label class='label'>Travellers</label>
-                  <i class='zmdi zmdi-pin input-group-symbol'></i>
-                  <input
-                    class='input--style-1'
-                    type='text'
-                    name='traveller'
-                    value='1 Adult, 0 Children, 1 Room'
-                    disabled='disabled'
-                    id='info'
-                  />
-                  <i class='zmdi zmdi-chevron-down input-icon'></i>
-                </div>
-                <div class='dropdown-select'>
-                  <ul class='list-room'>
-                    <li class='list-room__item'>
-                      <ul class='list-person'>
-                        <li class='list-person__item'>
-                          <span class='name'>Adults</span>
-                          <div class='quantity quantity1'>
-                            <span class='minus'>-</span>
-                            <input
-                              class='inputQty'
-                              type='number'
-                              min='0'
-                              value='1'
-                            />
-                            <span class='plus'>+</span>
-                          </div>
-                        </li>
-                        <li class='list-person__item'>
-                          <span class='name'>Children</span>
-                          <div class='quantity quantity2'>
-                            <span class='minus'>-</span>
-                            <input
-                              class='inputQty'
-                              type='number'
-                              min='0'
-                              value='0'
-                            />
-                            <span class='plus'>+</span>
-                          </div>
-                        </li>
-                        <li class='list-person__item'>
-                          <span class='name'>Rooms</span>
-                          <div class='quantity quantity3'>
-                            <span class='minus'>-</span>
-                            <input
-                              class='inputQty'
-                              type='number'
-                              min='1'
-                              value='1'
-                            />
-                            <span class='plus'>+</span>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-              <div className='col-md-2 search-button'>
-                <button class='btn-submit submit-Btn' type='submit'>
-                  <Link to='/hotels'>search</Link>
-                </button>
+  }, [])
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <div className=' searchcontainer '>
+          <div className='row'>
+            <div className='col-md-3'>
+              <div class='input-group '>
+                <label class='label'>Going to</label>
+                <input
+                  class='input--style-1'
+                  type='text'
+                  name='address'
+                  placeholder='Destination, hotel name'
+                />
+                <i class='zmdi zmdi-pin input-group-symbol'></i>
               </div>
             </div>
+            <div className='col-md-4'>
+              <div class='input-group ' style={{ paddingTop: '0.7rem' }}>
+                <DatePicker setDateRange={setDateRange} dateRange={dateRange} />
+                <i class='zmdi zmdi-calendar-alt input-group-symbol'></i>
+              </div>
+            </div>
+
+            <div className='col-md-3 travellers ' id='show'>
+              <div class='input-group' id='js-select-special'>
+                <label class='label'>Travellers</label>
+                <i class='zmdi zmdi-pin input-group-symbol'></i>
+                <input
+                  class='input--style-1'
+                  type='text'
+                  name='traveller'
+                  value='1 Adult, 0 Children, 1 Room'
+                  disabled='disabled'
+                  id='info'
+                />
+                <i class='zmdi zmdi-chevron-down input-icon'></i>
+              </div>
+              <div class='dropdown-select'>
+                <ul class='list-room'>
+                  <li class='list-room__item'>
+                    <ul class='list-person'>
+                      <li class='list-person__item'>
+                        <span class='name'>Adults</span>
+                        <div class='quantity quantity1'>
+                          <span class='minus'>-</span>
+                          <input
+                            class='inputQty '
+                            type='number'
+                            name='Adults'
+                            min='0'
+                            value='1'
+                          />
+
+                          <span class='plus'>+</span>
+                        </div>
+                      </li>
+                      <li class='list-person__item'>
+                        <span class='name'>Children</span>
+                        <div class='quantity quantity2'>
+                          <span class='minus'>-</span>
+                          <input
+                            class='inputQty'
+                            type='number'
+                            name='Children'
+                            min='0'
+                            value='0'
+                          />
+                          <span class='plus'>+</span>
+                        </div>
+                      </li>
+                      <li class='list-person__item'>
+                        <span class='name'>Rooms</span>
+                        <div class='quantity quantity3'>
+                          <span class='minus'>-</span>
+                          <input
+                            class='inputQty'
+                            type='number'
+                            name='Rooms'
+                            min='1'
+                            value='1'
+                          />
+                          <span class='plus'>+</span>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div className='col-md-2 search-button'>
+              <button class='btn-submit submit-Btn b-priamry' type='submit'>
+                <p>Search</p>
+              </button>
+            </div>
           </div>
-        </form>
-      </div>
-    )
-  }
+        </div>
+      </form>
+    </div>
+  )
 }
 
 export default Searchbox
