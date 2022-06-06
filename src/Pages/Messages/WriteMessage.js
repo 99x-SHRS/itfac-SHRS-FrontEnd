@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Messages from './messages';
+import Messages from './Message';
 
 const WriteMessage = () => {
     return (
