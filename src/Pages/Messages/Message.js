@@ -164,10 +164,12 @@ class Messages extends Component {
                             {this.state.messages.map((message) => (
                                 <tr key={message._id}>
                                     <td>{message.date.slice(0, 13)}</td>
+                                    {/* slice method used to cut off unnecessary parts of the date */}
                                     <td>{message.direction}</td>
                                     <td>{message.from}</td>
                                     <td>{message.to}</td>
                                     <td>{message.text.slice(0, 20) + "..."}</td>
+                                    {/* slice method used to cut off unnecessary parts of the message text */}
                                     <td>
                                         <div className="btn-group mr-2" >
                                             <div
