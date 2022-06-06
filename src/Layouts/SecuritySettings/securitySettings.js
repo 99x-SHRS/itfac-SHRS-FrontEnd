@@ -8,12 +8,22 @@ import {
 import { toast } from 'react-toastify';
 
 function SecuritySettings() {
-  const [position, setPosition] = useState(true);
+  const [readOnly, setReadOnly] = useState(true);
   const [items, setItems] = useState();
+  const [values, setValues] = React.useState({
+    currantPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+
 
   useEffect(() => {
     toast.configure()
   }, [])
+
+  useEffect(() => {
+    getuserDetails();
+  }, []);
 
   const notifyError = (message) => {
     toast.error(message)
@@ -29,7 +39,7 @@ function SecuritySettings() {
     await getUserbyId(data)
       .then((response) => {
         const data = response.data;
-        console.log(data);
+        //console.log(data);
         setItems(data);
       })
       .catch((e) => {
@@ -38,16 +48,25 @@ function SecuritySettings() {
   };
 
   const cheakValidation = () =>  {
-    //items.
+    if (values.newPassword === values.confirmPassword){
+      console.log("Sucess");
+      notifySuccess("Password change sucessfull..");
+    }
+    else {
+      notifyError("Passwords are not Match. Please Re Enter the passwords.");
+    }
   };
 
-  useEffect(() => {
-    getuserDetails();
-  }, []);
+  const handlePosition = (event) => {
+    // setReadOnly(false);
+    event.preventDefault();
+    cheakValidation();
+    console.log(values);
+  };
 
-  function handlePosition() {
-    setPosition(false);
-  }
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
 
   return (
     <div className="container">
@@ -128,7 +147,8 @@ function SecuritySettings() {
                       id="currantPassword"
                       placeholder="Currant Password..."
                       required
-                      readOnly={position}
+                      //readOnly={readOnly}
+                      onChange={handleChange("currantPassword")}
                     />
                   </div>
                   <div className="col-md-12">
@@ -141,7 +161,8 @@ function SecuritySettings() {
                       id="newPassword"
                       placeholder="New Password..."
                       required
-                      readOnly={position}
+                      //readOnly={readOnly}
+                      onChange={handleChange("newPassword")}
                     />
                   </div>
                   <div className="col-md-12">
@@ -154,12 +175,12 @@ function SecuritySettings() {
                       id="confirmPassword"
                       placeholder="Confirm New Password..."
                       required
-                      readOnly={position}
+                      //readOnly={readOnly}
+                      onChange={handleChange("confirmPassword")}
                     />
                   </div>
                   <div className="col-12 d-flex justify-content-center mt-3">
                     <button
-                      type="submit"
                       className="btn btn-outline-primary btn-md "
                       onClick={handlePosition}
                     >
