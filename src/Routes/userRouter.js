@@ -11,7 +11,9 @@ import BookingHistory from '../Pages/BookingHistory/bookingHistory.js'
 import BookingDetails from '../Layouts/BookingHistroy/bookingDetails'
 import LoyaltyDescription from '../Pages/Loyalty/loyaltyDescription'
 import SharedSignUp from '../Pages/SharedSignUp/SharedSignUp'
-import MyAccount from '../Pages/Account/MyAccount'
+import AccountSettings from '../Pages/Account/MyAccountSettings'
+import PersonalSettings from '../Pages/PersonalSettings/personalSettings'
+import SecuritySettings from '../Pages/SecuritySettings/securitySettings'
 import Review from '../Pages/Account/Review'
 const UserRoutes = (
   <>
@@ -31,7 +33,9 @@ const UserRoutes = (
       element={<LoyaltyDescription />}
     ></Route>
     <Route path='/share' element={<SharedSignUp />}></Route>
-    <Route exact path='/my-account' element={<MyAccount />}></Route>
+    <Route exact path='/account-settings' element={<AccountSettings />}></Route>
+    <Route exact path='/personal-settings' element={<PersonalSettings />}></Route>
+    <Route exact path='/security-settings' element={<SecuritySettings />}></Route>
     <Route exact path='/my-account/review' element={<Review />}></Route>
   </>
 )
