@@ -1,13 +1,41 @@
 import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const ReviewModel = ({id, hname, location, description, image, rating}) => {
-    const deleteReview = () => {
-        console.log("reviewDelete");
+
+    useEffect(() => {
+        toast.configure()
+      }, [])
+    
+      const notifyError = (message) => {
+        toast.error(message)
+      }
+      const notifySuccess = (message) => {
+        toast.success(message)
+      }
+
+    const deleteReview = async () => {
+        console.log("reviewDelete")
+        const id = localStorage.getItem("user");
+        // await deleteReviewById (id)
+        //     .then((response)=> {
+        //         const data = response.data;
+        //         if (response.data){
+        //             notifySuccess("Sucessfully Deleted..")
+        //         }
+        //         else {
+        //             notifyError("An Error Occoured..")
+        //         }
+        //     })
+        //     .catch((e) => {
+        //         console.log(e);
+        //     })
     };
   return (
-    <div className="rounded-3 shadow border border-info row g-1 align-middle mb-3 mt-3">
+    <div className="rounded shadow border border-primary row g-1 align-middle mb-3 mt-3 p-1">
       <div className="col-md-3 d-flex justify-content-center my-auto">
-        <img src={image} width="150px" height="110px" alt="This is an image" />
+        <img src={image} width="170px" height="150px" alt="This is an image" className="rounded" />
       </div>
       <div className="col-md-7 d-flex justify-content-center my-auto">
         <div className="row">
@@ -32,10 +60,10 @@ const ReviewModel = ({id, hname, location, description, image, rating}) => {
         </div>
       </div>
       <div className="col-md-2 justify-content-center my-auto mx-auto">
-        <button type="button" className="btn btn-outline-info rounded">
+        <button type="button" className="btn btn-outline-info rounded-pill">
           Update
         </button>
-        <button type="button" className="btn btn-outline-danger rounded" onClick={deleteReview}>
+        <button type="button" className="btn btn-outline-danger rounded-pill" onClick={deleteReview}>
           Remove
         </button>
       </div>

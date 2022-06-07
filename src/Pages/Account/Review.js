@@ -25,7 +25,7 @@ const Review = () => {
   return (
     <div className="container">
       <div className="row g-3">
-        <div className="col-12 shadow rounded-3 border ml-2">
+        <div className="col-12 shadow-lg rounded-3 border border-secondary ml-2">
           <div className="mt-3 ml-2">
             <h3>Your Reviews.....</h3>
           </div>
@@ -37,6 +37,7 @@ const Review = () => {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam nec neque metus. Nullam maximus nisl a elit ullamcorper vehicula. In hac habitasse platea dictumst."
               }
               location ={"Mount-Lavinia"}
+              image ={"https://www.berjayahotel.com/sites/default/files/Berjaya%20Colombo%20Hotel%20Garden%20Bar_0.jpg"}
             />
             <ReviewModel 
             rating={"5"}
@@ -44,7 +45,8 @@ const Review = () => {
             description={
               "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam nec neque metus. Nullam maximus nisl a elit ullamcorper vehicula. In hac habitasse platea dictumst."
             }
-            location ={"Mount-Lavinia"}/>
+            location ={"Mount-Lavinia"}
+            image ={"https://www.berjayahotel.com/sites/default/files/Berjaya%20Colombo%20Hotel%20Garden%20Bar_0.jpg"}/>
           </div>
         </div>
       </div>
