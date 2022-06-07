@@ -8,7 +8,7 @@ import {
 import { toast } from 'react-toastify';
 
 function SecuritySettings() {
-  const [readOnly, setReadOnly] = useState(true);
+  const [status, setStatus] = useState(false);
   const [items, setItems] = useState();
   const [values, setValues] = React.useState({
     currantPassword: "",
@@ -21,10 +21,6 @@ function SecuritySettings() {
     toast.configure()
   }, [])
 
-  useEffect(() => {
-    getuserDetails();
-  }, []);
-
   const notifyError = (message) => {
     toast.error(message)
   }
@@ -32,36 +28,45 @@ function SecuritySettings() {
     toast.success(message)
   }
 
-  const getuserDetails = async () => {
-    const data = {
-      id: localStorage.getItem("user"),
-    };
-    await getUserbyId(data)
-      .then((response) => {
-        const data = response.data;
-        //console.log(data);
-        setItems(data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  };
+  // const updatePassword = async () => {
+  //   const data = {
+  //     id : localStorage.getItem("user"),
+  //     currantPassword : values.currantPassword,
+  //     newPassword : values.newPassword
+  //   }
+  //   await changePassword(data)
+  //     .then((response) => {
+  //       const data = response.data;
+  //       setStatus(response.data);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e);
+  //     });
+  // };
+
 
   const cheakValidation = () =>  {
     if (values.newPassword === values.confirmPassword){
-      console.log("Sucess");
-      notifySuccess("Password change sucessfull..");
+      //updatePassword();
+      // {status ? (
+      //   console.log("Sucess"),
+      //   notifySuccess("Password change sucessfull.."),
+      //   setStatus(false)
+        
+      // ) : (
+      //   console.log("Faild"),
+      //   notifyError("An Error Occoured..")
+      // )}
     }
     else {
-      notifyError("Passwords are not Match. Please Re Enter the passwords.");
+      notifyError("Password does not Match. Please Re Enter the passwords.");
     }
   };
 
   const handlePosition = (event) => {
-    // setReadOnly(false);
     event.preventDefault();
     cheakValidation();
-    console.log(values);
+    //console.log(values);
   };
 
   const handleChange = (prop) => (event) => {
@@ -147,7 +152,6 @@ function SecuritySettings() {
                       id="currantPassword"
                       placeholder="Currant Password..."
                       required
-                      //readOnly={readOnly}
                       onChange={handleChange("currantPassword")}
                     />
                   </div>
@@ -161,7 +165,6 @@ function SecuritySettings() {
                       id="newPassword"
                       placeholder="New Password..."
                       required
-                      //readOnly={readOnly}
                       onChange={handleChange("newPassword")}
                     />
                   </div>
@@ -175,7 +178,6 @@ function SecuritySettings() {
                       id="confirmPassword"
                       placeholder="Confirm New Password..."
                       required
-                      //readOnly={readOnly}
                       onChange={handleChange("confirmPassword")}
                     />
                   </div>
