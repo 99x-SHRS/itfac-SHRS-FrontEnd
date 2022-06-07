@@ -17,8 +17,6 @@ const BookingVAS = () => {
     let hotelId = searchedParams.get('hotel') || ''
     if (hotelId != 0) {
       getAllVAS(hotelId)
-    } else {
-      alert('went wrong')
     }
     setUpdate(searchedParams.get('edit') || '')
   }, [vas.length])

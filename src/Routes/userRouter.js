@@ -24,7 +24,6 @@ const UserRoutes = (
     <Route exact path='/saved-hotel' element={<SavedHotel />}></Route>
     <Route exact path='/booking-history' element={<BookingHistory />}></Route>
     <Route path='/booking-history/details' element={<BookingDetails />}></Route>
-
     <Route
       exact
       path='/loyalty-program'
