@@ -25,7 +25,7 @@ const Login = ({ setLogin, setLoggedin }) => {
     }
     await updateUserById(uId, dataModal)
       .then((res) => {
-        // console.log(res)
+        console.log(res)
       })
       .catch((err) => {
         console.log(err)
