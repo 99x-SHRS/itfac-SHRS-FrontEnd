@@ -2,6 +2,7 @@ import React, { Component, useEffect } from 'react'
 import CurrentBookingHistory from '../../Components/BookingHistoryTabs/currentBookingHistory.js'
 import PastBookingHistory from '../../Components/BookingHistoryTabs/pastBookingHistory.js'
 import AllBookingHistory from '../../Components/BookingHistoryTabs/allBookingHistory.js'
+import Review from '../../Pages/Account/Review.js'
 import '../../Assets/styles/css/Layouts/bookingHistoryTable.css'
 const BookingHistroyTable = () => {
   useEffect(() => {
@@ -73,11 +74,7 @@ const BookingHistroyTable = () => {
             <AllBookingHistory />
           </section>
           <section>
-            <h2>Reviews</h2>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa dicta
-            vero rerum? Eaque repudiandae architecto libero reprehenderit
-            aliquam magnam ratione quidem? Nobis doloribus molestiae enim
-            deserunt necessitatibus eaque quidem incidunt.
+            <Review/>
           </section>
         </div>
       </div>
