@@ -576,6 +576,15 @@ const createReview = async (bodyData) => {
   return await provider.insertData(BASE_URL, 'review', 'createReview', bodyData)
 }
 
+const deleteReviewByReviewId = async (bodyData) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'review',
+    'deleteReviewById',
+    bodyData
+  )
+}
+
 export {
   getAllHotels,
   searchHotels,

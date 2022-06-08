@@ -6,8 +6,7 @@ import "../../Assets/styles/css/Pages/reviewPage.css";
 import { getReviewByCustomerId } from "../../Services/Api/Utilities/index.js";
 
 const Review = () => {
-  const [items, setItems] = useState();
-  const [isnull, setIsnull] = useState(true);
+  const [items, setItems] = useState([]);
 
   const getReviewDetails = async () => {
     const data = {
@@ -24,9 +23,9 @@ const Review = () => {
       });
   };
 
-  // useEffect(() => {
-  //   getReviewDetails();
-  // }, []);
+  useEffect(() => {
+    getReviewDetails();
+  }, []);
 
   return (
     <div className="container">
@@ -36,15 +35,16 @@ const Review = () => {
             <h3>Your Reviews.....</h3>
           </div>
           <div className="pl-5 pr-5 pb-2">
-            {/* {items.map((item) => {
+            {items.map((item) => {
               return (<ReviewModel
                 rating={"5"}
+                id={item.reviewId}
                 hname={item.hotelId}
                 description={item.review}
-                location={item.hotelId}
+                location={item.reviewId}
                 image={item.hotelId}
               />);
-            })} */}
+            })}
           </div>
         </div>
       </div>
