@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { getAvailableRoomQtyByRoomId } from '../../Services/Api/Utilities'
 import DatepickerModal from '../DatePicker/DatepickerModal'
 import '../../Assets/styles/css/components/datePickerModal.css'
-import { useNavigate } from 'react-router-dom'
 
 const SearchDatePicker = ({ hotelName }) => {
   let [rooms, setRooms] = useState(1)
@@ -11,8 +12,11 @@ const SearchDatePicker = ({ hotelName }) => {
   const navigate = useNavigate()
   var today = new Date().toISOString().slice(0, 10)
 
-  const [dateRange, setDateRange] = useState([today, today])
+  const [dateRange, setDateRange] = useState([null, null])
 
+  useEffect(() => {
+    toast.configure()
+  }, [])
   const increase = (status) => {
     if (status == 1) {
       setAdults((adults += 1))
@@ -38,24 +42,52 @@ const SearchDatePicker = ({ hotelName }) => {
     }
   }
 
-  const submitHandle = () => {
-    const URL = `/hotels?location=${hotelName}&checkin-date=${dateRange[0]
-      .toISOString()
-      .slice(0, 10)}&checkout-date=${dateRange[1]
-      .toISOString()
-      .slice(0, 10)}&adults=${adults}&children=${children}&rooms=${rooms}`
-    navigate(URL)
+  const submitHandle = (event) => {
+    event.preventDefault()
+
+    if (dateRange[0] != null && dateRange[1] != null) {
+      // const URL = `/hotels?location=${hotelName}&checkin-date=${dateRange[0]
+      //   .toISOString()
+      //   .slice(0, 10)}&checkout-date=${dateRange[1]
+      //   .toISOString()
+      //   .slice(0, 10)}&adults=${adults}&children=${children}&rooms=${rooms}`
+      let data = {
+        location: hotelName,
+        checkInDate: new Date(dateRange[0]).toLocaleDateString('en-ca'),
+        checkOutDate: new Date(dateRange[1]).toLocaleDateString('en-ca'),
+        adult: adults,
+        children: children,
+        rooms: rooms,
+      }
+      let URL = `/hotels?location=${hotelName}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
+      console.log(event.target.Children.value)
+      navigate(URL)
+    } else {
+      notifyError('Plase fill required feilds.')
+    }
+  }
+  const notifyError = (message) => {
+    toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
   }
 
   return (
     <form onSubmit={submitHandle}>
       <div className='row'>
         <div className='search-modal-container'>
-          <DatepickerModal setDateRange={setDateRange} />
+          <DatepickerModal setDateRange={setDateRange} dateRange={dateRange} />
           <input
             type='text'
             class='form-control mt-2 text-center'
-            value={adults + ' adults and ' + rooms + ' rooms'}
+            value={
+              adults +
+              ' adults and ' +
+              (children > 0 ? children + 'childres ' : '') +
+              rooms +
+              ' rooms'
+            }
             disabled
           />
 
@@ -73,6 +105,7 @@ const SearchDatePicker = ({ hotelName }) => {
               type='text'
               class='form-control  search-room-details'
               placeholder='No adults'
+              name='Adults'
               required
               value={adults > 0 ? adults + ' adults' : 'No adults'}
             />
@@ -100,6 +133,7 @@ const SearchDatePicker = ({ hotelName }) => {
               type='text'
               class='form-control search-room-details'
               placeholder='No children'
+              name='Children'
               required
               value={children > 0 ? children + ' children' : 'No children'}
             />
@@ -127,6 +161,7 @@ const SearchDatePicker = ({ hotelName }) => {
               type='text'
               class='form-control search-room-details'
               placeholder='No rooms'
+              name='Rooms'
               required
               value={rooms > 0 ? rooms + ' rooms' : 'No rooms'}
             />
