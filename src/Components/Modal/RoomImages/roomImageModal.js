@@ -1,9 +1,9 @@
 import React, { Component, useState } from 'react'
 import { Modal } from 'react-bootstrap'
-import Souvenir from '../../Carousel/souvenir'
+import Souvenir from '../../Carousel/Souvenir'
 import SplideSlider from '../../Carousel/splide'
 import '../../../Assets/styles/css/Components/roomImageModal.css'
-import Browsetype from '../../Carousel/browsetype'
+import Browsetype from '../../Carousel/Browsetype'
 
 const RoomImageModal = ({ roomId }) => {
   const [show, setShow] = useState(false)

@@ -3,7 +3,7 @@ import ReactPaginate from 'react-paginate'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { Tooltip, Modal, Button } from 'react-bootstrap'
 import { toast } from 'react-toastify'
-import BookingDetaill from '../../Layouts/BookingHistroy/bookingDetails.js'
+import BookingDetaill from '../../Layouts/BookingHistroy/BookingDetails.js'
 import {
   getPastBookingByUserId,
   createReview,

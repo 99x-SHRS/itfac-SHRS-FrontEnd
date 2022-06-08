@@ -1,7 +1,7 @@
 import React, { Component, useEffect } from 'react'
 import CurrentBookingHistory from '../../Components/BookingHistoryTabs/currentBookingHistory.js'
 import PastBookingHistory from '../../Components/BookingHistoryTabs/pastBookingHistory.js'
-import AllBookingHistory from '../../Components/BookingHistoryTabs/allBookingHistory.js'
+import AllBookingHistory from '../../Components/BookingHistoryTabs/AllBookingHistory.js'
 import '../../Assets/styles/css/Layouts/bookingHistoryTable.css'
 const BookingHistroyTable = () => {
   useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Navbar from '../../Components/Navbar/navbar'
-import BookingHistroyTable from '../../Layouts/BookingHistroy/bookingHistroyTable'
+import BookingHistroyTable from '../../Layouts/BookingHistroy/BookingHistroyTable'
 import Footer from '../../Layouts/Footer/footer'
 const BookingHistory = () => {
   return (

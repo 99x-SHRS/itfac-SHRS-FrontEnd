@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from 'react'
 import ReactPaginate from 'react-paginate'
 import { Link } from 'react-router-dom'
 import { Tooltip, OverlayTrigger, Button } from 'react-bootstrap'
-import BookingDetaill from '../../Layouts/BookingHistroy/bookingDetails.js'
+import BookingDetaill from '../../Layouts/BookingHistroy/BookingDetails.js'
 import {
   getBookingByUserId,
   paymentStatusByBookingId,

@@ -18,7 +18,7 @@ import '../../Assets/styles/css/Pages/payment.css'
 const Payament = () => {
   const [loading, setLoading] = useState(true)
   const [searchedParams, setSearchedparams] = useSearchParams()
-  const [bookingDetails, setBookkingDetails] = useState(null)
+  const [BookingDetails, setBookkingDetails] = useState(null)
   const [roomDetails, setRoomDetails] = useState(null)
   const [subscribedVAS, setSubscribedVAS] = useState(null)
   const [subPayment, setsubPayment] = useState(null)
@@ -141,7 +141,7 @@ const Payament = () => {
     const dataModel = {
       coupon: event.target.token.value,
       amount: subPayment,
-      hotelId: bookingDetails.hotelHotelId,
+      hotelId: BookingDetails.hotelHotelId,
     }
     if (discount == null) {
       validateVoucher(dataModel, event)
@@ -197,10 +197,10 @@ const Payament = () => {
                         <tr>
                           <td scope='row'>Deluxe Double</td>
                           <td>Rs. {roomDetails[0].rate}</td>
-                          <td>{bookingDetails.noRooms}</td>
+                          <td>{BookingDetails.noRooms}</td>
                           <td className='text-right'>
                             {' '}
-                            Rs.{roomDetails[0].rate * bookingDetails.noRooms}
+                            Rs.{roomDetails[0].rate * BookingDetails.noRooms}
                           </td>
                         </tr>
                         {subscribedVAS.map((vas, i) => {
@@ -208,7 +208,7 @@ const Payament = () => {
                             <tr>
                               <td scope='row'>{vas.name}</td>
                               <td>Rs. {vas.rate}</td>
-                              <td>{bookingDetails.noRooms}</td>
+                              <td>{BookingDetails.noRooms}</td>
                               <td className='text-right'>
                                 {' '}
                                 Rs.

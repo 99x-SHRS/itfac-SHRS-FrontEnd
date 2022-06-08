@@ -8,7 +8,7 @@ import CustomerDetails from '../Pages/Booking/CustomerDetails'
 import Payment from '../Pages/Booking/Payment.js'
 import SavedHotel from '../Pages/Saved/savedHotel'
 import BookingHistory from '../Pages/BookingHistory/bookingHistory.js'
-import BookingDetails from '../Layouts/BookingHistroy/bookingDetails'
+import BookingDetails from '../Layouts/BookingHistroy/BookingDetails'
 import LoyaltyDescription from '../Pages/Loyalty/loyaltyDescription'
 import SharedSignUp from '../Pages/SharedSignUp/SharedSignUp'
 import AccountSettings from '../Pages/Account/MyAccountSettings'
@@ -33,8 +33,16 @@ const UserRoutes = (
     ></Route>
     <Route path='/share' element={<SharedSignUp />}></Route>
     <Route exact path='/account-settings' element={<AccountSettings />}></Route>
-    <Route exact path='/personal-settings' element={<PersonalSettings />}></Route>
-    <Route exact path='/security-settings' element={<SecuritySettings />}></Route>
+    <Route
+      exact
+      path='/personal-settings'
+      element={<PersonalSettings />}
+    ></Route>
+    <Route
+      exact
+      path='/security-settings'
+      element={<SecuritySettings />}
+    ></Route>
     <Route exact path='/my-account/review' element={<Review />}></Route>
   </>
 )

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import HotelHeader from '../../Layouts/HotelHeader/hotelHeader.js'
 import HotelDescription from '../../Layouts/HotelDescription/hotelDescription.js'
-import Souvenir from '../../Components/Carousel/souvenir'
+import Souvenir from '../../Components/Carousel/Souvenir'
 import HotelPageTabs from '../../Components/HotelPageTabs/hotelPageTabs.js'
 import RoomTypeSelector from '../../Components/RoomTypeSelector/roomTypeSelector.js'
 import Facilities from '../../Layouts/Facilities/facilities.js'
