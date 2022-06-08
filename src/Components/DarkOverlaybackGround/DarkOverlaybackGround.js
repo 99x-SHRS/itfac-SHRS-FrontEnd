@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
-import styled, { css } from 'styled-components'
-
+import React from 'react'
 import PuffLoader from 'react-spinners/PuffLoader'
+import styled, { css } from 'styled-components'
 import '../../Assets/styles/css/Components/darkOverlaybackGround.css'
+
 const DarkBackground = styled.div`
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */

@@ -1,7 +1,7 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate'
 import { Link } from 'react-router-dom'
-import { Tooltip, OverlayTrigger, Button } from 'react-bootstrap'
 import HashLoader from 'react-spinners/HashLoader'
 import { getPastBookigsByHotelAdminId } from '../../../Services/Api/Utilities/Index.js'
 const PastBookings = () => {

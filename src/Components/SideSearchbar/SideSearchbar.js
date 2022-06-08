@@ -1,11 +1,10 @@
+import jQuery from 'jquery'
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import jQuery from 'jquery'
-import DatePicker from '../DatePicker/Datepicker.js'
-
-import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
+import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
+import DatePicker from '../DatePicker/Datepicker.js'
 
 class SideSearchbar extends Component {
   componentDidMount() {

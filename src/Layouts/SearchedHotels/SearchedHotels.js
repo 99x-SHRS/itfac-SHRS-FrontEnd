@@ -1,18 +1,12 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import { useSearchParams } from 'react-router-dom'
 import HashLoader from 'react-spinners/HashLoader'
+import '../../Assets/styles/css/Layouts/searchedHotels.css'
+import HotelCard from '../../Components/SearchedHotelCard/HotelCard'
 import { searchHotels } from '../../Services/Api/Utilities/Index.js'
 import PriceRange from '../leftSideBar/PriceRange'
 import StartFilter from '../leftSideBar/StartFilter'
-import HotelCard from '../../Components/SearchedHotelCard/HotelCard'
-
-import Hotel_1 from '../../Assets/images/hotels/hotel1.jpg'
-import Hotel_2 from '../../Assets/images/hotels/hotel2.jpg'
-import Hotel_3 from '../../Assets/images/hotels/hotel3.jpg'
-import Hotel_4 from '../../Assets/images/hotels/hotel4.jpg'
-
-import '../../Assets/styles/css/Layouts/searchedHotels.css'
 
 const SearchedHotels = (props) => {
   const [loading, setLoading] = useState(false)

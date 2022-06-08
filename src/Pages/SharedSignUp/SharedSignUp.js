@@ -1,21 +1,16 @@
-import React, { Component, useEffect, useState } from 'react'
-import {
-  userLogin,
-  addUser,
-  refferalValidate,
-} from '../../Services/Api/Utilities/Index'
+import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import '../../Assets/styles/css/Components/signupAndLogin.css'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import Footer from '../../Layouts/Footer/Footer'
-import '../../Assets/styles/css/Components/signupAndLogin.css'
+import { addUser, refferalValidate } from '../../Services/Api/Utilities/Index'
 
 const SharedSignUp = () => {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
   const [searchedParams, setSearchedparams] = useSearchParams()
   const navigate = useNavigate()
-  const params = useParams()
 
   useEffect(() => {
     toast.configure()

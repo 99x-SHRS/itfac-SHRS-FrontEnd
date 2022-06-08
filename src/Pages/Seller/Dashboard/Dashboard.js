@@ -1,12 +1,12 @@
 import React from 'react'
-import Navbar from '../../../Components/Navbar/Navbar.js'
-import HeaderStats from '../../../Layouts/SellerDashboard/HeaderStats.js'
-import CardLineChart from '../../../Components/Charts/CardLineChart.js'
-import CardBarChart from '../../../Components/Charts/CardBarChart.js'
+import '../../../Assets/styles/css/Seller/Pages/dashboard.css'
 import CardBookings from '../../../Components/Cards/CardBookings.js'
 import CardExtra from '../../../Components/Cards/CardExtra.js'
+import CardBarChart from '../../../Components/Charts/CardBarChart.js'
+import CardLineChart from '../../../Components/Charts/CardLineChart.js'
+import Navbar from '../../../Components/Navbar/Navbar.js'
 import Footer from '../../../Layouts/Footer/Footer.js'
-import '../../../Assets/styles/css/Seller/Pages/dashboard.css'
+import HeaderStats from '../../../Layouts/SellerDashboard/HeaderStats.js'
 const Dashboard = () => {
   return (
     <div className='relative'>

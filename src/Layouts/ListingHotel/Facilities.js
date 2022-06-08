@@ -1,18 +1,18 @@
+import { MDBDataTable } from 'mdbreact'
 import React, { useEffect, useState } from 'react'
-import { toast } from 'react-toastify'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
+import Navbars from '../../Components/Navbar/Navbar'
 import {
-  createFacilityType,
-  getFacilityTypesByHotelId,
-  getAllFacilitiesByHotelId,
   createFacility,
+  createFacilityType,
   deleteFacilityById,
   deleteFacilityTypeById,
+  getAllFacilitiesByHotelId,
+  getFacilityTypesByHotelId,
 } from '../../Services/Api/Utilities/Index.js'
-import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import Footer from '../Footer/Footer'
-import { MDBDataTable, MDBIcon } from 'mdbreact'
-import Navbars from '../../Components/Navbar/Navbar'
 
 const Facilities = () => {
   const [loading, setLoading] = useState(false)

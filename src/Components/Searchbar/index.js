@@ -1,14 +1,12 @@
-import React, { Component, createRef, useEffect, useState } from 'react'
-import DatePicker from '../DatePicker/Datepicker.js'
+import jQuery from 'jquery'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import jQuery from 'jquery'
-
-import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
-import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
-import '../../Assets/vendor/select2/select2.min.css'
-
 import '../../Assets/styles/css/Components/searchbar.css'
+import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
+import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
+import '../../Assets/vendor/select2/select2.min.css'
+import DatePicker from '../DatePicker/Datepicker.js'
 
 const Searchbox = () => {
   const [dateRange, setDateRange] = useState([null, null])

@@ -1,11 +1,11 @@
+import { MDBDataTable, MDBIcon } from 'mdbreact'
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import { MDBDataTable, MDBIcon } from 'mdbreact'
+import { toast } from 'react-toastify'
 import {
   getRoomTypesByHotelId,
   removeRoomType,
 } from '../../Services/Api/Utilities/Index.js'
-import { toast } from 'react-toastify'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
 const RoomTypeTable = ({ loading }) => {
   const params = useParams()

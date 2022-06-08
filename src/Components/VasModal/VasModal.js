@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
-import { Modal, Button } from 'react-bootstrap'
-import { Link, useSearchParams } from 'react-router-dom'
+import { Button, Modal } from 'react-bootstrap'
+import { useSearchParams } from 'react-router-dom'
 const DialogModal = () => {
   const [show, setShow] = useState(true)
   const [vasStatus, setVASStatus] = useState(false)

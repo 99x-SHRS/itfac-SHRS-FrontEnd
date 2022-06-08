@@ -1,12 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-
-import Paypal from '../../Services/PaymentGateways/PayPal'
+import { pay } from '../../Services/Api/Utilities/Index.js'
 import Gpay from '../../Services/PaymentGateways/Gpay'
 import PayHere from '../../Services/PaymentGateways/PayHere'
+import Paypal from '../../Services/PaymentGateways/PayPal'
 
-import { pay } from '../../Services/Api/Utilities/Index.js'
 const PaymentOptions = (payment) => {
   let navigate = useNavigate()
   const [searchedParams, setSearchedparams] = useSearchParams()

@@ -1,8 +1,8 @@
-import React, { Component, useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
+import '../../Assets/styles/css/Layouts/payment.css'
 import PaymentOptions from '../../Layouts/Payment/PaymentOptions.js'
 import { getAllPaymentsBybookingId } from '../../Services/Api/Utilities/Index.js'
-import '../../Assets/styles/css/Layouts/payment.css'
 const SelectPayment = ({ amount }) => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   useEffect(() => {

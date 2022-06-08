@@ -1,10 +1,8 @@
 import React from 'react'
-
+import '../../Assets/styles/css/Pages/accountSettings.css'
 import Navbar from '../../Components/Navbar/Navbar'
 import Accountsettingsmodel from '../../Layouts/AccountSettings/AccountSettings'
 import Footer from '../../Layouts/Footer/Footer'
-
-import '../../Assets/styles/css/Pages/accountSettings.css'
 
 const Accountsettings = () => {
   return (

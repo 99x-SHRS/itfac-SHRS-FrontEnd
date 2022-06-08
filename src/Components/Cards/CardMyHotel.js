@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { Modal, Button } from 'react-bootstrap'
 import { toast } from 'react-toastify'
-import { deleteHotelById } from '../../Services/Api/Utilities/Index.js'
 import '../../Assets/styles/css/Seller/Components/cardMyHotel.css'
+import { deleteHotelById } from '../../Services/Api/Utilities/Index.js'
 const CardMyHotel = ({ hotel, getHotels }) => {
   const [show, setShow] = useState(false)
   const [confirm, setConfirm] = useState(false)

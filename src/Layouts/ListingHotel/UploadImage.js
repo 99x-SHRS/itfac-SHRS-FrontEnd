@@ -1,13 +1,13 @@
-import React, { Component, useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import { Modal } from 'react-bootstrap'
-import { Link, useSearchParams, useNavigate } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import Navbars from '../../Components/Navbar/Navbar'
-import Footer from '../Footer/Footer.js'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
-import { getHotelById } from '../../Services/Api/Utilities/Index.js'
+import Navbars from '../../Components/Navbar/Navbar'
 import UploadService from '../../Services/Api/Utilities/FileUploader/UploadFilesService'
+import { getHotelById } from '../../Services/Api/Utilities/Index.js'
+import Footer from '../Footer/Footer.js'
 class UploadImage extends Component {
   constructor(props) {
     super(props)

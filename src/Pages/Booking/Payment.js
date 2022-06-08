@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import HotelHeader from '../../Layouts/HotelHeader/HotelHeader.js'
-import SelectPayment from '../../Layouts/Payment/SelectPayment.js'
-import Footer from '../../Layouts/Footer/Footer.js'
 import HashLoader from 'react-spinners/HashLoader'
 import { toast } from 'react-toastify'
+import '../../Assets/styles/css/Pages/payment.css'
+import Footer from '../../Layouts/Footer/Footer.js'
+import HotelHeader from '../../Layouts/HotelHeader/HotelHeader.js'
+import SelectPayment from '../../Layouts/Payment/SelectPayment.js'
 import {
   getBookingDetailsById,
-  getRoomDetailsById,
-  getVASByBookingId,
-  getTotalAmountByBookingId,
-  validateCoupon,
   getCustomerDiscount,
+  getRoomDetailsById,
+  getTotalAmountByBookingId,
+  getVASByBookingId,
+  validateCoupon,
 } from '../../Services/Api/Utilities/Index.js'
-import '../../Assets/styles/css/Pages/payment.css'
 
 const Payament = () => {
   const [loading, setLoading] = useState(true)

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
-import Navbars from '../../Components/Navbar/Navbar'
-import Footer from '../Footer/Footer.js'
-import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
-import { toast } from 'react-toastify'
-import {
-  getRoomByHotelId,
-  deleteRoomById,
-} from '../../Services/Api/Utilities/Index.js'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import HashLoader from 'react-spinners/HashLoader'
+import { toast } from 'react-toastify'
+import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
+import Navbars from '../../Components/Navbar/Navbar'
+import {
+  deleteRoomById,
+  getRoomByHotelId,
+} from '../../Services/Api/Utilities/Index.js'
+import Footer from '../Footer/Footer.js'
 const ListedRooms = () => {
   const [rooms, setRooms] = useState([])
   const [loading, setLoading] = useState(false)

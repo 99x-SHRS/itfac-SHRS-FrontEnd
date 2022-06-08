@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import NumericInput from 'react-numeric-input'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import {
   createRoom,
   getRoomById,
   updateRoomById,
 } from '../../Services/Api/Utilities/Index.js'
-import { toast } from 'react-toastify'
-import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 const RoomDetials = ({ roomType, setRoomType }) => {
   const navigate = useNavigate()
   const params = useParams()

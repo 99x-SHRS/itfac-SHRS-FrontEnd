@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Link, useSearchParams, useNavigate } from 'react-router-dom'
-
-import SideSummary from '../Payment/SideSummary'
+import { Link, useNavigate, useSearchParams } from 'react-router-dom'
+import '../../Assets/styles/css/Layouts/bookingVAS.css'
+import NewTable from '../../Components/Table/SearchPaginationTable'
 import DialogModal from '../../Components/VasModal/VasModal.js'
 import { getVasByHotelId } from '../../Services/Api/Utilities/Index.js'
-import NewTable from '../../Components/Table/SearchPaginationTable'
-import '../../Assets/styles/css/Layouts/bookingVAS.css'
+import SideSummary from '../Payment/SideSummary'
+
 const BookingVAS = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [vas, setVAS] = useState([])

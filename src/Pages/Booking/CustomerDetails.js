@@ -1,11 +1,8 @@
 import React from 'react'
-
+import '../../Assets/styles/css/Layouts/CustomerDetails.css'
+import Footer from '../../Layouts/Footer/Footer.js'
 import HotelHeader from '../../Layouts/HotelHeader/HotelHeader.js'
 import BookingCusDetails from '../../Layouts/PersonalDetails/BookingCusDetails.js'
-
-import Footer from '../../Layouts/Footer/Footer.js'
-
-import '../../Assets/styles/css/Layouts/CustomerDetails.css'
 
 const CustomerDetails = () => {
   return (

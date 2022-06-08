@@ -1,11 +1,10 @@
-import React from 'react'
-import { useEffect, useState } from 'react'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import {
   getUserbyId,
   updateUserById,
 } from '../../Services/Api/Utilities/Index.js'
-import { toast } from 'react-toastify'
 
 function Personalsettings() {
   const [readOnly, setReadOnly] = useState(true)

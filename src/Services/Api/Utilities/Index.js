@@ -626,4 +626,5 @@ export {
   getCustomerGrade,
   deleteHotelById,
   createReview,
+  markAsRead,
 }

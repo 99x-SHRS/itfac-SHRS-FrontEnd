@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
 import { MDBDataTable } from 'mdbreact'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import {
-  getVasByHotelId,
-  deleteVASById,
-} from '../../Services/Api/Utilities/Index.js'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
+import {
+  deleteVASById,
+  getVasByHotelId,
+} from '../../Services/Api/Utilities/Index.js'
 const ValueAddedSevicesTable = ({ loading, setFinished }) => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [load, setLoad] = useState(false)

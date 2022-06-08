@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { useParams, useSearchParams, useNavigate } from 'react-router-dom'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import {
-  getAllImagesByRoomId,
   deleteRoomImageById,
+  getAllImagesByRoomId,
 } from '../../Services/Api/Utilities/Index.js'
 const UploadedImages = ({ loading }) => {
   useEffect(() => {

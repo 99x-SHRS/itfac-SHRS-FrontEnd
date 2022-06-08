@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import Navbars from '../../../Components/Navbar/Navbar'
-import InfomationCard from '../../../Components/Cards/InfomationCard'
+import '../../../Assets/styles/css/Seller/Pages/listedHotel.css'
 import CardMyHotel from '../../../Components/Cards/CardMyHotel'
+import InfomationCard from '../../../Components/Cards/InfomationCard'
+import Navbars from '../../../Components/Navbar/Navbar'
 import Footer from '../../../Layouts/Footer/Footer'
 import { getHotelByUserId } from '../../../Services/Api/Utilities/Index.js'
-import '../../../Assets/styles/css/Seller/Pages/listedHotel.css'
 
 const ListedHotels = () => {
   const [hotels, setHotels] = useState(null)

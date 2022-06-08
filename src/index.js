@@ -1,9 +1,9 @@
+import '@fortawesome/fontawesome-free/css/all.min.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
-import './Assets/styles/css/common.css'
 import App from './App'
-import '@fortawesome/fontawesome-free/css/all.min.css'
+import './Assets/styles/css/common.css'
+import './index.css'
 // import 'bootstrap-css-only/css/bootstrap.min.css'
 // import 'mdbreact/dist/css/mdb.css'
 

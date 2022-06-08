@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import '../../Assets/styles/css/Seller/Layouts/registerRoom.css'
 import Navbars from '../../Components/Navbar/Navbar'
 import Footer from '../Footer/Footer.js'
-import RoomTypeSelector from './RoomTypeSelector.js'
 import RoomDetials from './RoomDetials'
-import '../../Assets/styles/css/Seller/Layouts/registerRoom.css'
+import RoomTypeSelector from './RoomTypeSelector.js'
 const RegisterRoom = () => {
   const [roomType, setRoomType] = useState(null)
   return (

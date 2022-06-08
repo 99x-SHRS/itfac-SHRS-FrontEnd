@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { createRoomtype } from '../../Services/Api/Utilities/Index.js'
-import Navbars from '../../Components/Navbar/Navbar'
-import Footer from '../Footer/Footer.js'
-import RoomTypeTable from '../../Components/Table/RoomTypeTable.js'
-import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround.js'
 import '../../Assets/styles/css/Seller/Layouts/listingRoomType.css'
+import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround.js'
+import Navbars from '../../Components/Navbar/Navbar'
+import RoomTypeTable from '../../Components/Table/RoomTypeTable.js'
+import { createRoomtype } from '../../Services/Api/Utilities/Index.js'
+import Footer from '../Footer/Footer.js'
 const ListingRoomType = () => {
   const params = useParams()
   const [loading, setLoading] = useState(false)

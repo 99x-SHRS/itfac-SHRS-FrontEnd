@@ -1,9 +1,9 @@
-import * as React from 'react'
-import TextField from '@mui/material/TextField'
-import DateRangePicker from '@mui/lab/DateRangePicker'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
+import DateRangePicker from '@mui/lab/DateRangePicker'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import Box from '@mui/material/Box'
+import TextField from '@mui/material/TextField'
+import * as React from 'react'
 
 export default function DatepickerModal({ setDateRange, dateRange }) {
   return (

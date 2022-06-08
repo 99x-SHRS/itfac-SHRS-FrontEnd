@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { getAvailableRoomQtyByRoomId } from '../../Services/Api/Utilities/Index'
-import DatepickerModal from '../DatePicker/DatepickerModal'
 import '../../Assets/styles/css/Components/datePickerModal.css'
+import DatepickerModal from '../DatePicker/DatepickerModal'
 
 const SearchDatePicker = ({ hotelName }) => {
   let [rooms, setRooms] = useState(1)

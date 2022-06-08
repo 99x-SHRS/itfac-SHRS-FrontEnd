@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import Navbars from '../../Components/Navbar/Navbar'
-import Footer from '../Footer/Footer.js'
-import ValueAddedSevicesTable from '../../Components/Table/ValueAddedSevicesTable'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
+import Navbars from '../../Components/Navbar/Navbar'
+import ValueAddedSevicesTable from '../../Components/Table/ValueAddedSevicesTable'
 import { addValueAddedServices } from '../../Services/Api/Utilities/Index.js'
+import Footer from '../Footer/Footer.js'
 const AddValueAddedServices = () => {
   const [loading, setLoading] = useState(false)
   const [searchedParams, setSearchedparams] = useSearchParams()

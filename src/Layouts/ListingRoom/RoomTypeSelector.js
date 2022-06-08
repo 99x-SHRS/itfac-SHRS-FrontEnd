@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import { useParams, Link, useSearchParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import {
-  getRoomTypesByHotelId,
   getRoomById,
+  getRoomTypesByHotelId,
 } from '../../Services/Api/Utilities/Index.js'
 const RoomTypeSelector = ({ setRoomType, roomType }) => {
   const params = useParams()

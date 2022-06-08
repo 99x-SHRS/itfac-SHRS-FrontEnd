@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { useParams, useSearchParams, useLocation } from 'react-router-dom'
 import Dropzone from 'react-dropzone'
 import { toast } from 'react-toastify'
+import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import Navbars from '../../Components/Navbar/Navbar'
+import UploadService from '../../Services/Api/Utilities/FileUploader/UploadFilesService'
 import Footer from '../Footer/Footer.js'
 import UploadedSouvenirImages from './UploadedSouvenirImages'
-import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
-import UploadService from '../../Services/Api/Utilities/FileUploader/UploadFilesService'
 class UploadSouvenirImage extends Component {
   constructor(props) {
     super(props)

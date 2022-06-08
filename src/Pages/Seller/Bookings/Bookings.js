@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
+import '../../../Assets/styles/css/Layouts/bookingHistoryTable.css'
+import '../../../Assets/styles/css/Seller/Pages/bookings.css'
+import Navbar from '../../../Components/Navbar/Navbar.js'
+import Footer from '../../../Layouts/Footer/Footer'
 import AllBookings from './AllBookings.js'
 import CurrenetBookings from './CurrenetBookings.js'
 import PastBookings from './PastBookings.js'
-import Navbar from '../../../Components/Navbar/Navbar.js'
-import Footer from '../../../Layouts/Footer/Footer'
-import '../../../Assets/styles/css/Seller/Pages/bookings.css'
-import '../../../Assets/styles/css/Layouts/bookingHistoryTable.css'
 const Bookings = () => {
   useEffect(() => {
     const checkTable = () => {

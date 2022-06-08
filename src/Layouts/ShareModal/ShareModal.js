@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { createRefferal } from '../../Services/Api/Utilities/Index.js'
 import { toast } from 'react-toastify'
+import { createRefferal } from '../../Services/Api/Utilities/Index.js'
 const ShareModal = () => {
   const [refferal, setRefferal] = useState('')
   useEffect(() => {

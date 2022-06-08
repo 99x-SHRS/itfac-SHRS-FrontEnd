@@ -1,10 +1,10 @@
+import { MDBDataTable } from 'mdbreact'
 import React, { useEffect, useState } from 'react'
-import { useSearchParams, useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { MDBDataTable, MDBIcon } from 'mdbreact'
 import {
-  getAllsouvenirByHotelId,
   deleteSouvenirById,
+  getAllsouvenirByHotelId,
 } from '../../Services/Api/Utilities/Index.js'
 const UploadedSouvenirImages = ({ trigger }) => {
   const [searchedParams, setSearchedparams] = useSearchParams()

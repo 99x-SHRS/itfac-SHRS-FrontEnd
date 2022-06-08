@@ -1,6 +1,6 @@
-import HotelHeader from '../../Layouts/HotelHeader/HotelHeader.js'
 import BookingVAS from '../../Layouts/AddingVAS/BookingVAS.js'
 import Footer from '../../Layouts/Footer/Footer.js'
+import HotelHeader from '../../Layouts/HotelHeader/HotelHeader.js'
 const AddingVAS = () => {
   return (
     <div>

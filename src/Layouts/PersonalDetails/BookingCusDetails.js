@@ -1,14 +1,14 @@
-import React, { useState, useMemo, useEffect } from 'react'
-import { useSearchParams, useNavigate } from 'react-router-dom'
-import {
-  updateBookingById,
-  getBookingDetailsById,
-} from '../../Services/Api/Utilities/Index.js'
-import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
+import React, { useEffect, useState } from 'react'
 import { CountryDropdown } from 'react-country-region-selector'
-import SideSummary from '../../Layouts/Payment/SideSummary.js'
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import SideSummary from '../../Layouts/Payment/SideSummary.js'
+import {
+  getBookingDetailsById,
+  updateBookingById,
+} from '../../Services/Api/Utilities/Index.js'
 const BookingCusDetails = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [special_request, setSpecial_request] = useState('')

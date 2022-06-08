@@ -1,8 +1,8 @@
 import React from 'react'
-import CardStats from '../../Components/Cards/CardStats'
 import { useNavigate } from 'react-router-dom'
-
 import '../../Assets/styles/css/Seller/Components/sellerDashboard.css'
+import CardStats from '../../Components/Cards/CardStats'
+
 const HeaderStats = () => {
   let navigate = useNavigate()
   return (
