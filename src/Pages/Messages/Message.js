@@ -4,18 +4,18 @@ import ListGroup from "./ListGroup";
 import MessagePagination from './MessagePagination';
 import { MessagePaginate } from "./MessagePaginate";
 import axios from "axios";
-import { getMessages } from "../services/fakeMessage";
-import { getMessageType } from "../services/fakeMessageType";
+// import { getMessages } from "../services/fakeMessage";
+import { getMessagesByRecieverId } from "../../Services/Api/Utilities";
+// import { getMessageType } from "../services/fakeMessageType";
 import trash from "../trash.svg";
-import eye from "../eye.svg";
-// import Modal from "./modal";
-
+import eye from "./utils/eye.svg";
 import { Link } from "react-router-dom";
+
 
 
 class Messages extends Component {
     state = {
-        messages: getMessages(),
+        messages: getMessagesByRecieverId,
         currentMessage: null,
         messageType: [],
         currentPage: 1,
@@ -27,7 +27,7 @@ class Messages extends Component {
     };
 
     componentDidMount() {
-        this.setState({ messages: getMessages(), messageType: getMessageType() });   //check backend
+        this.setState({ messages: getMessagesByRecieverId(), messageType: getMessagesByRecieverId() });   //check backend
         const data = {
             id: localStorage.getItem('userId')
         }
@@ -40,7 +40,6 @@ class Messages extends Component {
             .catch((err) => {
                 console.log(err);
             })
-
     }
 
     handleClose = () => {
