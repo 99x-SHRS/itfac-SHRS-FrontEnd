@@ -81,7 +81,13 @@ const SearchDatePicker = ({ hotelName }) => {
           <input
             type='text'
             class='form-control mt-2 text-center'
-            value={adults + ' adults and ' + rooms + ' rooms'}
+            value={
+              adults +
+              ' adults and ' +
+              (children > 0 ? children + 'childres ' : '') +
+              rooms +
+              ' rooms'
+            }
             disabled
           />
 
