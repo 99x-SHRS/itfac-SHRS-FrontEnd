@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { getAvailableRoomQtyByRoomId } from '../../Services/Api/Utilities'
 import DatepickerModal from '../DatePicker/DatepickerModal'
-import '../../Assets/styles/css/components/datePickerModal.css'
+import '../../Assets/styles/css/Components/datePickerModal.css'
 
 const SearchDatePicker = ({ hotelName }) => {
   let [rooms, setRooms] = useState(1)
