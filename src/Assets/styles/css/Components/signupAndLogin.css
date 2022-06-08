@@ -56,8 +56,8 @@
 
 .login-model button {
   border-radius: 20px;
-  border: 1px solid #ff4b2b;
-  background-color: #ff4b2b;
+  border: 1px solid #572f28;
+  background-color: #572f28;
   color: #ffffff;
   font-size: 12px;
   font-weight: bold;
@@ -170,9 +170,9 @@
 }
 
 .login-model .overlay {
-  background: #ff416c;
-  background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-  background: linear-gradient(to right, #ff4b2b, #ff416c);
+  background: #a46c79;
+  background: -webkit-linear-gradient(to right, #444342, #a46c79);
+  background: linear-gradient(to right, #444342, #a46c79);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 0 0;

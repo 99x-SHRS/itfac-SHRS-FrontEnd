@@ -2,11 +2,8 @@ import React, { Component } from 'react'
 
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
 import '../../Assets/styles/css/Layouts/googleMap.css'
-// const containerStyle = {
-//   width: '100%',
-//   height: '400px',
-// }
 
+//hotel locations
 const center = {
   lat: 6.0329,
   lng: 80.2158,
