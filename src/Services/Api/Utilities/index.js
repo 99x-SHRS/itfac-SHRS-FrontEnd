@@ -18,6 +18,24 @@ const updateUserById = async (id, bodyData) => {
     bodyData
   )
 }
+
+const updatePassword = async (bodyData) => {
+  return await provider.updateByIdPost(
+    BASE_URL,
+    'user',
+    'changePassword',
+    bodyData
+  )
+}
+
+const getUserbyId = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'user',
+    'getUserbyId',
+    bodyData
+  )
+}
 const addUser = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'user', 'addUser', bodyData)
 }
@@ -613,8 +631,10 @@ export {
   updateHotelById,
   getBookingCountByHotelAdminUserId,
   getReviewByHotelId,
+  getUserbyId,
   getMessagesByRecieverId,
   getCustomerGrade,
   deleteHotelById,
   createReview,
+  updatePassword,
 }

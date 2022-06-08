@@ -44,7 +44,7 @@
     display: block;
   }
 }
-/* .card-header {
+.gallery-cells .card-header {
   background: rgb(75, 75, 152);
   background: linear-gradient(
     186deg,
@@ -54,7 +54,7 @@
     rgba(23, 21, 69, 0.5) 100%
   );
   color: aliceblue;
-} */
+}
 .slick-prev:before,
 .slick-next:before {
   color: rgb(19, 113, 221) !important;
