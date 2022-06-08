@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 
 
 
-class Messages extends Component {
+class Message extends Component {
     state = {
         messages: getMessagesByRecieverId,
         currentMessage: null,
@@ -119,13 +119,13 @@ class Messages extends Component {
         // }
 
 
-        // const [to, setToValue] = useState(""); 
-        // const [message, setMessageValue] = useState(""); 
-        // const handleToChange = (e) => { 
-        //   setToValue(e.target.value) 
+        // const [to, setToValue] = useState("");
+        // const [message, setMessageValue] = useState("");
+        // const handleToChange = (e) => {
+        //   setToValue(e.target.value)
         // }
-        // const handleMessageChange = (e) => { 
-        //   setMessageValue(e.target.value) 
+        // const handleMessageChange = (e) => {
+        //   setMessageValue(e.target.value)
         // }
 
 
@@ -211,7 +211,6 @@ class Messages extends Component {
                         <Modal.Title>Pickup your ssss</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
                         {this.state.currentMessage}
                     </Modal.Body>
                     <Modal.Footer></Modal.Footer>
@@ -221,5 +220,18 @@ class Messages extends Component {
     }
 }
 
-export default Messages;
+export default Message;
 
+
+
+
+// import React, { Component } from 'react';
+
+// class Message extends Component {
+//     state = {}
+//     render() {
+//         return (<h1>Hi</h1>);
+//     }
+// }
+
+// export default Message;
