@@ -18,6 +18,16 @@ const updateUserById = async (id, bodyData) => {
     bodyData
   )
 }
+
+const updatePassword = async (bodyData) => {
+  return await provider.updateByIdPost(
+    BASE_URL,
+    'user',
+    'changePassword',
+    bodyData
+  )
+}
+
 const getUserbyId = async (bodyData) => {
   return await provider.getOneByIdPost(
     BASE_URL,
@@ -626,4 +636,5 @@ export {
   getCustomerGrade,
   deleteHotelById,
   createReview,
+  updatePassword,
 }

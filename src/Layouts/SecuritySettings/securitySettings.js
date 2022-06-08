@@ -2,13 +2,13 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import {
-  getUserbyId,
-  updateUserById,
+  updatePassword,
+  getUserbyId
 } from "../../Services/Api/Utilities/index.js";
 import { toast } from 'react-toastify';
 
 function SecuritySettings() {
-  const [status, setStatus] = useState(false);
+  const [Status, setStatus] = useState(false);
   const [items, setItems] = useState();
   const [values, setValues] = React.useState({
     currantPassword: "",
@@ -21,6 +21,11 @@ function SecuritySettings() {
     toast.configure()
   }, [])
 
+  useEffect(() => {
+    getUserDetails()
+  }, [])
+
+
   const notifyError = (message) => {
     toast.error(message)
   }
@@ -28,35 +33,45 @@ function SecuritySettings() {
     toast.success(message)
   }
 
-  // const updatePassword = async () => {
-  //   const data = {
-  //     id : localStorage.getItem("user"),
-  //     currantPassword : values.currantPassword,
-  //     newPassword : values.newPassword
-  //   }
-  //   await changePassword(data)
-  //     .then((response) => {
-  //       const data = response.data;
-  //       setStatus(response.data);
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
-  // };
+  const getUserDetails = async () => {
+    const data = {
+      id: localStorage.getItem("user"),
+    };
+    await getUserbyId(data)
+      .then((response) => {
+        const data = response.data;
+        setItems(data);
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+  };
+
+  const changePassword = async () => {
+    const data = {
+      email : items.email,
+      oldPassword : values.currantPassword,
+      newPassword : values.newPassword
+    }
+    await updatePassword(data)
+      .then((response) => {
+        const data = response.data;
+        setStatus(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
 
   const cheakValidation = () =>  {
     if (values.newPassword === values.confirmPassword){
-      //updatePassword();
-      // {status ? (
-      //   console.log("Sucess"),
-      //   notifySuccess("Password change sucessfull.."),
-      //   setStatus(false)
-        
-      // ) : (
-      //   console.log("Faild"),
-      //   notifyError("An Error Occoured..")
-      // )}
+      changePassword();
+      if (Status.status) {
+        notifySuccess("Password change sucessfull..")
+      }else {
+        notifyError("An Error Occoured..")
+      }
     }
     else {
       notifyError("Password does not Match. Please Re Enter the passwords.");
@@ -66,7 +81,6 @@ function SecuritySettings() {
   const handlePosition = (event) => {
     event.preventDefault();
     cheakValidation();
-    //console.log(values);
   };
 
   const handleChange = (prop) => (event) => {
