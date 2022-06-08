@@ -7,7 +7,7 @@ import axios from "axios";
 // import { getMessages } from "../services/fakeMessage";
 import { getMessagesByRecieverId } from "../../Services/Api/Utilities";
 // import { getMessageType } from "../services/fakeMessageType";
-import trash from "../trash.svg";
+import trash from "./utils/trash.svg";
 import eye from "./utils/eye.svg";
 import { Link } from "react-router-dom";
 
