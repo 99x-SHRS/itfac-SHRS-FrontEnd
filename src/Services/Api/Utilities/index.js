@@ -657,4 +657,5 @@ export {
   createReview,
   updatePassword,
   getReviewByCustomerId,
+  deleteReviewByReviewId,
 }

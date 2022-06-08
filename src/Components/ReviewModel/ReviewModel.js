@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 
+import {deleteReviewByReviewId} from '../../Services/Api/Utilities/index.js';
 
 const ReviewModel = ({id, hname, location, description, image, rating}) => {
 
@@ -18,20 +19,21 @@ const ReviewModel = ({id, hname, location, description, image, rating}) => {
 
     const deleteReview = async () => {
         console.log("reviewDelete")
-        const id = localStorage.getItem("user");
-        // await deleteReviewById (id)
-        //     .then((response)=> {
-        //         const data = response.data;
-        //         if (response.data){
-        //             notifySuccess("Sucessfully Deleted..")
-        //         }
-        //         else {
-        //             notifyError("An Error Occoured..")
-        //         }
-        //     })
-        //     .catch((e) => {
-        //         console.log(e);
-        //     })
+        const data = {id};
+        await deleteReviewByReviewId(data)
+            .then((response)=> { 
+                const data = response.data;
+                console.log(response.data);
+                if (response.data){
+                    notifySuccess("Sucessfully Deleted..");
+                }
+                else {
+                    notifyError("An Error Occoured..");
+                }
+            })
+            .catch((e) => {
+                console.log(e);
+            })
     };
   return (
     <div className="rounded shadow border border-primary row g-1 align-middle mb-3 mt-3 p-1">
