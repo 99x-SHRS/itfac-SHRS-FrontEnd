@@ -562,6 +562,16 @@ const getReviewByHotelId = async (bodyData) => {
     bodyData
   )
 }
+
+const getReviewByCustomerId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'review',
+    'getReviewByCustomerId',
+    bodyData
+  )
+}
+
 const createReview = async (bodyData) => {
   return await provider.insertData(BASE_URL, 'review', 'createReview', bodyData)
 }
@@ -637,4 +647,5 @@ export {
   deleteHotelById,
   createReview,
   updatePassword,
+  getReviewByCustomerId,
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { toast } from 'react-toastify';
 
+
 const ReviewModel = ({id, hname, location, description, image, rating}) => {
 
     useEffect(() => {
