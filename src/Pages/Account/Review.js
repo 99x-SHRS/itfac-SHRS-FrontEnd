@@ -16,7 +16,6 @@ const Review = () => {
       .then((response) => {
         const data = response.data;
         setItems(data);
-        console.log(data);
       })
       .catch((e) => {
         console.log(e);
@@ -39,10 +38,9 @@ const Review = () => {
               return (<ReviewModel
                 rating={"5"}
                 id={item.reviewId}
-                hname={item.hotelId}
                 description={item.review}
-                location={item.reviewId}
-                image={item.hotelId}
+                hotelId={item.hotelId}
+                onFresh={getReviewDetails}
               />);
             })}
           </div>

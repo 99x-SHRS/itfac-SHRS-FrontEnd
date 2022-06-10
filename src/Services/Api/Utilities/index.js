@@ -585,6 +585,16 @@ const deleteReviewByReviewId = async (bodyData) => {
   )
 }
 
+const updateReviewById = async (id,bodyData) => {
+  return await provider.updateById(
+    BASE_URL,
+    'review',
+    'updateReviewById',
+    id,
+    bodyData
+  )
+}
+
 export {
   getAllHotels,
   searchHotels,
@@ -658,4 +668,5 @@ export {
   updatePassword,
   getReviewByCustomerId,
   deleteReviewByReviewId,
+  updateReviewById,
 }
