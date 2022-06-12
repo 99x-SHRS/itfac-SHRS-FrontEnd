@@ -68,21 +68,25 @@ const ReviewModel = ({ id, description, image, rating, hotelId, onFresh }) => {
 
   const updateReview = async () => {
     const data ={
-      description: review,
+      review: review
     }
-    await updateReviewById(updateReviewId,data)
+    if (review != '') {
+      await updateReviewById(updateReviewId,data)
     .then((response) =>{
-      console.log(response.data);
-      // if (response.data === "1") {
-      //   notifySuccess("Sucessfully Updated..");
-      //   onFresh();
-      // } else {
-      //   notifyError("An Error Occoured..");
-      // }
+      if (response.status == 200) {
+        notifySuccess("Sucessfully Updated..");
+        handleClose();
+        onFresh();
+      } else {
+        notifyError("An Error Occoured..");
+      }
     })
     .catch((e) => {
       console.log(e);
     })
+    }else {
+      notifyError("Please enter a review...");
+    }
   };
 
   useEffect(() => {
@@ -190,7 +194,6 @@ const ReviewModel = ({ id, description, image, rating, hotelId, onFresh }) => {
           <Button
             variant="primary"
             onClick={() => {
-
               updateReview();
             }}
           >
