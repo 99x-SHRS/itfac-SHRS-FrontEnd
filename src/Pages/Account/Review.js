@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import ReactPaginate from "react-paginate";
 
 import ReviewModel from "../../Components/ReviewModel/ReviewModel.js";
 
@@ -8,20 +7,32 @@ import "../../Assets/styles/css/Pages/reviewPage.css";
 import { getReviewByCustomerId } from "../../Services/Api/Utilities/index.js";
 
 const Review = () => {
-  let limit = 3;
   const [items, setItems] = useState([]);
-  const [pageCount, setpageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+  const [showBack, setShowBack] = useState(true);
 
-  const getReviewDetails = async (currentPage) => {
+  const viewBack = (itemOffset) => {
+    if (itemOffset === 0) {
+      setShowBack(false);
+    } else {
+      setShowBack(true);
+    }
+  };
+  const getReviewDetails = async (page) => {
+    var pages;
+    if (page == null) {
+      pages = itemOffset;
+    } else {
+      pages = page;
+    }
     const data = {
       id: localStorage.getItem("user"),
-      page: currentPage,
+      page: pages,
     };
     await getReviewByCustomerId(data)
       .then((response) => {
         const data = response.data;
         setItems(data);
-        setpageCount(Math.ceil(data.count / limit));
       })
       .catch((e) => {
         console.log(e);
@@ -29,13 +40,26 @@ const Review = () => {
   };
 
   useEffect(() => {
-    getReviewDetails(0);
+    getReviewDetails(itemOffset);
+    //viewBack(itemOffset);
   }, []);
 
-  const handlePageClick = async (data) => {
-    console.log(data.selected);
-    let currentPage = data.selected;
-    getReviewDetails(currentPage);
+  const handlependingNextPageClick = async (event) => {
+    const newOffset = itemOffset + 1;
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
+    setItemOffset(newOffset);
+    getReviewDetails(newOffset);
+  };
+
+  const handlependingBackPageClick = async (event) => {
+    const newOffset = itemOffset - 1;
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
+    setItemOffset(newOffset);
+    getReviewDetails(newOffset);
   };
 
   return (
@@ -58,25 +82,26 @@ const Review = () => {
               );
             })}
           </div>
-          <ReactPaginate
-            previousLabel={"previous"}
-            nextLabel={"next"}
-            breakLabel={"..."}
-            pageCount={pageCount}
-            marginPagesDisplayed={1}
-            pageRangeDisplayed={2}
-            onPageChange={handlePageClick}
-            containerClassName={"pagination justify-content-center"}
-            pageClassName={"page-item"}
-            pageLinkClassName={"page-link"}
-            previousClassName={"page-item"}
-            previousLinkClassName={"page-link"}
-            nextClassName={"page-item"}
-            nextLinkClassName={"page-link"}
-            breakClassName={"page-item"}
-            breakLinkClassName={"page-link"}
-            activeClassName={"active"}
-          />
+          <div className="d-flex justify-content-center mb-2">
+            {showBack ? (
+              <button
+                className="pending-req-button mx-5"
+                onClick={() => {handlependingBackPageClick();
+                  //viewBack(itemOffset);
+                }}
+              >
+                Back
+              </button>
+            ) : (<></>)}
+            <button
+              className="pending-req-button mx-5"
+              onClick={() => {handlependingNextPageClick();
+                //viewBack(itemOffset);
+              }}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </div>
     </div>
