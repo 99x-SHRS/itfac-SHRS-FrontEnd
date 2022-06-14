@@ -15,6 +15,7 @@ import AccountSettings from '../Pages/Account/MyAccountSettings'
 import PersonalSettings from '../Pages/PersonalSettings/personalSettings'
 import SecuritySettings from '../Pages/SecuritySettings/securitySettings'
 import Review from '../Pages/Account/Review'
+import Requestmanage from '../Pages/RequestManage/requestManage'
 const UserRoutes = (
   <>
     <Route exact path='/' element={<Dashboard />}></Route>
@@ -31,6 +32,7 @@ const UserRoutes = (
       path='/loyalty-program'
       element={<LoyaltyDescription />}
     ></Route>
+    <Route exact path='/request-manage' element={<Requestmanage />}></Route>
     <Route path='/share' element={<SharedSignUp />}></Route>
     <Route exact path='/account-settings' element={<AccountSettings />}></Route>
     <Route exact path='/personal-settings' element={<PersonalSettings />}></Route>

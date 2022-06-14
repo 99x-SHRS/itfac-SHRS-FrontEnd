@@ -1,5 +1,5 @@
 import React from "react";
-import "../../Assets/styles/css/components/pendingRequest.css"
+import "../../Assets/styles/css/Components/pendingRequest.css"
 
 function Acceptedrequest(props) {
     return (
