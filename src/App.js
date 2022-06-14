@@ -1,56 +1,57 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import PropagateLoader from "react-spinners/PropagateLoader";
-
-import Dashboard from "./Pages/Home/dashboard";
-import Hotels from "./Pages/Hotels/hotels";
-import HotelPage from "./Pages/Booking/hotelPage";
-import AccountSettings from "./Pages/AccountSettings/accountSettings";
-import Personalsettings from "./Pages/PersonalSettings/personalSettings";
-import Securitysettings from "./Pages/SecuritySettings/securitySettings";
-import Requestmanage from "./Pages/RequestManage/requestManage";
-
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./App.css";
+import { BrowserRouter as Router, Routes } from 'react-router-dom'
+import PropagateLoader from 'react-spinners/PropagateLoader'
+import React, { useState, useEffect } from 'react'
+import History from './Components/History/history'
+import UserRoutes from './Routes/userRouter'
+import SellerRoutes from './Routes/sellerRouter'
+import exceptionsRouters from './Routes/exceptionsRouters'
+import ChatBot from './Services/ChatBot/chatBot.js'
+import ShareButton from './Components/ShareButton/ShareButton'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
+import './App.css'
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  let [color, setColor] = useState("#ffffff");
+  const [loading, setLoading] = useState(false)
+  let [color, setColor] = useState('#ffffff')
+  const [share, setShare] = useState(false)
+  const [session, setSession] = useState(true)
+
   useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
-  }, []);
+    setSession(localStorage.getItem('session'))
+    setLoading(true)
+  }, [])
+
+  useEffect(() => {
+    if (session == true) {
+      setTimeout(() => {
+        setShare(localStorage.getItem('session'))
+      }, 0)
+    } else {
+      setShare(false)
+    }
+
+    if (session == false || session == null) {
+      setShare(false)
+    }
+  }, [session])
+
   return (
-    <Router>
-      <div className="App">
-        <Routes>
-          <Route exact path="/" element={<Dashboard />}></Route>
-          <Route exact path="/hotels" element={<Hotels />}></Route>
-          <Route exact path="/booking/:id" element={<HotelPage />}></Route>
-          <Route
-            exact
-            path="/account/settings"
-            element={<AccountSettings />}
-          ></Route>
-          <Route
-            exact
-            path="/account/settings/personal-settings"
-            element={<Personalsettings />}
-          ></Route>
-          <Route
-            exact
-            path="/account/settings/security-settings"
-            element={<Securitysettings />}
-          ></Route>
-           <Route
-            exact
-            path="/request-manage"
-            element={<Requestmanage/>}
-          ></Route>
-        </Routes>
+    <Router history={History}>
+      <div className='App'>
+        <Routes>{UserRoutes}</Routes>
+        <Routes>{SellerRoutes}</Routes>
+        <Routes>{exceptionsRouters}</Routes>
+        {share ? (
+          <>
+            {' '}
+            <ShareButton />
+          </>
+        ) : (
+          <></>
+        )}
+
+        <ChatBot />
         {/* {loading ? (
           <div className='Loader'>
             <PropagateLoader
@@ -61,9 +62,10 @@ function App() {
             />
           </div>
         ) : (
-          <Routes>
-            <Route exact path='/' element={<Dashboard />}></Route>
-          </Routes>
+          <>
+            <Routes>{UserRoutes}</Routes>
+            <ChatBot />
+          </>
         )} */}
       </div>
     </Router>

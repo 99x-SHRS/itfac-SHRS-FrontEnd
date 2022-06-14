@@ -3,7 +3,7 @@ import { Form } from 'react-bootstrap'
 class StartFilter extends Component {
   render() {
     return (
-      <div className='bg-light'>
+      <div className='border'>
         <div class='card-header card-header'>Stars</div>
         <div class='card-body'>
           <Form>

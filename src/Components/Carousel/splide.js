@@ -1,76 +1,81 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
 import '@splidejs/splide/dist/css/themes/splide-default.min.css'
-import '../../Assets/styles/css/components/souvenir.css'
+import { getAllImagesByRoomId } from '../../Services/Api/Utilities/index.js'
+import '../../Assets/styles/css/Components/souvenir.css'
 
-const initialItems = Array.apply(null, Array(6)).map(
-  (value, index) => index + 1
-)
+const SplideSlider = ({ roomId }) => {
+  const [images, setRoomImages] = useState(null)
+  useEffect(() => {
+    getImages()
+  }, [])
 
-const souvenirs1 = [
-  {
-    path: '/images/property-types/kabana.jpg',
-  },
-  {
-    path: '/images/property-types/villa.jpg',
-  },
-  {
-    path: '/images/property-types/villa.jpg',
-  },
-  {
-    path: '/images/property-types/bangalow.jpg',
-  },
-  {
-    path: '/images/property-types/guest-houses.jpg',
-  },
-  {
-    path: '/images/property-types/guest-houses.jpg',
-  },
-  {
-    path: '/images/property-types/guest-houses.jpg',
-  },
-]
-
-const SplideSlider = () => {
-  const [items, setItems] = useState(initialItems)
-
+  const getImages = async () => {
+    const dataModel = {
+      id: roomId,
+    }
+    await getAllImagesByRoomId(dataModel)
+      .then((res) => {
+        try {
+          if (res.data.length == 0) {
+            setRoomImages(null)
+          } else {
+            setRoomImages(res.data)
+          }
+        } catch (e) {
+          setRoomImages(null)
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   return (
     <>
-      <Splide
-        options={{
-          rewind: false,
-          perPage: 5,
-          perMove: 5,
-          gap: 20,
-          padding: '3rem',
-          pagination: false,
-          breakpoints: {
-            623: {
-              perPage: 2,
-              perMove: 2,
-            },
-            935: {
-              perPage: 3,
-              perMove: 3,
-            },
-            1247: {
-              perPage: 4,
-              perMove: 4,
-            },
-          },
-        }}
-      >
-        {items.map((item) => {
-          return (
-            <SplideSlide key={item} className='slide'>
-              <img
-                src={`https://source.unsplash.com/random/400x500?sig=${item}`}
-                alt={`${item}`}
-              />
-            </SplideSlide>
-          )
-        })}
-      </Splide>
+      <>
+        {images != null ? (
+          <>
+            <Splide
+              options={{
+                rewind: true,
+                perPage: 1,
+                perMove: 1,
+                gap: 10,
+                padding: '10px',
+                pagination: true,
+                breakpoints: {
+                  623: {
+                    perPage: 1,
+                    perMove: 1,
+                  },
+                  935: {
+                    perPage: 1,
+                    perMove: 1,
+                  },
+                  1247: {
+                    perPage: 1,
+                    perMove: 1,
+                  },
+                },
+              }}
+            >
+              {images.map((item) => {
+                return (
+                  <SplideSlide className='slide souvenir-images'>
+                    <img src={item.image} />
+                  </SplideSlide>
+                )
+              })}
+            </Splide>
+          </>
+        ) : (
+          <>
+            <div class='alert alert-primary' role='alert'>
+              Nothing to display.
+            </div>
+          </>
+        )}
+      </>
     </>
   )
 }

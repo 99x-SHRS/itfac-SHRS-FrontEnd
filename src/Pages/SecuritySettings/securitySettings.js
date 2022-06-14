@@ -1,16 +1,16 @@
 import React from 'react';
 
 import Navbars from '../../Components/Navbar/navbar.js';
-import SecuritySettingsmodel from "../../Layouts/SecuritySettingsmodel/securitySettingsmodel.js";
+import SecuritySettings from "../../Layouts/SecuritySettings/securitySettings";
 import Footer from '../../Layouts/Footer/footer.js';
 
-import '../../Assets/styles/css/pages/securitySettings.css';
+import '../../Assets/styles/css/Pages/securitySettings.css';
 
 function Securitysettings() {
   return (
     <div>
       <Navbars/>
-      <div className='sec-container'><SecuritySettingsmodel /></div>
+      <div className='sec-container'><SecuritySettings /></div>
       <Footer/>
     </div>
   );

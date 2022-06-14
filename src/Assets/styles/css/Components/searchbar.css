@@ -208,7 +208,7 @@ a:active {
    #BACKGROUND
    ========================================================================== */
 .bg-img-1 {
-  background: url('../../images/bg-img-01.jpg') center center/cover no-repeat;
+  background: url('../../../images/bg-img-01.jpg') center center/cover no-repeat;
 }
 
 /* ==========================================================================
@@ -572,7 +572,7 @@ button {
   font-size: 16px;
   padding: 5px 0;
   padding-top: 0px;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   color: #808080;
   font-family: 'Poppins', 'Arial', 'Helvetica Neue', sans-serif;
 }
@@ -751,6 +751,7 @@ button {
   .quantity {
     float: none;
     margin-top: 10px;
+    justify-content: center;
   }
 }
 
@@ -785,6 +786,7 @@ button {
   -o-transition: all 0.4s ease;
   -moz-transition: all 0.4s ease;
   transition: all 0.4s ease;
+  margin-top: 6px;
 }
 
 .minus:hover,
@@ -795,7 +797,6 @@ button {
 
 .list-room {
   list-style: none;
-
   max-height: 324px;
   overflow-y: hidden;
   padding-right: 20px;
@@ -803,7 +804,8 @@ button {
 
 @media only screen and (max-width: 767px) {
   .list-room {
-    min-height: 200px;
+    min-height: 210px;
+    text-align: center;
   }
 }
 .list-room__item {
@@ -872,22 +874,23 @@ input[type='number']::-webkit-outer-spin-button {
 
 .dropdown-select {
   display: none;
-  position: absolute;
+  position: relative;
   left: 0;
   right: 0;
   /* top: -webkit-calc(100% + 2px); */
   /* top: -moz-calc(100% + 2px); */
   /* top: calc(100% + 2px); */
   background: #fff;
-  z-index: 99;
+  z-index: 999;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
   -webkit-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
   box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
-  padding: 30px 45px;
-  padding-right: 25px;
+  padding: 10px 50px 10px 50px;
+  /* padding-right: 25px;  */
+  margin-bottom: 5px;
 }
 
 .dropdown-select.show {
@@ -1125,7 +1128,7 @@ input[type='number']::-webkit-outer-spin-button {
 @media only screen and (max-width: 767px) {
   .searchcontainer {
     position: relative;
-    top: 10rem;
+    top: 14rem !important;
   }
   .submit-Btn {
     height: 100%;
@@ -1133,9 +1136,9 @@ input[type='number']::-webkit-outer-spin-button {
   }
 }
 
-.dropdown-select {
+/* .dropdown-select {
   padding: 50px;
-}
+} */
 /* .travellers {
   flex-wrap: wrap !important;
 } */

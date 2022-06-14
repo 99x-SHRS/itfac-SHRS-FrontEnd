@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
+import jQuery from 'jquery'
+import DatePicker from '../DatePicker/datepicker.js'
+
 import '../../Assets/vendor/mdi-font/css/material-design-iconic-font.min.css'
 import '../../Assets/vendor/font-awesome-4.7/css/font-awesome.min.css'
 import '../../Assets/vendor/select2/select2.min.css'
-import DatePicker from '../DatePicker/datepicker.js'
 
-import ReactDOM from 'react-dom'
-import jQuery from 'jquery'
-import { Link } from 'react-router-dom'
 class SideSearchbar extends Component {
   componentDidMount() {
     ;(function ($) {
@@ -267,7 +267,7 @@ class SideSearchbar extends Component {
                 </div>
               </div>
               <div className='search-button'>
-                <button class='btn-submit submit-Btn' type='submit'>
+                <button class='btn-submit submit-Btn b-priamry' type='submit'>
                   <Link to='/hotels'>search</Link>
                 </button>
               </div>

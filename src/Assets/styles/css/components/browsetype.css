@@ -44,7 +44,7 @@
     display: block;
   }
 }
-.card-header {
+.gallery-cells .card-header {
   background: rgb(75, 75, 152);
   background: linear-gradient(
     186deg,

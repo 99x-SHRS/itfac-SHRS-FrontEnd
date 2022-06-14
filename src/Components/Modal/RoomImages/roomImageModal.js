@@ -1,62 +1,46 @@
-import React, { Component } from 'react'
+import React, { Component, useState } from 'react'
+import { Modal } from 'react-bootstrap'
 import Souvenir from '../../Carousel/souvenir'
 import SplideSlider from '../../Carousel/splide'
-import '../../../Assets/styles/css/components/roomImageModal.css'
+import '../../../Assets/styles/css/Components/roomImageModal.css'
 import Browsetype from '../../Carousel/browsetype'
 
-class RoomImageModal extends Component {
-  render() {
-    return (
-      <div className='room-image-modal'>
-        <a
-          data-toggle='modal'
-          data-target='#exampleModalCenter'
-          className='mt-3 text-primary'
-        >
-          {' '}
-          Click here to view all images
-        </a>
-        <div
-          class='modal fade modal-container'
-          id='exampleModalCenter'
-          tabindex='-1'
-          role='dialog'
-          aria-labelledby='exampleModalCenterTitle'
-          aria-hidden='true'
-        >
-          <div class='modal-dialog modal-dialog-centered' role='document'>
-            <div class='modal-content'>
-              <div class='modal-header'>
-                <h5 class='modal-title' id='exampleModalLongTitle'>
-                  Room images
-                </h5>
-                <button
-                  type='button'
-                  class='close'
-                  data-dismiss='modal'
-                  aria-label='Close'
-                >
-                  <span aria-hidden='true'>&times;</span>
-                </button>
-              </div>
-              <div class='modal-body'>
-                <SplideSlider />
-              </div>
-              <div class='modal-footer'>
-                <button
-                  type='button'
-                  class='btn btn-secondary'
-                  data-dismiss='modal'
-                >
-                  Close
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
+const RoomImageModal = ({ roomId }) => {
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => {
+    setShow(false)
   }
+  const handleShow = () => {
+    setShow(true)
+  }
+  return (
+    <div className='room-image-modal'>
+      <a
+        data-toggle='modal'
+        data-target='#exampleModalCenter'
+        className='mt-3 text-primary'
+        onClick={handleShow}
+      >
+        {' '}
+        Click here to view all images
+      </a>
+      <Modal
+        show={show}
+        onHide={() => {
+          handleClose()
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Room Images</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <SplideSlider roomId={roomId} />
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
+    </div>
+  )
 }
 
 export default RoomImageModal

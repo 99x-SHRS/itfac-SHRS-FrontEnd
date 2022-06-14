@@ -1,43 +1,49 @@
 import React, { Component } from 'react'
 
-class HotelLocation extends Component {
-  render() {
-    return (
-      <div className='mt-4 pt-4' id='hotel-location'>
-        <h3>Location on Google Map</h3>
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Itaque,
-          officia deserunt qui, eaque iste ratione minus iure atque, culpa quae
-          aperiam natus quaerat ducimus aliquam voluptates quasi saepe adipisci?
-          Atque.
-        </p>
-        <br />
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus,
-          modi impedit! Corrupti ratione mollitia tempore. Laudantium voluptatum
-          nihil fugit vitae minima nemo placeat harum ea, ipsam sunt deleniti,
-          repudiandae quia.
-        </p>
-        <br />
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus,
-          modi impedit! Corrupti ratione mollitia tempore. Laudantium voluptatum
-          nihil fugit vitae minima nemo placeat harum ea, ipsam sunt deleniti,
-          repudiandae quia.
-        </p>
-        <br />
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus,
-          modi impedit! Corrupti ratione mollitia tempore. Laudantium voluptatum
-          nihil fugit vitae minima nemo placeat harum ea, ipsam sunt deleniti,
-          repudiandae quia.
-        </p>
-      </div>
-    )
-  }
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api'
+import '../../Assets/styles/css/Layouts/googleMap.css'
+// const containerStyle = {
+//   width: '100%',
+//   height: '400px',
+// }
+
+const center = {
+  lat: 6.0329,
+  lng: 80.2158,
+}
+
+function HotelLocation() {
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: 'AIzaSyD-RDqFvg7zwemTVQQujx1VOS-AD7HYWOI',
+  })
+
+  const [map, setMap] = React.useState(null)
+
+  const onLoad = React.useCallback(function callback(map) {
+    const bounds = new window.google.maps.LatLngBounds()
+    map.fitBounds(bounds)
+    setMap(map)
+  }, [])
+
+  const onUnmount = React.useCallback(function callback(map) {
+    setMap(null)
+  }, [])
+
+  return isLoaded ? (
+    <div id='hotel-location'>
+      <h3>Hotel Location</h3>
+      <GoogleMap
+        mapContainerStyle={{ width: '100%', height: '100%' }}
+        center={center}
+        zoom={13}
+      >
+        <Marker position={center} />
+      </GoogleMap>
+    </div>
+  ) : (
+    <></>
+  )
 }
 
 export default HotelLocation

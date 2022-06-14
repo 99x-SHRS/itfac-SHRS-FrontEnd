@@ -36,7 +36,7 @@ const Footer = () => {
               </ul>
             </div>
             <div class='col-md-6 item text'>
-              <h3>BOOKNOW.COM</h3>
+              <h3>BOOKNOW.LK</h3>
               <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
                 odit iure distinctio rem alias aliquam voluptas quaerat velit
@@ -59,7 +59,7 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          <p class='copyright'>BOOKNOW.COM © 2022</p>
+          <p class='copyright'>BOOKNOW.LK © 2022</p>
         </div>
       </footer>
     </div>

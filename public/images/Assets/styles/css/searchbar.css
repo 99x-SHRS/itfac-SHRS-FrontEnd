@@ -290,7 +290,7 @@ a:active {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   color: #fff;
   font-size: 16px;
   font-weight: 700;
@@ -563,16 +563,15 @@ button {
 .label {
   font-size: 12px;
   color: #555;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   display: block;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .input--style-1 {
   font-size: 16px;
   padding: 5px 0;
   padding-top: 0px;
-  text-transform: uppercase;
   color: #808080;
   font-family: 'Poppins', 'Arial', 'Helvetica Neue', sans-serif;
 }
@@ -803,7 +802,7 @@ button {
 
 @media only screen and (max-width: 767px) {
   .list-room {
-    min-height: 200px;
+    min-height: 210px;
   }
 }
 .list-room__item {
@@ -875,9 +874,9 @@ input[type='number']::-webkit-outer-spin-button {
   position: absolute;
   left: 0;
   right: 0;
-  /* top: -webkit-calc(100% + 2px); */
-  /* top: -moz-calc(100% + 2px); */
-  /* top: calc(100% + 2px); */
+  top: -webkit-calc(100% + 2px);
+  top: -moz-calc(100% + 2px);
+  top: calc(100% + 2px);
   background: #fff;
   z-index: 99;
   -webkit-border-radius: 10px;
@@ -890,8 +889,9 @@ input[type='number']::-webkit-outer-spin-button {
   padding-right: 25px;
 }
 
-.dropdown-select.show {
+.dropdown-select .show {
   display: block;
+  align-content: space-between !important;
 }
 
 .open .input-icon::before {
@@ -1048,7 +1048,7 @@ input[type='number']::-webkit-outer-spin-button {
 
 .tab-list__link {
   display: block;
-  text-transform: capitalize;
+  /* text-transform: capitalize; */
   font-family: 'Poppins', 'Arial', 'Helvetica Neue', sans-serif;
   font-weight: 500;
   font-size: 24px;
