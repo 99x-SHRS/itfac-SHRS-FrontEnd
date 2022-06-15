@@ -1,14 +1,34 @@
 import React from "react";
-import "../../Assets/styles/css/Components/pendingRequest.css"
+import { useState, useEffect } from "react";
+import "../../Assets/styles/css/Components/pendingRequest.css";
+
+import {getUserbyId} from "../../Services/Api/Utilities/index"
 
 function Rejectedrequest(props) {
+  const [userDetails, setUserDetails] = useState([]);
+
+  const getUserDetails = async () => {
+    const data = {
+      id: props.oId,
+    };
+    await getUserbyId(data)
+      .then((res) => {
+        setUserDetails(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
+  useEffect(() => {
+    getUserDetails();
+  }, []);
   return (
     <div className="rounded-3 shadow border border-info row g-1 align-middle mb-2">
       <div className="col-sm-3 d-flex justify-content-center my-auto">
         <p>{props.hname}</p>
       </div>
       <div className="col-sm-3 d-flex justify-content-center my-auto">
-        <p>{props.oname}</p>
+        <p>{userDetails.firstName}</p>
       </div>
       <div className="col-sm-2 d-flex justify-content-center my-auto">
         <p>{props.location}</p>

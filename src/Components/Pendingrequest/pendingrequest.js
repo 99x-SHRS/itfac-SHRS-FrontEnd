@@ -1,10 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "../../Assets/styles/css/Components/pendingRequest.css";
 
-import {updateHotelById} from "../../Services/Api/Utilities/index"
+import {updateHotelById,getUserbyId} from "../../Services/Api/Utilities/index"
 
-function Pendingrequest({id, hname, oname,location,status,onfresh}) {
+function Pendingrequest({id, hname, oId,location,status,onfresh}) {
+  const [userDetails, setUserDetails] = useState([]);
+
+  const getUserDetails = async () => {
+  
+    const data={
+      id : oId
+    }
+    await getUserbyId(data)
+      .then((res)=>{
+        setUserDetails(res.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+  }
+
   const updaterejectedDetails = async () => {
     const data = {
       status: "rejected",
@@ -18,7 +34,7 @@ function Pendingrequest({id, hname, oname,location,status,onfresh}) {
         console.log(err);
       });
   };
-  //getrejectedDetails();
+
   const updateacceptedDetails = async() => {
     const data = {
       status: "accepted",
@@ -32,14 +48,18 @@ function Pendingrequest({id, hname, oname,location,status,onfresh}) {
         console.log(err);
       });
   };
-  //getrejectedDetails();
+
+  useEffect(()=>{
+    getUserDetails();
+  },[])
+
   return (
     <div className="rounded-3 shadow border border-info row g-1 align-middle mb-2">
       <div className="col-sm-3 d-flex justify-content-center my-auto">
         <p>{hname}</p>
       </div>
       <div className="col-sm-3 d-flex justify-content-center my-auto">
-        <p>{oname}</p>
+        <p>{userDetails.firstName}</p>
       </div>
       <div className="col-sm-2 d-flex justify-content-center my-auto">
         <p>{location}</p>

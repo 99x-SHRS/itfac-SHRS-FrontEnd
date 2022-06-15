@@ -34,7 +34,6 @@ function Requestmanagemodel() {
     await getHotelByStatus(data)
       .then((res) => {
         const data = res.data;
-        console.log(data);
         setItems0(data);
       })
       .catch((err) => {
@@ -56,7 +55,6 @@ function Requestmanagemodel() {
     await getHotelByStatus(data)
       .then((res) => {
         const data = res.data;
-        console.log(data);
         setItems1(data);
       })
       .catch((err) => {
@@ -78,14 +76,12 @@ function Requestmanagemodel() {
     await getHotelByStatus(data)
       .then((res) => {
         const data = res.data;
-        console.log(data);
         setItems2(data);
       })
       .catch((err) => {
         console.log(err);
       });
   }
-
 
   const handlependingNextPageClick = async (event) => {
     const newOffset = itemOffset + 1;
@@ -175,11 +171,12 @@ function Requestmanagemodel() {
                 </div>
 
                 {items2.map((item) => {
+                  console.log(item.userUId);
                   return (
                     <Pendingrequest
                       id={item.hotelId}
                       hname={item.name}
-                      oname={item.description}
+                      oId={item.userUId}
                       location={item.town}
                       status={item.status}
                       onfresh={getpendingDetails}
@@ -233,7 +230,7 @@ function Requestmanagemodel() {
                   return (
                     <Acceptedrequest
                       hname={item.name}
-                      oname={item.description}
+                      oId={item.userUId}
                       location={item.town}
                       status={item.status}
                     />
@@ -286,7 +283,7 @@ function Requestmanagemodel() {
                   return (
                     <Rejectedrequest
                       hname={item.name}
-                      oname={item.description}
+                      oId={item.userUId}
                       location={item.town}
                       status={item.status}
                     />
