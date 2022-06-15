@@ -4,10 +4,9 @@ import Acceptedrequest from "../../Components/Acceptedrequest/acceptedrequest";
 import React from "react";
 import { Tabs, Tab } from "react-bootstrap";
 import { Collapse } from "react-bootstrap";
-import ReactPaginate from "react-paginate";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import HttpHelper from "../../Utill/HttpHelper.js";
+
+import {getHotelByStatus} from "../../Services/Api/Utilities/index";
 
 function Requestmanagemodel() {
   const [items0, setItems0] = useState([]);
@@ -32,7 +31,7 @@ function Requestmanagemodel() {
       status: "rejected",
       page: pages,
     };
-    HttpHelper.post(`/api/hotel/getHotelsByStatus`, data)
+    await getHotelByStatus(data)
       .then((res) => {
         const data = res.data;
         console.log(data);
@@ -54,8 +53,7 @@ function Requestmanagemodel() {
       status: "accepted",
       page: pages,
     };
-    await axios
-      .post(`http://localhost:8000/api/hotel/getHotelsByStatus`, data)
+    await getHotelByStatus(data)
       .then((res) => {
         const data = res.data;
         console.log(data);
@@ -77,8 +75,7 @@ function Requestmanagemodel() {
       status: "pending",
       page: pages,
     };
-    await axios
-      .post(`http://localhost:8000/api/hotel/getHotelsByStatus`, data)
+    await getHotelByStatus(data)
       .then((res) => {
         const data = res.data;
         console.log(data);

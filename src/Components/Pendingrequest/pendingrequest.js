@@ -2,15 +2,14 @@ import React from "react";
 import axios from "axios";
 import "../../Assets/styles/css/Components/pendingRequest.css";
 
-
+import {updateHotelById} from "../../Services/Api/Utilities/index"
 
 function Pendingrequest({id, hname, oname,location,status,onfresh}) {
-  const updaterejectedDetails = () => {
+  const updaterejectedDetails = async () => {
     const data = {
       status: "rejected",
     };
-    axios
-      .put(`http://localhost:8000/api/hotel/updateHotelById/${id}`, data)
+    await updateHotelById(id,data)
       .then((res) => {
         console.log("updated");
         onfresh();
@@ -20,12 +19,11 @@ function Pendingrequest({id, hname, oname,location,status,onfresh}) {
       });
   };
   //getrejectedDetails();
-  const updateacceptedDetails = () => {
+  const updateacceptedDetails = async() => {
     const data = {
       status: "accepted",
     };
-    axios
-      .put(`http://localhost:8000/api/hotel/updateHotelById/${id}`, data)
+    await updateHotelById(id,data)
       .then((res) => {
         console.log("updated");
         onfresh();

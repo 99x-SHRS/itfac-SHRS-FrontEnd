@@ -77,6 +77,16 @@ const getHotelByUserId = async (bodyData) => {
     bodyData
   )
 }
+
+const getHotelByStatus = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'getHotelsByStatus',
+    bodyData
+  )
+}
+
 const saveHotelById = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'saveHotel', bodyData)
 }
@@ -637,4 +647,5 @@ export {
   deleteHotelById,
   createReview,
   updatePassword,
+  getHotelByStatus,
 }
