@@ -1,5 +1,6 @@
 import React, { Component, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import secureLocalStorage from 'react-secure-storage'
 import { Dropdown, Nav, Container, Button } from 'react-bootstrap'
 import Modal from 'react-responsive-modal'
 import { toast } from 'react-toastify'
@@ -23,6 +24,11 @@ const Navbars = () => {
   const [sign, setSign] = useState(false)
   const [loggedin, setLoggedin] = useState(false)
   const [messageCount, setMessageCount] = useState(0)
+  const [roles, setRoles] = useState({
+    admin: secureLocalStorage.getItem('admin'),
+    hotelAdmin: secureLocalStorage.getItem('hotelAdmin'),
+    customer: secureLocalStorage.getItem('customer'),
+  })
   const navigate = useNavigate()
   let session = localStorage.getItem('session')
 
@@ -31,7 +37,7 @@ const Navbars = () => {
     toast.configure()
     session = localStorage.getItem('session')
     let localCurrency = localStorage.getItem('currency')
-    if (localStorage.getItem('session')) {
+    if (localStorage.getItem('session') == 'true') {
       setLoggedin(true)
     } else {
       setLoggedin(false)
@@ -219,12 +225,34 @@ const Navbars = () => {
                     Loyalty
                   </Dropdown.Item>
                   <Dropdown.Item>Messeges</Dropdown.Item>
-                  <Dropdown.Item as={Link} to={'/seller/dashboard'}>
-                    My Account
-                  </Dropdown.Item>
-                  <Dropdown.Item as={Link} to={'/account-settings'}>
-                    Account
-                  </Dropdown.Item>
+                  {roles.admin ? (
+                    <>
+                      <Dropdown.Item as={Link} to={'/admin/dashboard'}>
+                        Admin Account
+                      </Dropdown.Item>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {roles.hotelAdmin ? (
+                    <>
+                      <Dropdown.Item as={Link} to={'/seller/dashboard'}>
+                        My Account
+                      </Dropdown.Item>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+                  {roles.customer ? (
+                    <>
+                      <Dropdown.Item as={Link} to={'/account-settings'}>
+                        Account
+                      </Dropdown.Item>
+                    </>
+                  ) : (
+                    <></>
+                  )}
+
                   <Dropdown.Item
                     onClick={() => {
                       setLoggedin(false)

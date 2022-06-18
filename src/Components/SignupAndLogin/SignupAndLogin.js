@@ -59,10 +59,10 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
       })
       .catch((err) => {
         console.log(err)
+        navigate('/')
       })
     setLoading(false)
     setLogin(false)
-    navigate('/')
   }
   const signUpHandle = async (event) => {
     event.preventDefault()

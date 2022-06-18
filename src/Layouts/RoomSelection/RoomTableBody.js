@@ -56,13 +56,20 @@ const TableBody = ({ rooms, souvenirs1 }) => {
       .then((res) => {
         try {
           const bookingId = res.data.bookingId
-          console.log(res.data)
-          if (Number.isInteger(bookingId)) {
-            let URL = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
-            navigate(URL)
+          const userId = localStorage.getItem('user')
+          if (
+            localStorage.getItem('session') == 'false' ||
+            localStorage.getItem('session') == null
+          ) {
+            notifyError('Please login your account before book your place!')
           } else {
-            navigate('/')
-            notifyError('Some thing went wrong.')
+            if (Number.isInteger(bookingId)) {
+              let URL = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
+              navigate(URL)
+            } else {
+              navigate('/')
+              notifyError('Some thing went wrong.')
+            }
           }
         } catch (error) {
           console.log(error)
