@@ -1,15 +1,24 @@
 import React, { Component, useEffect, useState } from 'react'
-import '../../Assets/styles/css/Components/savedHotelCard.css'
+import { Modal } from 'react-bootstrap'
+import SearchDatePicker from '../../Components/SearchDatePicker/SearchDatePicker'
 import { getHotelById } from '../../Services/Api/Utilities/Index.js'
 import HashLoader from 'react-spinners/HashLoader'
+import '../../Assets/styles/css/Components/savedHotelCard.css'
+
 const SavedHotelCard = ({ hotel, removeSaveHotel }) => {
   const [hotelDetails, setHotelDetails] = useState([])
   const [loading, setLoading] = useState(false)
+  const [show, setShow] = useState(false)
 
   useEffect(() => {
     getHotelDetails()
   }, [])
-
+  const handleClose = () => {
+    setShow(false)
+  }
+  const handleShow = () => {
+    setShow(true)
+  }
   const getHotelDetails = async () => {
     const dataModel = {
       id: hotel.hotelId,
@@ -82,7 +91,12 @@ const SavedHotelCard = ({ hotel, removeSaveHotel }) => {
               <small>{calculateTime(hotel.createdAt)} </small>
             </div>
             <div className='saveHotelBtm'>
-              <button className='go-to-hotel mt-2 item'>
+              <button
+                className='go-to-hotel mt-2 item'
+                onClick={() => {
+                  handleShow()
+                }}
+              >
                 Go to hotel {'>'}
               </button>
               <i
@@ -96,6 +110,20 @@ const SavedHotelCard = ({ hotel, removeSaveHotel }) => {
           </div>
         </>
       )}
+      <Modal
+        show={show}
+        onHide={() => {
+          handleClose()
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Pickup your date</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <SearchDatePicker hotelName={hotelDetails.name} />
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
     </div>
   )
 }
