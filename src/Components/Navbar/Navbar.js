@@ -117,7 +117,6 @@ const Navbars = () => {
   const unreadMessageCount = async () => {
     const dataModel = {
       id: localStorage.getItem('user'),
-      // id: 14,
     }
     await getUnreadCountByRecieverId(dataModel)
       .then((res) => {

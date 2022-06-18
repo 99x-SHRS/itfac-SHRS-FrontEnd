@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useState } from 'react'
+import secureLocalStorage from 'react-secure-storage'
 import { userLogin, addUser } from '../../Services/Api/Utilities/Index'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -46,6 +47,10 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           localStorage.setItem('user', res.data.userId)
           localStorage.setItem('currency', res.data.currency)
           localStorage.setItem('session', true)
+          // secureLocalStorage.setItem('user', res.data.userId)
+          secureLocalStorage.setItem('admin', res.data.admin)
+          secureLocalStorage.setItem('hotelAdmin', res.data.hotelAdmin)
+          secureLocalStorage.setItem('customer', res.data.customer)
           setLoggedin(true)
           notifySuccess('You have loggedin successfully')
         } else {
@@ -114,6 +119,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
               <a href='#' class='social'>
                 <i class='fab fa-google-plus-g'></i>
               </a>
+
               <a href='#' class='social'>
                 <i class='fab fa-linkedin-in'></i>
               </a>

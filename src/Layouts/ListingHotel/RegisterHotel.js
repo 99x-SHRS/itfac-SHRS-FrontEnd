@@ -75,7 +75,7 @@ const RegisterHotel = () => {
       town: event.target.town.value,
       Street1: event.target.street_01.value,
       Street2: event.target.street_02.value,
-      userId: 1,
+      userId: localStorage.getItem('user'), //user id
     }
     let id = searchedParams.get('id') || ''
     if (isUpdate) {
