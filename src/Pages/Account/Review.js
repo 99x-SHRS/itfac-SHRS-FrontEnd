@@ -6,7 +6,7 @@ import ReviewModel from "../../Components/ReviewModel/ReviewModel.js";
 
 import "../../Assets/styles/css/Pages/reviewPage.css";
 
-import { getReviewByCustomerId } from "../../Services/Api/Utilities/index.js";
+import { getReviewByCustomerId } from "../../Services/Api/Utilities/Index.js";
 
 const Review = () => {
   let limit = 3;

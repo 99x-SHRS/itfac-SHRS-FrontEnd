@@ -7,7 +7,7 @@ import {
   deleteReviewByReviewId,
   getHotelById,
   updateReviewById,
-} from "../../Services/Api/Utilities/index.js";
+} from "../../Services/Api/Utilities/Index.js";
 
 const ReviewModel = ({ id, description, image, rating, hotelId, onFresh }) => {
   const [hotelData, setHotelData] = useState({});
