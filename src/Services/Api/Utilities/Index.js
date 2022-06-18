@@ -78,6 +78,16 @@ const getSavedhotelByCustomerId = async (bodyData) => {
     bodyData
   )
 }
+
+const getHotelByStatus = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'getHotelsByStatus',
+    bodyData
+  )
+}
+
 const sortHotelsByBookingCount = async (bodyData) => {
   return await provider.getAllPOST(
     BASE_URL,
@@ -659,4 +669,5 @@ export {
   getReviewByCustomerId,
   deleteReviewByReviewId,
   updateReviewById,
+  getHotelByStatus,
 }

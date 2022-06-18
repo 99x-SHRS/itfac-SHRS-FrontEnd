@@ -207,6 +207,9 @@ const Navbars = () => {
                 ></Dropdown.Toggle>
 
                 <Dropdown.Menu>
+                  <Dropdown.Item as={Link} to={'/request-manage'}>
+                    Request
+                  </Dropdown.Item>
                   <Dropdown.Item as={Link} to={'/booking-history'}>
                     Bookings
                   </Dropdown.Item>
