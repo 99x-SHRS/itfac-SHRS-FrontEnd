@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CountryDropdown } from 'react-country-region-selector'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { SendEmail } from '../../Services/Gmail/EmailJs'
 import { toast } from 'react-toastify'
 import SideSummary from '../../Layouts/Payment/SideSummary.js'
 import {
@@ -10,6 +10,9 @@ import {
   updateBookingById,
   getHotelRules,
 } from '../../Services/Api/Utilities/Index.js'
+
+import 'react-phone-number-input/style.css'
+
 const BookingCusDetails = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [special_request, setSpecial_request] = useState('')
@@ -89,6 +92,7 @@ const BookingCusDetails = () => {
         if (!isUpdate) {
           if (res.status === 200) {
             notifySuccess('Your booking is placed !')
+            // SendEmail()
             window.location.href = `/payment?booking=${
               searchedParams.get('booking') || ''
             }`

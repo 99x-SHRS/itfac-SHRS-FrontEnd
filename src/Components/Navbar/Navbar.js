@@ -48,9 +48,9 @@ const Navbars = () => {
     unreadMessageCount()
   }, [])
 
-  useEffect(() => {
-    document.getElementById('currency-selector').hidden = !loggedin
-  }, [loggedin])
+  // useEffect(() => {
+  //   document.getElementById('currency-selector').hidden = !loggedin
+  // }, [loggedin])
 
   const onOpenModal = () => {
     setSign(true)
@@ -142,61 +142,9 @@ const Navbars = () => {
           onClick={homepage}
         />
         <div className='right-align'>
-          <div className='nav-items'>
-            <select
-              className='currency-selector'
-              id='currency-selector'
-              onChange={(e) => {
-                setCurrency(e.target.value)
-                changeCurrency(e.target.value)
-              }}
-            >
-              <option selected value={currency}>
-                {currency}
-              </option>
-              <option value={'LKR'}>LKR</option>
-              <option value={'EUR'}>EUR</option>
-
-              <option value={'GBP'}>GBP</option>
-              <option value={'JPY'}>JPY</option>
-              <option value={'CAD'}>CAD</option>
-              <option value={'AUD'}>AUD</option>
-            </select>
-          </div>
           {/* <div className='nav-items'>
             <i class='fa-solid fa-comment'></i>
           </div> */}
-          <div className='nav-items'>
-            <div class='icons'>
-              <div class='notification'>
-                <a href='#'>
-                  <div class='notBtn' href='#'>
-                    <div class='number'>
-                      {messageCount != 0 ? messageCount : <></>}
-                    </div>
-                    <i class='fas fa-bell '></i>
-
-                    <div class='box'>
-                      <div class='display'>
-                        <div class='nothing'>
-                          <i class='fas fa-child stick'></i>
-                          <div class='cent'>Looks Like your all caught up!</div>
-                        </div>
-                        <div class='cont'>
-                          <div class='view-all-container'>
-                            <div class=';'>
-                              <button className='view-all'>View All</button>
-                            </div>
-                          </div>
-                          <Notifications />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
 
           {/* <div id='sideDropMenu'>
               <div>Bookings</div>
@@ -204,79 +152,145 @@ const Navbars = () => {
               <div>Loyalty</div>
             </div> */}
           {loggedin ? (
-            <div className='nav-items menu-dropdown'>
-              <Dropdown>
-                <Dropdown.Toggle
-                  className='wrapper right-dropdown'
-                  id='dropdown-basic'
-                ></Dropdown.Toggle>
+            <>
+              <div className='nav-items'>
+                <select
+                  className='currency-selector'
+                  id='currency-selector'
+                  onChange={(e) => {
+                    setCurrency(e.target.value)
+                    changeCurrency(e.target.value)
+                  }}
+                >
+                  <option selected value={currency}>
+                    {currency}
+                  </option>
+                  <option value={'LKR'}>LKR</option>
+                  <option value={'EUR'}>EUR</option>
 
-                <Dropdown.Menu>
-                  <Dropdown.Item as={Link} to={'/request-manage'}>
-                    Request
-                  </Dropdown.Item>
-                  <Dropdown.Item as={Link} to={'/booking-history'}>
-                    Bookings
-                  </Dropdown.Item>
-                  <Dropdown.Item as={Link} to={'/saved-hotel'}>
-                    Saved
-                  </Dropdown.Item>
-                  <Dropdown.Item as={Link} to={'/loyalty-program'}>
-                    Loyalty
-                  </Dropdown.Item>
-                  <Dropdown.Item>Messeges</Dropdown.Item>
-                  {roles.admin ? (
-                    <>
-                      <Dropdown.Item as={Link} to={'/admin/dashboard'}>
-                        Admin Account
-                      </Dropdown.Item>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  {roles.hotelAdmin ? (
-                    <>
-                      <Dropdown.Item as={Link} to={'/seller/dashboard'}>
-                        My Account
-                      </Dropdown.Item>
-                    </>
-                  ) : (
-                    <></>
-                  )}
-                  {roles.customer ? (
-                    <>
-                      <Dropdown.Item as={Link} to={'/account-settings'}>
-                        Account
-                      </Dropdown.Item>
-                    </>
-                  ) : (
-                    <></>
-                  )}
+                  <option value={'GBP'}>GBP</option>
+                  <option value={'JPY'}>JPY</option>
+                  <option value={'CAD'}>CAD</option>
+                  <option value={'AUD'}>AUD</option>
+                </select>
+              </div>
+              <div className='nav-items'>
+                <div class='icons'>
+                  <div class='notification'>
+                    <a href='#'>
+                      <div class='notBtn' href='#'>
+                        <div class='number'>
+                          {messageCount != 0 ? messageCount : <></>}
+                        </div>
+                        <i class='fas fa-bell '></i>
 
-                  <Dropdown.Item
-                    onClick={() => {
-                      setLoggedin(false)
-                      logOut()
-                      homepage()
-                    }}
-                  >
-                    Sign Out
-                  </Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
+                        <div class='box'>
+                          <div class='display'>
+                            <div class='nothing'>
+                              <i class='fas fa-child stick'></i>
+                              <div class='cent'>
+                                Looks Like your all caught up!
+                              </div>
+                            </div>
+                            <div class='cont'>
+                              <div class='view-all-container'>
+                                <div class=';'>
+                                  <button className='view-all'>View All</button>
+                                </div>
+                              </div>
+                              <Notifications />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div className='nav-items menu-dropdown'>
+                <Dropdown>
+                  <Dropdown.Toggle
+                    className='wrapper right-dropdown'
+                    id='dropdown-basic'
+                  ></Dropdown.Toggle>
+
+                  <Dropdown.Menu>
+                    <Dropdown.Item as={Link} to={'/request-manage'}>
+                      Request
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to={'/booking-history'}>
+                      Bookings
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to={'/saved-hotel'}>
+                      Saved
+                    </Dropdown.Item>
+                    <Dropdown.Item as={Link} to={'/loyalty-program'}>
+                      Loyalty
+                    </Dropdown.Item>
+                    <Dropdown.Item>Messeges</Dropdown.Item>
+                    {roles.admin ? (
+                      <>
+                        <Dropdown.Item as={Link} to={'/admin/dashboard'}>
+                          Admin Account
+                        </Dropdown.Item>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    {roles.hotelAdmin ? (
+                      <>
+                        <Dropdown.Item as={Link} to={'/seller/dashboard'}>
+                          My Account
+                        </Dropdown.Item>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                    {roles.customer ? (
+                      <>
+                        <Dropdown.Item as={Link} to={'/account-settings'}>
+                          Account
+                        </Dropdown.Item>
+                      </>
+                    ) : (
+                      <></>
+                    )}
+
+                    <Dropdown.Item
+                      onClick={() => {
+                        setLoggedin(false)
+                        logOut()
+                        homepage()
+                      }}
+                    >
+                      Sign Out
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
+              </div>
+            </>
           ) : (
             <>
               {' '}
-              <div className='nav-items'>
-                <span className='login-btn ' onClick={onOpenModal}>
+              <div className='nav-items '>
+                {/* <span className='login-btn ' onClick={onOpenModal}>
                   Signup{' '}
-                </span>
+                </span> */}
+                <button class='button-18' role='button' onClick={onOpenModal}>
+                  Register
+                </button>
               </div>
-              <div className='nav-items'>
-                <span className='login-btn' onClick={onOpenModalLogin}>
+              <div className='nav-items mr-3'>
+                {/* <span className='login-btn' onClick={onOpenModalLogin}>
                   login{' '}
-                </span>
+                </span> */}
+                <button
+                  class='button-18'
+                  role='button'
+                  onClick={onOpenModalLogin}
+                >
+                  Login
+                </button>
               </div>
             </>
           )}

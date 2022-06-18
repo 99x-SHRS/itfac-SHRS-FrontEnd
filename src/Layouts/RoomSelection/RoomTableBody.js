@@ -8,6 +8,7 @@ import {
   getDiscountByHotelId,
   placeBooking,
 } from '../../Services/Api/Utilities/Index.js'
+
 import NumericInput from 'react-numeric-input'
 
 const TableBody = ({ rooms, souvenirs1 }) => {
@@ -93,6 +94,9 @@ const TableBody = ({ rooms, souvenirs1 }) => {
   }
   const notifyError = (message) => {
     toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
   }
   return (
     <>
