@@ -15,6 +15,7 @@ import AccountSettings from '../Pages/Account/MyAccountSettings'
 import PersonalSettings from '../Pages/PersonalSettings/PersonalSettings'
 import SecuritySettings from '../Pages/SecuritySettings/SecuritySettings'
 import Review from '../Pages/Account/Review'
+import Requestmanage from '../Pages/RequestManage/RequestManage'
 const UserRoutes = (
   <>
     <Route exact path='/' element={<Dashboard />}></Route>
@@ -44,6 +45,7 @@ const UserRoutes = (
       element={<SecuritySettings />}
     ></Route>
     <Route exact path='/my-account/review' element={<Review />}></Route>
+    <Route exact path='/request-manage' element={<Requestmanage />}></Route>
   </>
 )
 
