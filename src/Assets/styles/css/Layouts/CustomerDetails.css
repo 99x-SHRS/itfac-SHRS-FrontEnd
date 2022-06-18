@@ -123,9 +123,9 @@
     margin-top: 12% !important;
   }
 }
-.PhoneInputCountryIconImg {
+/* .PhoneInputCountryIconImg {
   min-width: 2rem;
-}
+} */
 .PhoneInputCountryIcon--border {
   box-shadow: none;
   background-color: white;

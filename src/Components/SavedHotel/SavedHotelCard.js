@@ -1,10 +1,21 @@
 import React, { Component, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { Modal } from 'react-bootstrap'
 import '../../Assets/styles/css/Components/savedHotelCard.css'
+import SearchDatePicker from '../SearchDatePicker/SearchDatePicker'
 import { getHotelById } from '../../Services/Api/Utilities/Index.js'
 import HashLoader from 'react-spinners/HashLoader'
 const SavedHotelCard = ({ hotel, removeSaveHotel }) => {
   const [hotelDetails, setHotelDetails] = useState([])
   const [loading, setLoading] = useState(false)
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => {
+    setShow(false)
+  }
+  const handleShow = () => {
+    setShow(true)
+  }
 
   useEffect(() => {
     getHotelDetails()
@@ -82,9 +93,15 @@ const SavedHotelCard = ({ hotel, removeSaveHotel }) => {
               <small>{calculateTime(hotel.createdAt)} </small>
             </div>
             <div className='saveHotelBtm'>
-              <button className='go-to-hotel mt-2 item'>
+              <button
+                className='go-to-hotel mt-2 item'
+                onClick={() => {
+                  handleShow()
+                }}
+              >
                 Go to hotel {'>'}
               </button>
+
               <i
                 class='fa fa-trash item'
                 aria-hidden='true'
@@ -96,6 +113,20 @@ const SavedHotelCard = ({ hotel, removeSaveHotel }) => {
           </div>
         </>
       )}
+      <Modal
+        show={show}
+        onHide={() => {
+          handleClose()
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Pickup your date</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <SearchDatePicker hotelName={hotelDetails.name} />
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
     </div>
   )
 }

@@ -14,11 +14,13 @@ const Searchbox = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    let letters = /^[A-Za-z]+$/
 
     if (
       dateRange[0] != null &&
       dateRange[1] != null &&
-      event.target.address.value != ''
+      event.target.address.value != '' &&
+      event.target.address.value.match(letters)
     ) {
       let data = {
         location: event.target.address.value,

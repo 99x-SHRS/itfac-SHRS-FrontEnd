@@ -31,65 +31,6 @@ const Review = () => {
   }
   return (
     <div className='mt-4 pt-4 review-container' id='hotel-review'>
-      {/* <h3>Guest reviews</h3>
-        <div className='container review-details'>
-          <span className='review-rate'>9.6</span>
-          <span className='review-count'>79 Reviews</span>
-        </div>
-        <div className='container'>
-          <div className='row '>
-            <div className='col-md-4'>
-              <div className='container'>Staff</div>
-              <div class='progress'>
-                <div class='bar' style={{ width: '87%' }}>
-                  <p class='percent'>87%</p>
-                </div>
-              </div>
-            </div>
-            <div className='col-md-4'>
-              <div className='container'>Cleanliness</div>
-              <div class='progress'>
-                <div class='bar' style={{ width: '78%' }}>
-                  <p class='percent'>78%</p>
-                </div>
-              </div>
-            </div>
-            <div className='col-md-4'>
-              <div className='container'>Location</div>
-              <div class='progress'>
-                <div class='bar' style={{ width: '95%' }}>
-                  <p class='percent'>95%</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='row '>
-            <div className='col-md-4'>
-              <div className='container'>Value for money</div>
-              <div class='progress'>
-                <div class='bar' style={{ width: '75%' }}>
-                  <p class='percent'>75%</p>
-                </div>
-              </div>
-            </div>
-            <div className='col-md-4'>
-              <div className='container'>Comfort</div>
-              <div class='progress'>
-                <div class='bar' style={{ width: '85%' }}>
-                  <p class='percent'>85%</p>
-                </div>
-              </div>
-            </div>
-            <div className='col-md-4'>
-              <div className='container'>Facilities</div>
-              <div class='progress'>
-                <div class='bar' style={{ width: '98%' }}>
-                  <p class='percent'>98%</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
       <div>
         <div>
           {' '}
