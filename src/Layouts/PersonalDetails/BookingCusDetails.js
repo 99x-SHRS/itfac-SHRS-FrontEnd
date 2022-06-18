@@ -8,6 +8,7 @@ import SideSummary from '../../Layouts/Payment/SideSummary.js'
 import {
   getBookingDetailsById,
   updateBookingById,
+  getHotelRules,
 } from '../../Services/Api/Utilities/Index.js'
 const BookingCusDetails = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
@@ -20,6 +21,7 @@ const BookingCusDetails = () => {
   const [number, setNumber] = useState(0)
   const [arrival_time, setArrivalTime] = useState('')
   const [isUpdate, setUpdate] = useState(false)
+  const [rules, setRules] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -27,6 +29,7 @@ const BookingCusDetails = () => {
     if (searchedParams.get('edit') || '') {
       getBookingDetails()
     }
+    getAllRules()
     toast.configure()
   }, [])
   const notifyError = (message) => {
@@ -98,6 +101,19 @@ const BookingCusDetails = () => {
             }&edit=true`
           }
         }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  const getAllRules = async () => {
+    const dataModel = {
+      id: 24,
+    }
+    await getHotelRules(dataModel)
+      .then((res) => {
+        console.log(res)
+        setRules(res.data)
       })
       .catch((err) => {
         console.log(err)
@@ -289,24 +305,22 @@ const BookingCusDetails = () => {
                   rules:
                 </p>
                 <ul class='fa-ul mt-3 mb-3'>
-                  <li>
-                    <span class='fa-li'>
-                      <i class='fa-solid fa-check-circle'></i>
-                    </span>
-                    No smoking
-                  </li>
-                  <li>
-                    <span class='fa-li'>
-                      <i class='fa-solid fa-check-circle'></i>
-                    </span>
-                    Quiet hours are between 10:00 PM and 7:00 AM
-                  </li>
-                  <li>
-                    <span class='fa-li'>
-                      <i class='fa-solid fa-check-circle'></i>
-                    </span>
-                    Pets are not allowed
-                  </li>
+                  {rules != null ? (
+                    rules.map((item) => {
+                      return (
+                        <>
+                          <li>
+                            <span class='fa-li'>
+                              <i class='fa-solid fa-check-circle'></i>
+                            </span>
+                            {item.rule}
+                          </li>
+                        </>
+                      )
+                    })
+                  ) : (
+                    <></>
+                  )}
                 </ul>
                 <p>
                   By continuing to the next step, you agree to these house rules

@@ -4,18 +4,20 @@ import { useSearchParams } from 'react-router-dom'
 import HashLoader from 'react-spinners/HashLoader'
 import '../../Assets/styles/css/Layouts/searchedHotels.css'
 import HotelCard from '../../Components/SearchedHotelCard/HotelCard'
-import { searchHotels } from '../../Services/Api/Utilities/Index.js'
+import { searchHotelsByRate } from '../../Services/Api/Utilities/Index.js'
 import PriceRange from '../leftSideBar/PriceRange'
 import StartFilter from '../leftSideBar/StartFilter'
-
+import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 const SearchedHotels = (props) => {
   const [loading, setLoading] = useState(false)
   let [color, setColor] = useState('#ffffff')
   const [searchedParams, setSearchedparams] = useSearchParams()
-  let [hotels, setHotels] = useState([])
+  let [hotels, setHotels] = useState(null)
   const [items, setItems] = useState([])
   const [pageCount, setpageCount] = useState(0)
   const [URLparams, setURLparams] = useState({})
+  const [lowerPrice, setLowerPrice] = useState(0)
+  const [upperPrice, setUpperPrice] = useState(100000)
   let limit = 10
 
   useEffect(() => {
@@ -26,11 +28,11 @@ const SearchedHotels = (props) => {
     fetchData(0)
   }, [limit])
   useEffect(() => {
-    if (hotels.length != 0) {
+    if (hotels != null) {
       setLoading(false)
       console.log(hotels)
     }
-  }, [hotels.length])
+  }, [hotels])
 
   useEffect(() => {
     if (loading) {
@@ -39,8 +41,11 @@ const SearchedHotels = (props) => {
       document.getElementById('pagination-div').style.display = 'block'
     }
   }, [loading])
-
+  useEffect(() => {
+    fetchData(0)
+  }, [lowerPrice])
   const fetchData = async (page) => {
+    setLoading(true)
     const dataModel = {
       location: searchedParams.get('location') || '',
       checkInDate: searchedParams.get('checkin-date') || '',
@@ -49,14 +54,19 @@ const SearchedHotels = (props) => {
       children: searchedParams.get('children') || '',
       rooms: searchedParams.get('rooms') || '',
       page: page,
+      lowerPrice: lowerPrice,
+      upperPrice: upperPrice,
     }
     setURLparams(dataModel)
-    await searchHotels(dataModel).then((data) => {
+    await searchHotelsByRate(dataModel).then((data) => {
       setHotels(data.data.rows)
-      console.log(data.data.count.length)
+      console.log(data.data.rows)
       let totalRows = data.data.count.length
       if (data.status == 200) {
         setLoading(false)
+        if (totalRows == 0) {
+          setHotels(null)
+        }
       }
       setpageCount(Math.ceil(totalRows / limit))
     })
@@ -77,27 +87,29 @@ const SearchedHotels = (props) => {
                 <b>Filter By</b>
               </div>
               <div className='mb-3'>
-                <PriceRange />
+                <PriceRange
+                  setLowerPrice={setLowerPrice}
+                  setUpperPrice={setUpperPrice}
+                />
               </div>
-              <div>
-                <StartFilter />
-              </div>
+              <div>{/* <StartFilter /> */}</div>
             </div>
           </div>
           <div className=' col-md-9 searched-hotel '>
-            {loading ? (
-              <div className='hotel-loader'>
-                <HashLoader
-                  loading={loading}
-                  size={25}
-                  margin={2}
-                  color='#00AD5F'
-                />
-              </div>
+            {!loading ? (
+              hotels != null ? (
+                hotels.map((hotel, index) => {
+                  return <HotelCard hotelData={hotel} URLparams={URLparams} />
+                })
+              ) : (
+                <>
+                  <div class='alert alert-primary' role='alert'>
+                    Nothing to display.
+                  </div>
+                </>
+              )
             ) : (
-              hotels.map((hotel, index) => {
-                return <HotelCard hotelData={hotel} URLparams={URLparams} />
-              })
+              <></>
             )}
             <div className='mt-3 pagination-container' id='pagination-div'>
               <ReactPaginate
@@ -123,6 +135,7 @@ const SearchedHotels = (props) => {
           </div>
         </div>
       </div>
+      <DarkOverlaybackGround loading={loading} content={''} />
     </div>
   )
 }
