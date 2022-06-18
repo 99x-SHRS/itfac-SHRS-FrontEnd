@@ -49,6 +49,14 @@ const getHotelById = async (bodyData) => {
 const searchHotels = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'search', bodyData)
 }
+const searchHotelsByRate = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'searchSotByRate',
+    bodyData
+  )
+}
 
 const getAvailbleRooms = async (bodyData) => {
   return await provider.getAllPOST(
@@ -556,6 +564,17 @@ const createReview = async (bodyData) => {
   return await provider.insertData(BASE_URL, 'review', 'createReview', bodyData)
 }
 
+// *****************************************************************************
+//                          Hotel rules end points
+// *****************************************************************************
+const getHotelRules = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'rules',
+    'getAllRulesByHotelId',
+    bodyData
+  )
+}
 export {
   getAllHotels,
   searchHotels,
@@ -627,4 +646,6 @@ export {
   deleteHotelById,
   createReview,
   markAsRead,
+  searchHotelsByRate,
+  getHotelRules,
 }
