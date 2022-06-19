@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from 'react'
+import { Modal } from 'react-bootstrap'
 import { Link, useSearchParams } from 'react-router-dom'
-const SideSummary = () => {
+import SearchDatePicker from '../../Components/SearchDatePicker/SearchDatePicker'
+
+const SideSummary = ({ totalPay }) => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [checkingDate, setCheckingDate] = useState(null)
   const [checkoutgDate, setCheckoutgDate] = useState(null)
   const [nights, setNights] = useState(0)
+  const [show, setShow] = useState(false)
+
   useEffect(() => {
     const date1 = new Date(searchedParams.get('checkin-date'))
     const date2 = new Date(searchedParams.get('checkout-date'))
@@ -13,6 +18,13 @@ const SideSummary = () => {
     setCheckingDate(date1.toString())
     setCheckoutgDate(date2.toString())
   }, [])
+  const handleClose = () => {
+    setShow(false)
+  }
+  const handleShow = () => {
+    setShow(true)
+  }
+
   return (
     <div>
       <div className='border'>
@@ -65,12 +77,16 @@ const SideSummary = () => {
           <p>Total length of stay: {nights} nights</p>
         </div>
         <div>
-          <a href=''>Do you want to change the dates?</a>
+          {/* <a
+            style={{ color: 'blue' }}
+            onClick={() => {
+              handleShow()
+            }}
+          >
+            Do you want to change the dates?
+          </a> */}
         </div>
         <hr />
-        <div>
-          <p>You selected Deluxe room</p>
-        </div>
         <div>
           <Link
             to={`/hotel/page?location=${searchedParams.get(
@@ -94,10 +110,11 @@ const SideSummary = () => {
         </div>
       </div>
       <div className='border mt-3'>
-        <h4>Payment summary</h4>
+        <h4>Total Payment</h4>
         <div className='payment-summary'>
-          <div>Deluxe Double Room</div>
-          <div>LKR 20,098.38</div>
+          <div>
+            <b>LKR {' ' + totalPay + '.00'}</b>
+          </div>
         </div>
       </div>
       <div className='border mt-3'>
@@ -116,6 +133,20 @@ const SideSummary = () => {
           <p>Applied to the price before taxes and fees</p>
         </div>
       </div>
+      <Modal
+        show={show}
+        onHide={() => {
+          handleClose()
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Pickup your date</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <SearchDatePicker update={true} />
+        </Modal.Body>
+        <Modal.Footer></Modal.Footer>
+      </Modal>
     </div>
   )
 }

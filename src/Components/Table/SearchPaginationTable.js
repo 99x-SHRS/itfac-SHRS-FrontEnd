@@ -8,7 +8,7 @@ import {
   subscribeVAS,
   unSubscribeVAS,
 } from '../../Services/Api/Utilities/Index.js'
-const NewTable = ({ vas }) => {
+const NewTable = ({ vas, getTotPaymet }) => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [subscribedVAS, setSubscribedVAS] = useState([])
   useEffect(() => {
@@ -69,6 +69,7 @@ const NewTable = ({ vas }) => {
     await subscribeVAS(datModel)
       .then((response) => {
         // console.log(response)
+        getTotPaymet()
         getAllVAS()
       })
       .catch((err) => {
@@ -83,6 +84,7 @@ const NewTable = ({ vas }) => {
       .then((response) => {
         console.log(response)
         getAllVAS()
+        getTotPaymet()
       })
       .catch((err) => {
         console.log(err)

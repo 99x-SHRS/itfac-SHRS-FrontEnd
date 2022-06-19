@@ -5,12 +5,13 @@ import NewTable from '../../Components/Table/SearchPaginationTable'
 import DialogModal from '../../Components/VasModal/VasModal.js'
 import { getVasByHotelId } from '../../Services/Api/Utilities/Index.js'
 import SideSummary from '../Payment/SideSummary'
-
+import { getTotalAmountByBookingId } from '../../Services/Api/Utilities/Index'
 const BookingVAS = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [vas, setVAS] = useState([])
   const [suggestions, setSuggestions] = useState([])
   const [isUpdate, setUpdate] = useState(false)
+  const [totalPay, setTotalPay] = useState(0)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -21,12 +22,26 @@ const BookingVAS = () => {
     setUpdate(searchedParams.get('edit') || '')
   }, [vas.length])
 
+  const getTotPaymet = async () => {
+    const dataModel = {
+      id: searchedParams.get('booking'),
+    }
+    await getTotalAmountByBookingId(dataModel)
+      .then((res) => {
+        console.log(res)
+        setTotalPay(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
   const getAllVAS = async (hotelId) => {
     const dataModel = {
       id: hotelId,
     }
     await getVasByHotelId(dataModel)
       .then((res) => {
+        console.log(res)
         setVAS(res.data)
       })
       .catch((err) => {
@@ -39,7 +54,7 @@ const BookingVAS = () => {
       <div className='container'>
         <div className='row user-details '>
           <div className='col-md-4 col-lg-3 '>
-            <SideSummary />
+            <SideSummary getTotPaymet={getTotPaymet} totalPay={totalPay} />
           </div>
           <div className='col-md-7 col-lg-8  '>
             {/* <h4>Do you expect other services from us?</h4>  */}
@@ -49,7 +64,7 @@ const BookingVAS = () => {
               , you can select one or more sevices.{' '}
               <small>Charges can be vary.</small>
             </h4>
-            <NewTable vas={vas} />
+            <NewTable vas={vas} getTotPaymet={getTotPaymet} />
             <div className='next-container'>
               <button
                 className='previous-button btn btn-primary'

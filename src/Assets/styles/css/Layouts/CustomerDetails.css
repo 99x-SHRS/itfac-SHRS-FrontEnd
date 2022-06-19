@@ -127,14 +127,14 @@
   min-width: 2rem;
 }
 .PhoneInputCountryIcon--border {
-  box-shadow: none;
-  background-color: white;
+  box-shadow: none !important;
+  background-color: inherit !important;
 }
 .PhoneInputCountrySelectArrow {
   margin-right: 1rem !important;
 }
 .PhoneInputCountryIcon--border {
-  border: red;
+  box-shadow: transparent !important;
 }
 .PhoneInputInput,
 .country-selector {
@@ -143,8 +143,8 @@
 }
 .PhoneInputCountryIcon {
   /* display: none !important; */
-  width: 3rem;
-  height: 2rem;
+  width: 3rem !important;
+  height: 2rem !important;
 }
 .country-selector {
   padding-top: 5px !important;

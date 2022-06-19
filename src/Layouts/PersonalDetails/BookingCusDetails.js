@@ -93,7 +93,6 @@ const BookingCusDetails = () => {
           if (res.status === 200) {
             notifySuccess('Your booking is placed !')
             SendEmail(event.target)
-            return
             window.location.href = `/payment?booking=${
               searchedParams.get('booking') || ''
             }`
