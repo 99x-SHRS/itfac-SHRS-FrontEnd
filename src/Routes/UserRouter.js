@@ -15,6 +15,8 @@ import AccountSettings from '../Pages/Account/MyAccountSettings'
 import PersonalSettings from '../Pages/PersonalSettings/PersonalSettings'
 import SecuritySettings from '../Pages/SecuritySettings/SecuritySettings'
 import Review from '../Pages/Account/Review'
+import Message from '../Pages/Messages/Message'
+import WriteMessage from '../Pages/Messages/WriteMessage'
 const UserRoutes = (
   <>
     <Route exact path='/' element={<Dashboard />}></Route>

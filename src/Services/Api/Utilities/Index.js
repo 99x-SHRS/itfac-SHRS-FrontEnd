@@ -478,6 +478,15 @@ const getMessagesByRecieverId = async (bodyData) => {
   )
 }
 
+const getMessagesBySenderId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'message',
+    'getMessagesBySenderId',
+    bodyData
+  )
+}
+
 const markAsRead = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'message', 'markAsRead', bodyData)
 }
@@ -623,6 +632,7 @@ export {
   getReviewByHotelId,
   getUserbyId,
   getMessagesByRecieverId,
+  getMessagesBySenderId,
   getCustomerGrade,
   deleteHotelById,
   createReview,

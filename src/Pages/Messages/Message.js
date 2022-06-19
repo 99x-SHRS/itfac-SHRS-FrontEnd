@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Navbars from './../../Components/Navbar/navbar';
-import Footer from './../../Layouts/Footer/footer';
+import Navbars from '../../Components/Navbar/Navbar';
+import Footer from '../../Layouts/Footer/Footer'
 import * as ReactBootstrap from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -12,8 +12,8 @@ import trash from "./utils/trash.svg";
 import eye from "./utils/eye.svg";
 
 
-import { getMessagesByRecieverId } from '../../Services/Api/Utilities'
-import { getMessagesBySenderId } from '../../Services/Api/Utilities'
+import { getMessagesByRecieverId } from '../../Services/Api/Utilities/Index'
+import { getMessagesBySenderId } from '../../Services/Api/Utilities/Index'
 
 
 class Message extends Component {
