@@ -70,6 +70,7 @@ function App() {
         ) : roles.hotelAdmin && session ? (
           <>
             {' '}
+            <Routes>{UserRoutes}</Routes>
             <Routes>{SellerRoutes}</Routes>
           </>
         ) : (
