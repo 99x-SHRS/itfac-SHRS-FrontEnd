@@ -44,6 +44,8 @@ const UserRoutes = (
       element={<SecuritySettings />}
     ></Route>
     <Route exact path='/my-account/review' element={<Review />}></Route>
+    <Route exact path='/messages' element={<Message />}></Route>
+    <Route exact path='/writeMessages' element={<WriteMessage />}></Route>
   </>
 )
 
