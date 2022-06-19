@@ -39,6 +39,7 @@ function App() {
     if (localStorage.getItem('session') == 'false' || session == null) {
       setShare(false)
     }
+    console.log(roles)
   }, [])
 
   useEffect(() => {
@@ -62,11 +63,11 @@ function App() {
           <Route exact path='/' element={<Dashboard />}></Route>
         </Routes>
 
-        {roles.customer ? (
+        {roles.customer && !roles.hotelAdmin ? (
           <>
             <Routes>{UserRoutes}</Routes>
           </>
-        ) : roles.customer && session ? (
+        ) : roles.hotelAdmin && session ? (
           <>
             {' '}
             <Routes>{SellerRoutes}</Routes>
