@@ -127,10 +127,10 @@ const BookingCusDetails = () => {
   return (
     <div className='container'>
       <div className='row user-details '>
-        <div className='col-md-4 col-lg-3 '>
+        {/* <div className='col-md-4 col-lg-3 '>
           <SideSummary />
-        </div>
-        <div className='col-md-7 col-lg-8  '>
+        </div> */}
+        <div className='col-md-12 col-lg-12  '>
           <div className='border'>
             <div>
               <h4> Good to know:</h4>

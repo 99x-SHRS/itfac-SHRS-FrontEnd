@@ -12,7 +12,7 @@ export default function HotelPageTabs() {
 
   return (
     <div className='hotel-tabs mt-4 '>
-      <Box sx={{ flexGrow: 1, bgcolor: 'background.paper' }}>
+      <Box sx={{ flexGrow: 1, bgcolor: 'bg-transparent' }}>
         <Tabs
           value={value}
           onChange={handleChange}

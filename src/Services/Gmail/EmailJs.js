@@ -2,15 +2,6 @@ import React, { useRef } from 'react'
 import emailjs from '@emailjs/browser'
 
 const SendEmail = (inputform) => {
-  // e.preventDefault()
-  console.log('send email')
-  const data = {
-    from_name: 'Navod',
-    to_name: 'Dilshan',
-    message: 'Hello Dilshan',
-    subject: 'Test',
-    reply_to: 'navoddilshan9@gmail.com',
-  }
   emailjs
     .sendForm(
       'service_yrdr13l',
@@ -20,7 +11,6 @@ const SendEmail = (inputform) => {
     )
     .then(
       (result) => {
-        console.log(result)
         console.log(result.text)
       },
       (error) => {
@@ -30,15 +20,6 @@ const SendEmail = (inputform) => {
 }
 
 const SendSignUpEmail = (inputform) => {
-  // e.preventDefault()
-  console.log('send email')
-  const data = {
-    from_name: 'Navod',
-    to_name: 'Dilshan',
-    message: 'Hello Dilshan',
-    subject: 'Test',
-    reply_to: 'navoddilshan9@gmail.com',
-  }
   emailjs
     .sendForm(
       'service_yrdr13l',
