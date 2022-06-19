@@ -7,7 +7,9 @@ import NumberInputBox from '../../Components/NumberInputBox/InputBoxNumber'
 import {
   getDiscountByHotelId,
   placeBooking,
+  updateBookingById,
 } from '../../Services/Api/Utilities/Index.js'
+
 import NumericInput from 'react-numeric-input'
 
 const TableBody = ({ rooms, souvenirs1 }) => {
@@ -19,6 +21,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
   const [discount, setDiscount] = useState(0)
   const [avQty, setAvQty] = useState(null)
   const navigate = useNavigate()
+  const [isUpdate, setIsUpdate] = useState(false)
 
   useEffect(() => {
     setRoomsData(rooms)
@@ -34,6 +37,10 @@ const TableBody = ({ rooms, souvenirs1 }) => {
       children: searchedParams.get('children') || '',
       rooms: searchedParams.get('rooms') || '',
       hotelId: searchedParams.get('hotel') || '',
+    }
+    const bookingId = searchedParams.get('booking') || ''
+    if (bookingId != '') {
+      setIsUpdate(true)
     }
     setParams(dataModel)
     toast.configure()
@@ -52,25 +59,56 @@ const TableBody = ({ rooms, souvenirs1 }) => {
       vasId: null,
       noRooms: searchedParams.get('rooms') || '',
     }
-    await placeBooking(dataModal)
-      .then((res) => {
-        try {
-          const bookingId = res.data.bookingId
-          console.log(res.data)
-          if (Number.isInteger(bookingId)) {
-            let URL = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
-            navigate(URL)
-          } else {
-            navigate('/')
-            notifyError('Some thing went wrong.')
+
+    if (isUpdate) {
+      const bookingId = searchedParams.get('booking')
+      await updateBookingById(bookingId, {
+        roomRoomId: setedRoom,
+      })
+        .then((res) => {
+          notifySuccess('Booking is updated')
+        })
+        .catch(() => {
+          notifyError('Some thing went wrong.')
+        })
+      let URL = `/booking/vas?location=${params.location}&checkin-date=${
+        params.checkInDate
+      }&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${
+        params.children
+      }&hotel=${
+        params.hotelId
+      }&rooms=${roomQty}&roomno=${setedRoom}&booking=${searchedParams.get(
+        'booking'
+      )}`
+      navigate(URL)
+    } else {
+      await placeBooking(dataModal)
+        .then((res) => {
+          try {
+            const bookingId = res.data.bookingId
+            const userId = localStorage.getItem('user')
+            if (
+              localStorage.getItem('session') == 'false' ||
+              localStorage.getItem('session') == null
+            ) {
+              notifyError('Please login your account before book your place!')
+            } else {
+              if (Number.isInteger(bookingId)) {
+                let URL = `/booking/vas?location=${params.location}&checkin-date=${params.checkInDate}&checkout-date=${params.checkOutDate}&adults=${params.adult}&children=${params.children}&hotel=${params.hotelId}&rooms=${roomQty}&roomno=${setedRoom}&booking=${bookingId}`
+                navigate(URL)
+              } else {
+                navigate('/')
+                notifyError('Some thing went wrong.')
+              }
+            }
+          } catch (error) {
+            console.log(error)
           }
-        } catch (error) {
-          console.log(error)
-        }
-      })
-      .catch((err) => {
-        console.log(err)
-      })
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
   }
   const getRoomDiscount = async (hotelId, roomId) => {
     const dataModel = {
@@ -86,6 +124,9 @@ const TableBody = ({ rooms, souvenirs1 }) => {
   }
   const notifyError = (message) => {
     toast.error(message)
+  }
+  const notifySuccess = (message) => {
+    toast.success(message)
   }
   return (
     <>

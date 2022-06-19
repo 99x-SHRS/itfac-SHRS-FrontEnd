@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CountryDropdown } from 'react-country-region-selector'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
-import 'react-phone-number-input/style.css'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { SendEmail } from '../../Services/Gmail/EmailJs'
 import { toast } from 'react-toastify'
 import SideSummary from '../../Layouts/Payment/SideSummary.js'
 import {
@@ -10,6 +10,9 @@ import {
   updateBookingById,
   getHotelRules,
 } from '../../Services/Api/Utilities/Index.js'
+
+import 'react-phone-number-input/style.css'
+
 const BookingCusDetails = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
   const [special_request, setSpecial_request] = useState('')
@@ -23,7 +26,7 @@ const BookingCusDetails = () => {
   const [isUpdate, setUpdate] = useState(false)
   const [rules, setRules] = useState(null)
   const navigate = useNavigate()
-
+  const inputform = useRef()
   useEffect(() => {
     setUpdate(searchedParams.get('edit') || '')
     if (searchedParams.get('edit') || '') {
@@ -80,15 +83,16 @@ const BookingCusDetails = () => {
       contactNo: number,
     }
     console.log(dataModel)
-    updateBooking(bookingId, dataModel)
+    updateBooking(bookingId, dataModel, event)
   }
 
-  const updateBooking = async (bookingId, dataModel) => {
+  const updateBooking = async (bookingId, dataModel, event) => {
     await updateBookingById(bookingId, dataModel)
       .then((res) => {
         if (!isUpdate) {
           if (res.status === 200) {
             notifySuccess('Your booking is placed !')
+            SendEmail(event.target)
             window.location.href = `/payment?booking=${
               searchedParams.get('booking') || ''
             }`
@@ -122,10 +126,10 @@ const BookingCusDetails = () => {
   return (
     <div className='container'>
       <div className='row user-details '>
-        <div className='col-md-4 col-lg-3 '>
+        {/* <div className='col-md-4 col-lg-3 '>
           <SideSummary />
-        </div>
-        <div className='col-md-7 col-lg-8  '>
+        </div> */}
+        <div className='col-md-12 col-lg-12  '>
           <div className='border'>
             <div>
               <h4> Good to know:</h4>
@@ -153,7 +157,7 @@ const BookingCusDetails = () => {
               </ul>
             </div>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} ref={inputform}>
             <div className='border mt-3'>
               <h3>Enter your details</h3>
               <div className='personal-details-form'>

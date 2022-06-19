@@ -61,15 +61,8 @@ const HotelCard = ({ hotel }) => {
               <a class='font-semibold text-gray-700 ml-2'>Show on Map</a>
             </p>
           </div>
-          {/* <p class='card-text text-justify mt-3'>
-            {this.props.hotel.description.}
-          </p> */}
         </div>
         <div>
-          {/* <Button variant='primary' onClick={handleShow}>
-            Launch demo modal
-          </Button> */}
-
           <Modal
             show={show}
             onHide={() => {
@@ -80,7 +73,10 @@ const HotelCard = ({ hotel }) => {
               <Modal.Title>Pickup your date</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <SearchDatePicker hotelName={hotel.name} />
+              <SearchDatePicker
+                hotelName={hotel.name}
+                handleClose={handleClose}
+              />
             </Modal.Body>
             <Modal.Footer></Modal.Footer>
           </Modal>

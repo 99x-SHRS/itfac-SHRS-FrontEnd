@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useState } from 'react'
+import secureLocalStorage from 'react-secure-storage'
 import { useNavigate } from 'react-router-dom'
 import { userLogin, updateUserById } from '../../Services/Api/Utilities/Index'
 import { toast } from 'react-toastify'
@@ -48,6 +49,9 @@ const Login = ({ setLogin, setLoggedin }) => {
           localStorage.setItem('user', res.data.userId)
           localStorage.setItem('currency', res.data.currency)
           localStorage.setItem('session', true)
+          secureLocalStorage.setItem('admin', res.data.admin)
+          secureLocalStorage.setItem('hotelAdmin', res.data.hotelAdmin)
+          secureLocalStorage.setItem('customer', res.data.customer)
           setLoggedin(true)
           notifySuccess('You have loggedin successfully')
         } else {
