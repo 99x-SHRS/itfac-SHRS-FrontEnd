@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { CountryDropdown } from 'react-country-region-selector'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
@@ -26,7 +26,7 @@ const BookingCusDetails = () => {
   const [isUpdate, setUpdate] = useState(false)
   const [rules, setRules] = useState(null)
   const navigate = useNavigate()
-
+  const inputform = useRef()
   useEffect(() => {
     setUpdate(searchedParams.get('edit') || '')
     if (searchedParams.get('edit') || '') {
@@ -83,16 +83,17 @@ const BookingCusDetails = () => {
       contactNo: number,
     }
     console.log(dataModel)
-    updateBooking(bookingId, dataModel)
+    updateBooking(bookingId, dataModel, event)
   }
 
-  const updateBooking = async (bookingId, dataModel) => {
+  const updateBooking = async (bookingId, dataModel, event) => {
     await updateBookingById(bookingId, dataModel)
       .then((res) => {
         if (!isUpdate) {
           if (res.status === 200) {
             notifySuccess('Your booking is placed !')
-            // SendEmail()
+            SendEmail(event.target)
+            return
             window.location.href = `/payment?booking=${
               searchedParams.get('booking') || ''
             }`
@@ -157,7 +158,7 @@ const BookingCusDetails = () => {
               </ul>
             </div>
           </div>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} ref={inputform}>
             <div className='border mt-3'>
               <h3>Enter your details</h3>
               <div className='personal-details-form'>

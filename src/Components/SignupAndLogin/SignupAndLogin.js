@@ -3,6 +3,7 @@ import secureLocalStorage from 'react-secure-storage'
 import { userLogin, addUser } from '../../Services/Api/Utilities/Index'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { SendSignUpEmail } from '../../Services/Gmail/EmailJs'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
 import '../../Assets/styles/css/Components/signupAndLogin.css'
 
@@ -82,6 +83,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
             notifySuccess(
               'Successfully created your account and please check you email to verify the account'
             )
+            SendSignUpEmail(event.target)
             setLoading(false)
             setSign(false)
             navigate('/')
@@ -126,7 +128,13 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
             </div>
             <span>or use your email for registration</span>
 
-            <input type='text' placeholder='Email' id='signupEmail' required />
+            <input
+              type='text'
+              placeholder='Email'
+              id='signupEmail'
+              name='email'
+              required
+            />
             <input
               type='password'
               placeholder='password'
