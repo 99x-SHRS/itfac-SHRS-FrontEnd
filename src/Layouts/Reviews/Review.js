@@ -131,9 +131,9 @@ const Review = () => {
             </div>
           </section>
           <div>
-            <button className='button-23 mt-5 mb-2' role='button'>
+            {/* <button className='button-23 mt-5 mb-2' role='button'>
               View More
-            </button>
+            </button> */}
           </div>
         </div>
       </div>

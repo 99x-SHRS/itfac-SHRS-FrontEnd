@@ -18,7 +18,7 @@ import Review from '../Pages/Account/Review'
 import Requestmanage from '../Pages/RequestManage/RequestManage'
 const UserRoutes = (
   <>
-    <Route exact path='/' element={<Dashboard />}></Route>
+    {/* <Route exact path='/' element={<Dashboard />}></Route> */}
     <Route path='/hotels' element={<Hotels />}></Route>
     <Route path='/hotel/page' element={<HotelPage />}></Route>
     <Route path='/booking/vas' element={<AddingVAS />}></Route>

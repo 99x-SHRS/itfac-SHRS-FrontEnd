@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import '../../Assets/styles/css/Components/datePickerModal.css'
 import DatepickerModal from '../DatePicker/DatepickerModal'
-
-const SearchDatePicker = ({ hotelName }) => {
+import {
+  getAvailableRoomQtyByRoomId,
+  updateBookingById,
+} from '../../Services/Api/Utilities/Index'
+const SearchDatePicker = ({ hotelName, update, handleClose }) => {
   let [rooms, setRooms] = useState(1)
   let [adults, setAdults] = useState(1)
   let [children, setChildren] = useState(0)
+  let [checkinDate, setCheckinDate] = useState(null)
+  let [checkoutDate, setCheckoutDate] = useState(null)
+  const [searchedParams, setSearchedparams] = useSearchParams()
+
   const navigate = useNavigate()
   var today = new Date().toISOString().slice(0, 10)
 
@@ -15,6 +22,14 @@ const SearchDatePicker = ({ hotelName }) => {
 
   useEffect(() => {
     toast.configure()
+    if (update) {
+      // setCheckinDate(searchedParams.get('checkin-date'))
+      // setCheckoutDate(searchedParams.get('checkout-date'))
+      setDateRange([
+        searchedParams.get('checkin-date'),
+        searchedParams.get('checkout-date'),
+      ])
+    }
   }, [])
   const increase = (status) => {
     if (status == 1) {
@@ -43,27 +58,62 @@ const SearchDatePicker = ({ hotelName }) => {
 
   const submitHandle = (event) => {
     event.preventDefault()
-
-    if (dateRange[0] != null && dateRange[1] != null) {
-      // const URL = `/hotels?location=${hotelName}&checkin-date=${dateRange[0]
-      //   .toISOString()
-      //   .slice(0, 10)}&checkout-date=${dateRange[1]
-      //   .toISOString()
-      //   .slice(0, 10)}&adults=${adults}&children=${children}&rooms=${rooms}`
-      let data = {
-        location: hotelName,
-        checkInDate: new Date(dateRange[0]).toLocaleDateString('en-ca'),
-        checkOutDate: new Date(dateRange[1]).toLocaleDateString('en-ca'),
-        adult: adults,
-        children: children,
-        rooms: rooms,
+    if (!update) {
+      if (dateRange[0] != null && dateRange[1] != null) {
+        let data = {
+          location: hotelName,
+          checkInDate: new Date(dateRange[0]).toLocaleDateString('en-ca'),
+          checkOutDate: new Date(dateRange[1]).toLocaleDateString('en-ca'),
+          adult: adults,
+          children: children,
+          rooms: rooms,
+        }
+        let URL = `/hotels?location=${hotelName}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
+        console.log(event.target.Children.value)
+        navigate(URL)
+      } else {
+        notifyError('Plase fill required feilds.')
       }
-      let URL = `/hotels?location=${hotelName}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
-      console.log(event.target.Children.value)
-      navigate(URL)
     } else {
-      notifyError('Plase fill required feilds.')
+      changeRoom()
+      console.log('ad')
+      handleClose()
     }
+  }
+
+  const changeRoom = async () => {
+    const dataModel = {
+      roomId: searchedParams.get('roomno'),
+      checkInDate: new Date(dateRange[0]).toLocaleDateString('en-ca'),
+      checkOutDate: new Date(dateRange[0]).toLocaleDateString('en-ca'),
+    }
+    await getAvailableRoomQtyByRoomId(dataModel).then(async () => {
+      if (dateRange[0] != null && dateRange[1] != null) {
+        let data = {
+          location: searchedParams.get('location'),
+          checkInDate: new Date(dateRange[0]).toLocaleDateString('en-ca'),
+          checkOutDate: new Date(dateRange[1]).toLocaleDateString('en-ca'),
+          adult: adults,
+          children: children,
+          rooms: rooms,
+        }
+        const bookingId = searchedParams.get('booking')
+        await updateBookingById(bookingId, {
+          checkInDate: data.checkInDate,
+          checkOutDate: data.checkOutDate,
+          noRooms: data.rooms,
+        })
+          .then((res) => {
+            console.log(data)
+            notifySuccess('Booking is updated')
+          })
+          .catch(() => {
+            notifyError('Some thing went wrong.')
+          })
+      } else {
+        notifyError('Plase fill required feilds.')
+      }
+    })
   }
   const notifyError = (message) => {
     toast.error(message)

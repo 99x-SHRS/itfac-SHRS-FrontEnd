@@ -117,7 +117,7 @@ const Payament = () => {
   }
   const loyaltyReward = async (totPayment) => {
     const dataModel = {
-      userId: 1,
+      userId: localStorage.getItem('user'), //user id
       amount: totPayment,
     }
     //console.log(dataModel)

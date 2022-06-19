@@ -21,7 +21,9 @@ const Hotels = (props) => {
           <SearchedHotels />
         </div>
       </div>
-      <Footer />
+      <div className='room-footer'>
+        <Footer />
+      </div>
     </div>
   )
 }
