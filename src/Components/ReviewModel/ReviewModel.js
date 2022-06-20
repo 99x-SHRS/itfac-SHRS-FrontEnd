@@ -9,7 +9,7 @@ import {
   updateReviewById,
 } from "../../Services/Api/Utilities/Index.js";
 
-const ReviewModel = ({ id, description, image, rating, hotelId, onFresh }) => {
+const ReviewModel = ({ id, description, rating, hotelId, onFresh }) => {
   const [hotelData, setHotelData] = useState({});
   const [show, setShow] = useState(false);
   const [updateReviewId, setupdateReviewId] = useState(null);
@@ -69,11 +69,12 @@ const ReviewModel = ({ id, description, image, rating, hotelId, onFresh }) => {
   const updateReview = async () => {
     const data = {
       review: review,
+      stars: ratings,
     };
-    if (review != "") {
+    if (review !== "") {
       await updateReviewById(updateReviewId, data)
         .then((response) => {
-          if (response.status == 200) {
+          if (response.status === 200) {
             notifySuccess("Sucessfully Updated..");
             handleClose();
             onFresh();
