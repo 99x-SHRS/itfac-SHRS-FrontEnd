@@ -53,9 +53,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           secureLocalStorage.setItem('hotelAdmin', res.data.hotelAdmin)
           secureLocalStorage.setItem('customer', res.data.customer)
           setLoggedin(true)
-          setLogin(true)
           notifySuccess('You have loggedin successfully')
-          navigate('/')
         } else {
           notifyError('User name or password is incorrect')
         }
@@ -82,15 +80,12 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
       await addUser(dataModel)
         .then((res) => {
           if (res.data) {
-            notifySuccess('Successfully created your account ')
+            notifySuccess('Successfully created your account.')
             setTimeout(() => {
               SendSignUpEmail(event.target)
             }, 2000)
             setLoading(false)
             setSign(false)
-            document.getElementById('signupEmail').value = null
-            document.getElementById('signupPassword').value = null
-            document.getElementById('reEnterPassword').value = null
             navigate('/')
           } else {
             notifyError('This email is aleady taken')
@@ -120,7 +115,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           <form onSubmit={signUpHandle}>
             <h1>Create Account</h1>
             <div class='social-container'>
-              {/* <a href='#' class='social'>
+              <a href='#' class='social'>
                 <i class='fab fa-facebook-f'></i>
               </a>
               <a href='#' class='social'>
@@ -129,9 +124,9 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
 
               <a href='#' class='social'>
                 <i class='fab fa-linkedin-in'></i>
-              </a> */}
+              </a>
             </div>
-            {/* <span>or use your email for registration</span> */}
+            <span>or use your email for registration</span>
 
             <input
               type='text'
@@ -159,7 +154,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           <form onSubmit={loginHandle}>
             <h1>Sign in</h1>
             <div class='social-container'>
-              {/* <a href='#' class='social'>
+              <a href='#' class='social'>
                 <i class='fab fa-facebook-f'></i>
               </a>
               <a href='#' class='social'>
@@ -167,9 +162,9 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
               </a>
               <a href='#' class='social'>
                 <i class='fab fa-linkedin-in'></i>
-              </a> */}
+              </a>
             </div>
-            {/* <span>or use your account</span> */}
+            <span>or use your account</span>
             <input type='email' placeholder='Email' id='loginEmail' required />
             <input
               type='password'
