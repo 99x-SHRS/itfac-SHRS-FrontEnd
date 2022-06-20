@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import secureLocalStorage from 'react-secure-storage'
 import { toast } from 'react-toastify'
 import '../../Assets/styles/css/Seller/Layouts/registerHotel.css'
 import AddressSelector from '../../Components/AddressSelector/AddressSelector.js'
@@ -111,6 +112,7 @@ const RegisterHotel = () => {
             }
             await updateRole(userId, dataModel).then((res) => {
               console.log(res)
+              secureLocalStorage.setItem('hotelAdmin', res.data.hotelAdmin)
             })
             setTimeout(() => {
               setLoading(false)
