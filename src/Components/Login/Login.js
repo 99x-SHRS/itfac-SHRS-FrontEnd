@@ -25,9 +25,7 @@ const Login = ({ setLogin, setLoggedin }) => {
       refreshToken: localStorage.getItem('rtoken'),
     }
     await updateUserById(uId, dataModal)
-      .then((res) => {
-        // console.log(res)
-      })
+      .then((res) => {})
       .catch((err) => {
         console.log(err)
       })

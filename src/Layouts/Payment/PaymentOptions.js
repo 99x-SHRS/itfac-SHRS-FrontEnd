@@ -19,16 +19,13 @@ const PaymentOptions = (payment) => {
     navigate('../booking-history')
   }
   const payBooking = async () => {
-    console.log('called')
     const dataModel = {
       paymenttype: payment.method,
       bookingId: searchedParams.get('booking') || '',
       payment: payment.payment,
     }
     await pay(dataModel)
-      .then((response) => {
-        console.log(response)
-      })
+      .then((response) => {})
       .catch((err) => {
         console.log(err)
       })

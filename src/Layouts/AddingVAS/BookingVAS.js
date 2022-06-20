@@ -41,7 +41,6 @@ const BookingVAS = () => {
     }
     await getVasByHotelId(dataModel)
       .then((res) => {
-        console.log(res)
         setVAS(res.data)
       })
       .catch((err) => {

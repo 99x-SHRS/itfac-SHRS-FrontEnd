@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Navbars from '../../Components/Navbar/Navbar';
+import React, { Component } from 'react'
+import Navbars from '../../Components/Navbar/Navbar'
 import Footer from '../../Layouts/Footer/Footer'
 import * as ReactBootstrap from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
@@ -16,30 +16,24 @@ import eye from "./utils/eye.svg";
 import { getMessagesByRecieverId } from '../../Services/Api/Utilities/Index'
 import { getMessagesBySenderId } from '../../Services/Api/Utilities/Index'
 
-
 class Message extends Component {
     state = {
         messages: [],
+        show: false
         // searchQuery: ""
 
-    }
 
+    }
     componentDidMount() {
         this.handleViewReceivedMessages();
     }
-
     handleShowModal = () => {
-        this.setState({ show: true });
+        this.setState({ show: true })
     }
     handleCloseModal = () => {
-        this.setState({ show: false });
+        this.setState({ show: false })
     }
-
-    // handleSearch = query => {
-    //     this.setState({ searchQuery: query, selected })
-    // }
     handleViewReceivedMessages = async () => {
-
         const dataModel = {
             id: localStorage.getItem('user')
         }
@@ -48,6 +42,12 @@ class Message extends Component {
         this.setState({ messages: data.data })
 
     }
+
+
+    // handleSearch = query => {
+    //     this.setState({ searchQuery: query, selected })
+    // }
+
     handleViewSentMessages = async () => {
 
         const dataModel = {
@@ -190,4 +190,4 @@ class Message extends Component {
     }
 }
 
-export default Message;
+export default Message
