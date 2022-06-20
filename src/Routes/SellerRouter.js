@@ -65,7 +65,6 @@ const SellerRoutes = (
     <Route exact path='/seller/revenue' element={<Revenue />}></Route>
     <Route exact path='/seller/viewCoupons' element={<ViewCoupons />}></Route>
     <Route exact path='/seller/createCoupon' element={<CreateCoupon />}></Route>
-
   </>
 )
 

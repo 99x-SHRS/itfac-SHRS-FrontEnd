@@ -5,8 +5,12 @@ import {
   getHotelById,
   getRoomById,
   getTotalAmountByBookingId,
+  getCustomerDiscount,
+  getVASByBookingId,
 } from '../../Services/Api/Utilities/Index.js'
 import Navbars from '../../Components/Navbar/Navbar'
+import Footer from '../Footer/Footer.js'
+import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround.js'
 import '../../Assets/styles/css/Layouts/reservedRoomStyle.css'
 
 const BookingDetails = () => {
@@ -14,6 +18,9 @@ const BookingDetails = () => {
   const [hotel, setHotel] = useState(null)
   const [room, setRoom] = useState(null)
   const [payment, setPayment] = useState(null)
+  const [savings, setSavings] = useState(null)
+  const [nights, setNights] = useState(null)
+  const [vas, setVas] = useState(null)
   const [searchedParams, setSearchedparams] = useSearchParams()
   useEffect(() => {
     getBooking()
@@ -26,6 +33,10 @@ const BookingDetails = () => {
     await getBookingDetailsById(dataModel)
       .then(async (res) => {
         setBoooking(res.data)
+        const checkOutDate = new Date(res.data.checkOutDate)
+        const checkInDate = new Date(res.data.checkInDate)
+        setNights((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24))
+
         const hotelId = {
           id: res.data.hotelHotelId,
         }
@@ -38,6 +49,7 @@ const BookingDetails = () => {
 
         await getRoomById(roomId).then((data) => {
           setRoom(data.data)
+          console.log(data)
         })
 
         const bookingId = {
@@ -45,6 +57,18 @@ const BookingDetails = () => {
         }
         await getTotalAmountByBookingId(bookingId).then((data) => {
           setPayment(data.data)
+        })
+        const idAndAmount = {
+          userId: localStorage.getItem('user'),
+          amount: payment,
+        }
+
+        await getCustomerDiscount(idAndAmount).then((data) => {
+          setSavings(data.data)
+        })
+
+        await getVASByBookingId(bookingId).then((data) => {
+          setVas(data.data)
         })
       })
       .catch((err) => {
@@ -56,7 +80,12 @@ const BookingDetails = () => {
     <>
       <Navbars />
       <div className='container booking-history-container booking-details-container'>
-        {hotel != null && room != null && payment != null ? (
+        {hotel != null &&
+        room != null &&
+        payment != null &&
+        savings != null &&
+        nights != null &&
+        vas != null ? (
           <>
             <div className='container-header1'>
               <h1>
@@ -150,22 +179,40 @@ const BookingDetails = () => {
                   </div>
                   <div class='card-body text-dark'>
                     <h5 class='card-title'>
-                      Total<div className='c'>Rs. {payment}</div>
+                      Total<div className='c'>Rs. {payment}.00</div>
                     </h5>
                     <p class='card-text'>
                       <hr />
-                      <b>Member's price : 40%</b>
-                      <br />
-                      Prices shown after <b>$529.23 savings</b>
+                      {savings != 0 ? (
+                        <>
+                          <div className='row'>
+                            <div className='col-6'> Member's price : </div>
+                            <div className='col-6'>
+                              {' '}
+                              <b>{((savings / payment) * 100).toFixed(2)} %</b>
+                            </div>
+                          </div>
+                          <div className='row'>
+                            <div className='col-6'> Prices shown after :</div>
+                            <div className='col-6'>
+                              {' '}
+                              <b>Rs. {payment - savings.toFixed(2)}.00 </b>{' '}
+                              savings
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        <></>
+                      )}
                       <br />
                       <table>
                         <tr>
-                          <th>Room Price</th>
-                          <th>Rs. {payment.amount}</th>
-                        </tr>
-                        <tr>
-                          <td>13 nights</td>
-                          <td>$61.07 /night</td>
+                          <td>
+                            <b>{nights}</b> nights
+                          </td>
+                          <td>
+                            Rs. <b>{room.rate}.00</b> /night
+                          </td>
                         </tr>
                         <tr>
                           <td>Taxes</td>
@@ -191,13 +238,20 @@ const BookingDetails = () => {
                       The following fees and deposits are charged by the
                       property at time of service, check-in, or check-out.
                       <ul>
-                        <li>
-                          Fee for high-speed Internet (wired) in public areas
-                          EUR 1 (for 30 minutes, rates may vary)
-                        </li>
-                        <li>
-                          Rollaway beds are available for an additional fee
-                        </li>
+                        {vas.map((item) => {
+                          return (
+                            <div className='row'>
+                              <div className='col-6'>
+                                <li>
+                                  <b>{item.name}</b>
+                                </li>
+                              </div>
+                              <div className='col-6'>
+                                <b>Rs.{item.rate}.00</b>
+                              </div>
+                            </div>
+                          )
+                        })}
                       </ul>
                       The above list may not be comprehensive. Fees and deposits
                       may not include tax and are subject to change.
@@ -208,8 +262,14 @@ const BookingDetails = () => {
             </div>
           </>
         ) : (
-          <></>
+          <DarkOverlaybackGround
+            loading={true}
+            content={'Looking your booking information'}
+          />
         )}
+      </div>
+      <div className='footer-div'>
+        <Footer />
       </div>
     </>
   )

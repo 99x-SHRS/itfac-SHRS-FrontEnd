@@ -89,9 +89,9 @@ const BookingVAS = () => {
               ) : (
                 <>
                   <Link
-                    to={`/booking/details?booking=${
-                      searchedParams.get('booking') || ''
-                    }`}
+                    to={`/booking/details?hotelId=${
+                      searchedParams.get('hotel') || ''
+                    }&booking=${searchedParams.get('booking') || ''}`}
                     className='next-link'
                   >
                     <button className='next-button btn btn-primary'>
