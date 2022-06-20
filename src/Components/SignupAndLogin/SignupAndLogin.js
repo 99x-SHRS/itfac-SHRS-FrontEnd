@@ -1,7 +1,9 @@
 import React, { Component, useEffect, useState } from 'react'
+import secureLocalStorage from 'react-secure-storage'
 import { userLogin, addUser } from '../../Services/Api/Utilities/Index'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { SendSignUpEmail } from '../../Services/Gmail/EmailJs'
 import DarkOverlaybackGround from '../DarkOverlaybackGround/DarkOverlaybackGround'
 import '../../Assets/styles/css/Components/signupAndLogin.css'
 
@@ -46,6 +48,10 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           localStorage.setItem('user', res.data.userId)
           localStorage.setItem('currency', res.data.currency)
           localStorage.setItem('session', true)
+          // secureLocalStorage.setItem('user', res.data.userId)
+          secureLocalStorage.setItem('admin', res.data.admin)
+          secureLocalStorage.setItem('hotelAdmin', res.data.hotelAdmin)
+          secureLocalStorage.setItem('customer', res.data.customer)
           setLoggedin(true)
           notifySuccess('You have loggedin successfully')
         } else {
@@ -54,10 +60,10 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
       })
       .catch((err) => {
         console.log(err)
+        navigate('/')
       })
     setLoading(false)
     setLogin(false)
-    navigate('/')
   }
   const signUpHandle = async (event) => {
     event.preventDefault()
@@ -77,6 +83,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
             notifySuccess(
               'Successfully created your account and please check you email to verify the account'
             )
+            SendSignUpEmail(event.target)
             setLoading(false)
             setSign(false)
             navigate('/')
@@ -114,13 +121,20 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
               <a href='#' class='social'>
                 <i class='fab fa-google-plus-g'></i>
               </a>
+
               <a href='#' class='social'>
                 <i class='fab fa-linkedin-in'></i>
               </a>
             </div>
             <span>or use your email for registration</span>
 
-            <input type='text' placeholder='Email' id='signupEmail' required />
+            <input
+              type='text'
+              placeholder='Email'
+              id='signupEmail'
+              name='email'
+              required
+            />
             <input
               type='password'
               placeholder='password'

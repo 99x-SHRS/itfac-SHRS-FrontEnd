@@ -49,6 +49,14 @@ const getHotelById = async (bodyData) => {
 const searchHotels = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'hotel', 'search', bodyData)
 }
+const searchHotelsByRate = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'searchSotByRate',
+    bodyData
+  )
+}
 
 const getAvailbleRooms = async (bodyData) => {
   return await provider.getAllPOST(
@@ -78,6 +86,16 @@ const getSavedhotelByCustomerId = async (bodyData) => {
     bodyData
   )
 }
+
+const getHotelByStatus = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'hotel',
+    'getHotelsByStatus',
+    bodyData
+  )
+}
+
 const sortHotelsByBookingCount = async (bodyData) => {
   return await provider.getAllPOST(
     BASE_URL,
@@ -478,6 +496,15 @@ const getMessagesByRecieverId = async (bodyData) => {
   )
 }
 
+const getMessagesBySenderId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'message',
+    'getMessagesBySenderId',
+    bodyData
+  )
+}
+
 const markAsRead = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'message', 'markAsRead', bodyData)
 }
@@ -552,8 +579,48 @@ const getReviewByHotelId = async (bodyData) => {
     bodyData
   )
 }
+
+const getReviewByCustomerId = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'review',
+    'getReviewByCustomerId',
+    bodyData
+  )
+}
+
 const createReview = async (bodyData) => {
   return await provider.insertData(BASE_URL, 'review', 'createReview', bodyData)
+}
+
+// *****************************************************************************
+//                          Hotel rules end points
+// *****************************************************************************
+const getHotelRules = async (bodyData) => {
+  return await provider.getAllPOST(
+    BASE_URL,
+    'rules',
+    'getAllRulesByHotelId',
+    bodyData
+  )
+}
+const deleteReviewByReviewId = async (bodyData) => {
+  return await provider.deleteDataById(
+    BASE_URL,
+    'review',
+    'deleteReviewById',
+    bodyData
+  )
+}
+
+const updateReviewById = async (id, bodyData) => {
+  return await provider.updateById(
+    BASE_URL,
+    'review',
+    'updateReviewById',
+    id,
+    bodyData
+  )
 }
 
 export {
@@ -623,8 +690,15 @@ export {
   getReviewByHotelId,
   getUserbyId,
   getMessagesByRecieverId,
+  getMessagesBySenderId,
   getCustomerGrade,
   deleteHotelById,
   createReview,
   markAsRead,
+  searchHotelsByRate,
+  getHotelRules,
+  getReviewByCustomerId,
+  deleteReviewByReviewId,
+  updateReviewById,
+  getHotelByStatus,
 }

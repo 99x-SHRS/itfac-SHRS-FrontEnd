@@ -1,3 +1,4 @@
+import { useSearchParams } from 'react-router-dom'
 import AdapterDateFns from '@mui/lab/AdapterDateFns'
 import DateRangePicker from '@mui/lab/DateRangePicker'
 import LocalizationProvider from '@mui/lab/LocalizationProvider'
@@ -6,6 +7,7 @@ import TextField from '@mui/material/TextField'
 import * as React from 'react'
 
 export default function DatepickerModal({ setDateRange, dateRange }) {
+  const [searchedParams, setSearchedparams] = useSearchParams()
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <DateRangePicker

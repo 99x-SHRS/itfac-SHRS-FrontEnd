@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import secureLocalStorage from 'react-secure-storage'
 import PropagateLoader from 'react-spinners/PropagateLoader'
 import React, { useState, useEffect } from 'react'
 import History from './Components/History/History'
@@ -7,6 +8,7 @@ import SellerRoutes from './Routes/SellerRouter'
 import exceptionsRouters from './Routes/ExceptionsRouters'
 import ChatBot from './Services/ChatBot/ChatBot.js'
 import ShareButton from './Components/ShareButton/ShareButton'
+import Dashboard from './Pages/Home/Dashboard'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './App.css'
@@ -16,21 +18,38 @@ function App() {
   let [color, setColor] = useState('#ffffff')
   const [share, setShare] = useState(false)
   const [session, setSession] = useState(true)
+  const [roles, setRoles] = useState({
+    admin: false,
+    hotelAdmin: false,
+    customer: true,
+  })
 
   useEffect(() => {
-    setSession(localStorage.getItem('session'))
     setLoading(true)
+    if (localStorage.getItem('session') == 'true') {
+      setSession(true)
+    } else {
+      setSession(false)
+    }
+    setRoles({
+      admin: secureLocalStorage.getItem('admin'),
+      hotelAdmin: secureLocalStorage.getItem('hotelAdmin'),
+      customer: true,
+    })
+    if (localStorage.getItem('session') == 'false' || session == null) {
+      setShare(false)
+    }
+    console.log(roles)
   }, [])
 
   useEffect(() => {
     if (session == true) {
       setTimeout(() => {
-        setShare(localStorage.getItem('session'))
+        setShare(true)
       }, 0)
     } else {
       setShare(false)
     }
-
     if (session == false || session == null) {
       setShare(false)
     }
@@ -39,10 +58,26 @@ function App() {
   return (
     <Router history={History}>
       <div className='App'>
-        <Routes>{UserRoutes}</Routes>
-        <Routes>{SellerRoutes}</Routes>
-        <Routes>{exceptionsRouters}</Routes>
-        {share ? (
+        <Routes>
+          {' '}
+          <Route exact path='/' element={<Dashboard />}></Route>
+        </Routes>
+
+        {roles.customer && !roles.hotelAdmin ? (
+          <>
+            <Routes>{UserRoutes}</Routes>
+          </>
+        ) : roles.hotelAdmin && session ? (
+          <>
+            {' '}
+            <Routes>{UserRoutes}</Routes>
+            <Routes>{SellerRoutes}</Routes>
+          </>
+        ) : (
+          <Routes>{exceptionsRouters}</Routes>
+        )}
+
+        {session ? (
           <>
             {' '}
             <ShareButton />

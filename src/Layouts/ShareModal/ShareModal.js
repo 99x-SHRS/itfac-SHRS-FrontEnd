@@ -9,7 +9,7 @@ const ShareModal = () => {
     if (sharedToken == null || sharedToken == undefined || sharedToken == '') {
       genarateToken()
     } else {
-      setRefferal(window.location.href + 'share?token=' + sharedToken)
+      setRefferal(window.location.origin + '/share?token=' + sharedToken)
     }
   }, [])
 

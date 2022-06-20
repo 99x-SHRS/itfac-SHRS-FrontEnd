@@ -15,9 +15,12 @@ import AccountSettings from '../Pages/Account/MyAccountSettings'
 import PersonalSettings from '../Pages/PersonalSettings/PersonalSettings'
 import SecuritySettings from '../Pages/SecuritySettings/SecuritySettings'
 import Review from '../Pages/Account/Review'
+import Requestmanage from '../Pages/RequestManage/RequestManage'
+import Message from '../Pages/Messages/Message'
+import WriteMessage from '../Pages/Messages/WriteMessage'
 const UserRoutes = (
   <>
-    <Route exact path='/' element={<Dashboard />}></Route>
+    {/* <Route exact path='/' element={<Dashboard />}></Route> */}
     <Route path='/hotels' element={<Hotels />}></Route>
     <Route path='/hotel/page' element={<HotelPage />}></Route>
     <Route path='/booking/vas' element={<AddingVAS />}></Route>
@@ -44,6 +47,9 @@ const UserRoutes = (
       element={<SecuritySettings />}
     ></Route>
     <Route exact path='/my-account/review' element={<Review />}></Route>
+    <Route exact path='/request-manage' element={<Requestmanage />}></Route>
+    <Route exact path='/messages' element={<Message />}></Route>
+    <Route exact path='/writeMessages' element={<WriteMessage />}></Route>
   </>
 )
 
