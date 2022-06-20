@@ -8,7 +8,7 @@ import '../../Assets/styles/css/Layouts/hotelLeftSide.css'
 const PriceRange = ({ setLowerPrice, setUpperPrice }) => {
   return (
     <div className=' price-container border'>
-      <div class='card-header  text-white '>Budget</div>
+      <div class='card-header  text-dark '>Budget</div>
       <div class='card-body'>
         <Form className='mt-3 mb-3'>
           <Form.Check
@@ -61,7 +61,7 @@ const PriceRange = ({ setLowerPrice, setUpperPrice }) => {
             type='radio'
             value='beverage'
             onChange={() => {
-              setLowerPrice(50000)
+              setLowerPrice(0)
               setUpperPrice(100000)
             }}
           />
