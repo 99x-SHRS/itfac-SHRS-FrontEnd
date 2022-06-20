@@ -15,7 +15,6 @@ const CardExtra = () => {
     }
     await getBookingCountByHotelAdminUserId(dataModal)
       .then((res) => {
-        console.log(res.data)
         if (res.status == 200) {
           setHotels(res.data.slice(0, 10))
         }

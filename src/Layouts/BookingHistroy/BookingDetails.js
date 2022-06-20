@@ -44,7 +44,6 @@ const BookingDetails = () => {
           id: searchedParams.get('booking') || '',
         }
         await getTotalAmountByBookingId(bookingId).then((data) => {
-          console.log(data.data)
           setPayment(data.data)
         })
       })

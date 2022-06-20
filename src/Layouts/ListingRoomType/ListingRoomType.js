@@ -28,7 +28,7 @@ const ListingRoomType = () => {
       beds: document.getElementsByName('type_beds')[0].value,
       hotelId: params.hotelId,
     }
-    console.log(dataModel)
+
     await createRoomtype(dataModel)
       .then((res) => {
         if (res.status == 200) {

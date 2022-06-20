@@ -51,7 +51,7 @@ const NewTable = ({ vas, getTotPaymet }) => {
     const datModel = {
       id: searchedParams.get('booking') || '',
     }
-    // console.log(datModel)
+
     await getVASByBookingId(datModel)
       .then((response) => {
         setSubscribedVAS(response.data)
@@ -65,10 +65,9 @@ const NewTable = ({ vas, getTotPaymet }) => {
       bookingId: searchedParams.get('booking') || '',
       vasId: vasid,
     }
-    // console.log(datModel)
+
     await subscribeVAS(datModel)
       .then((response) => {
-        // console.log(response)
         getTotPaymet()
         getAllVAS()
       })
@@ -82,7 +81,6 @@ const NewTable = ({ vas, getTotPaymet }) => {
 
     await unSubscribeVAS(params)
       .then((response) => {
-        console.log(response)
         getAllVAS()
         getTotPaymet()
       })

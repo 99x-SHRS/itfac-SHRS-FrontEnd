@@ -16,7 +16,6 @@ const CardBookings = () => {
     }
     await getAllBookigsByHotelAdminId(dataModal)
       .then((res) => {
-        console.log(res.data.rows)
         if (res.status == 200) {
           setBookings(res.data.rows)
         }

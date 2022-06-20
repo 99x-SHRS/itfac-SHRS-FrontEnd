@@ -104,7 +104,6 @@ const RoomSelection = ({ roomTypeId }) => {
     }
     await getAvailbleRooms(dataModel)
       .then((res) => {
-        console.log(res.data.rows)
         let totalRows = res.data.count
         if (res.status == 200) {
           setRooms(res.data.rows)

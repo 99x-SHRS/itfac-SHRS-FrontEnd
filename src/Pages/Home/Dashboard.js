@@ -18,7 +18,6 @@ const Dashboard = () => {
     }
     await sortHotelsByBookingCount(dataModel)
       .then((res) => {
-        console.log(res.data)
         setRecommondedHotel(res.data)
       })
       .catch((err) => {

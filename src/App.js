@@ -25,7 +25,7 @@ function App() {
   })
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(false)
     if (localStorage.getItem('session') == 'true') {
       setSession(true)
     } else {
@@ -39,7 +39,6 @@ function App() {
     if (localStorage.getItem('session') == 'false' || session == null) {
       setShare(false)
     }
-    console.log(roles)
   }, [])
 
   useEffect(() => {
@@ -102,6 +101,7 @@ function App() {
             )}
           </>
         )}
+        <ChatBot />
       </div>
     </Router>
   )

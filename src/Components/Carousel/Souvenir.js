@@ -22,7 +22,6 @@ const Souvenir = () => {
     }
     await getAllsouvenirByHotelId(dataModal)
       .then((res) => {
-        console.log(res)
         setSouvenirs(res.data)
       })
       .catch((err) => {
