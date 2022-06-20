@@ -7,7 +7,13 @@ const HeaderStats = () => {
   let navigate = useNavigate()
   return (
     <div>
-      <div className='relative bg-lightBlue-600 md:pt-32 pb-32 pt-12'>
+      <div
+        className='relative md:pt-32 pb-32 pt-12'
+        style={{
+          backgroundImage:
+            'url(https://res.cloudinary.com/uom/image/upload/v1655696873/rnlmtivdfqdtds5yrmsx.jpg)',
+        }}
+      >
         <div className='px-4 md:px-10 mx-auto w-full'>
           <div>
             {/* Card stats */}
