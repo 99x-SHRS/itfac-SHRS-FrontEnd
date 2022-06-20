@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useState } from 'react'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { Carousel } from 'react-bootstrap'
 import { getAllsouvenirByHotelId } from '../../Services/Api/Utilities/Index.js'
 import image_1 from '../../Assets/images/property-types/luxary.jpg'
@@ -11,14 +12,14 @@ import '../../Assets/styles/css/Components/souvenir.css'
 
 const Souvenir = () => {
   const [souvenirs, setSouvenirs] = useState(null)
-
+  const [searchedParams, setSearchedparams] = useSearchParams()
   useEffect(() => {
     getSouvenir()
   }, [])
 
   const getSouvenir = async () => {
     const dataModal = {
-      id: 24,
+      id: searchedParams.get('hotel') || '',
     }
     await getAllsouvenirByHotelId(dataModal)
       .then((res) => {

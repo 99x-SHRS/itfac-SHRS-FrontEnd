@@ -132,7 +132,7 @@ const BookingCusDetails = () => {
   }
   return (
     <div className='container'>
-      <div className='row user-details '>
+      <div className='row user-details'>
         {/* <div className='col-md-4 col-lg-3 '>
           <SideSummary />
         </div> */}
