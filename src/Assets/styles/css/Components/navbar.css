@@ -6,7 +6,12 @@
   transition: top 0.3s; /* Transition effect when sliding down (and up) */
   z-index: 99;
 }
-
+.listing-button {
+  white-space: nowrap;
+  font-size: 0.85rem !important;
+  padding: -5px 10px !important;
+  margin-right: 1rem;
+}
 /* Style the navbar links */
 /* #navbar a {
   float: left;

@@ -10,6 +10,7 @@ import {
   getHotelById,
   registerHotel,
   updateHotelById,
+  updateRole,
 } from '../../Services/Api/Utilities/Index.js'
 import Footer from '../Footer/Footer.js'
 
@@ -99,9 +100,18 @@ const RegisterHotel = () => {
         })
     } else {
       await registerHotel(dataModel)
-        .then((res) => {
+        .then(async (res) => {
           if (res.status == 200) {
             setLoading(true)
+            let userId = localStorage.getItem('user')
+            const dataModel = {
+              admin: false,
+              hotelAdmin: true,
+              customer: true,
+            }
+            await updateRole(userId, dataModel).then((res) => {
+              console.log(res)
+            })
             setTimeout(() => {
               setLoading(false)
               navigate(`/seller/hotel/image?id=${res.data.hotelId}`)

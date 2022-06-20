@@ -154,6 +154,24 @@ const Navbars = () => {
           {loggedin ? (
             <>
               <div className='nav-items'>
+                {!roles.admin && roles.customer ? (
+                  <>
+                    <button
+                      class='button-18 listing-button'
+                      role='button'
+                      onClick={() => {
+                        navigate('/seller/hotel/register')
+                      }}
+                    >
+                      List Your Property
+                    </button>
+                  </>
+                ) : (
+                  <></>
+                )}
+              </div>
+
+              <div className='nav-items'>
                 <select
                   className='currency-selector'
                   id='currency-selector'
@@ -287,6 +305,7 @@ const Navbars = () => {
                 {/* <span className='login-btn ' onClick={onOpenModal}>
                   Signup{' '}
                 </span> */}
+
                 <button class='button-18' role='button' onClick={onOpenModal}>
                   Register
                 </button>

@@ -5,15 +5,6 @@ import {
   getAllFacilitiesByHotelId,
 } from '../../Services/Api/Utilities/Index'
 import '../../Assets/styles/css/Layouts/facilities.css'
-const facilitiess = [
-  'Lorem ipsum dolor sit amet consectetur.',
-  'Lorem ipsum dolor sit amet consectetur.',
-  'Lorem ipsum dolor sit amet consectetur.',
-  'Lorem ipsum dolor sit amet consectetur.',
-  'Lorem ipsum dolor sit amet consectetur.',
-  'Lorem ipsum dolor sit amet consectetur.',
-  'Lorem ipsum dolor sit amet consectetur.',
-]
 
 const Facilities = () => {
   const [searchedParams, setSearchedparams] = useSearchParams()
