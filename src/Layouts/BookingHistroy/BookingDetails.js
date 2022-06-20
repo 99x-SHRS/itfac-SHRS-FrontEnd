@@ -264,7 +264,7 @@ const BookingDetails = () => {
         ) : (
           <DarkOverlaybackGround
             loading={true}
-            content={'Loading your booking info'}
+            content={'Looking your booking information'}
           />
         )}
       </div>

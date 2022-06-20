@@ -83,7 +83,9 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
             notifySuccess(
               'Successfully created your account and please check you email to verify the account'
             )
-            SendSignUpEmail(event.target)
+            setTimeout(() => {
+              SendSignUpEmail(event.target)
+            }, 2000)
             setLoading(false)
             setSign(false)
             navigate('/')
