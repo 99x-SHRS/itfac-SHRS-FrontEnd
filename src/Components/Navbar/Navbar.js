@@ -227,7 +227,7 @@ const Navbars = () => {
                     <Dropdown.Item as={Link} to={'/loyalty-program'}>
                       Loyalty
                     </Dropdown.Item>
-                    <Dropdown.Item>Messeges</Dropdown.Item>
+                    <Dropdown.Item as={Link} to={'/messages'}>Messeges</Dropdown.Item>
                     {roles.admin ? (
                       <>
                         <Dropdown.Item as={Link} to={'/admin/dashboard'}>

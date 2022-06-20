@@ -4,7 +4,8 @@ import Footer from '../../Layouts/Footer/Footer'
 import * as ReactBootstrap from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import ListGroupMessages from './ListGroup';
+import ListGroup from 'react-bootstrap/ListGroup';
+import { Link } from 'react-router-dom';
 import MessagePagination from './MessagePagination';
 
 import './MessagesStyles/messagesTable.css';
@@ -18,41 +19,46 @@ import { getMessagesBySenderId } from '../../Services/Api/Utilities/Index'
 
 class Message extends Component {
     state = {
-        messages: []
+        messages: [],
+        // searchQuery: ""
 
     }
 
-    // async componentDidMount() {
-    //     const dataModel = {
-    //         // id: localStorage.getItem('userId')
-    //         id: 1
-    //     }
-    //     const data = await getMessagesBySenderId(dataModel)
-    //     this.setState({ messages: data.data })
-    //     console.log(data);
-    // }
+    componentDidMount() {
+        this.handleViewReceivedMessages();
+    }
+
     handleShowModal = () => {
         this.setState({ show: true });
     }
     handleCloseModal = () => {
         this.setState({ show: false });
     }
+
+    // handleSearch = query => {
+    //     this.setState({ searchQuery: query, selected })
+    // }
     handleViewReceivedMessages = async () => {
 
-
-
         const dataModel = {
-            id: 1
+            id: localStorage.getItem('user')
         }
         const data = await getMessagesByRecieverId(dataModel)
         console.log(data);
         this.setState({ messages: data.data })
 
+    }
+    handleViewSentMessages = async () => {
+
+        const dataModel = {
+            id: localStorage.getItem('user')
+
+        }
+        const data = await getMessagesBySenderId(dataModel)
+        this.setState({ messages: data.data })
+        console.log(data);
 
     }
-    // handleViewReceivedMessages = () => {
-    // }
-
 
     render() {
         return (
@@ -61,10 +67,52 @@ class Message extends Component {
                     <Navbars />
                 </div>
                 <div>
-                    <ListGroupMessages />
+                    <ListGroup className='listGroupMessages'>
+                        <ListGroup.Item action as={Link} to={'/writeMessages'}
+                            className="d-flex justify-content-between align-items-start"
+                        >
+                            <div className="ms-2 me-auto">
+                                <div className="fw-bold">Write Message</div>
+
+                            </div>
+                            {/* <Badge bg="primary" pill>
+                    14
+                </Badge> */}
+                        </ListGroup.Item>
+
+                        <ListGroup.Item
+                            onClick={this.handleViewReceivedMessages}
+                            className="d-flex justify-content-between align-items-start"
+                        >
+                            <div className="ms-2 me-auto">
+                                <div
+                                    className="fw-bold">Received</div>
+                            </div>
+                            {/* <Badge bg="primary" pill>
+                    14
+                </Badge> */}
+                        </ListGroup.Item>
+                        <ListGroup.Item
+                            onClick={this.handleViewSentMessages}
+                            className="d-flex justify-content-between align-items-start"
+                        >
+                            <div className="ms-2 me-auto">
+                                <div
+                                    className="fw-bold">Sent</div>
+
+                            </div>
+                            {/* <Badge bg="primary" pill>
+                    14
+                </Badge> */}
+                        </ListGroup.Item>
+                    </ListGroup>
                 </div>
                 {/* if({this.state.messages.length === 0}) return <p>There are no messages to show !</p> */}
+
+
+
                 <div className='messagesTable'>
+                    {/* <SearchBox value={searchQuery} onChange={this.handleSearch} /> */}
                     <ReactBootstrap.Table striped bordered hover>
                         <thead className='messageTableHead'>
                             <tr>
@@ -79,7 +127,6 @@ class Message extends Component {
                             {this.state.messages.map((message) =>
                                 <tr key={message.messageId}>
                                     <td>{message.createdAt.split('T')[0]}</td>
-                                    {/* <td>incomming</td> */}
                                     <td>{message.from}</td>
                                     <td>{message.to}</td>
                                     <td>{message.notification.slice(0, 20) + "..."}</td>
@@ -135,7 +182,7 @@ class Message extends Component {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-                <div>
+                <div style={{ top: '3rem !important', position: 'relative' }}>
                     <Footer />
                 </div>
             </div>
