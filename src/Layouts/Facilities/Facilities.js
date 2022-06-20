@@ -34,7 +34,6 @@ const Facilities = () => {
     }
     await getFacilityTypesByHotelId(dataModel)
       .then((res) => {
-        console.log(res.data)
         setFacilityTypes(res.data)
       })
       .catch((err) => {
@@ -48,8 +47,6 @@ const Facilities = () => {
     }
     await getAllFacilitiesByHotelId(dataModel)
       .then((res) => {
-        // console.log('asd')
-        console.log(res.data)
         setFacilities(res.data)
       })
       .catch((err) => {

@@ -13,13 +13,14 @@ const Review = () => {
   const [items, setItems] = useState([])
   const [pageCount, setpageCount] = useState(0)
   const [loading, setLoading] = useState(true)
-
+  const [pageNumber, setPageNumber] = useState(0)
   useEffect(() => {
     getReviewDetails(0)
     setLoading(true)
   }, [])
 
   const handlePageClick = async (data) => {
+    setPageNumber(data.selected)
     let currentPage = data.selected
     getReviewDetails(currentPage)
   }
@@ -58,11 +59,13 @@ const Review = () => {
               items.map((item) => {
                 return (
                   <ReviewModel
-                    rating={'5'}
+                    rating={item.stars}
                     id={item.reviewId}
                     description={item.review}
-                    hotelId={item.hotelId}
-                    onFresh={getReviewDetails}
+                    hotelId={item.hotelHotelId}
+                    onFresh={() => {
+                      getReviewDetails(pageNumber)
+                    }}
                   />
                 )
               })

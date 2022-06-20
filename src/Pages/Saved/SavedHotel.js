@@ -27,7 +27,6 @@ const SavedHotel = () => {
         if (res.status == 200) {
           setHotels(res.data)
           setLoading(false)
-          console.log(hotels)
         }
       })
       .catch((err) => {

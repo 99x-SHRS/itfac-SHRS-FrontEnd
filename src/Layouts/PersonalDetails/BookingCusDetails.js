@@ -27,6 +27,7 @@ const BookingCusDetails = () => {
   const [rules, setRules] = useState(null)
   const navigate = useNavigate()
   const inputform = useRef()
+
   useEffect(() => {
     setUpdate(searchedParams.get('edit') || '')
     if (searchedParams.get('edit') || '') {
@@ -35,6 +36,7 @@ const BookingCusDetails = () => {
     getAllRules()
     toast.configure()
   }, [])
+
   const notifyError = (message) => {
     toast.error(message)
   }
@@ -53,6 +55,7 @@ const BookingCusDetails = () => {
         setNumber(res.data.contactNo)
         setSpecial_request(res.data.specialRequest)
         setArrivalTime(res.data.arrivalTime)
+        setEmail(res.data.email)
         var dates = new Date(res.data.arrivalTime)
         var currentTime = dates.toISOString().substring(11, 16)
         document.getElementById('arrivalTime').value = currentTime
@@ -81,21 +84,26 @@ const BookingCusDetails = () => {
       rentCar: event.target.rent_car.checked,
       customerId: localStorage.getItem('user'), //user id
       contactNo: number,
+      email: email,
     }
-    console.log(dataModel)
+
     updateBooking(bookingId, dataModel, event)
   }
 
   const updateBooking = async (bookingId, dataModel, event) => {
+    event.preventDefault()
     await updateBookingById(bookingId, dataModel)
       .then((res) => {
         if (!isUpdate) {
           if (res.status === 200) {
             notifySuccess('Your booking is placed !')
-            SendEmail(event.target)
-            window.location.href = `/payment?booking=${
-              searchedParams.get('booking') || ''
-            }`
+
+            setTimeout(() => {
+              SendEmail(event.target)
+              navigate(
+                `/payment?booking=${searchedParams.get('booking') || ''}`
+              )
+            }, 2000)
           }
         } else {
           if (res.status === 200) {
@@ -116,7 +124,6 @@ const BookingCusDetails = () => {
     }
     await getHotelRules(dataModel)
       .then((res) => {
-        console.log(res)
         setRules(res.data)
       })
       .catch((err) => {
@@ -125,7 +132,7 @@ const BookingCusDetails = () => {
   }
   return (
     <div className='container'>
-      <div className='row user-details '>
+      <div className='row user-details'>
         {/* <div className='col-md-4 col-lg-3 '>
           <SideSummary />
         </div> */}

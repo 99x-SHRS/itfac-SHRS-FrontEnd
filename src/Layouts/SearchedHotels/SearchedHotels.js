@@ -30,7 +30,6 @@ const SearchedHotels = (props) => {
   useEffect(() => {
     if (hotels != null) {
       setLoading(false)
-      console.log(hotels)
     }
   }, [hotels])
 
@@ -60,7 +59,6 @@ const SearchedHotels = (props) => {
     setURLparams(dataModel)
     await searchHotelsByRate(dataModel).then((data) => {
       setHotels(data.data.rows)
-      console.log(data.data.rows)
       let totalRows = data.data.count.length
       if (data.status == 200) {
         setLoading(false)

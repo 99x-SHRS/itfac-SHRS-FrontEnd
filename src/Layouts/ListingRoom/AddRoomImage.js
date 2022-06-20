@@ -28,7 +28,6 @@ class AddRoomImage extends Component {
     this.setState({
       roomId: this.state.roomId.split('=')[1],
     })
-    console.log(this.props)
   }
   notifySuccess = (message) => {
     toast.success(message)
