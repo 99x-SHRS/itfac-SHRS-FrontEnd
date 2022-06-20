@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import InputForm from '../Coupon/InputForm';
 import Navbars from '../../Components/Navbar/Navbar';
 import Footer from '../../Layouts/Footer/Footer'
 
@@ -7,11 +8,30 @@ class WriteMessage extends Component {
         message: {
             to: '',
             messageText: ''
+        },
+        errors: {
+
         }
+    }
+    validate = () => {
+
+        const errors = {};
+
+        const { message } = this.state;
+        if (message.to.trim() === '')
+            errors.to = "Sender is required."
+        if (message.messageText.trim() === '')
+            errors.messageText = "Message is required."
+
+        return Object.keys(errors).length === 0 ? null : errors;
     }
 
     handleWriteMessage = e => {
         e.preventDefault();
+
+        const errors = this.validate();
+        this.setState({ errors: errors || {} });
+        if (errors) return;
     }
     handleChange = e => {
         const message = { ...this.state.message };
@@ -20,6 +40,7 @@ class WriteMessage extends Component {
     }
 
     render() {
+        const { message, errors } = this.state;
         return (
             <div>
                 <div>
@@ -32,22 +53,39 @@ class WriteMessage extends Component {
                     </div>
 
                     <form onSubmit={this.handleWriteMessage}>
-                        <div class="writeMessage-form-group">
+                        <InputForm
+                            name="to"
+                            value={message.to}
+                            label="To"
+                            onChange={this.handleChange}
+                            error={errors.to}
+                        />
+                        <InputForm
+                            name="messageText"
+                            value={message.messageText}
+                            label="Enter Message"
+                            onChange={this.handleChange}
+                            error={errors.messageText}
+
+                        />
+
+
+                        {/* <div class="writeMessage-form-group">
                             <label htmlFor="to">To</label>
-                            <input value={this.state.message.to}
+                            <input value={message.to}
                                 onChange={this.handleChange}
                                 name="to"
                                 type="string" class="form-control" id="to" aria-describedby="emailHelp" placeholder="Enter receiver"></input>
                             <br />
-                        </div>
-                        <div class="writeMessage-form-group">
+                        </div> */}
+                        {/* <div class="writeMessage-form-group">
                             <label htmlFor="messageText">Message</label>
-                            <input value={this.state.message.messageText}
+                            <input value={message.messageText}
                                 onChange={this.handleChange}
                                 name="messageText"
                                 type="string" class="form-control" id="messageText" placeholder="Enter message"></input>
                             <br />
-                        </div>
+                        </div> */}
                         <button
                             onClick={() => this.handleSendMessage}
                             type="submit" className="btn btn sendMessageButton">Send</button>
@@ -64,9 +102,6 @@ class WriteMessage extends Component {
 export default WriteMessage;
 
 
-// handleSendMessage = () => {
-//   console.log(to.value)
-//   console.log(to.message)
 
 //   const data={
 //     // id:localStorage.getItem('userId'),

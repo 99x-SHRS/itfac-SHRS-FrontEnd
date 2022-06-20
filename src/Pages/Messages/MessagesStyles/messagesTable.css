@@ -85,6 +85,9 @@ button.sendMessageButton{
   background-color: #5553b7 !important;
   color: white;
 }
+input#messageText.form-control{
+height: 200px;
+}
 /*
 .booking-history-container .tabs {
   left: 50%;

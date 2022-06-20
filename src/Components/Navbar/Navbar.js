@@ -227,8 +227,8 @@ const Navbars = () => {
                     <Dropdown.Item as={Link} to={'/loyalty-program'}>
                       Loyalty
                     </Dropdown.Item>
-                    <Dropdown.Item>Messeges</Dropdown.Item>
-                    {/* {roles.admin ? (
+                    <Dropdown.Item as={Link} to={'/messages'}>Messeges</Dropdown.Item>
+                    {roles.admin ? (
                       <>
                         <Dropdown.Item as={Link} to={'/admin/dashboard'}>
                           Admin Account
@@ -236,7 +236,7 @@ const Navbars = () => {
                       </>
                     ) : (
                       <></>
-                    )} */}
+                    )}
                     {roles.hotelAdmin ? (
                       <>
                         <Dropdown.Item as={Link} to={'/seller/dashboard'}>
