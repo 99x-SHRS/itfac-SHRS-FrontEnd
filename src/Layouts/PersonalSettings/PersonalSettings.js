@@ -33,15 +33,15 @@ function Personalsettings() {
   const [imgFile, setImgFile] = useState();
   const [edit, setEdit] = useState(false);
   const [items, setItems] = useState([]);
-  const [valuesError,setValuesError] = useState({
-    firstName: "",
-    lastName: "",
-    contactNo: "",
-    street2: "",
-    street1: "",
-    district: "",
-    province: "",
-  });
+  // const [valuesError,setValuesError] = useState({
+  //   firstName: "",
+  //   lastName: "",
+  //   contactNo: "",
+  //   street2: "",
+  //   street1: "",
+  //   district: "",
+  //   province: "",
+  // });
 
   const getuserDetails = async () => {
     const data = {
@@ -63,7 +63,7 @@ function Personalsettings() {
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
-    setValuesError({ ...valuesError, [prop]: "" })
+    // setValuesError({ ...valuesError, [prop]: "" })
   };
 
   function handleFile(event) {
@@ -91,29 +91,29 @@ function Personalsettings() {
         console.log(e);
       });
   }
-  const handleError = () => {
-    let isError = false;
-    Object.keys(values).forEach((property)=> {
-      if(values[property] === "") {
-        isError = true;
-        setValuesError((prevState) => ({
-          ...prevState,
-          [property]: "This filed is required!",
-        }));
+  // const handleError = () => {
+  //   let isError = false;
+  //   Object.keys(values).forEach((property)=> {
+  //     if(values[property] === "") {
+  //       isError = true;
+  //       setValuesError((prevState) => ({
+  //         ...prevState,
+  //         [property]: "This filed is required!",
+  //       }));
 
-      }
-    })
-    return isError;
-  };
+  //     }
+  //   })
+  //   return isError;
+  // };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     handlePosition();
     if (edit) {
-      if (!handleError()) {
+      
         updateUserDetails();
         setReadOnly(true);
-      }
+      
     } else {
       setEdit(true);
     }
@@ -198,7 +198,7 @@ function Personalsettings() {
                   readOnly={readOnly}
                   onChange={handleChange("firstName")}
                 />
-                <span>{valuesError.firstName}</span>
+                {/* <span>{valuesError.firstName}</span> */}
               </div>
               <div className="col-md-6">
                 <label for="inputEmail4" className="form-label">

@@ -70,7 +70,7 @@ const HeaderStats = () => {
                 className='w-full lg:w-6/12 xl:w-3/12 px-4'
                 style={{ cursor: 'pointer' }}
                 onClick={() => {
-                  // navigate('../seller/hotels')
+                  navigate('../seller/Review')
                 }}
               >
                 <CardStats

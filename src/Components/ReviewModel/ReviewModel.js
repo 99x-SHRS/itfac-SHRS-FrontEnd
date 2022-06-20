@@ -12,6 +12,7 @@ import {
 const ReviewModel = ({ id, description, rating, hotelId, onFresh }) => {
   const [hotelData, setHotelData] = useState({});
   const [show, setShow] = useState(false);
+  const [dshow, setDShow] = useState(false);
   const [updateReviewId, setupdateReviewId] = useState(null);
   const [ratings, setRatings] = useState(null);
   const [review, setReview] = useState(null);
@@ -36,6 +37,13 @@ const ReviewModel = ({ id, description, rating, hotelId, onFresh }) => {
   }
   const handleShow = () => {
     setShow(true)
+  }
+
+  const handleDClose = () => {
+    setDShow(false)
+  }
+  const handleDShow = () => {
+    setDShow(true)
   }
 
   const getHotelDetails = async () => {
@@ -140,7 +148,7 @@ const ReviewModel = ({ id, description, rating, hotelId, onFresh }) => {
           <button
             type='button'
             className='btn btn-outline-danger rounded-pill btn-block mb-2'
-            onClick={deleteReview}
+            onClick={handleDShow}
           >
             Remove
           </button>
@@ -204,6 +212,35 @@ const ReviewModel = ({ id, description, rating, hotelId, onFresh }) => {
             }}
           >
             Submit
+          </Button>
+        </Modal.Footer>
+      </Modal>
+      <Modal
+        show={dshow}
+        onHide={() => {
+          handleDClose()
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Are you sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button
+            variant='secondary'
+            onClick={() => {
+              handleDClose()
+            }}
+          >
+            No
+          </Button>
+          <Button
+            variant='primary'
+            onClick={() => {
+              deleteReview()
+              handleDClose()
+            }}
+          >
+            Yes
           </Button>
         </Modal.Footer>
       </Modal>

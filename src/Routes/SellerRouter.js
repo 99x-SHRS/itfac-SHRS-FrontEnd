@@ -15,10 +15,12 @@ import Revenue from '../Pages/Seller/Revenue/Revenue.js'
 import Facilities from '../Layouts/ListingHotel/Facilities.js'
 import ViewCoupons from '../Pages/Coupon/ViewCoupons'
 import CreateCoupon from '../Pages/Coupon/CreateCoupon'
+import Review from '../Pages/Seller/Review/Review'
 
 const SellerRoutes = (
   <>
     <Route exact path='/seller/hotels' element={<ListedHotels />}></Route>
+    <Route exact path='/seller/Review' element={<Review/>}></Route>
     <Route path='/seller/hotel/register' element={<RegisterHotel />}></Route>
     <Route exact path='/seller/hotel/image' element={<UploadImage />}></Route>
     <Route
