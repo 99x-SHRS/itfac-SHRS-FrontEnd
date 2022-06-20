@@ -161,7 +161,7 @@ const ListedRooms = () => {
           )}
         </div>
       </div>
-      <div className='room-footer'>
+      <div className='room-type-footer'>
         <Footer />
       </div>
       <DarkOverlaybackGround loading={deleted} content={'Deleting room .'} />
