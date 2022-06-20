@@ -33,15 +33,6 @@ function Personalsettings() {
   const [imgFile, setImgFile] = useState();
   const [edit, setEdit] = useState(false);
   const [items, setItems] = useState([]);
-  // const [valuesError,setValuesError] = useState({
-  //   firstName: "",
-  //   lastName: "",
-  //   contactNo: "",
-  //   street2: "",
-  //   street1: "",
-  //   district: "",
-  //   province: "",
-  // });
 
   const getuserDetails = async () => {
     const data = {
@@ -63,7 +54,6 @@ function Personalsettings() {
 
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
-    // setValuesError({ ...valuesError, [prop]: "" })
   };
 
   function handleFile(event) {
@@ -91,29 +81,54 @@ function Personalsettings() {
         console.log(e);
       });
   }
-  // const handleError = () => {
-  //   let isError = false;
-  //   Object.keys(values).forEach((property)=> {
-  //     if(values[property] === "") {
-  //       isError = true;
-  //       setValuesError((prevState) => ({
-  //         ...prevState,
-  //         [property]: "This filed is required!",
-  //       }));
 
-  //     }
-  //   })
-  //   return isError;
-  // };
+  const handleError = (values) => {
+    let isError = false;
+    var letters = /^[A-Za-z]+$/;
+    var road = /^[A-Za-z]+\s+$/;
+    var numbers = /^[0-9]+$/;
+    var contact = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    var houseNo = /^(?!0)\d[0-3]{0,2}[a-zA-Z]?\/(?!0)\d[0-9]{0,1}$/;
+    if (values.firstName == "" || !values.firstName.match(letters)) {
+      isError = true;
+    }
+    if (values.lastName == "" || !values.lastName.match(letters)) {
+      isError = true;
+    }
+    if (values.street1 == "" || !values.street1.match(numbers)) {
+      isError = true;
+    }
+    if (values.street2 == "" || !values.street2.match(letters)) {
+      isError = true;
+    }
+    if (values.district == "" || !values.district.match(letters)) {
+      isError = true;
+    }
+    if (values.province == "" || !values.province.match(letters)) {
+      isError = true;
+    }
+    if (values.contactNo == "" || !values.contactNo.match(contact)) {
+      isError = true;
+    }
+    if (isError) {
+      notifyError("Your details are incorrect.");
+      return isError;
+    } else {
+      return isError;
+    }
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     handlePosition();
     if (edit) {
-      
+      if (!handleError(values)) {
         updateUserDetails();
         setReadOnly(true);
-      
+        notifySuccess("Successfully Edited your Details..");
+      } else {
+        notifyError("Check your values before update");
+      }
     } else {
       setEdit(true);
     }
@@ -198,7 +213,6 @@ function Personalsettings() {
                   readOnly={readOnly}
                   onChange={handleChange("firstName")}
                 />
-                {/* <span>{valuesError.firstName}</span> */}
               </div>
               <div className="col-md-6">
                 <label for="inputEmail4" className="form-label">
@@ -232,9 +246,9 @@ function Personalsettings() {
                   <h6>No:</h6>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
-                  id="firstName"
+                  id="No"
                   placeholder={items.street1}
                   required
                   readOnly={readOnly}
@@ -296,7 +310,7 @@ function Personalsettings() {
                 />
               </div>
 
-              <div className="col-md-6">
+              {/* <div className="col-md-6">
                 <label for="inputFile" className="form-label">
                   <h6>Enter Your Photo:</h6>
                 </label>
@@ -308,7 +322,7 @@ function Personalsettings() {
                   readOnly={readOnly}
                   onChange={handleFile}
                 />
-              </div>
+              </div> */}
 
               <div className="col-md-12">
                 <h6 className="text-left">Last Edited At: {items.updatedAt}</h6>

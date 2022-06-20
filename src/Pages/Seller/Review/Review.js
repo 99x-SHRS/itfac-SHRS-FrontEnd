@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbars from "../../../Components/Navbar/Navbar";
 import Footer from "../../../Layouts/Footer/Footer";
-// import ReviewModel from "../../../Components/SellerReviewModel/ReviewModel";
-import MappingHelp from "../../../Components/SellerReviewModel/MappingHelp"
+import ReviewModel from "../../../Components/SellerReviewModel/ReviewModel";
 // import HashLoader from "react-spinners/HashLoader";
 
 import {
@@ -41,7 +40,7 @@ const Review = () => {
         <div className="row g-3">
           <div className="col-12 shadow-lg rounded-3 border border-secondary ml-2">
             <div className="pl-5 pr-5 pb-2 mt-5">
-              <MappingHelp/>
+                <ReviewModel/>
             </div>
           </div>
         </div>
