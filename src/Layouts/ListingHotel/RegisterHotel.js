@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import { useNavigate, useSearchParams } from 'react-router-dom'
+import secureLocalStorage from 'react-secure-storage'
 import { toast } from 'react-toastify'
 import '../../Assets/styles/css/Seller/Layouts/registerHotel.css'
 import AddressSelector from '../../Components/AddressSelector/AddressSelector.js'
@@ -10,6 +11,7 @@ import {
   getHotelById,
   registerHotel,
   updateHotelById,
+  updateRole,
 } from '../../Services/Api/Utilities/Index.js'
 import Footer from '../Footer/Footer.js'
 
@@ -99,9 +101,19 @@ const RegisterHotel = () => {
         })
     } else {
       await registerHotel(dataModel)
-        .then((res) => {
+        .then(async (res) => {
           if (res.status == 200) {
             setLoading(true)
+            let userId = localStorage.getItem('user')
+            const dataModel = {
+              admin: false,
+              hotelAdmin: true,
+              customer: true,
+            }
+            await updateRole(userId, dataModel).then((res) => {
+              console.log(res)
+              secureLocalStorage.setItem('hotelAdmin', res.data.hotelAdmin)
+            })
             setTimeout(() => {
               setLoading(false)
               navigate(`/seller/hotel/image?id=${res.data.hotelId}`)

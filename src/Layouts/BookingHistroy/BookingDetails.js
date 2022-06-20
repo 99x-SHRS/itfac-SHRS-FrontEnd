@@ -110,9 +110,7 @@ const BookingDetails = () => {
                     {booking.checkOutDate.split('T')[0]}{' '}
                   </h6>
                 </div>
-                <div className='col-sm-4'>
-                  <h6>1 room 2 nights</h6>
-                </div>
+                <div className='col-sm-4'>{/* <h6>1 room 2 nights</h6> */}</div>
                 <div className='col-sm-4'></div>
               </div>
             </div>

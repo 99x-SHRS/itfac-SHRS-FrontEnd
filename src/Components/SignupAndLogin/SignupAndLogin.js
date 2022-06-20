@@ -80,6 +80,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
       await addUser(dataModel)
         .then((res) => {
           if (res.data) {
+            console.log(res)
             notifySuccess('Successfully created your account.')
             setTimeout(() => {
               SendSignUpEmail(event.target)
@@ -115,7 +116,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           <form onSubmit={signUpHandle}>
             <h1>Create Account</h1>
             <div class='social-container'>
-              <a href='#' class='social'>
+              {/* <a href='#' class='social'>
                 <i class='fab fa-facebook-f'></i>
               </a>
               <a href='#' class='social'>
@@ -124,9 +125,9 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
 
               <a href='#' class='social'>
                 <i class='fab fa-linkedin-in'></i>
-              </a>
+              </a> */}
             </div>
-            <span>or use your email for registration</span>
+            {/* <span>or use your email for registration</span> */}
 
             <input
               type='text'
@@ -154,7 +155,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           <form onSubmit={loginHandle}>
             <h1>Sign in</h1>
             <div class='social-container'>
-              <a href='#' class='social'>
+              {/* <a href='#' class='social'>
                 <i class='fab fa-facebook-f'></i>
               </a>
               <a href='#' class='social'>
@@ -162,9 +163,9 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
               </a>
               <a href='#' class='social'>
                 <i class='fab fa-linkedin-in'></i>
-              </a>
+              </a> */}
             </div>
-            <span>or use your account</span>
+            {/* <span>or use your account</span> */}
             <input type='email' placeholder='Email' id='loginEmail' required />
             <input
               type='password'
@@ -172,7 +173,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
               id='loginPassword'
               required
             />
-            <a href='#'>Forgot your password?</a>
+            {/* <a href='#'>Forgot your password?</a> */}
             <button type='submit'>Sign In</button>
           </form>
         </div>
