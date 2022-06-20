@@ -13,6 +13,9 @@ import Bookings from '../Pages/Seller/Bookings/Bookings.js'
 import BookingDetails from '../Pages/Seller/Bookings/BookingDetails.js'
 import Revenue from '../Pages/Seller/Revenue/Revenue.js'
 import Facilities from '../Layouts/ListingHotel/Facilities.js'
+import ViewCoupons from '../Pages/Coupon/ViewCoupons'
+import CreateCoupon from '../Pages/Coupon/CreateCoupon'
+
 const SellerRoutes = (
   <>
     <Route exact path='/seller/hotels' element={<ListedHotels />}></Route>
@@ -58,6 +61,9 @@ const SellerRoutes = (
       element={<BookingDetails />}
     ></Route>
     <Route exact path='/seller/revenue' element={<Revenue />}></Route>
+    <Route exact path='/seller/viewCoupons' element={<ViewCoupons />}></Route>
+    <Route exact path='/seller/createCoupon' element={<CreateCoupon />}></Route>
+
   </>
 )
 
