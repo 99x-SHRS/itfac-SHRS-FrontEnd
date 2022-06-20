@@ -31,9 +31,7 @@ const Searchbox = () => {
       let URL = `/hotels?location=${data.location}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
       navigate(URL)
     } else {
-      notifyError(
-        'Fill all the required and valid feilds before search a hotel'
-      )
+      notifyError('Fill all the required and valid fieds before search a hotel')
     }
   }
   const notifyError = (message) => {

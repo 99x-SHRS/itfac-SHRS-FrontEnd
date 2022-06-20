@@ -22,10 +22,7 @@ const HeaderStats = () => {
                 <CardStats
                   statSubtitle='Bookings'
                   statTitle='350,897'
-                  statArrow='up'
-                  statPercent='3.48'
                   statPercentColor='text-emerald-500'
-                  statDescripiron='Since last month'
                   statIconName='far fa-chart-bar'
                   statIconColor='bg-red-500'
                 />
@@ -34,16 +31,13 @@ const HeaderStats = () => {
                 className='w-full lg:w-6/12 xl:w-3/12 px-4'
                 style={{ cursor: 'pointer' }}
                 onClick={() => {
-                  navigate('../seller/revenue')
+                  // navigate('../seller/revenue')
                 }}
               >
                 <CardStats
                   statSubtitle='REVENUE'
-                  statTitle='2,356'
-                  statArrow='down'
                   statPercent='3.48'
                   statPercentColor='text-red-500'
-                  statDescripiron='Since last week'
                   statIconName='fas fa-chart-pie'
                   statIconColor='bg-orange-500'
                 />
