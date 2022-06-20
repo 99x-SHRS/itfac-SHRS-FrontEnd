@@ -173,7 +173,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
               id='loginPassword'
               required
             />
-            <a href='#'>Forgot your password?</a>
+            {/* <a href='#'>Forgot your password?</a> */}
             <button type='submit'>Sign In</button>
           </form>
         </div>
