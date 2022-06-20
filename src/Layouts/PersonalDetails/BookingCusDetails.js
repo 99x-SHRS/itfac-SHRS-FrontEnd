@@ -35,6 +35,9 @@ const BookingCusDetails = () => {
     getAllRules()
     toast.configure()
   }, [])
+  useEffect(() => {
+    console.log(email)
+  }, [email])
   const notifyError = (message) => {
     toast.error(message)
   }
@@ -53,6 +56,7 @@ const BookingCusDetails = () => {
         setNumber(res.data.contactNo)
         setSpecial_request(res.data.specialRequest)
         setArrivalTime(res.data.arrivalTime)
+        setEmail(res.data.email)
         var dates = new Date(res.data.arrivalTime)
         var currentTime = dates.toISOString().substring(11, 16)
         document.getElementById('arrivalTime').value = currentTime
@@ -81,12 +85,16 @@ const BookingCusDetails = () => {
       rentCar: event.target.rent_car.checked,
       customerId: localStorage.getItem('user'), //user id
       contactNo: number,
+      email: email,
     }
-    console.log(dataModel)
+
     updateBooking(bookingId, dataModel, event)
   }
 
   const updateBooking = async (bookingId, dataModel, event) => {
+    // console.log(dataModel)
+    // return
+    event.preventDefault()
     await updateBookingById(bookingId, dataModel)
       .then((res) => {
         if (!isUpdate) {

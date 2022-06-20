@@ -13,7 +13,7 @@ import {
   updateUserById,
   getUnreadCountByRecieverId,
 } from '../../Services/Api/Utilities/Index'
-import { SendEmail } from '../../Services/Gmail/EmailJs'
+
 import '../../Assets/styles/css/Components/navbar.css'
 import 'react-responsive-modal/styles.css'
 
@@ -228,7 +228,7 @@ const Navbars = () => {
                       Loyalty
                     </Dropdown.Item>
                     <Dropdown.Item>Messeges</Dropdown.Item>
-                    {roles.admin ? (
+                    {/* {roles.admin ? (
                       <>
                         <Dropdown.Item as={Link} to={'/admin/dashboard'}>
                           Admin Account
@@ -236,7 +236,7 @@ const Navbars = () => {
                       </>
                     ) : (
                       <></>
-                    )}
+                    )} */}
                     {roles.hotelAdmin ? (
                       <>
                         <Dropdown.Item as={Link} to={'/seller/dashboard'}>
