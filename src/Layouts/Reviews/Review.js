@@ -15,7 +15,6 @@ const Review = () => {
     }
     await getReviewByHotelId(dataModel)
       .then((res) => {
-        console.log(res)
         setReview(res.data)
       })
       .catch((err) => {

@@ -17,7 +17,6 @@ const SelectPayment = ({ amount }) => {
     }
     await getAllPaymentsBybookingId(dataModel)
       .then((res) => {
-        console.log(res.data[0].paymenttype)
         if (res.status == 200) {
           let method = res.data[0].paymenttype
           document.getElementById(method).checked = true

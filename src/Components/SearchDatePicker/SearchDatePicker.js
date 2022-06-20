@@ -69,14 +69,14 @@ const SearchDatePicker = ({ hotelName, update, handleClose }) => {
           rooms: rooms,
         }
         let URL = `/hotels?location=${hotelName}&checkin-date=${data.checkInDate}&checkout-date=${data.checkOutDate}&adults=${data.adult}&children=${data.children}&rooms=${data.rooms}`
-        console.log(event.target.Children.value)
+
         navigate(URL)
       } else {
         notifyError('Plase fill required feilds.')
       }
     } else {
       changeRoom()
-      console.log('ad')
+
       handleClose()
     }
   }
@@ -104,7 +104,6 @@ const SearchDatePicker = ({ hotelName, update, handleClose }) => {
           noRooms: data.rooms,
         })
           .then((res) => {
-            console.log(data)
             notifySuccess('Booking is updated')
           })
           .catch(() => {

@@ -11,7 +11,7 @@ const AddressSelector = ({ dis, prov }) => {
   const getDistrinct = (province) => {
     if (province != null) {
       // province = province.trim().toUpperCase()
-      console.log(province)
+
       if (!ProvinceDistrict[province]) {
         return null
       } else {

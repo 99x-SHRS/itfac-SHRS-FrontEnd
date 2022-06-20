@@ -32,7 +32,6 @@ class UploadFilesService {
     formData.append('description', description)
     formData.append('image', file)
     formData.append('hotelId', hotelId)
-    console.log(formData)
     return http.post('/api/v1/uploads//hotel/souvenir', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
@@ -45,8 +44,6 @@ class UploadFilesService {
     let formData = new FormData()
     formData.append('roomId', roomId)
     formData.append('image', file)
-
-    console.log(formData)
 
     return http.post('/api/v1/uploads/room', formData, {
       headers: {

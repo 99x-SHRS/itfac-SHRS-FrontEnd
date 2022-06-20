@@ -27,6 +27,7 @@ const BookingCusDetails = () => {
   const [rules, setRules] = useState(null)
   const navigate = useNavigate()
   const inputform = useRef()
+
   useEffect(() => {
     setUpdate(searchedParams.get('edit') || '')
     if (searchedParams.get('edit') || '') {
@@ -35,9 +36,7 @@ const BookingCusDetails = () => {
     getAllRules()
     toast.configure()
   }, [])
-  useEffect(() => {
-    console.log(email)
-  }, [email])
+
   const notifyError = (message) => {
     toast.error(message)
   }
@@ -92,18 +91,19 @@ const BookingCusDetails = () => {
   }
 
   const updateBooking = async (bookingId, dataModel, event) => {
-    // console.log(dataModel)
-    // return
     event.preventDefault()
     await updateBookingById(bookingId, dataModel)
       .then((res) => {
         if (!isUpdate) {
           if (res.status === 200) {
             notifySuccess('Your booking is placed !')
-            SendEmail(event.target)
-            window.location.href = `/payment?booking=${
-              searchedParams.get('booking') || ''
-            }`
+
+            setTimeout(() => {
+              SendEmail(event.target)
+              navigate(
+                `/payment?booking=${searchedParams.get('booking') || ''}`
+              )
+            }, 2000)
           }
         } else {
           if (res.status === 200) {
@@ -124,7 +124,6 @@ const BookingCusDetails = () => {
     }
     await getHotelRules(dataModel)
       .then((res) => {
-        console.log(res)
         setRules(res.data)
       })
       .catch((err) => {
@@ -133,7 +132,7 @@ const BookingCusDetails = () => {
   }
   return (
     <div className='container'>
-      <div className='row user-details '>
+      <div className='row user-details'>
         {/* <div className='col-md-4 col-lg-3 '>
           <SideSummary />
         </div> */}

@@ -68,7 +68,6 @@ const AllBookingHistory = () => {
   }
   const handlePageClick = async (data) => {
     let currentPage = data.selected
-    console.log(currentPage)
     getBookings(currentPage)
   }
 
