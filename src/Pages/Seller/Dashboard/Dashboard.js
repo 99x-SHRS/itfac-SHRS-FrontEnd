@@ -16,10 +16,10 @@ const Dashboard = () => {
         <div className='px-4 md:px-10 mx-auto w-full -m-24 chart-container  bg-blueGray-100'>
           <div className='flex flex-wrap'>
             <div className='w-full xl:w-8/12 mb-12 xl:mb-0 px-4'>
-              <CardLineChart />
+              {/* <CardLineChart /> */}
             </div>
             <div className='w-full xl:w-4/12 px-4'>
-              <CardBarChart />
+              {/* <CardBarChart /> */}
             </div>
           </div>
           <div className='flex flex-wrap mt-4'>

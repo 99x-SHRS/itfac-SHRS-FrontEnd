@@ -64,7 +64,7 @@ const SelectPayment = ({ amount }) => {
             </label>
           </div>
         </div>
-        <div class='form-check'>
+        {/* <div class='form-check'>
           <div className='payment-methods'>
             <input
               class='form-check-input'
@@ -80,7 +80,7 @@ const SelectPayment = ({ amount }) => {
               PayHere
             </label>
           </div>
-        </div>
+        </div> */}
         <div class='form-check'>
           <div className='payment-methods'>
             <input

@@ -11,13 +11,13 @@ const Footer = () => {
               <h3>Services</h3>
               <ul>
                 <li>
-                  <a href='#'>Hotel Bookings</a>
+                  <a>Hotel Bookings</a>
                 </li>
                 <li>
-                  <a href='#'>Events</a>
+                  <a>Events</a>
                 </li>
                 <li>
-                  <a href='#'>Parties</a>
+                  <a>Weddings</a>
                 </li>
               </ul>
             </div>
@@ -25,36 +25,35 @@ const Footer = () => {
               <h3>About</h3>
               <ul>
                 <li>
-                  <a href='#'>Company</a>
+                  <a>Company</a>
                 </li>
                 <li>
-                  <a href='#'>Team</a>
+                  <a>Team</a>
                 </li>
                 <li>
-                  <a href='#'>Careers</a>
+                  <a>Careers</a>
                 </li>
               </ul>
             </div>
             <div class='col-md-6 item text'>
               <h3>BOOKNOW.LK</h3>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis
-                odit iure distinctio rem alias aliquam voluptas quaerat velit
-                reiciendis repellat perferendis soluta itaque, illo quibusdam
-                eius voluptatem quo ullam officiis.
+                We make it easy for everyone to create a beautiful, professional
+                web presence. WE save your money and time. So what are you
+                waiting for? Book your next trip on Booknow.lk today.
               </p>
             </div>
             <div class='col item social'>
-              <a href='#'>
+              <a>
                 <i class='icon ion-social-facebook'></i>
               </a>
-              <a href='#'>
+              <a>
                 <i class='icon ion-social-twitter'></i>
               </a>
-              <a href='#'>
+              <a>
                 <i class='icon ion-social-snapchat'></i>
               </a>
-              <a href='#'>
+              <a>
                 <i class='icon ion-social-instagram'></i>
               </a>
             </div>

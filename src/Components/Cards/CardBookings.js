@@ -85,8 +85,8 @@ const CardBookings = () => {
                       </td>
                       <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
                         <i className='fas fa-arrow-up text-emerald-500 mr-4'></i>
-                        {booking.checkInDate.split('T')[0]} at{' '}
-                        {booking.arrivalTime}
+                        {booking.checkInDate.split('T')[0]}{' '}
+                        {/* {booking.arrivalTime} */}
                       </td>
                       <td className='border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4'>
                         <Link to={`/seller/booking/`}>

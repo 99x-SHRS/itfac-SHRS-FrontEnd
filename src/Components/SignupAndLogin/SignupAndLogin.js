@@ -80,9 +80,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
       await addUser(dataModel)
         .then((res) => {
           if (res.data) {
-            notifySuccess(
-              'Successfully created your account and please check you email to verify the account'
-            )
+            notifySuccess('Successfully created your account.')
             setTimeout(() => {
               SendSignUpEmail(event.target)
             }, 2000)
