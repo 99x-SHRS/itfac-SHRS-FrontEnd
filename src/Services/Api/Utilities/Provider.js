@@ -50,6 +50,13 @@ const insertData = async (url, type, task, data) => {
     .then(handleResponse)
     .catch(handleError)
 }
+
+const updateByIdPost = async (url, type, task, data) => {
+  return axios
+    .post(`${url}/${type}/${task}`, data)
+    .then(handleResponse)
+    .catch(handleError)
+}
 //delete methods
 const deleteData = async (url, type, task, data) => {
   return axios
@@ -81,4 +88,5 @@ export default {
   deleteDataById,
   updateById,
   getWithOneParams,
+  updateByIdPost,
 }

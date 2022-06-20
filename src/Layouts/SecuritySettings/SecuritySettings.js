@@ -53,8 +53,6 @@ function SecuritySettings() {
       oldPassword : values.currantPassword,
       newPassword : values.newPassword
     }
-    console.log(data);
-    return
     await updatePassword(data)
       .then((response) => {
         const data = response.data;
