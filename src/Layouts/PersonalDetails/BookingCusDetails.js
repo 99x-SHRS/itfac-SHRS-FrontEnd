@@ -86,10 +86,16 @@ const BookingCusDetails = () => {
       contactNo: number,
       email: email,
     }
-
-    updateBooking(bookingId, dataModel, event)
+    if (validate()) {
+      updateBooking(bookingId, dataModel, event)
+    } else {
+      notifyError('Invalid first name or last name')
+    }
   }
-
+  const validate = () => {
+    var letters = /^[A-Za-z]+$/
+    return first_name.match(letters) && last_name.match(letters)
+  }
   const updateBooking = async (bookingId, dataModel, event) => {
     event.preventDefault()
     await updateBookingById(bookingId, dataModel)
@@ -97,7 +103,6 @@ const BookingCusDetails = () => {
         if (!isUpdate) {
           if (res.status === 200) {
             notifySuccess('Your booking is placed !')
-
             setTimeout(() => {
               SendEmail(event.target)
               navigate(
@@ -118,9 +123,10 @@ const BookingCusDetails = () => {
         console.log(err)
       })
   }
+
   const getAllRules = async () => {
     const dataModel = {
-      id: 24,
+      id: searchedParams.get('hotelId') || '',
     }
     await getHotelRules(dataModel)
       .then((res) => {
