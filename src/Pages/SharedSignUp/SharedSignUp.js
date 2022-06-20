@@ -5,7 +5,7 @@ import '../../Assets/styles/css/Components/signupAndLogin.css'
 import DarkOverlaybackGround from '../../Components/DarkOverlaybackGround/DarkOverlaybackGround'
 import Footer from '../../Layouts/Footer/Footer'
 import { addUser, refferalValidate } from '../../Services/Api/Utilities/Index'
-
+import { SendSignUpEmail } from '../../Services/Gmail/EmailJs'
 const SharedSignUp = () => {
   const [content, setContent] = useState('')
   const [loading, setLoading] = useState(false)
@@ -48,6 +48,9 @@ const SharedSignUp = () => {
             validateRefferal()
             setLoading(false)
             localStorage.clear()
+            setTimeout(() => {
+              SendSignUpEmail(event.target)
+            }, 2000)
             navigate('/')
           } else {
             notifyError('This email is aleady taken')
@@ -87,7 +90,7 @@ const SharedSignUp = () => {
             <form onSubmit={signUpHandle}>
               <h1>Create Account</h1>
               <div class='social-container'>
-                <a href='#' class='social'>
+                {/* <a href='#' class='social'>
                   <i class='fab fa-facebook-f'></i>
                 </a>
                 <a href='#' class='social'>
@@ -95,7 +98,7 @@ const SharedSignUp = () => {
                 </a>
                 <a href='#' class='social'>
                   <i class='fab fa-linkedin-in'></i>
-                </a>
+                </a> */}
               </div>
               <span>or use your email for registration</span>
 
@@ -104,6 +107,7 @@ const SharedSignUp = () => {
                 placeholder='Email'
                 id='signupEmail'
                 required
+                name='email'
               />
               <input
                 type='password'
