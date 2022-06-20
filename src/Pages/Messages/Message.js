@@ -21,34 +21,37 @@ class Message extends Component {
         messages: []
 
     }
-    async componentDidMount() {
-        const dataModel = {
-            // id: localStorage.getItem('userId')
-            id: 1
-        }
-        const data = await getMessagesByRecieverId(dataModel)
-        this.setState({ messages: data.data })
-        console.log(data);
-    }
-    async componentDidMount() {
-        const dataModel = {
-            // id: localStorage.getItem('userId')
-            id: 1
-        }
-        const data = await getMessagesBySenderId(dataModel)
-        this.setState({ messages: data.data })
-        console.log(data);
-    }
+
+    // async componentDidMount() {
+    //     const dataModel = {
+    //         // id: localStorage.getItem('userId')
+    //         id: 1
+    //     }
+    //     const data = await getMessagesBySenderId(dataModel)
+    //     this.setState({ messages: data.data })
+    //     console.log(data);
+    // }
     handleShowModal = () => {
         this.setState({ show: true });
     }
     handleCloseModal = () => {
         this.setState({ show: false });
     }
-    handleViewReceivedMessages = () => {
+    handleViewReceivedMessages = async () => {
+
+
+
+        const dataModel = {
+            id: 1
+        }
+        const data = await getMessagesByRecieverId(dataModel)
+        console.log(data);
+        this.setState({ messages: data.data })
+
+
     }
-    handleViewReceivedMessages = () => {
-    }
+    // handleViewReceivedMessages = () => {
+    // }
 
 
     render() {
@@ -106,6 +109,7 @@ class Message extends Component {
                             )}
                         </tbody>
                     </ReactBootstrap.Table>
+
                     <span>
                         <MessagePagination />
                     </span>

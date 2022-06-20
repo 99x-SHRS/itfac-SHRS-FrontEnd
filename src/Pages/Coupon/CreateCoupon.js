@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Navbars from './../../Components/Navbar/navbar';
-import Footer from './../../Layouts/Footer/footer';
+import InputForm from './InputForm';
+import Navbars from '../../Components/Navbar/Navbar';
+import Footer from '../../Layouts/Footer/Footer'
 
 import '../Coupon/CouponStyles/couponStyles.css'
 
@@ -12,14 +13,47 @@ class CreateCoupon extends Component {
             discount: '',
             minTotal: '',
             expireDate: ''
+        },
+        errors: {
+
         }
+    }
+
+    validate = () => {
+
+        const errors = {};
+
+        const { coupon } = this.state;
+        if (coupon.title.trim() === '')
+            errors.title = "Title is required."
+        if (coupon.token.trim() === '')
+            errors.token = "Token is required."
+        if (coupon.discount.trim() === '')
+            errors.discount = "Discount is required."
+        if (coupon.minTotal.trim() === '')
+            errors.minTotal = "Minimum Total is required."
+        if (coupon.expireDate.trim() === '')
+            errors.expireDate = "Expire Date is required."
+
+        return Object.keys(errors).length === 0 ? null : errors;
     }
 
 
     handleCreateCoupon = e => {
         e.preventDefault();
+
+        const errors = this.validate();
+        this.setState({ errors: errors || {} });
+        if (errors) return;
     }
+    handleChange = e => {
+        const coupon = { ...this.state.coupon };
+        coupon[e.currentTarget.name] = e.currentTarget.value;
+        this.setState({ coupon });
+    }
+
     render() {
+        const { coupon, errors } = this.state;
         return (
             <div>
                 <div>
@@ -31,35 +65,52 @@ class CreateCoupon extends Component {
                     </div>
 
                     <form onSubmit={this.handleCreateCoupon}>
-                        <div className="coupon-form-group">
-                            <label htmlFor="title">Title</label>
-                            <input type="string" className="form-control" id="title" aria-describedby="emailHelp" placeholder="Enter title"></input>
-                            <br />
-                        </div>
-                        <div className="coupon-form-group">
-                            <label htmlFor="token">Token</label>
-                            <input type="string" className="form-control" id="token" placeholder="Enter token"></input>
-                            <br />
-                        </div>
-                        <div className="coupon-form-group">
-                            <label htmlFor="discount">Discount</label>
-                            <input type="string" className="form-control" id="discount" placeholder="Enter discount"></input>
-                            <br />
-                        </div>
-                        <div className="coupon-form-group">
-                            <label htmlFor="minTotal">Minimum Total</label>
-                            <input type="string" className="form-control" id="minTotal" placeholder="Enter minimum total"></input>
-                            <br />
-                        </div>
-                        <div className="coupon-form-group">
-                            <label htmlFor="expireOn">Expire On</label>
-                            <input type="string" className="form-control" id="expireOn" placeholder="Enter expire date"></input>
-                            <br />
-                        </div>
+                        <InputForm
+                            name="title"
+                            value={coupon.title}
+                            label="Title"
+                            placeholder="Enter Title"
+                            onChange={this.handleChange}
+                            error={errors.title}
+                        />
+                        <InputForm
+                            name="token"
+                            value={coupon.token}
+                            label="Token"
+                            placeholder="Enter Token"
+                            onChange={this.handleChange}
+                            error={errors.token}
+                        />
+                        <InputForm
+                            name="discount"
+                            value={coupon.discount}
+                            label="Discount"
+                            placeholder="Enter Discount"
+                            onChange={this.handleChange}
+                            error={errors.discount}
+                        />
+                        <InputForm
+                            name="minTotal"
+                            value={coupon.minTotal}
+                            label="Minimum Total"
+                            placeholder="Enter Minimum Total"
+                            onChange={this.handleChange}
+                            error={errors.minTotal}
+                        />
+                        <InputForm
+                            name="expireOn"
+                            value={coupon.expireDate}
+                            label="Expire On"
+                            placeholder="Enter Expire Date"
+                            onChange={this.handleChange}
+                            error={errors.expireDate}
+                        />
                         <button
                             onClick={() => this.handleSendMessage}
                             type="submit" className="btn btn sendCouponButton">Create Coupon</button>
                     </form>
+
+
                 </div>
                 <div>
                     <Footer />

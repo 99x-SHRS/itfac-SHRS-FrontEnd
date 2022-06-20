@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Navbars from './../../Components/Navbar/navbar';
-import Footer from './../../Layouts/Footer/footer';
+import Navbars from '../../Components/Navbar/Navbar';
+import Footer from '../../Layouts/Footer/Footer'
 import * as ReactBootstrap from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';

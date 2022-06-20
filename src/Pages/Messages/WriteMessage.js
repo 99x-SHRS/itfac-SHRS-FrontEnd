@@ -1,42 +1,67 @@
 import React, { Component } from 'react';
 import Navbars from '../../Components/Navbar/Navbar';
 import Footer from '../../Layouts/Footer/Footer'
-import Messages from './Message';
 
-const WriteMessage = () => {
-    return (
-        <div>
+class WriteMessage extends Component {
+    state = {
+        message: {
+            to: '',
+            messageText: ''
+        }
+    }
+
+    handleWriteMessage = e => {
+        e.preventDefault();
+    }
+    handleChange = e => {
+        const message = { ...this.state.message };
+        message[e.currentTarget.name] = e.currentTarget.value;
+        this.setState({ message });
+    }
+
+    render() {
+        return (
             <div>
-                <Navbars />
-            </div>
-
-            <div className='writeMessageBox'>
-                <div className='writeMessageBoxHeader'>
-                    <>Write Message</>
+                <div>
+                    <Navbars />
                 </div>
 
-                <form>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">To</label>
-                        <input type="string" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter receiver"></input>
-                        {/* <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                <div className='writeMessageBox'>
+                    <div className='writeMessageBoxHeader'>
+                        <>Write Message</>
                     </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword1">Message</label>
-                        <input type="string" class="form-control" id="exampleInputPassword1" placeholder="Enter message"></input>
-                    </div>
-                    <button
-                        onClick={() => this.handleSendMessage}
-                        type="submit" className="btn btn sendMessageButton">Send</button>
-                </form>
+
+                    <form onSubmit={this.handleWriteMessage}>
+                        <div class="writeMessage-form-group">
+                            <label htmlFor="to">To</label>
+                            <input value={this.state.message.to}
+                                onChange={this.handleChange}
+                                name="to"
+                                type="string" class="form-control" id="to" aria-describedby="emailHelp" placeholder="Enter receiver"></input>
+                            <br />
+                        </div>
+                        <div class="writeMessage-form-group">
+                            <label htmlFor="messageText">Message</label>
+                            <input value={this.state.message.messageText}
+                                onChange={this.handleChange}
+                                name="messageText"
+                                type="string" class="form-control" id="messageText" placeholder="Enter message"></input>
+                            <br />
+                        </div>
+                        <button
+                            onClick={() => this.handleSendMessage}
+                            type="submit" className="btn btn sendMessageButton">Send</button>
+                    </form>
+                </div>
+                <div>
+                    <Footer />
+                </div>
             </div>
-            <div>
-                <Footer />
-            </div>
-        </div>
-    );
+        );
+    }
 }
 
+export default WriteMessage;
 
 
 // handleSendMessage = () => {
@@ -62,14 +87,13 @@ const WriteMessage = () => {
 // }
 
 
-// const [to, setToValue] = useState(""); 
-// const [message, setMessageValue] = useState(""); 
-// const handleToChange = (e) => { 
-//   setToValue(e.target.value) 
+// const [to, setToValue] = useState("");
+// const [message, setMessageValue] = useState("");
+// const handleToChange = (e) => {
+//   setToValue(e.target.value)
 // }
-// const handleMessageChange = (e) => { 
-//   setMessageValue(e.target.value) 
+// const handleMessageChange = (e) => {
+//   setMessageValue(e.target.value)
 // }
 
 
-export default WriteMessage;
