@@ -9,6 +9,7 @@ import exceptionsRouters from './Routes/ExceptionsRouters'
 import ChatBot from './Services/ChatBot/ChatBot.js'
 import ShareButton from './Components/ShareButton/ShareButton'
 import Dashboard from './Pages/Home/Dashboard'
+import RegisterHotel from './Layouts/ListingHotel/RegisterHotel'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import './App.css'
@@ -75,6 +76,10 @@ function App() {
             <Routes>
               {' '}
               <Route exact path='/' element={<Dashboard />}></Route>
+              <Route
+                path='/seller/hotel/register'
+                element={<RegisterHotel />}
+              ></Route>
             </Routes>
 
             {roles.customer && !roles.hotelAdmin ? (

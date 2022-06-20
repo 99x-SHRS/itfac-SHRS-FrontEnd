@@ -49,6 +49,19 @@ const addProfilePicture = async (bodyData) => {
   )
 }
 // *****************************************************************************
+//                          users roles pointsend points
+// *****************************************************************************
+const updateRole = async (id, bodyData) => {
+  return await provider.updateById(
+    BASE_URL,
+    'user',
+    'role/updateRole',
+    id,
+    bodyData
+  )
+}
+
+// *****************************************************************************
 //                          hotels end points
 // *****************************************************************************
 const registerHotel = async (bodyData) => {
@@ -722,4 +735,5 @@ export {
   getHotelByStatus,
   addProfilePicture,
   updatePassword,
+  updateRole,
 }
