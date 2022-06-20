@@ -88,15 +88,13 @@ class UploadImage extends Component {
     }
   }
   getHotelInfo = async () => {
-    console.log('called')
     const dataModel = {
       id: this.state.hotelId.split('=')[1],
     }
-    console.log(this.state.hotelId.split('=')[1])
+
     await getHotelById(dataModel)
       .then((res) => {
         if (res.status == 200 && res.data[0].image != null) {
-          console.log(res.data[0].image)
           this.setState({
             uploaded: true,
           })

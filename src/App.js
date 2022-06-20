@@ -25,7 +25,7 @@ function App() {
   })
 
   useEffect(() => {
-    setLoading(true)
+    setLoading(false)
     if (localStorage.getItem('session') == 'true') {
       setSession(true)
     } else {
@@ -39,10 +39,12 @@ function App() {
     if (localStorage.getItem('session') == 'false' || session == null) {
       setShare(false)
     }
-    console.log(roles)
   }, [])
 
   useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 3000)
     if (session == true) {
       setTimeout(() => {
         setShare(true)
@@ -58,36 +60,8 @@ function App() {
   return (
     <Router history={History}>
       <div className='App'>
-        <Routes>
-          {' '}
-          <Route exact path='/' element={<Dashboard />}></Route>
-        </Routes>
-
-        {roles.customer && !roles.hotelAdmin ? (
-          <>
-            <Routes>{UserRoutes}</Routes>
-          </>
-        ) : roles.hotelAdmin && session ? (
-          <>
-            {' '}
-            <Routes>{UserRoutes}</Routes>
-            <Routes>{SellerRoutes}</Routes>
-          </>
-        ) : (
-          <Routes>{exceptionsRouters}</Routes>
-        )}
-
-        {session ? (
-          <>
-            {' '}
-            <ShareButton />
-          </>
-        ) : (
-          <></>
-        )}
-
-        <ChatBot />
-        {/* {loading ? (
+        {/* <ChatBot /> */}
+        {loading ? (
           <div className='Loader'>
             <PropagateLoader
               loading={loading}
@@ -98,10 +72,36 @@ function App() {
           </div>
         ) : (
           <>
-            <Routes>{UserRoutes}</Routes>
-            <ChatBot />
+            <Routes>
+              {' '}
+              <Route exact path='/' element={<Dashboard />}></Route>
+            </Routes>
+
+            {roles.customer && !roles.hotelAdmin ? (
+              <>
+                <Routes>{UserRoutes}</Routes>
+              </>
+            ) : roles.hotelAdmin && session ? (
+              <>
+                {' '}
+                <Routes>{UserRoutes}</Routes>
+                <Routes>{SellerRoutes}</Routes>
+              </>
+            ) : (
+              <Routes>{exceptionsRouters}</Routes>
+            )}
+
+            {session ? (
+              <>
+                {' '}
+                <ShareButton />
+              </>
+            ) : (
+              <></>
+            )}
           </>
-        )} */}
+        )}
+        <ChatBot />
       </div>
     </Router>
   )

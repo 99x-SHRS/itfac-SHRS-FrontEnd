@@ -3,7 +3,6 @@ import { handleResponse, handleError } from './Response'
 
 //get methods
 const getAll = async (url, type, task) => {
-  console.log(`${url}/${type}/${task}`)
   return axios
     .get(`${url}/${type}/${task}`)
     .then(handleResponse)
@@ -59,7 +58,6 @@ const deleteData = async (url, type, task, data) => {
     .catch(handleError)
 }
 const deleteDataById = async (url, type, task, id) => {
-  console.log(`${url}/${type}/${task}/${id}`)
   return axios
     .delete(`${url}/${type}/${task}/${id}`)
     .then(handleResponse)

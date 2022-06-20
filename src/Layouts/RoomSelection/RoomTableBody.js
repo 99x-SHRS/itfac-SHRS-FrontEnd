@@ -54,7 +54,7 @@ const TableBody = ({ rooms, souvenirs1 }) => {
       guestName: null,
       rentCar: null,
       location: searchedParams.get('location') || '',
-      customerId: 1,
+      customerId: localStorage.getItem('user'),
       roomId: setedRoom,
       vasId: null,
       noRooms: searchedParams.get('rooms') || '',

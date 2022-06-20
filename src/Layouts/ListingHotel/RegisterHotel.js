@@ -29,6 +29,7 @@ const RegisterHotel = () => {
   const [town, setTown] = useState(null)
   const [street1, setStreet1] = useState(null)
   const [street2, setStreet2] = useState(null)
+  const [email, setEmail] = useState(null)
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -58,6 +59,7 @@ const RegisterHotel = () => {
         setStreet1(res.data[0].Street1)
         setStreet2(res.data[0].Street2)
         setNumber(res.data[0].phoneNumber)
+        setEmail(res.data[0].email)
       })
       .catch((err) => {
         console.log(err)
@@ -68,7 +70,7 @@ const RegisterHotel = () => {
     const dataModel = {
       name: event.target.hotel_name.value,
       phoneNumber: number,
-      // email: event.target.email.value,
+      email: event.target.email.value,
       description: event.target.description.value,
       province: document.getElementById('province').value,
       district: document.getElementById('district').value,
@@ -156,6 +158,7 @@ const RegisterHotel = () => {
                         aria-describedby='emailHelp'
                         placeholder='Enter email'
                         name='email'
+                        value={email}
                         required
                       />
                       <small id='emailHelp' class='form-text text-muted'>

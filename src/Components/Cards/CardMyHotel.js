@@ -29,10 +29,8 @@ const CardMyHotel = ({ hotel, getHotels }) => {
     toast.success(message)
   }
   const deleteHotel = async () => {
-    console.log(hotel)
     await deleteHotelById(hotel.hotelId)
       .then((res) => {
-        console.log(res)
         getHotels()
         notifySuccess('You deleted a hotel sucessfully')
       })

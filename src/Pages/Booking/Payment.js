@@ -43,7 +43,8 @@ const Payament = () => {
     await getBookingDetailsById(dataModel)
       .then((res) => {
         setBookkingDetails(res.data)
-        //console.log(res.data)
+        console.log(res.data.roomRoomId)
+
         getRoomDetails(res.data.roomRoomId)
       })
       .catch((err) => {
@@ -58,7 +59,7 @@ const Payament = () => {
     await getRoomDetailsById(dataModel)
       .then((res) => {
         setRoomDetails(res.data)
-        //console.log(res)
+        console.log(res.data.rate)
         getAllVAS()
       })
       .catch((err) => {
@@ -72,7 +73,7 @@ const Payament = () => {
     await getVASByBookingId(dataModel)
       .then((res) => {
         setSubscribedVAS(res.data)
-        //console.log(res)
+        console.log(res)
         getTotalCost()
       })
       .catch((err) => {
@@ -123,11 +124,8 @@ const Payament = () => {
     //console.log(dataModel)
     await getCustomerDiscount(dataModel)
       .then((res) => {
-        //console.log(res)
         setLoyalty(res.data)
-        //console.log(totPayment - res.data)
         setTotalPayment(totPayment - res.data)
-
         setLoading(false)
       })
       .catch((err) => {
@@ -137,7 +135,6 @@ const Payament = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    //console.log('called')
     const dataModel = {
       coupon: event.target.token.value,
       amount: subPayment,
@@ -179,7 +176,7 @@ const Payament = () => {
                   </thead>
 
                   <tbody>
-                    {loading ? (
+                    {loading && roomDetails == null ? (
                       <tr>
                         <td colspan='4'>
                           <div className='payment-loader'>
@@ -196,27 +193,31 @@ const Payament = () => {
                       <>
                         <tr>
                           <td scope='row'>Deluxe Double</td>
-                          <td>Rs. {roomDetails[0].rate}</td>
+                          <td>Rs. {roomDetails.rate}</td>
                           <td>{BookingDetails.noRooms}</td>
                           <td className='text-right'>
                             {' '}
-                            Rs.{roomDetails[0].rate * BookingDetails.noRooms}
+                            Rs.{roomDetails.rate * BookingDetails.noRooms}
                           </td>
                         </tr>
-                        {subscribedVAS.map((vas, i) => {
-                          return (
-                            <tr>
-                              <td scope='row'>{vas.name}</td>
-                              <td>Rs. {vas.rate}</td>
-                              <td>{BookingDetails.noRooms}</td>
-                              <td className='text-right'>
-                                {' '}
-                                Rs.
-                                {vas.rate}
-                              </td>
-                            </tr>
-                          )
-                        })}
+                        {(subscribedVAS != null) != 0 ? (
+                          subscribedVAS.map((vas, i) => {
+                            return (
+                              <tr>
+                                <td scope='row'>{vas.name}</td>
+                                <td>Rs. {vas.rate}</td>
+                                <td>{BookingDetails.noRooms}</td>
+                                <td className='text-right'>
+                                  {' '}
+                                  Rs.
+                                  {vas.rate}
+                                </td>
+                              </tr>
+                            )
+                          })
+                        ) : (
+                          <></>
+                        )}
                         <tr>
                           <td colspan='3'>
                             <b>Subtotal</b>

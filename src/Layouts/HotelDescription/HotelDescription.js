@@ -19,7 +19,6 @@ const HotelDescription = () => {
     await getHotelById(dataModal)
       .then((res) => {
         if (res.status === 200) {
-          console.log('asd')
           setHotelDetails(res.data[0])
           setLoading(false)
         }

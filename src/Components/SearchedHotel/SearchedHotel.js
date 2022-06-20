@@ -21,10 +21,8 @@ class SearchedHotel extends Component {
       isSaved: !state.isSaved,
     }))
     if (this.state.isSaved) {
-      console.log(this.state.isSaved)
       this.notify('You removed a hotel successfully !')
     } else {
-      console.log(this.state.isSaved)
       this.notify('You Saved a hotel successfully !')
     }
   }

@@ -133,7 +133,6 @@ const Searchbox = () => {
           listRoomItem.each(function () {
             var that = $(this)
             var numberAdults = parseInt(that.find('.quantity1 > input').val())
-            console.log(numberAdults)
             totalAdults = totalAdults + numberAdults
           })
 
@@ -147,7 +146,7 @@ const Searchbox = () => {
           listRoomItem.each(function () {
             var that = $(this)
             var numberRooms = parseInt(that.find('.quantity3 > input').val())
-            console.log(numberRooms)
+
             totalRooms = totalRooms + numberRooms
           })
 
