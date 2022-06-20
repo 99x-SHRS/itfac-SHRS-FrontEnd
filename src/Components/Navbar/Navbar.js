@@ -13,7 +13,7 @@ import {
   updateUserById,
   getUnreadCountByRecieverId,
 } from '../../Services/Api/Utilities/Index'
-import { SendEmail } from '../../Services/Gmail/EmailJs'
+
 import '../../Assets/styles/css/Components/navbar.css'
 import 'react-responsive-modal/styles.css'
 
