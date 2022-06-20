@@ -20,7 +20,7 @@ import Message from '../Pages/Messages/Message'
 import WriteMessage from '../Pages/Messages/WriteMessage'
 const UserRoutes = (
   <>
-    {/* <Route exact path='/' element={<Dashboard />}></Route> */}
+    <Route exact path='/' element={<Dashboard />}></Route>
     <Route path='/hotels' element={<Hotels />}></Route>
     <Route path='/hotel/page' element={<HotelPage />}></Route>
     <Route path='/booking/vas' element={<AddingVAS />}></Route>
