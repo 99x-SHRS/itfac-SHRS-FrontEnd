@@ -117,7 +117,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           <form onSubmit={signUpHandle}>
             <h1>Create Account</h1>
             <div class='social-container'>
-              <a href='#' class='social'>
+              {/* <a href='#' class='social'>
                 <i class='fab fa-facebook-f'></i>
               </a>
               <a href='#' class='social'>
@@ -126,9 +126,9 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
 
               <a href='#' class='social'>
                 <i class='fab fa-linkedin-in'></i>
-              </a>
+              </a> */}
             </div>
-            <span>or use your email for registration</span>
+            {/* <span>or use your email for registration</span> */}
 
             <input
               type='text'
@@ -156,7 +156,7 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           <form onSubmit={loginHandle}>
             <h1>Sign in</h1>
             <div class='social-container'>
-              <a href='#' class='social'>
+              {/* <a href='#' class='social'>
                 <i class='fab fa-facebook-f'></i>
               </a>
               <a href='#' class='social'>
@@ -164,9 +164,9 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
               </a>
               <a href='#' class='social'>
                 <i class='fab fa-linkedin-in'></i>
-              </a>
+              </a> */}
             </div>
-            <span>or use your account</span>
+            {/* <span>or use your account</span> */}
             <input type='email' placeholder='Email' id='loginEmail' required />
             <input
               type='password'
