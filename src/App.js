@@ -73,25 +73,8 @@ function App() {
           </div>
         ) : (
           <>
-            {/* <Routes>
-              {' '}
-              <Route exact path='/' element={<Dashboard />}></Route>
-            </Routes> */}
             <Routes>{UserRoutes}</Routes>
             <Routes>{SellerRoutes}</Routes>
-            {/* {roles.customer && !roles.hotelAdmin ? (
-              <>
-                <Routes>{UserRoutes}</Routes>
-              </>
-            ) : roles.hotelAdmin && session ? (
-              <>
-                {' '}
-                <Routes>{UserRoutes}</Routes>
-                <Routes>{SellerRoutes}</Routes>
-              </>
-            ) : (
-              <Routes>{exceptionsRouters}</Routes>
-            )} */}
 
             {session ? (
               <>
