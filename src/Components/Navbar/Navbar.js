@@ -215,9 +215,9 @@ const Navbars = () => {
                   ></Dropdown.Toggle>
 
                   <Dropdown.Menu>
-                    <Dropdown.Item as={Link} to={'/request-manage'}>
+                    {/* <Dropdown.Item as={Link} to={'/request-manage'}>
                       Request
-                    </Dropdown.Item>
+                    </Dropdown.Item> */}
                     <Dropdown.Item as={Link} to={'/booking-history'}>
                       Bookings
                     </Dropdown.Item>
@@ -239,10 +239,19 @@ const Navbars = () => {
                     ) : (
                       <></>
                     )} */}
+                    {roles.admin ? (
+                      <>
+                        <Dropdown.Item as={Link} to={'/request-manage'}>
+                          Request
+                        </Dropdown.Item>
+                      </>
+                    ) : (
+                      <></>
+                    )}
                     {roles.hotelAdmin ? (
                       <>
                         <Dropdown.Item as={Link} to={'/seller/dashboard'}>
-                          My Account
+                          Seller Account
                         </Dropdown.Item>
                       </>
                     ) : (
@@ -251,7 +260,7 @@ const Navbars = () => {
                     {roles.customer ? (
                       <>
                         <Dropdown.Item as={Link} to={'/account-settings'}>
-                          Account
+                          Profile
                         </Dropdown.Item>
                       </>
                     ) : (

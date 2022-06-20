@@ -53,7 +53,9 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
           secureLocalStorage.setItem('hotelAdmin', res.data.hotelAdmin)
           secureLocalStorage.setItem('customer', res.data.customer)
           setLoggedin(true)
+          setLogin(true)
           notifySuccess('You have loggedin successfully')
+          navigate('/')
         } else {
           notifyError('User name or password is incorrect')
         }
@@ -80,14 +82,15 @@ const SignupAndLogin = ({ setSign, setLoggedin, setLogin }) => {
       await addUser(dataModel)
         .then((res) => {
           if (res.data) {
-            notifySuccess(
-              'Successfully created your account and please check you email to verify the account'
-            )
+            notifySuccess('Successfully created your account ')
             setTimeout(() => {
               SendSignUpEmail(event.target)
             }, 2000)
             setLoading(false)
             setSign(false)
+            document.getElementById('signupEmail').value = null
+            document.getElementById('signupPassword').value = null
+            document.getElementById('reEnterPassword').value = null
             navigate('/')
           } else {
             notifyError('This email is aleady taken')
