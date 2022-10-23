@@ -18,6 +18,16 @@ const updateUserById = async (id, bodyData) => {
     bodyData
   )
 }
+
+const updatePassword = async (bodyData) => {
+  return await provider.updateByIdPost(
+    BASE_URL,
+    'user',
+    'changePassword',
+    bodyData
+  )
+}
+
 const getUserbyId = async (bodyData) => {
   return await provider.getOneByIdPost(
     BASE_URL,
@@ -28,6 +38,15 @@ const getUserbyId = async (bodyData) => {
 }
 const addUser = async (bodyData) => {
   return await provider.getAllPOST(BASE_URL, 'user', 'addUser', bodyData)
+}
+
+const addProfilePicture = async (bodyData) => {
+  return await provider.getOneByIdPost(
+    BASE_URL,
+    'uploads',
+    'profile-picture',
+    bodyData
+  )
 }
 // *****************************************************************************
 //                          users roles pointsend points
@@ -714,5 +733,7 @@ export {
   deleteReviewByReviewId,
   updateReviewById,
   getHotelByStatus,
+  addProfilePicture,
+  updatePassword,
   updateRole,
 }

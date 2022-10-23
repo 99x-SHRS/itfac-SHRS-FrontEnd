@@ -6,24 +6,26 @@ import { Tabs, Tab } from "react-bootstrap";
 import { Collapse } from "react-bootstrap";
 import { useEffect, useState } from "react";
 
-import {getHotelByStatus} from "../../Services/Api/Utilities/Index";
+import { getHotelByStatus } from "../../Services/Api/Utilities/Index";
 
 function Requestmanagemodel() {
   const [items0, setItems0] = useState([]);
   const [items1, setItems1] = useState([]);
   const [items2, setItems2] = useState([]);
-  const [itemOffset, setItemOffset] = useState(0);
+  const [itemOffset1, setItemOffset1] = useState(0);
+  const [itemOffset2, setItemOffset2] = useState(0);
+  const [itemOffset3, setItemOffset3] = useState(0);
 
   useEffect(() => {
-    getrejectedDetails(itemOffset);
-    getacceptedDetails(itemOffset);
-    getpendingDetails(itemOffset);
+    getrejectedDetails(itemOffset3);
+    getacceptedDetails(itemOffset2);
+    getpendingDetails(itemOffset1);
   }, []);
 
   async function getrejectedDetails(page) {
     var pages;
     if (page == null) {
-      pages = itemOffset;
+      pages = itemOffset3;
     } else {
       pages = page;
     }
@@ -39,12 +41,12 @@ function Requestmanagemodel() {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }
 
   async function getacceptedDetails(page) {
     var pages;
     if (page == null) {
-      pages = itemOffset;
+      pages = itemOffset2;
     } else {
       pages = page;
     }
@@ -60,12 +62,12 @@ function Requestmanagemodel() {
       .catch((err) => {
         console.log(err);
       });
-  };
+  }
 
   async function getpendingDetails(page) {
     var pages;
     if (page == null) {
-      pages = itemOffset;
+      pages = itemOffset1;
     } else {
       pages = page;
     }
@@ -83,56 +85,36 @@ function Requestmanagemodel() {
       });
   }
 
-  const handlependingNextPageClick = async (event) => {
-    const newOffset = itemOffset + 1;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-    getpendingDetails(newOffset);
+  const handlependingNextPageClick = async () => {
+    const newOffset1 = itemOffset1 + 1;
+    setItemOffset1(newOffset1);
+    getpendingDetails(newOffset1);
   };
-  const handleacceptedNextPageClick = async (event) => {
-    const newOffset = itemOffset + 1;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-    getacceptedDetails(newOffset);
+  const handleacceptedNextPageClick = async () => {
+    const newOffset2 = itemOffset2 + 1;
+    setItemOffset2(newOffset2);
+    getacceptedDetails(newOffset2);
   };
-  const handlerejectedNextPageClick = async (event) => {
-    const newOffset = itemOffset + 1;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-    getrejectedDetails(newOffset);
+  const handlerejectedNextPageClick = async () => {
+    const newOffset3 = itemOffset3 + 1;
+    setItemOffset3(newOffset3);
+    getrejectedDetails(newOffset3);
   };
 
-
-
-  const handlependingBackPageClick = async (event) => {
-    const newOffset = itemOffset - 1;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-    getpendingDetails(newOffset);
+  const handlependingBackPageClick = async () => {
+    const newOffset1 = itemOffset1 - 1;
+    setItemOffset1(newOffset1);
+    getpendingDetails(newOffset1);
   };
-  const handleacceptedBackPageClick = async (event) => {
-    const newOffset = itemOffset - 1;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-    getacceptedDetails(newOffset);
+  const handleacceptedBackPageClick = async () => {
+    const newOffset2 = itemOffset2 - 1;
+    setItemOffset2(newOffset2);
+    getacceptedDetails(newOffset2);
   };
-  const handlerejectedBackPageClick = async (event) => {
-    const newOffset = itemOffset - 1;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
-    setItemOffset(newOffset);
-    getrejectedDetails(newOffset);
+  const handlerejectedBackPageClick = async () => {
+    const newOffset3 = itemOffset3 - 1;
+    setItemOffset3(newOffset3);
+    getrejectedDetails(newOffset3);
   };
   return (
     <div class="container">
@@ -171,7 +153,6 @@ function Requestmanagemodel() {
                 </div>
 
                 {items2.map((item) => {
-                  console.log(item.userUId);
                   return (
                     <Pendingrequest
                       id={item.hotelId}
@@ -179,7 +160,11 @@ function Requestmanagemodel() {
                       oId={item.userUId}
                       location={item.town}
                       status={item.status}
-                      onfresh={getpendingDetails}
+                      onfresh={() => {
+                          getrejectedDetails()
+                          getacceptedDetails()
+                          getpendingDetails()
+                      }}
                     />
                   );
                 })}
@@ -229,10 +214,15 @@ function Requestmanagemodel() {
                 {items1.map((item, index) => {
                   return (
                     <Acceptedrequest
+                      id={item.hotelId}
                       hname={item.name}
                       oId={item.userUId}
                       location={item.town}
                       status={item.status}
+                      onfresh={() => {
+                        getacceptedDetails()
+                        getpendingDetails()
+                    }}
                     />
                   );
                 })}
@@ -282,10 +272,15 @@ function Requestmanagemodel() {
                 {items0.map((item, index) => {
                   return (
                     <Rejectedrequest
+                      id={item.hotelId}
                       hname={item.name}
                       oId={item.userUId}
                       location={item.town}
                       status={item.status}
+                      onfresh={() => {
+                        getrejectedDetails()
+                        getpendingDetails()
+                    }}
                     />
                   );
                 })}

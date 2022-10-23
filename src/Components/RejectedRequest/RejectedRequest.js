@@ -1,11 +1,20 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { Modal, Button } from "react-bootstrap";
 import "../../Assets/styles/css/Components/pendingRequest.css";
 
-import {getUserbyId} from "../../Services/Api/Utilities/Index"
+import {getUserbyId,updateHotelById} from "../../Services/Api/Utilities/Index"
 
 function Rejectedrequest(props) {
   const [userDetails, setUserDetails] = useState([]);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleShow = () => {
+    setShow(true);
+  };
 
   const getUserDetails = async () => {
     const data = {
@@ -19,6 +28,20 @@ function Rejectedrequest(props) {
         console.log(e);
       });
   };
+
+  const updateStatus = async () => {
+    const data = {
+      status: "pending",
+    };
+    await updateHotelById(props.id, data)
+      .then((res) => {
+        props.onfresh();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     getUserDetails();
   }, []);
@@ -37,7 +60,7 @@ function Rejectedrequest(props) {
         <p>{props.status}</p>
       </div>
       <div className="col-sm-2 pb-2 d-flex justify-content-center">
-        <button type="button" className="pending-req-button mx-2">
+        <button type="button" className="pending-req-button mx-2" onClick={handleShow}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="22"
@@ -50,6 +73,38 @@ function Rejectedrequest(props) {
           </svg>
         </button>
       </div>
+      <Modal
+        show={show}
+        onHide={() => {
+          handleClose();
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Do you want to change status of this hotel...???</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <p>You can change the hotel status to pending status by using change button.</p>
+        </Modal.Body>
+        <Modal.Footer>
+        <Button
+            variant="secondary"
+            onClick={() => {
+              handleClose();
+              updateStatus();
+            }}
+          >
+            Change
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

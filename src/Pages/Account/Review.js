@@ -20,7 +20,7 @@ const Review = () => {
   }, [])
 
   const handlePageClick = async (data) => {
-    setPageNumber(data.selected)
+    setPageNumber(data.selected);
     let currentPage = data.selected
     getReviewDetails(currentPage)
   }
@@ -63,9 +63,11 @@ const Review = () => {
                     id={item.reviewId}
                     description={item.review}
                     hotelId={item.hotelHotelId}
-                    onFresh={() => {
-                      getReviewDetails(pageNumber)
-                    }}
+                    onFresh={
+                      () =>{
+                        getReviewDetails(pageNumber)
+                      }
+                      }
                   />
                 )
               })
